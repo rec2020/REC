@@ -1,0 +1,29 @@
+﻿@model NajmetAlraqee.Data.Entities.DoctorScheduleConfiguration
+
+@{
+    ViewData["Title"] = "Delete Schedule Configuration ";
+}
+
+
+
+<div class="block-header">
+    <h2>Delete Doctor Schedule Configuration </h2>
+    <ol class="breadcrumb breadcrumb-col-cyan">
+        <li><a href=@Url.Action("index","Doctors")><i class="material-icons">home</i> Doctors</a></li>
+        <li><a href="javascript:void(0);"><i class="material-icons">library_books</i>Delete Doctor Schedule Configuration </a></li>
+    </ol>
+</div>
+
+<div>
+    <center>
+        <h3> Are you sure want to delete doctor Schedule Configuration  ?</h3>
+        <br />
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Delete" class="btn  btn-raised btn-danger waves-effect" />
+            <a asp-action="Index" class="btn btn-raised">Back</a>
+        </form>
+    </center>
+
+
+</div>

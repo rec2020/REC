@@ -1,0 +1,88 @@
+﻿@using System.Collections.Generic
+        @using System.Linq
+        @using Microsoft.AspNetCore.Http
+        @using Microsoft.AspNetCore.Http.Authentication
+        @model LoginViewModel
+        @inject SignInManager<User> SignInManager
+
+        @{
+            Layout = null;
+        }
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <title>:: NajmetAlraqee Hospital::</title>
+        <meta name="description" content="WrapTheme, Hospital Admin">
+        <meta name="keywords" content="adminX, Bootstrap4, Hospital, Angular4, Material Design">
+        <link rel="icon" href="~/themeforest/Documentation/favicon.ico" type="image/x-icon">
+        <!-- Custom Css -->
+        <link href="~/themeforest/HTML/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/droidarabickufi.css" type="text/css" media="screen" />
+        <link href="~/themeforest/HTML/assets/css/main.css" rel="stylesheet">
+       
+        <link href="~/themeforest/HTML/assets/css/login.css" rel="stylesheet">
+
+
+        <!-- adminX You can choose a theme from css/themes instead of get all themes -->
+        <link href="~/themeforest/HTML/assets/css/themes/all-themes.css" rel="stylesheet" />
+    </head>
+
+    <body class="theme-cyan"style="overflow: hidden">
+        <div class="authentication">
+            <div class="container-fluid">
+                <div class="row clearfix">
+                    <div class="col-xl-3 col-lg-4 col-md-12 col-sm-12 p-r-0">
+                        <div class="card position">
+                            <h4 class="l-login">Login</h4>
+                            <section>
+                                <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                                    <div asp-validation-summary="All" class="text-danger"></div>
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label class="form-label">Email</label>
+                                            <input asp-for="Email" type="text" class="form-control">
+                                            @*<span asp-validation-for="Email" class="text-danger"></span>*@
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label class="form-label">Password</label>
+                                            <input asp-for="Password" class="form-control" />
+                                            @*<span asp-validation-for="Password" class="text-danger"></span>*@
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <input asp-for="RememberMe" type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-cyan">
+                                        <label for="rememberme">Remember Me</label>
+                                    </div>
+                                    <input type="submit" value="SIGN IN " class="btn btn-raised g-bg-cyan waves-effect" />
+                                    <a href="@Url.Action("Register","Account")" class="btn btn-raised waves-effect">SIGN UP</a>
+                                    @*<div class="text-left"> <a href="forgot-password.html">Forgot Password?</a> </div>*@
+                                </form>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12 p-l-0">
+                        <div class="l-detail">
+                            <h5 class="position">Welcome</h5>
+                            <h1 class="position"><img src="~/themeforest/HTML/assets/images/logo.svg" alt="profile img"><span>MC</span>are <span>H</span>ospitals</h1>
+                            @*<h3 class="position">Sign in to start your session</h3>
+        <p class="position">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>*@
+                        </div>
+
+                    </div>
+                </div>
+        </div>
+</div>
+        <!-- Jquery Core Js -->
+        <script src="~/themeforest/HTML/assets/bundles/libscripts.bundle.js"></script> <!-- Bootstrap JS and jQuery v3.2.1 -->
+        <script src="~/themeforest/HTML/assets/bundles/vendorscripts.bundle.js"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+        <script src="~/themeforest/HTML/assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
+    </body>
+    </html>
+
+

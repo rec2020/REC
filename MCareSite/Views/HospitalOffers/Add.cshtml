@@ -1,0 +1,211 @@
+﻿@model NajmetAlraqee.Site.ViewModels.HospitalOfferViewModel
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = "Add Offer";
+}
+
+
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var fullPath = document.getElementById('ArabicImagePathFile').value;
+
+            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+            var filename = fullPath.substring(startIndex);
+            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                filename = filename.substring(1);
+            }
+            var filename2 = filename.substring(0, filename.lastIndexOf('.'));
+            ext = filename.substring(filename.indexOf('.') + 1);
+            if (ext == 'jpg' || ext == "jpeg" || ext == "png" || ext == "GIF") {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#thumbnail').attr('style', "  display: block;");
+                    $('#ImgAr3')
+                        .attr('src', e.target.result);
+
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                $('#thumbnail').attr('style', "  display: none;");
+
+            }
+        }
+    }
+    function readURL2(input) {
+        if (input.files && input.files[0]) {
+            var fullPath = document.getElementById('EnglishImagePathFile').value;
+
+            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+            var filename = fullPath.substring(startIndex);
+            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                filename = filename.substring(1);
+            }
+            var filename2 = filename.substring(0, filename.lastIndexOf('.'));
+            ext = filename.substring(filename.indexOf('.') + 1);
+            if (ext == 'jpg' || ext == "jpeg" || ext == "png" || ext == "GIF") {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#thumbnail').attr('style', "  display: block;");
+                    $('#ImgAr')
+                        .attr('src', e.target.result);
+
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                $('#thumbnail').attr('style', "  display: none;");
+
+            }
+        }
+    }
+</script>
+
+<div class="container-fluid">
+    <div class="block-header">
+        @*<h2>Add Offer</h2>*@
+        <ol class="breadcrumb breadcrumb-col-cyan">
+            <li><a href=@Url.Action("index", "Hospitals")><i class="material-icons">home</i> @SharedLocalizer.GetLocalizedHtmlString("HospitalOffers")</a></li>
+            <li><a href="javascript:void(0);"><i class="material-icons">library_books</i>@SharedLocalizer.GetLocalizedHtmlString("AddOffer")</a></li>
+        </ol>
+    </div>
+
+    <div class="row clearfix">
+        <form asp-action="AddPost" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>@SharedLocalizer.GetLocalizedHtmlString("BasicInformation")</h2>
+                        <ul class="header-dropdown m-r--5">
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="javascript:void(0);" class=" waves-effect waves-block">@SharedLocalizer.GetLocalizedHtmlString("Action")</a></li>
+                                    <li><a href="javascript:void(0);" class=" waves-effect waves-block">@SharedLocalizer.GetLocalizedHtmlString("AnotherAction")</a></li>
+                                    <li><a href="javascript:void(0);" class=" waves-effect waves-block">@SharedLocalizer.GetLocalizedHtmlString("SomethingElseHere")</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+                        @Html.HiddenFor(x => x.HospitalId)
+                        <div class="row clearfix">
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("EnglishTitle")</label>
+                                    <div class="form-line">
+                                        <input asp-for="EnglishTitle" class="form-control" placeholder=@SharedLocalizer.GetLocalizedHtmlString("EnglishTitle") />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ArabicTitle")</label>
+                                    <div class="form-line">
+                                        <input asp-for="ArabicTitle" class="form-control" placeholder=@SharedLocalizer.GetLocalizedHtmlString("ArabicTitle") />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Country")</label>
+                                    <div class="form-line">
+                                        <input asp-for="CountryName" class="form-control" readonly="readonly" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("City")</label>
+                                    <div class="form-line">
+                                        <input asp-for="CityName" class="form-control" readonly="readonly" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("EnglishBody")</label>
+                                    <div class="form-line">
+                                        <textarea asp-for="EnglishBody" rows="5" class="form-control" placeholder=@SharedLocalizer.GetLocalizedHtmlString("EnglishBody")> </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ArabicBody")</label>
+                                    <div class="form-line">
+                                        <textarea asp-for="ArabicBody" rows="5" class="form-control" placeholder=@SharedLocalizer.GetLocalizedHtmlString("ArabicBody")></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("HappendOn")</label>
+                                    <div class="form-line">
+                                        <input asp-for="HappendOn" type="date" class="form-control" placeholder=@SharedLocalizer.GetLocalizedHtmlString("HappendOn") />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("EndOn")</label>
+                                    <div class="form-line">
+                                        <input asp-for="EndOn" type="date"   class="form-control"   placeholder=@SharedLocalizer.GetLocalizedHtmlString("EndOn")/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br />
+                        <br />
+                        <div class="row clearfix">
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ArabicOfferImage")</label>
+                                <center>
+                                    <div class="thumbnail" id="thumbnail" style="width: 80%; height: 210px; display: block;">
+                                        <img id="ImgAr3" src="~/images/AttachedFile.png" style="width: 70%; height: 200px; display: block;" />
+                                    </div>
+                                    <br />
+                                    <div class="form-line">
+                                        <input type="file" asp-for="ArabicImagePathFile" id="ArabicImagePathFile" class="dropzone dz-clickable" placeholder=@SharedLocalizer.GetLocalizedHtmlString("Image") onchange="readURL(this);" accept=".doc,.docx,.pdf,.jpg,.jpeg,.png" />
+                                    </div>
+                                    <br />
+                                    <span class="label bg-teal">@SharedLocalizer.GetLocalizedHtmlString("ArabicOfferImage") </span>
+                                </center>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("EnglishOfferImage")</label>
+                                <center>
+                                    <div class="thumbnail" id="thumbnail" style="width: 80%; height: 210px; display: block;">
+                                        <img id="ImgAr" src="~/images/AttachedFile.png" style="width: 70%; height: 200px; display: block;" />
+                                    </div>
+                                    <br />
+                                    <div class="form-line">
+                                        <input type="file" asp-for="EnglishImagePathFile" id="EnglishImagePathFile" class="dropzone dz-clickable" placeholder=@SharedLocalizer.GetLocalizedHtmlString("OfferImage") onchange="readURL2(this);" accept=".doc,.docx,.pdf,.jpg,.jpeg,.png" />
+                                    </div>
+                                    <br />
+                                    <span class="label bg-teal">@SharedLocalizer.GetLocalizedHtmlString("EnglishOfferImage") </span>
+                                </center>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                    </div>
+                    <br />
+                    <div class="col-sm-12">
+                        <button type="submit" value="AddPost" class="btn btn-raised g-bg-cyan pull-right">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+                        <a asp-action="Index" class="btn btn-raised">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</a>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>

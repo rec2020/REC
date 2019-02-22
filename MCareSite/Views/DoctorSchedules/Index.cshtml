@@ -1,0 +1,136 @@
+﻿@model PaginatedList<NajmetAlraqee.Data.Entities.DoctorSchedule>
+@using NajmetAlraqee.Site.Services;
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("DoctorsSchedules");
+}
+
+
+@*<br />*@
+<div class="block-header">
+    @*<span style="color:darkcyan"><strong>@SharedLocalizer.GetLocalizedHtmlString("DoctorsSchedules") </strong></span>*@
+    <ol class="breadcrumb breadcrumb-col-cyan">
+        <li><a href=@Url.Action("index","Home")><i class="material-icons">home</i>@SharedLocalizer.GetLocalizedHtmlString("Home") </a></li>
+        <li><a href="javascript:void(0);"><i class="material-icons">library_books</i>@SharedLocalizer.GetLocalizedHtmlString("DoctorsSchedule")  </a></li>
+    </ol>
+
+</div>
+
+<div class="raw">
+    <div class="card">
+        <div class="body">
+            <form asp-action="Index">
+                <div class="raw clearfix">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input class="form-control" name="Search" placeholder=@SharedLocalizer.GetLocalizedHtmlString("Search") type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("FromDate")</label>
+                            <div class="form-line">
+                                <input name="FromDate" type="date" value="@DateTime.Now" class="form-control" placeholder=@SharedLocalizer.GetLocalizedHtmlString("FromDate") />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ToDate")</label>
+                            <div class="form-line">
+                                <input name="ToDate" type="date" value="@DateTime.Now.AddMonths(1)" class="form-control" placeholder=@SharedLocalizer.GetLocalizedHtmlString("ToDate") />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <button class="btn btn-raised btn-sm btn-success m-b-0 m-t-0" type="submit">@SharedLocalizer.GetLocalizedHtmlString("Search")</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-12 col-xs-12">
+            <div class="card patients-list">
+                <div class="body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("No"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Hospital"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Doctor"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Date"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Time"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Status"))
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td>
+                                        @item.Id
+                                    </td>
+                                    <td>
+                                        @item.Hospital.EnglishName
+                                    </td>
+                                    <td>
+                                        @item.Doctor.EnglishName
+                                    </td>
+                                    <td>
+                                        @item.Date.ToShortDateString()
+                                    </td>
+                                    <td>
+                                        @item.Time
+                                    </td>
+                                    <td>
+                                        @item.ScheduleStatus.EnglishName
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex - 1)"
+   class="btn btn-default @prevDisabled">
+    @SharedLocalizer.GetLocalizedHtmlString("Previous") 
+</a>
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex + 1)"
+   class="btn btn-default @nextDisabled">
+    @SharedLocalizer.GetLocalizedHtmlString("Next") 
+</a>

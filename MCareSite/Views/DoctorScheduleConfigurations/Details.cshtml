@@ -1,0 +1,72 @@
+﻿@model NajmetAlraqee.Data.Entities.DoctorScheduleConfiguration
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DoctorScheduleConfiguration</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StartOn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StartOn)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EndOn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EndOn)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MorningStartingTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MorningStartingTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MorningEndingTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MorningEndingTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EveningStartingTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EveningStartingTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EveningEndingTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EveningEndingTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PeroidInMintues)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PeroidInMintues)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Doctor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Doctor.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hospital)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hospital.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

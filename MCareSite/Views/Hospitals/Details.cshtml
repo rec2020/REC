@@ -1,0 +1,110 @@
+﻿@model NajmetAlraqee.Site.ViewModels.HospitalViewModel
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("Details");
+}
+
+
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>Hospital Profile</h2>
+        <small class="text-muted">@SharedLocalizer.GetLocalizedHtmlString("WelcomeToHospital")</small>
+    </div>
+    <div class="row clearfix">
+        <div class="col-lg-4 col-md-12 col-sm-12">
+            <div class=" card patient-profile">
+                <img src="~/Uploads/@Model.ImagePath" class="img-fluid" alt="">
+            </div>
+            <div class="card xl-khaki">
+                <div class="header xl-khaki">
+                    <h2>@SharedLocalizer.GetLocalizedHtmlString("AboutHospital")</h2>
+                </div>
+                <div class="body">
+                    <strong>@SharedLocalizer.GetLocalizedHtmlString("Name")</strong>
+                    <p>@Model.EnglishName</p>
+                    <strong>@SharedLocalizer.GetLocalizedHtmlString("EnglishDescription")</strong>
+                    <address>@Model.EnglishDescription</address>
+                    <strong>@SharedLocalizer.GetLocalizedHtmlString("Country")</strong>
+                    <p>@Model.CountryName</p>
+                    <strong>@SharedLocalizer.GetLocalizedHtmlString("City")</strong>
+                    <p>@Model.cityName</p>
+                    <strong>@SharedLocalizer.GetLocalizedHtmlString("HosType")</strong>
+                    <p>@Model.HospitalTypeName</p>
+                    <strong>@SharedLocalizer.GetLocalizedHtmlString("Phone")</strong>
+                    <p>@Model.Phone1 - @Model.Phone2</p>
+                    <hr>
+                    <strong>@SharedLocalizer.GetLocalizedHtmlString("EnglishAddress")</strong>
+                    <address>@Model.EnglishName</address>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="body">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Offers" aria-expanded="true">@SharedLocalizer.GetLocalizedHtmlString("HospitalOffers")</a></li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane in active" id="Offers" aria-expanded="true">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("EnglishTitle"))
+                                            </th>
+                                            <th>
+                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ArabicTitle"))
+                                            </th>
+                                            <th>
+                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("HappendOn"))
+                                            </th>
+                                            <th>
+                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("EndOn"))
+                                            </th>
+                                            <th>@SharedLocalizer.GetLocalizedHtmlString("Operation")</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in ViewBag.Offers)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @item.EnglishTitle
+                                                </td>
+                                                <td>
+                                                    @item.ArabicTitle
+                                                </td>
+                                                <td>
+                                                    @item.HappendOn
+                                                </td>
+                                                <td>
+                                                    @item.EndOn
+                                                </td>
+                                                <td>
+                                                    <a style="color:brown" title=@SharedLocalizer.GetLocalizedHtmlString("Edit") onclick="location.href='@Url.Action("Edit", "HospitalOffers")?id=' + @item.Id" class="waves-cyan waves-circle zmdi zmdi-edit"></a>
+                                                    <a style="color:red" title=@SharedLocalizer.GetLocalizedHtmlString("Delete") onclick="location.href='@Url.Action("Delete", "HospitalOffers")?id=' + @item.Id" class="waves-cyan waves-circle zmdi zmdi-delete"></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<script>
+        $.get('@Url.Action("Index", "HospitalOffers")', { hospitalId : @Model.Id}, function(content){
+            $("#dynamicContentContainer").html(content);
+        });
+    </script>*@

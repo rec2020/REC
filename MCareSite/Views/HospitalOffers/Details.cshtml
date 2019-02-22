@@ -1,0 +1,147 @@
+﻿@model NajmetAlraqee.Site.ViewModels.HospitalOfferViewModel
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = "Edit Offer";
+}
+
+
+
+
+<div class="container-fluid">
+    <div class="block-header">
+        @*<h2>Offer Details</h2>*@
+        <ol class="breadcrumb breadcrumb-col-cyan">
+            <li><a href=@Url.Action("index","Hospitals")><i class="material-icons">home</i> @SharedLocalizer.GetLocalizedHtmlString("HospitalOffers")</a></li>
+            <li><a href="javascript:void(0);"><i class="material-icons">library_books</i>@SharedLocalizer.GetLocalizedHtmlString("OffersDetails")</a></li>
+        </ol>
+    </div>
+
+    <div class="row clearfix">
+        <form asp-action="Details" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>@SharedLocalizer.GetLocalizedHtmlString("HospitalOffersInformation")</h2>
+                        <ul class="header-dropdown m-r--5">
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="javascript:void(0);" class=" waves-effect waves-block">@SharedLocalizer.GetLocalizedHtmlString("Action")</a></li>
+                                    <li><a href="javascript:void(0);" class=" waves-effect waves-block">@SharedLocalizer.GetLocalizedHtmlString("AnotherAction")</a></li>
+                                    <li><a href="javascript:void(0);" class=" waves-effect waves-block">@SharedLocalizer.GetLocalizedHtmlString("SomethingElseHere")</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+                        @Html.HiddenFor(x => x.Id)
+                        @Html.HiddenFor(x => x.HospitalId)
+                        <div class="row clearfix">
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label>@SharedLocalizer.GetLocalizedHtmlString("EnglishTitle")</label>
+                                    <div class="form-line">
+                                        <input asp-for="EnglishTitle" class="form-control" readonly="readonly" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label>@SharedLocalizer.GetLocalizedHtmlString("ArabicTitle")</label>
+                                    <div class="form-line">
+                                        <input asp-for="ArabicTitle" class="form-control" readonly="readonly" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label>@SharedLocalizer.GetLocalizedHtmlString("Country")</label>
+                                    <div class="form-line">
+                                        <input asp-for="CountryName" class="form-control" readonly="readonly" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label>@SharedLocalizer.GetLocalizedHtmlString("City")</label>
+                                    <div class="form-line">
+                                        <input asp-for="CityName" class="form-control" readonly="readonly" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>@SharedLocalizer.GetLocalizedHtmlString("EnglishBody")</label>
+                                    <div class="form-line">
+                                        <textarea asp-for="EnglishBody" rows="5" class="form-control" readonly="readonly">@Model.EnglishBody</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>@SharedLocalizer.GetLocalizedHtmlString("ArabicBody")</label>
+                                    <div class="form-line">
+                                        <textarea asp-for="ArabicBody" rows="5" class="form-control" readonly="readonly">@Model.ArabicBody</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>@SharedLocalizer.GetLocalizedHtmlString("HappendOn")</label>
+                                    <div class="form-line">
+                                        <input asp-for="HappendOn" type="text" class="form-control" readonly="readonly" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>@SharedLocalizer.GetLocalizedHtmlString("EndOn")</label>
+                                    <div class="form-line">
+                                        <input asp-for="EndOn" type="text" class="form-control" readonly="readonly" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br />
+                        <br />
+                        <div class="row clearfix">
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                <label>@SharedLocalizer.GetLocalizedHtmlString("ArabicOfferImage")</label>
+                                <center>
+                                    <div class="thumbnail" id="thumbnail" style="width: 80%; height: 210px; display: block;">
+                                        <img id="ImgAr3" src="~/Uploads/@Model.ArabicImagePath" style="width: 70%; height: 200px; display: block;" />
+                                    </div>
+                                    <span class="label bg-teal">@SharedLocalizer.GetLocalizedHtmlString("ArabicOfferImage")</span>
+                                </center>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                <label>@SharedLocalizer.GetLocalizedHtmlString("EnglishOfferImage")</label>
+                                <center>
+                                    <div class="thumbnail" id="thumbnail" style="width: 80%; height: 210px; display: block;">
+                                        <img id="ImgAr" src="~/Uploads/@Model.EnglishImagePath" style="width: 70%; height: 200px; display: block;" />
+                                    </div>
+                                    <span class="label bg-teal">@SharedLocalizer.GetLocalizedHtmlString("EnglishOfferImage")</span>
+                                </center>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                    </div>
+                    <br />
+                    <div class="col-sm-12">
+                        <center>
+                            <a asp-action="Index" class="btn btn-raised">@SharedLocalizer.GetLocalizedHtmlString("Close")</a>
+                        </center>
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>

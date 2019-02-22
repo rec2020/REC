@@ -1,0 +1,88 @@
+﻿@model NajmetAlraqeeSite.ViewModels.EditUserViewModel
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("UserRoles");
+}
+<div class="block-header">
+    @*<h2>User Roles</h2>*@
+    <ol class="breadcrumb breadcrumb-col-cyan">
+        <li><a href=@Url.Action("index","Home")><i class="material-icons">home</i>@SharedLocalizer.GetLocalizedHtmlString("Home")</a></li>
+        <li><a href="javascript:void(0);"><i class="material-icons">library_books</i>@SharedLocalizer.GetLocalizedHtmlString("UserRoles")</a></li>
+    </ol>
+</div>
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-12 col-xs-12">
+            <div class="card patients-list">
+                <div class="body">
+                    <h2 class="card-inside-title">@SharedLocalizer.GetLocalizedHtmlString("AssignRoleToUser")</h2>
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <form asp-action="AssignRoleToUser" asp-controller="ApplicationRoles" method="post">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                @Html.HiddenFor(X => X.UserId)
+                                @*<label/>*@
+                                <div class="row clearfix">
+                                    <div class="col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input asp-for="UserName" class="form-control" readonly="readonly" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <select asp-for="ApplicationRoleId" class="form-control" asp-items="ViewBag.ApplicationRoleId"><option>-----@SharedLocalizer.GetLocalizedHtmlString("PleaseselectRole") ---</option></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <center>
+                                    <input type="submit" value="@SharedLocalizer.GetLocalizedHtmlString("Assign")" class="btn btn-raised btn-success btn-sm" />
+                                </center>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 col-xs-12">
+            <div class="card patients-list">
+                <div class="body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("UserRoles"))
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.UserRoles)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("DeleteRoleToUser", "ApplicationRoles", new { item = @item , UserId=Model.UserId })" class="btn btn-raised btn-danger btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Delete")</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

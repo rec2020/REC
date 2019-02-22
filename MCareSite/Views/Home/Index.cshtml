@@ -1,0 +1,147 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("Title");
+}
+
+
+
+
+
+<div class="block-header">
+    <ol class="breadcrumb">
+        <li><a asp-action="index" asp-controller="Home">@SharedLocalizer.GetLocalizedHtmlString("Home")</a></li>
+    </ol>
+
+
+</div>
+
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-sm-12">
+            <div class="card">
+                <div id="demo" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ul class="carousel-indicators">
+                        <li data-target="#demo" data-slide-to="0" class="active"></li>
+                        <li data-target="#demo" data-slide-to="1"></li>
+                        <li data-target="#demo" data-slide-to="2"></li>
+                    </ul>
+                    <!-- The slideshow -->
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="~/themeforest/HTML/assets/images/puppy-1.jpg" alt="Los Angeles" width="1100" height="500">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="~/themeforest/HTML/assets/images/puppy-1.jpg" alt="Chicago" width="1100" height="500">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="~/themeforest/HTML/assets/images/puppy-1.jpg" alt="New York" width="1100" height="500">
+                        </div>
+                    </div>
+                    <!-- Left and right controls -->
+                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#demo" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="card">
+                <div class="body" id="footer">
+                    @*<button type="button" class="btn btn-default waves-effect m-r-20" data-toggle="modal" data-target="#defaultModal">MODAL - DEFAULT SIZE</button>
+                        <button type="button" class="btn btn-default waves-effect m-r-20 mybtn">MODAL - DEFAULT SIZE2</button>*@
+                    <div class="row">
+                        @*<div class="col-xs-12 col-sm-4">
+                            <h5>Email Newsletters</h5>
+                            <p>Sign up for new MaterialWrap content, updates, and offers.</p>
+                            <div class="input-group">
+                                <div class="form-line">
+                                    <input class="form-control date" placeholder="Enter your email..." type="text">
+                                </div>
+                                <span class="input-group-addon"> <i class="material-icons">send</i> </span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-2">
+                            <h5>Company</h5>
+                            <ul class="list-unstyled company">
+                                <li><a href="javascript:void(0)">About Us </a></li>
+                                <li><a href="javascript:void(0)">Careers</a></li>
+                                <li><a href="javascript:void(0)">Privacy Policy</a></li>
+                                <li><a href="javascript:void(0)">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <h5>Want to Work with Us?</h5>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                        </div>*@
+                        <div class="col-sm-12">
+                            <p class="copy m-b-0">
+                                © @SharedLocalizer.GetLocalizedHtmlString("Copyright")
+                                <time class="year">2017</time>
+                                - @SharedLocalizer.GetLocalizedHtmlString("AllRightsReserved")
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="defaultModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sodales orci ante, sed ornare eros vestibulum ut. Ut accumsan
+                    vitae eros sit amet tristique. Nullam scelerisque nunc enim, non dignissim nibh faucibus ullamcorper.
+                    Fusce pulvinar libero vel ligula iaculis ullamcorper. Integer dapibus, mi ac tempor varius, purus
+                    nibh mattis erat, vitae porta nunc nisi non tellus. Vivamus mollis ante non massa egestas fringilla.
+                    Vestibulum egestas consectetur nunc at ultricies. Morbi quis consectetur nunc.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link waves-effect">SAVE CHANGES</button>
+                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+
+@*<script src="~/themeforest/HTML/assets/js/pages/ui/modals.js"></script>*@
+@*<div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="defaultModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sodales orci ante, sed ornare eros vestibulum ut. Ut accumsan
+                    vitae eros sit amet tristique. Nullam scelerisque nunc enim, non dignissim nibh faucibus ullamcorper.
+                    Fusce pulvinar libero vel ligula iaculis ullamcorper. Integer dapibus, mi ac tempor varius, purus
+                    nibh mattis erat, vitae porta nunc nisi non tellus. Vivamus mollis ante non massa egestas fringilla.
+                    Vestibulum egestas consectetur nunc at ultricies. Morbi quis consectetur nunc.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link waves-effect">SAVE CHANGES</button>
+                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+

@@ -1,0 +1,130 @@
+﻿@model NajmetAlraqee.Site.ViewModels.DoctorScheduleConfigurationViewModels
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("Configuration");
+}
+
+
+<div class="container-fluid">
+    <div class="block-header">
+        @*<h2>Add Doctor Configuration </h2>*@
+        <ol class="breadcrumb breadcrumb-col-cyan">
+            <li><a href=@Url.Action("index","Doctors")><i class="material-icons">home</i> @SharedLocalizer.GetLocalizedHtmlString("Doctors")Doctors</a></li>
+            <li><a href="javascript:void(0);"><i class="material-icons">library_books</i>@SharedLocalizer.GetLocalizedHtmlString("Configuration")</a></li>
+        </ol>
+    </div>
+
+
+    <div class="col-12">
+        <form asp-action="AddPost" asp-controller="DoctorScheduleConfigurations" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="card">
+                <div class="header">
+                    @*<h2>Basic Information</h2>*@
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">@SharedLocalizer.GetLocalizedHtmlString("Action")</a></li>
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">@SharedLocalizer.GetLocalizedHtmlString("AnotherAction")</a></li>
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">@SharedLocalizer.GetLocalizedHtmlString("SomethingElseHere")</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    @Html.HiddenFor(x => x.DoctorId)
+                    @Html.HiddenFor(x => x.HospitalId)
+                    <div class="row clearfix">
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                <label>@SharedLocalizer.GetLocalizedHtmlString("Hospital") </label>
+                                <div class="form-line">
+                                    <input asp-for="HospitalName" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Hospital")" readonly="readonly" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label>@SharedLocalizer.GetLocalizedHtmlString("StartingOn")</label>
+                                <div class="form-line">
+                                    <input asp-for="StartOn" type="date" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("StartingOn")" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label>@SharedLocalizer.GetLocalizedHtmlString("EndOn")</label>
+                                <div class="form-line">
+                                    <input asp-for="EndOn" type="date" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("EndOn")" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xs-12">
+                            <div class="form-group">
+                                <label>@SharedLocalizer.GetLocalizedHtmlString("PeroidInMintues")</label>
+                                <div class="form-line">
+                                    <input asp-for="PeroidInMintues" type="text" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("PeroidInMintues")" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row clearfix">
+                        <div class="col-sm-3 col-xs-12">
+                            <label>@SharedLocalizer.GetLocalizedHtmlString("MorningStartingTime")</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input asp-for="MorningStartingTime" type="time" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("MorningStartingTime")" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <label>@SharedLocalizer.GetLocalizedHtmlString("MorningEndingTime") </label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input asp-for="MorningEndingTime" type="time" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("MorningEndingTime")" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <label>@SharedLocalizer.GetLocalizedHtmlString("EveningStartingTime") </label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input asp-for="EveningStartingTime" type="time" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("EveningStartingTime")" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <label>@SharedLocalizer.GetLocalizedHtmlString("EveningEndingTime")</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input asp-for="EveningEndingTime" type="time" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("EveningEndingTime")" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <br />
+                <div class="col-sm-12">
+                    <button type="submit" value="Add" class="btn btn-raised g-bg-cyan pull-right">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+                    <a asp-action="Index" class="btn btn-raised">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</a>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+
+</div>
+
+
+
+
+
+
+

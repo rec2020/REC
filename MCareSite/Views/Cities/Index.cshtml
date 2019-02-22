@@ -1,0 +1,100 @@
+﻿@model PaginatedList<NajmetAlraqee.Data.Entities.City>
+@using NajmetAlraqee.Site.Services;
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("Cities");
+}
+
+
+@*<br />*@
+<div class="block-header">
+    @*<h2>Cities</h2>*@
+    <ol class="breadcrumb breadcrumb-col-cyan">
+        <li><a href=@Url.Action("index","Home")><i class="material-icons">home</i> @SharedLocalizer.GetLocalizedHtmlString("Home")</a></li>
+        <li><a href="javascript:void(0);"><i class="material-icons">library_books</i> @SharedLocalizer.GetLocalizedHtmlString("Cities")</a></li>
+    </ol>
+    <div>
+        <a class="btn btn-round pull-right bg-cyan waves-effect" asp-action="Add">@SharedLocalizer.GetLocalizedHtmlString("AddCity")</a>
+    </div>
+
+</div>
+
+@*<div class="col-md-12">
+        <div class="card">
+            <div class="body">
+                <div class="form-group m-t-0">
+                    <div class="form-line">
+                        <input class="form-control" placeholder="Search..." type="text">
+                    </div>
+                </div>
+                <button class="btn btn-raised btn-sm btn-success m-b-0 m-t-0" type="button">Search</button>
+            </div>
+        </div>
+    </div>*@
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-12 col-xs-12">
+            <div class="card patients-list">
+                <div class="body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("EnglishName"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ArabicName"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Country"))
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EnglishName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ArabicName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Country.EnglishName)
+                                        </td>
+                                        <td>
+                                            @*<a style="color:cadetblue" asp-action="Edit" asp-route-id="@item.Id" title="Edit" class="waves-cyan waves-circle zmdi zmdi-edit"></a>*@
+                                            <a style="color:red" asp-action="Delete" asp-route-id="@item.Id" title="@SharedLocalizer.GetLocalizedHtmlString("Delete")" class="waves-cyan waves-block zmdi zmdi-delete"></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex - 1)"
+   class="btn btn-default @prevDisabled">
+    @SharedLocalizer.GetLocalizedHtmlString("Previous")
+</a>
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex + 1)"
+   class="btn btn-default @nextDisabled">
+    @SharedLocalizer.GetLocalizedHtmlString("Next")
+</a>

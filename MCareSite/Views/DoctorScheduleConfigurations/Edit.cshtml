@@ -1,0 +1,129 @@
+﻿@model NajmetAlraqee.Site.ViewModels.DoctorScheduleConfigurationViewModels
+
+@{
+    ViewData["Title"] = "Add Doctor Configuration";
+}
+
+
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>Edit Doctor Configuration </h2>
+        <ol class="breadcrumb breadcrumb-col-cyan">
+            <li><a href=@Url.Action("index","Doctors")><i class="material-icons">home</i> Doctors</a></li>
+            <li><a href="javascript:void(0);"><i class="material-icons">library_books</i>Edit Doctor Configuration</a></li>
+        </ol>
+    </div>
+
+
+    <div class="col-12">
+        <form asp-action="Edit" asp-controller="DoctorScheduleConfigurations" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="card">
+                <div class="header">
+                    @*<h2>Basic Information</h2>*@
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    @Html.HiddenFor(x => x.DoctorId)
+                    @Html.HiddenFor(x => x.Id)
+                    <div class="row clearfix">
+                        <div class="col-sm-4 col-xs-12">
+                            <label>Hospital </label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select asp-for="HospitalId" class="form-control" asp-items="@ViewBag.HospitalId"> <option>---Select Hospital ---</option></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                <label>Start On</label>
+                                <div class="form-line">
+                                    <input asp-for="StartOn" type="date" class="form-control" placeholder="Start On" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                <label>End On</label>
+                                <div class="form-line">
+                                    <input asp-for="EndOn" type="date" class="form-control" placeholder="End On" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <br />
+                    <div class="row clearfix">
+                        <div class="col-sm-3 col-xs-12">
+                            <label>Morning Starting Time </label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input asp-for="MorningStartingTime" type="datetime-local" class="form-control" placeholder="Morning Starting Time" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <label>Morning Ending Time </label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input asp-for="MorningEndingTime" type="datetime-local" class="form-control" placeholder="Morning Ending Time" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <label>Morning Starting Time </label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input asp-for="MorningStartingTime" type="datetime-local" class="form-control" placeholder="Morning Starting Time" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <label>Morning Ending Time </label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input asp-for="MorningEndingTime" type="datetime-local" class="form-control" placeholder="Morning Ending Time" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        @*<div class="col-sm-4 col-xs-12">
+                <div class="form-group">
+                    <div class="form-line">
+                        <input asp-for="PeroidInMintues" type="number" class="form-control" placeholder="Peroid In Mintues" />
+                    </div>
+                </div>
+            </div>*@
+                    </div>
+                </div>
+                <br />
+                <div class="col-sm-12">
+                    <button type="submit" value="Add" class="btn btn-raised g-bg-cyan pull-right">Save</button>
+                    <a asp-action="Index" class="btn btn-raised">Cancel</a>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+
+</div>
+
+
+
+
+
+
+
