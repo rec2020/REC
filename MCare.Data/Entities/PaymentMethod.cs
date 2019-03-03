@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+
+namespace NajmetAlraqee.Data.Entities
+{
+   public class PaymentMethod
+    {
+        [Key]
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public string TreeAccountNo { get; set; }
+    }
+}

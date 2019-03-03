@@ -78,15 +78,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Uploads\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Views\Delegates\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MCare.Data\NajmetAlraqee.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\datatable\table\" />
+    <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>
 
 </Project>

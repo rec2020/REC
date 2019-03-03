@@ -15,7 +15,7 @@ namespace NajmetAlraqee.Data.Repositories
         {
             _context = context;
         }
-        public long AddDelegateType(DelegateType delegateType)
+        public int AddDelegateType(DelegateType delegateType)
         {
             _context.DelegateTypes.Add(delegateType);
             _context.SaveChanges();

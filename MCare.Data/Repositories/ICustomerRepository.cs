@@ -9,10 +9,10 @@ namespace NajmetAlraqee.Data.Repositories
     public interface ICustomerRepository
     {
 
-        long AddCustomer(Customer customer);
-        Customer GetCustomerById(long Id);
+        int AddCustomer(Customer customer);
+        Customer GetCustomerById(int Id);
         IQueryable<Customer> GetCustomers();
-        bool RemoveCustomer(long Id);
-        bool UpdateCustomer(long Id, Customer del);
+        bool RemoveCustomer(int Id);
+        bool UpdateCustomer(int  Id, Customer del);
     }
 }

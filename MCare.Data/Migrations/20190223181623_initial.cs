@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NajmetAlraqee.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -242,6 +242,38 @@ namespace NajmetAlraqee.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Nationalities", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Partners",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Percentage = table.Column<decimal>(nullable: true),
+                    Deserved = table.Column<decimal>(nullable: true),
+                    Expenses = table.Column<decimal>(nullable: true),
+                    Transfer = table.Column<decimal>(nullable: true),
+                    Remiander = table.Column<decimal>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Partners", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PaymentMethods",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    TreeAccountNo = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PaymentMethods", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -632,23 +664,25 @@ namespace NajmetAlraqee.Data.Migrations
                     FirstName = table.Column<string>(nullable: true),
                     MiddleName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
                     IdentityNo = table.Column<string>(nullable: true),
                     FirstPhone = table.Column<string>(nullable: true),
                     SecondPhone = table.Column<string>(nullable: true),
-                    TypeId = table.Column<int>(nullable: false),
+                    CustomerTypeId = table.Column<int>(nullable: false),
+                    CustomerTypeName = table.Column<string>(nullable: true),
                     IdentiyImage = table.Column<string>(nullable: true),
                     FamilyImage = table.Column<string>(nullable: true),
                     IsActive = table.Column<bool>(nullable: false),
-                    UserDelegateId = table.Column<int>(nullable: false),
-                    BirthDate = table.Column<DateTime>(nullable: true),
+                    UserDelegateId = table.Column<int>(nullable: true),
+                    UserDelegateName = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Customers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Customers_CustomerTypes_TypeId",
-                        column: x => x.TypeId,
+                        name: "FK_Customers_CustomerTypes_CustomerTypeId",
+                        column: x => x.CustomerTypeId,
                         principalTable: "CustomerTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -1094,9 +1128,9 @@ namespace NajmetAlraqee.Data.Migrations
                 column: "CurrencyTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customers_TypeId",
+                name: "IX_Customers_CustomerTypeId",
                 table: "Customers",
-                column: "TypeId");
+                column: "CustomerTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_UserDelegateId",
@@ -1345,7 +1379,13 @@ namespace NajmetAlraqee.Data.Migrations
                 name: "HospitalOffers");
 
             migrationBuilder.DropTable(
+                name: "Partners");
+
+            migrationBuilder.DropTable(
                 name: "PatientAppointments");
+
+            migrationBuilder.DropTable(
+                name: "PaymentMethods");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

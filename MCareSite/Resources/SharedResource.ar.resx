@@ -810,4 +810,73 @@
   <data name="DisActivated" xml:space="preserve">
     <value>أيقاف</value>
   </data>
+  <data name="AddCustomer" xml:space="preserve">
+    <value>أضافة عميل </value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>العنوان</value>
+  </data>
+  <data name="Customer" xml:space="preserve">
+    <value>العميل</value>
+  </data>
+  <data name="Customers" xml:space="preserve">
+    <value>قائمة العملاء</value>
+  </data>
+  <data name="CustomerType" xml:space="preserve">
+    <value>نوع العميل</value>
+  </data>
+  <data name="FirstPhone" xml:space="preserve">
+    <value>رقم الجوال الاول </value>
+  </data>
+  <data name="SecondPhone" xml:space="preserve">
+    <value>رقم الجوال الثاني</value>
+  </data>
+  <data name="FamilyImage" xml:space="preserve">
+    <value>كرت الاسرة  </value>
+  </data>
+  <data name="IdentiyImage" xml:space="preserve">
+    <value>كرت الهوية </value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>الاسم الاخير </value>
+  </data>
+  <data name="MiddleName" xml:space="preserve">
+    <value>الاسم الاوسط</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>الاسم الاول</value>
+  </data>
+  <data name="AddPartner" xml:space="preserve">
+    <value>أضافة شريك</value>
+  </data>
+  <data name="AddPaymentMethod" xml:space="preserve">
+    <value>أضافة طريقة دفع</value>
+  </data>
+  <data name="Deserved" xml:space="preserve">
+    <value>المستحق</value>
+  </data>
+  <data name="Partner" xml:space="preserve">
+    <value>الشريك </value>
+  </data>
+  <data name="Partners" xml:space="preserve">
+    <value>قائمة الشركاء</value>
+  </data>
+  <data name="PaymentMethod" xml:space="preserve">
+    <value>طريقة الدفع</value>
+  </data>
+  <data name="PaymentMethods" xml:space="preserve">
+    <value>قائمة طرق الدفع</value>
+  </data>
+  <data name="Percentage" xml:space="preserve">
+    <value>النسبة</value>
+  </data>
+  <data name="Remiander" xml:space="preserve">
+    <value>المتبقي</value>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>المحوله</value>
+  </data>
+  <data name="TreeAccountNo" xml:space="preserve">
+    <value>رقم حساب الدليل</value>
+  </data>
 </root>

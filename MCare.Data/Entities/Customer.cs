@@ -12,17 +12,21 @@ namespace NajmetAlraqee.Data.Entities
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
+
+        public string Name { get; set; }
         public string IdentityNo { get; set; }
         public string FirstPhone { get; set; }
         public string SecondPhone { get; set; }
-        public int TypeId { get; set; }
+        public int CustomerTypeId { get; set; }
+        public string CustomerTypeName { get; set; }
         public string IdentiyImage { get; set; }
         public string FamilyImage { get; set; }
         public bool IsActive { get; set; }
-         public int UserDelegateId { get; set; }
-        public DateTime? BirthDate { get; set; }
+        public int? UserDelegateId { get; set; }
+        public string UserDelegateName { get; set; }
+       
         public string Address { get; set; }
-        public virtual CustomerType Type { get; set; }
+        public virtual CustomerType CustomerType { get; set; }
 
         public virtual UserDelegate UserDelegate { get; set; }
 

@@ -83,6 +83,11 @@ namespace NajmetAlraqeeSite
             services.AddTransient<IArrivalRepository, ArrivalRepository>();
             services.AddTransient<IExpenseRepository, ExpenseRepository>();
             services.AddTransient<IForeignAgencyRepository, ForeignAgencyRepository>();
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<ICustomerTypeRepository,CustomerTypeRepository>();
+            services.AddTransient<IPaymentMethodRepository, PaymentMethodRepository>();
+            services.AddTransient<IPartnerRepository, PartnerRepository>();
+
             //// configure identity server with in-memory stores, keys, clients and scopes
             //services.AddIdentityServer()
             //    .AddDeveloperSigningCredential()

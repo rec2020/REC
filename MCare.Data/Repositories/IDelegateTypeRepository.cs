@@ -11,7 +11,7 @@ namespace NajmetAlraqee.Data.Repositories
 
         IQueryable<DelegateType> GetDelegateTypes();
         DelegateType GetDelegateTypeById(int id);
-        long AddDelegateType(DelegateType cdelegateType);
+        int AddDelegateType(DelegateType cdelegateType);
         bool UpdateDelegateType(int id, DelegateType delegateType);
         bool RemoveDelegateType(int id);
 

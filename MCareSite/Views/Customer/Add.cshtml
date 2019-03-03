@@ -1,0 +1,220 @@
+﻿@model NajmetAlraqee.Site.ViewModels.CustomerViewModel
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("AddCustomer");
+}
+
+
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var fullPath = document.getElementById('IdentiyImageFile').value;
+
+            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+            var filename = fullPath.substring(startIndex);
+            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                filename = filename.substring(1);
+            }
+            var filename2 = filename.substring(0, filename.lastIndexOf('.'));
+            ext = filename.substring(filename.indexOf('.') + 1);
+            if (ext == 'jpg' || ext == "jpeg" || ext == "png" || ext == "GIF") {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#thumbnail').attr('style', "  display: block;");
+                    $('#ImgAr3')
+                        .attr('src', e.target.result);
+
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                $('#thumbnail').attr('style', "  display: none;");
+
+            }
+        }
+    }
+    function readURL2(input) {
+        if (input.files && input.files[0]) {
+            var fullPath = document.getElementById('FamilyImageFile').value;
+
+            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+            var filename = fullPath.substring(startIndex);
+            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                filename = filename.substring(1);
+            }
+            var filename2 = filename.substring(0, filename.lastIndexOf('.'));
+            ext = filename.substring(filename.indexOf('.') + 1);
+            if (ext == 'jpg' || ext == "jpeg" || ext == "png" || ext == "GIF") {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#thumbnail2').attr('style', "  display: block;");
+                    $('#ImgAr2')
+                        .attr('src', e.target.result);
+
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                $('#thumbnail2').attr('style', "  display: none;");
+
+            }
+        }
+    }
+</script>
+
+<div class="container-fluid">
+    <div class="block-header">
+        @*<h2>Add Doctor</h2>*@
+        <ol class="breadcrumb breadcrumb-col-cyan">
+            <li><a href=@Url.Action("index","Customer")><i class="material-icons">home</i>@SharedLocalizer.GetLocalizedHtmlString("Customers")</a></li>
+            <li><a href="javascript:void(0);"><i class="material-icons">library_books</i>@SharedLocalizer.GetLocalizedHtmlString("AddCustomer")</a></li>
+        </ol>
+    </div>
+
+
+  
+        <form asp-action="Add" method="post" enctype="multipart/form-data">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2 style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("BasicInformation")</h2>
+                        <ul class="header-dropdown m-r--5">
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
+                                <ul class="dropdown-menu pull-right"></ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-12"></div>
+                            <div class="col-sm-8 col-xs-12">
+                                <div asp-validation-summary="All" style="font-family:Droid Arabic Kufi" class="text-danger"></div>
+                                @Html.HiddenFor(x => x.Id)
+                            </div>
+                            <div class="col-sm-2 col-xs-12"></div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("FirstName") </label>
+                                    <div class="form-line">
+                                        <input asp-for="FirstName" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("FirstName")" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("MiddleName") </label>
+                                    <div class="form-line">
+                                        <input asp-for="MiddleName" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("MiddleName")" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("LastName") </label>
+                                    <div class="form-line">
+                                        <input asp-for="LastName" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("LastName")" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("IdentityNo")</label>
+                                    <div class="form-line">
+                                        <input asp-for="IdentityNo" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("IdentityNo")" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("FirstPhone") </label>
+                                    <div class="form-line">
+                                        <input asp-for="@Model.FirstPhone" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("FirstPhone")" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("SecondPhone") </label>
+                                    <div class="form-line">
+                                        <input asp-for="@Model.SecondPhone" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("SecondPhone")" />
+                                    </div>
+                                </div>
+                            </div>
+                      
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-4 col-xs-12">
+                                <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("CustomerType") </label>
+                                <div class="form-group drop-custum">
+                                    <select asp-for="@Model.CustomerTypeId" class="form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.CustomerTypeId"><option>@SharedLocalizer.GetLocalizedHtmlString("CustomerType")</option></select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Delegate") </label>
+                                    <div class="form-line">
+                                        <select asp-for="@Model.UserDelegateId" class="form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.DelegateId"><option>@SharedLocalizer.GetLocalizedHtmlString("Delegate")</option></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Address") </label>
+                                    <div class="form-line">
+                                        <input asp-for="@Model.Address" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Address")" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row clearfix">
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                <label style="color:black;font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("IdentiyImage")</label>
+                                <center>
+                                    <div class="thumbnail" id="thumbnail" style="width: 80%; height: 210px; display: block;">
+                                        <img id="ImgAr3" src="~/images/AttachedFile.png" style="width: 70%; height: 200px; display: block; border: 1px solid #ddd;border-radius:8px;padding: 5px;" />
+                                    </div>
+                                    <br />
+                                    <div class="form-line">
+                                        <input type="file" asp-for="IdentiyImageFile" id="IdentiyImageFile" class="dropzone dz-clickable" placeholder="image" onchange="readURL(this);" accept=".doc,.docx,.pdf,.jpg,.jpeg,.png" />
+                                    </div>
+                                    <br />
+                                    <span class="label bg-teal" style="font-family:Droid Arabic Kufi;font-size:small">@SharedLocalizer.GetLocalizedHtmlString("IdentiyImage")</span>
+                                </center>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                <label style="color:black;font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("FamilyImage")</label>
+                                <center>
+                                    <div class="thumbnail " id="thumbnail2" style="width: 80%; height: 210px; display: block;">
+                                        <img id="ImgAr2" src="~/images/AttachedFile.png" style="width: 70%; height: 200px; display: block; border: 1px solid #ddd;border-radius:8px;padding: 5px;" />
+                                    </div>
+                                    <br />
+                                    <div class="form-line">
+                                        <input type="file" asp-for="FamilyImageFile" id="FamilyImageFile" placeholder="CV" class="dropzone dz-clickable" onchange="readURL2(this);" accept=".doc,.docx,.pdf,.jpg,.jpeg,.png" />
+                                    </div>
+                                    <br />
+                                    <span class="label bg-teal" style="font-family:Droid Arabic Kufi;font-size:small">@SharedLocalizer.GetLocalizedHtmlString("FamilyImage") </span>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                <div class="col-sm-12">
+                    <button type="submit" value="Add" style="font-family:Droid Arabic Kufi;right:950px" class="btn btn-raised g-bg-cyan pull-right">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+                    <a asp-action="Index" class="btn btn-raised"  style="font-family:Droid Arabic Kufi;right:950px" >@SharedLocalizer.GetLocalizedHtmlString("Cancel")</a>
+                </div>
+            </div>
+    </div>
+
+    </form>
+
+
+</div>

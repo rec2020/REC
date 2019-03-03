@@ -127,5 +127,9 @@ namespace NajmetAlraqee.Data
 
         public DbSet<ForeignAgency> ForeignAgencies { get; set; }
 
+        public DbSet<PaymentMethod> PaymentMethods { get; set; }
+
+        public DbSet<Partner> Partners { get; set; }
+
     }
 }

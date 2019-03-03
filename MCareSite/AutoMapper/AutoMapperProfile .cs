@@ -75,23 +75,29 @@ namespace NajmetAlraqeeSite.AutoMapper
             CreateMap<ForeignAgency, ForeignAgencyViewModel>();
             CreateMap<ForeignAgencyViewModel, ForeignAgency>();
 
+            CreateMap<PaymentMethod, PaymentMethodViewModel>();
+            CreateMap<PaymentMethodViewModel, PaymentMethod>();
 
-           //  CreateMap<ForeignAgency, ForeignAgencyViewModel>()
-           // .ForMember(d => d.BankName, o => o.MapFrom(s => s.BankDetail.Name))
-           // .ForMember(d => d.BankAccountNo, o => o.MapFrom(s => s.BankDetail.AccountNumber))
-           // .ForAllMembers(o => o.Condition((src, dest, value) => value != null));
+            CreateMap<Partner, PartnerViewModel>();
+            CreateMap<PartnerViewModel, Partner>();
 
-           //  CreateMap<ForeignAgency, ForeignAgencyViewModel>()
-           // .ForMember(d => d.CurrencyName, o => o.MapFrom(s => s.Currency.Name))
-           // .ForAllMembers(o => o.Condition((src, dest, value) => value != null));
 
-           // CreateMap<ForeignAgency, ForeignAgencyViewModel>()
-           //.ForMember(d => d.JobTypeName, o => o.MapFrom(s => s.JobType.Name))
-           //.ForAllMembers(o => o.Condition((src, dest, value) => value != null));
+            //  CreateMap<ForeignAgency, ForeignAgencyViewModel>()
+            // .ForMember(d => d.BankName, o => o.MapFrom(s => s.BankDetail.Name))
+            // .ForMember(d => d.BankAccountNo, o => o.MapFrom(s => s.BankDetail.AccountNumber))
+            // .ForAllMembers(o => o.Condition((src, dest, value) => value != null));
 
-           // CreateMap<ForeignAgency, ForeignAgencyViewModel>()
-           //.ForMember(d => d.NationalityName, o => o.MapFrom(s => s.Nationality.Name))
-           //.ForAllMembers(o => o.Condition((src, dest, value) => value != null));
+            //  CreateMap<ForeignAgency, ForeignAgencyViewModel>()
+            // .ForMember(d => d.CurrencyName, o => o.MapFrom(s => s.Currency.Name))
+            // .ForAllMembers(o => o.Condition((src, dest, value) => value != null));
+
+            // CreateMap<ForeignAgency, ForeignAgencyViewModel>()
+            //.ForMember(d => d.JobTypeName, o => o.MapFrom(s => s.JobType.Name))
+            //.ForAllMembers(o => o.Condition((src, dest, value) => value != null));
+
+            // CreateMap<ForeignAgency, ForeignAgencyViewModel>()
+            //.ForMember(d => d.NationalityName, o => o.MapFrom(s => s.Nationality.Name))
+            //.ForAllMembers(o => o.Condition((src, dest, value) => value != null));
         }
     }
 }

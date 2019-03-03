@@ -10,8 +10,8 @@ using NajmetAlraqee.Data;
 namespace NajmetAlraqee.Data.Migrations
 {
     [DbContext(typeof(NajmetAlraqeeContext))]
-    [Migration("20190221045958_Initial")]
-    partial class Initial
+    [Migration("20190223181623_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -268,7 +268,9 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<string>("Address");
 
-                    b.Property<DateTime?>("BirthDate");
+                    b.Property<int>("CustomerTypeId");
+
+                    b.Property<string>("CustomerTypeName");
 
                     b.Property<string>("FamilyImage");
 
@@ -286,15 +288,17 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<string>("MiddleName");
 
+                    b.Property<string>("Name");
+
                     b.Property<string>("SecondPhone");
 
-                    b.Property<int>("TypeId");
+                    b.Property<int?>("UserDelegateId");
 
-                    b.Property<int>("UserDelegateId");
+                    b.Property<string>("UserDelegateName");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TypeId");
+                    b.HasIndex("CustomerTypeId");
 
                     b.HasIndex("UserDelegateId");
 
@@ -837,6 +841,29 @@ namespace NajmetAlraqee.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.Partner", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal?>("Deserved");
+
+                    b.Property<decimal?>("Expenses");
+
+                    b.Property<string>("Name");
+
+                    b.Property<decimal?>("Percentage");
+
+                    b.Property<decimal?>("Remiander");
+
+                    b.Property<decimal?>("Transfer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Partners");
+                });
+
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.Patient", b =>
                 {
                     b.Property<long>("Id")
@@ -905,6 +932,21 @@ namespace NajmetAlraqee.Data.Migrations
                     b.HasIndex("PatientId");
 
                     b.ToTable("PatientAppointments");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.PaymentMethod", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("TreeAccountNo");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PaymentMethods");
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.ScheduleStatus", b =>
@@ -1127,15 +1169,14 @@ namespace NajmetAlraqee.Data.Migrations
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.Customer", b =>
                 {
-                    b.HasOne("NajmetAlraqee.Data.Entities.CustomerType", "Type")
+                    b.HasOne("NajmetAlraqee.Data.Entities.CustomerType", "CustomerType")
                         .WithMany()
-                        .HasForeignKey("TypeId")
+                        .HasForeignKey("CustomerTypeId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("NajmetAlraqee.Data.Entities.UserDelegate", "UserDelegate")
                         .WithMany()
-                        .HasForeignKey("UserDelegateId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("UserDelegateId");
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.Doctor", b =>

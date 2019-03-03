@@ -807,4 +807,73 @@
   <data name="DisActivated" xml:space="preserve">
     <value>DisActivated</value>
   </data>
+  <data name="AddCustomer" xml:space="preserve">
+    <value>Add Customer</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="Customer" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="Customers" xml:space="preserve">
+    <value>Customers</value>
+  </data>
+  <data name="CustomerType" xml:space="preserve">
+    <value>Customer Type </value>
+  </data>
+  <data name="FirstPhone" xml:space="preserve">
+    <value>First Phone</value>
+  </data>
+  <data name="SecondPhone" xml:space="preserve">
+    <value>Second Phone</value>
+  </data>
+  <data name="FamilyImage" xml:space="preserve">
+    <value>Family Image</value>
+  </data>
+  <data name="IdentiyImage" xml:space="preserve">
+    <value>Identiy Image</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="MiddleName" xml:space="preserve">
+    <value>Middle Name</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="AddPartner" xml:space="preserve">
+    <value>AddPartner</value>
+  </data>
+  <data name="AddPaymentMethod" xml:space="preserve">
+    <value>AddPaymentMethod</value>
+  </data>
+  <data name="Deserved" xml:space="preserve">
+    <value>Deserved</value>
+  </data>
+  <data name="Partner" xml:space="preserve">
+    <value>Partner</value>
+  </data>
+  <data name="Partners" xml:space="preserve">
+    <value>Partners</value>
+  </data>
+  <data name="PaymentMethod" xml:space="preserve">
+    <value>PaymentMethod</value>
+  </data>
+  <data name="PaymentMethods" xml:space="preserve">
+    <value>PaymentMethods</value>
+  </data>
+  <data name="Percentage" xml:space="preserve">
+    <value>Percentage</value>
+  </data>
+  <data name="Remiander" xml:space="preserve">
+    <value>Remiander</value>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>Transfer</value>
+  </data>
+  <data name="TreeAccountNo" xml:space="preserve">
+    <value>TreeAccountNo</value>
+  </data>
 </root>
