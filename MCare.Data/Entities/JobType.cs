@@ -10,5 +10,10 @@ namespace NajmetAlraqee.Data.Entities
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
+        //public virtual ForeignAgency ForeignAgency { get; set; }
+        //public virtual Employee Employee { get; set; }
+        //public virtual Contract Contract { get; set; }
+
+
     }
 }

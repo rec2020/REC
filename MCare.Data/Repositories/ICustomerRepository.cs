@@ -13,6 +13,7 @@ namespace NajmetAlraqee.Data.Repositories
         Customer GetCustomerById(int Id);
         IQueryable<Customer> GetCustomers();
         bool RemoveCustomer(int Id);
-        bool UpdateCustomer(int  Id, Customer del);
+        bool UpdateCustomer(int  Id, Customer cus);
+        bool ActivationCustomer(int Id, Customer cust);
     }
 }

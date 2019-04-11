@@ -11,21 +11,25 @@
     <Compile Remove="Properties\PublishProfiles\**" />
     <Compile Remove="Repositories\**" />
     <Compile Remove="Views\old\**" />
+    <Compile Remove="wwwroot\datatable\**" />
     <Content Remove="Constants\**" />
     <Content Remove="Controllers\oldcon\**" />
     <Content Remove="Properties\PublishProfiles\**" />
     <Content Remove="Repositories\**" />
     <Content Remove="Views\old\**" />
+    <Content Remove="wwwroot\datatable\**" />
     <EmbeddedResource Remove="Constants\**" />
     <EmbeddedResource Remove="Controllers\oldcon\**" />
     <EmbeddedResource Remove="Properties\PublishProfiles\**" />
     <EmbeddedResource Remove="Repositories\**" />
     <EmbeddedResource Remove="Views\old\**" />
+    <EmbeddedResource Remove="wwwroot\datatable\**" />
     <None Remove="Constants\**" />
     <None Remove="Controllers\oldcon\**" />
     <None Remove="Properties\PublishProfiles\**" />
     <None Remove="Repositories\**" />
     <None Remove="Views\old\**" />
+    <None Remove="wwwroot\datatable\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -79,6 +83,20 @@
 
   <ItemGroup>
     <None Include="Views\Delegates\Index.cshtml" />
+    <None Include="wwwroot\DatePickers\jquery.calendars-ar-EG.js" />
+    <None Include="wwwroot\DatePickers\jquery.calendars-ar.js" />
+    <None Include="wwwroot\DatePickers\jquery.calendars.all.min.js" />
+    <None Include="wwwroot\DatePickers\jquery.calendars.islamic-ar.js" />
+    <None Include="wwwroot\DatePickers\jquery.calendars.islamic.js" />
+    <None Include="wwwroot\DatePickers\jquery.calendars.js" />
+    <None Include="wwwroot\DatePickers\jquery.calendars.min.js" />
+    <None Include="wwwroot\DatePickers\jquery.calendars.picker-ar.js" />
+    <None Include="wwwroot\DatePickers\jquery.calendars.picker.js" />
+    <None Include="wwwroot\DatePickers\jquery.calendars.picker.lang.js" />
+    <None Include="wwwroot\DatePickers\jquery.calendars.plus.js" />
+    <None Include="wwwroot\DatePickers\jquery.calendars.plus.min.js" />
+    <None Include="wwwroot\DatePickers\jquery.plugin.js" />
+    <None Include="wwwroot\DatePickers\jquery.plugin.min.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -86,7 +104,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\datatable\table\" />
     <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>
 

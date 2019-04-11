@@ -82,7 +82,7 @@
                                     {
                                         <tr>
                                             <td>
-                                                @item.Name
+                                                @item.FirstName  @item.LastName
                                             </td>
                                             <td>
                                                 @item.IdentityNo
@@ -91,7 +91,7 @@
                                                 @item.Address
                                             </td>
                                             <td>
-                                                @item.CustomerTypeName
+                                                @item.CustomerType.Name
                                             </td>
                                             <td>
                                                 @if (item.IsActive)
@@ -100,7 +100,7 @@
                                             {<span class="label label-warning">@SharedLocalizer.GetLocalizedHtmlString("InActive")</span>}
                                             </td>
                                             <td>
-                                                @item.UserDelegateName
+                                                @item.UserDelegate.Name
                                             </td>
                                             <td>
                                                 @item.FirstPhone

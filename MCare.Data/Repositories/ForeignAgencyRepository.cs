@@ -1,4 +1,5 @@
-﻿using NajmetAlraqee.Data.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using NajmetAlraqee.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,20 +18,6 @@ namespace NajmetAlraqee.Data.Repositories
         }
         public int AddAgency(ForeignAgency agency)
         {
-            var bankinfo = _context.BankDetails.SingleOrDefault(x => x.Id == agency.BankDetailId);
-            if (bankinfo != null)
-            {
-                agency.BankName = bankinfo.Name;
-                agency.BankAccountNo = bankinfo.AccountNumber;
-            }
-            var currencyinfo = _context.Currencies.SingleOrDefault(x => x.Id == agency.CurrencyId);
-            if (currencyinfo!=null) { agency.CurrencyName = currencyinfo.Name; }
-
-            var jobinfo = _context.JobTypes.SingleOrDefault(x => x.Id == agency.JobTypeId);
-            if (jobinfo != null) { agency.JobTypeName = jobinfo.Name; }
-
-            var nationalityinfo = _context.Nationalities.SingleOrDefault(x => x.Id == agency.NationalityId);
-            if (nationalityinfo != null) { agency.NationalityName = nationalityinfo.Name; }
             agency.IsActive = true;
             _context.ForeignAgencies.Add(agency);
             _context.SaveChanges();
@@ -43,7 +30,7 @@ namespace NajmetAlraqee.Data.Repositories
         }
         public IQueryable<ForeignAgency> GetAgencies()
         {
-            return _context.ForeignAgencies;
+            return _context.ForeignAgencies.Include(x=>x.BankDetail).Include(x=>x.Currency).Include(x=>x.JobType).Include(x=>x.Nationality) ;
         }
         public bool RemoveAggency(int Id)
         {
@@ -70,22 +57,6 @@ namespace NajmetAlraqee.Data.Repositories
             existagency.Phone = agency.Phone;
             existagency.Price = agency.Price;
             existagency.ResponsibleUser = agency.ResponsibleUser;
-            
-            var bankinfo = _context.BankDetails.SingleOrDefault(x => x.Id == agency.BankDetailId);
-            if (bankinfo != null)
-            {
-                existagency.BankName = bankinfo.Name;
-                existagency.BankAccountNo = bankinfo.AccountNumber;
-            }
-            var currencyinfo = _context.Currencies.SingleOrDefault(x => x.Id == agency.CurrencyId);
-            if (currencyinfo != null) { existagency.CurrencyName = currencyinfo.Name; }
-
-            var jobinfo = _context.JobTypes.SingleOrDefault(x => x.Id == agency.JobTypeId);
-            if (jobinfo != null) { existagency.JobTypeName = jobinfo.Name; }
-
-            var nationalityinfo = _context.Nationalities.SingleOrDefault(x => x.Id == agency.NationalityId);
-            if (nationalityinfo != null) { existagency.NationalityName = nationalityinfo.Name; }
-
 
             _context.Update(existagency);
             _context.SaveChanges();

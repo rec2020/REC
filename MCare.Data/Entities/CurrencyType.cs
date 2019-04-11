@@ -9,7 +9,7 @@ namespace NajmetAlraqee.Data.Entities
     {
         [Key]
         public int Id { get; set; }
-
         public string  Name { get; set; }
+        //public virtual Currency Currency { get; set; }
     }
 }

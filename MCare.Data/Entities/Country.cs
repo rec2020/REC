@@ -5,8 +5,9 @@ namespace NajmetAlraqee.Data.Entities
 {
     public class Country
     {    
-        public long Id { get; set; }
-        public string ArabicName { get; set; }
-        public string EnglishName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public virtual City City { get; set; }
     }
 }

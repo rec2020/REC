@@ -129,21 +129,6 @@ namespace NajmetAlraqee.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.AppointmentStatus", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ArabicName");
-
-                    b.Property<string>("EnglishName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppointmentStatuses");
-                });
-
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.Arrival", b =>
                 {
                     b.Property<int>("Id")
@@ -178,32 +163,386 @@ namespace NajmetAlraqee.Data.Migrations
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.City", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ArabicName");
+                    b.Property<int>("CountryId");
 
-                    b.Property<long>("CountryId");
-
-                    b.Property<string>("EnglishName");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CountryId");
+                    b.HasIndex("CountryId")
+                        .IsUnique();
 
                     b.ToTable("Cities");
                 });
 
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.Country", b =>
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.Contract", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ArabicName");
+                    b.Property<int?>("ArrivalCityId");
 
-                    b.Property<string>("EnglishName");
+                    b.Property<decimal>("ContractCost");
+
+                    b.Property<string>("ContractDate");
+
+                    b.Property<int?>("ContractInterVal");
+
+                    b.Property<string>("ContractNote");
+
+                    b.Property<int?>("ContractStatusId");
+
+                    b.Property<int?>("ContractTypeId");
+
+                    b.Property<int?>("ContractYear");
+
+                    b.Property<string>("CreatedById");
+
+                    b.Property<string>("CreationDate");
+
+                    b.Property<int?>("CustomerId");
+
+                    b.Property<decimal?>("EmployeeCost");
+
+                    b.Property<int?>("EmployeeId");
+
+                    b.Property<int?>("EmployeeNumber");
+
+                    b.Property<string>("ExperienceYear");
+
+                    b.Property<int?>("ForeignAgencyId");
+
+                    b.Property<int?>("JobTypeId");
+
+                    b.Property<string>("ModifybyId");
+
+                    b.Property<int?>("OldContractNo");
+
+                    b.Property<string>("QulaficationNote");
+
+                    b.Property<decimal?>("SalaryMonth");
+
+                    b.Property<int?>("TestDay");
+
+                    b.Property<decimal>("VatCost");
+
+                    b.Property<int?>("VicationDays");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArrivalCityId");
+
+                    b.HasIndex("ContractStatusId");
+
+                    b.HasIndex("ContractTypeId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("ForeignAgencyId");
+
+                    b.HasIndex("JobTypeId");
+
+                    b.ToTable("Contracts");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ContractAction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ContractAction");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "تم انشاء العقد"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "تم الاختيار"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "تم التفويض"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "تم التفيز"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "تم حجز تذكرة سفر"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "تم الاسترجاع"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "تم الاغلاق "
+                        });
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ContractDelegation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ContractId");
+
+                    b.Property<string>("DelegateById");
+
+                    b.Property<string>("DelegationDate");
+
+                    b.Property<int?>("ForeignAgencyId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContractId");
+
+                    b.HasIndex("DelegateById");
+
+                    b.HasIndex("ForeignAgencyId");
+
+                    b.ToTable("ContractDelegations");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ContractHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ActionById");
+
+                    b.Property<string>("ActionByName");
+
+                    b.Property<string>("ActionDate");
+
+                    b.Property<int?>("ActionId");
+
+                    b.Property<int>("ContractId");
+
+                    b.Property<int?>("ContractStatusId");
+
+                    b.Property<int?>("CustomerId");
+
+                    b.Property<string>("CustomerName");
+
+                    b.Property<int?>("EmployeeId");
+
+                    b.Property<string>("EmployeeName");
+
+                    b.Property<int?>("ForeignAgencyId");
+
+                    b.Property<string>("ForeignAgencyName");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActionId");
+
+                    b.HasIndex("ContractId");
+
+                    b.HasIndex("ContractStatusId");
+
+                    b.ToTable("ContractHistories");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ContractSelect", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ContractId");
+
+                    b.Property<int?>("ForeignAgencyId");
+
+                    b.Property<int?>("PolNumer");
+
+                    b.Property<string>("PolNumerDate");
+
+                    b.Property<string>("SelectById");
+
+                    b.Property<string>("SelectDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContractId");
+
+                    b.HasIndex("ForeignAgencyId");
+
+                    b.HasIndex("SelectById");
+
+                    b.ToTable("ContractSelects");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ContractStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ContractStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "جديد"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "تم الاختيار"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "تم التفويض"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "تم التفيز"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "تذكرة سفر"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "استرجاع"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "انتهي"
+                        });
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ContractTicket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AirLineName");
+
+                    b.Property<string>("ArrivalDate");
+
+                    b.Property<int?>("CityId");
+
+                    b.Property<int>("ContractId");
+
+                    b.Property<string>("Date");
+
+                    b.Property<int?>("EmployeeId");
+
+                    b.Property<bool>("IsApproved");
+
+                    b.Property<string>("TicketById");
+
+                    b.Property<string>("TicketDate");
+
+                    b.Property<string>("Time");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("ContractId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("TicketById");
+
+                    b.ToTable("ContractTickets");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ContractType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ContractTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "أستقدام"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "بديل"
+                        });
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ContractVisa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ContractId");
+
+                    b.Property<int?>("EmployeeId");
+
+                    b.Property<string>("VisaById");
+
+                    b.Property<string>("VisaDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContractId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("VisaById");
+
+                    b.ToTable("ContractVisas");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.Country", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
@@ -217,8 +556,6 @@ namespace NajmetAlraqee.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("CurrencyTypeId");
-
-                    b.Property<string>("CurrencyTypeName");
 
                     b.Property<decimal>("ExchangeRate");
 
@@ -268,8 +605,6 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<int>("CustomerTypeId");
 
-                    b.Property<string>("CustomerTypeName");
-
                     b.Property<string>("FamilyImage");
 
                     b.Property<string>("FirstName");
@@ -280,7 +615,7 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<string>("IdentiyImage");
 
-                    b.Property<bool>("IsActive");
+                    b.Property<bool?>("IsActive");
 
                     b.Property<string>("LastName");
 
@@ -292,13 +627,13 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<int?>("UserDelegateId");
 
-                    b.Property<string>("UserDelegateName");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerTypeId");
 
-                    b.HasIndex("UserDelegateId");
+                    b.HasIndex("UserDelegateId")
+                        .IsUnique()
+                        .HasFilter("[UserDelegateId] IS NOT NULL");
 
                     b.ToTable("Customers");
                 });
@@ -353,240 +688,6 @@ namespace NajmetAlraqee.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.Doctor", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ArabicBio");
-
-                    b.Property<string>("ArabicCVPath");
-
-                    b.Property<string>("ArabicName");
-
-                    b.Property<DateTime>("BirthDate");
-
-                    b.Property<string>("EnglishBio");
-
-                    b.Property<string>("EnglishCVPath");
-
-                    b.Property<string>("EnglishName");
-
-                    b.Property<DateTime>("Experience");
-
-                    b.Property<long>("GenderId");
-
-                    b.Property<long>("HospitalId");
-
-                    b.Property<string>("IdentityNo");
-
-                    b.Property<string>("ImagePath");
-
-                    b.Property<string>("MobileNo");
-
-                    b.Property<long>("NationalityId");
-
-                    b.Property<int?>("NationalityId1");
-
-                    b.Property<string>("PhoneExtension");
-
-                    b.Property<string>("PhoneNo");
-
-                    b.Property<decimal>("Rate");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GenderId");
-
-                    b.HasIndex("HospitalId");
-
-                    b.HasIndex("NationalityId1");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Doctors");
-                });
-
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.DoctorEducationLevel", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("DoctorId");
-
-                    b.Property<long>("EducationLevelId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("EducationLevelId");
-
-                    b.ToTable("DoctorEducationLevels");
-                });
-
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.DoctorFeedback", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Body");
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<long>("DoctorId");
-
-                    b.Property<long>("PatientId");
-
-                    b.Property<double>("Rate");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("PatientId");
-
-                    b.ToTable("DoctorFeedbacks");
-                });
-
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.DoctorLanguage", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("DoctorId");
-
-                    b.Property<long>("LanguageId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("LanguageId");
-
-                    b.ToTable("DoctorLanguages");
-                });
-
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.DoctorSchedule", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<long>("DoctorId");
-
-                    b.Property<long>("HospitalId");
-
-                    b.Property<long>("ScheduleStatusId");
-
-                    b.Property<string>("Time");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("HospitalId");
-
-                    b.HasIndex("ScheduleStatusId");
-
-                    b.ToTable("DoctorSchedules");
-                });
-
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.DoctorScheduleConfiguration", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("DoctorId");
-
-                    b.Property<DateTime>("EndOn");
-
-                    b.Property<string>("EveningEndingTime");
-
-                    b.Property<string>("EveningStartingTime");
-
-                    b.Property<long>("HospitalId");
-
-                    b.Property<string>("MorningEndingTime");
-
-                    b.Property<string>("MorningStartingTime");
-
-                    b.Property<int>("PeroidInMintues");
-
-                    b.Property<DateTime>("StartOn");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("HospitalId");
-
-                    b.ToTable("DoctorScheduleConfigurations");
-                });
-
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.DoctorSpecialty", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("DoctorId");
-
-                    b.Property<long>("SpecialtyId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("SpecialtyId");
-
-                    b.ToTable("DoctorSpecialties");
-                });
-
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.DoctorVacation", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<long>("DoctorId");
-
-                    b.Property<DateTime>("EndingOn");
-
-                    b.Property<long>("HospitalId");
-
-                    b.Property<DateTime>("StartingOn");
-
-                    b.Property<long>("VacationStatusId");
-
-                    b.Property<long>("VacationTypeId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("HospitalId");
-
-                    b.HasIndex("VacationStatusId");
-
-                    b.HasIndex("VacationTypeId");
-
-                    b.ToTable("DoctorVacations");
-                });
-
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.EducationLevel", b =>
                 {
                     b.Property<long>("Id")
@@ -600,6 +701,185 @@ namespace NajmetAlraqee.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("EducationLevels");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.Employee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddressInOrigin");
+
+                    b.Property<int?>("Age");
+
+                    b.Property<decimal?>("Amountdeducted");
+
+                    b.Property<string>("ArrivalDate");
+
+                    b.Property<decimal?>("BasicSalary");
+
+                    b.Property<string>("BirhtDate");
+
+                    b.Property<string>("BorderNo");
+
+                    b.Property<string>("ContractDate");
+
+                    b.Property<string>("DriverLicenseExpireDate");
+
+                    b.Property<string>("DriverLicenseIssueDate");
+
+                    b.Property<int?>("DriverLicenseNo");
+
+                    b.Property<string>("EmbassyContractDate");
+
+                    b.Property<int?>("EmbassyContractNo");
+
+                    b.Property<int?>("EmployeeStatusId");
+
+                    b.Property<string>("EntrancePort");
+
+                    b.Property<string>("ExpireDate");
+
+                    b.Property<string>("Family");
+
+                    b.Property<int?>("FamilyNo");
+
+                    b.Property<string>("Father");
+
+                    b.Property<int?>("FileNo");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<int?>("ForeignAgencyId");
+
+                    b.Property<decimal?>("FuelAllowance");
+
+                    b.Property<int?>("GenderId");
+
+                    b.Property<string>("GrandFather");
+
+                    b.Property<int?>("GroupNo");
+
+                    b.Property<decimal?>("HousingAllowance");
+
+                    b.Property<string>("IdentityExpireDate");
+
+                    b.Property<string>("IdentityIssueDate");
+
+                    b.Property<string>("IdentityNo");
+
+                    b.Property<string>("IdentitySource");
+
+                    b.Property<string>("IssueDate");
+
+                    b.Property<string>("IssuePlace");
+
+                    b.Property<int?>("JobTypeId");
+
+                    b.Property<string>("KafeelName");
+
+                    b.Property<int?>("KafeelNo");
+
+                    b.Property<string>("LicenseExpireDate");
+
+                    b.Property<int?>("LicenseNo");
+
+                    b.Property<int?>("NationalityId");
+
+                    b.Property<string>("NewKafeelAddress");
+
+                    b.Property<string>("NewKafeelName");
+
+                    b.Property<int?>("NewKafeelNo");
+
+                    b.Property<int?>("NumberTime");
+
+                    b.Property<string>("PassportNo");
+
+                    b.Property<string>("PhonrInOrigin");
+
+                    b.Property<int?>("ReligionId");
+
+                    b.Property<int?>("SocialStatusId");
+
+                    b.Property<decimal?>("Subsistence");
+
+                    b.Property<decimal?>("Telephoneallowance");
+
+                    b.Property<decimal?>("TotalSalary");
+
+                    b.Property<decimal?>("TransportationAllowance");
+
+                    b.Property<string>("VisaNo");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeStatusId");
+
+                    b.HasIndex("ForeignAgencyId");
+
+                    b.HasIndex("GenderId");
+
+                    b.HasIndex("JobTypeId");
+
+                    b.HasIndex("NationalityId");
+
+                    b.HasIndex("ReligionId");
+
+                    b.HasIndex("SocialStatusId");
+
+                    b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.EmployeeStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EmployeeStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "علي راس العمل"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "تجربة"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "خروج نهائي"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "هروب"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "نقل كفالة"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "في السكن"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "جديد"
+                        });
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.Expense", b =>
@@ -633,11 +913,7 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<int?>("BankDetailId");
 
-                    b.Property<string>("BankName");
-
                     b.Property<int?>("CurrencyId");
-
-                    b.Property<string>("CurrencyName");
 
                     b.Property<string>("Email");
 
@@ -645,11 +921,7 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<int?>("JobTypeId");
 
-                    b.Property<string>("JobTypeName");
-
                     b.Property<int?>("NationalityId");
-
-                    b.Property<string>("NationalityName");
 
                     b.Property<string>("OfficeName");
 
@@ -676,114 +948,27 @@ namespace NajmetAlraqee.Data.Migrations
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.Gender", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ArabicName");
-
-                    b.Property<string>("EnglishName");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
                     b.ToTable("Genders");
-                });
 
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.Hospital", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ArabicAddress");
-
-                    b.Property<string>("ArabicDescription");
-
-                    b.Property<string>("ArabicName");
-
-                    b.Property<long>("CityId");
-
-                    b.Property<long>("CountryId");
-
-                    b.Property<string>("EnglishAddress");
-
-                    b.Property<string>("EnglishDescription");
-
-                    b.Property<string>("EnglishName");
-
-                    b.Property<long>("HospitalTypeId");
-
-                    b.Property<string>("ImagePath");
-
-                    b.Property<double>("Latitude");
-
-                    b.Property<string>("LogoPath");
-
-                    b.Property<double>("Longitude");
-
-                    b.Property<string>("MapLocation");
-
-                    b.Property<string>("Phone1");
-
-                    b.Property<string>("Phone2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityId");
-
-                    b.HasIndex("CountryId");
-
-                    b.HasIndex("HospitalTypeId");
-
-                    b.ToTable("Hospitals");
-                });
-
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.HospitalOffer", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ArabicBody");
-
-                    b.Property<string>("ArabicImagePath");
-
-                    b.Property<string>("ArabicTitle");
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<DateTime?>("EndOn");
-
-                    b.Property<string>("EnglishBody");
-
-                    b.Property<string>("EnglishImagePath");
-
-                    b.Property<string>("EnglishTitle");
-
-                    b.Property<DateTime?>("HappendOn");
-
-                    b.Property<long>("HospitalId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HospitalId");
-
-                    b.ToTable("HospitalOffers");
-                });
-
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.HospitalType", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ArabicName");
-
-                    b.Property<string>("EnglishName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("HospitalTypes");
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "ذكر"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "أنثي"
+                        });
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.JobType", b =>
@@ -862,76 +1047,6 @@ namespace NajmetAlraqee.Data.Migrations
                     b.ToTable("Partners");
                 });
 
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.Patient", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ArabicName");
-
-                    b.Property<string>("BirthDate");
-
-                    b.Property<string>("EnglishName");
-
-                    b.Property<long>("GenderId");
-
-                    b.Property<long>("NationalityId");
-
-                    b.Property<int?>("NationalityId1");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GenderId");
-
-                    b.HasIndex("NationalityId1");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Patients");
-                });
-
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.PatientAppointment", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("AppointementStatusId");
-
-                    b.Property<string>("AppointmentOn");
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<long>("DoctorScheduleId");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("FullName");
-
-                    b.Property<long>("GenderId");
-
-                    b.Property<string>("Mobile");
-
-                    b.Property<string>("Notes");
-
-                    b.Property<long>("PatientId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppointementStatusId");
-
-                    b.HasIndex("DoctorScheduleId");
-
-                    b.HasIndex("GenderId");
-
-                    b.HasIndex("PatientId");
-
-                    b.ToTable("PatientAppointments");
-                });
-
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.PaymentMethod", b =>
                 {
                     b.Property<int>("Id")
@@ -947,38 +1062,170 @@ namespace NajmetAlraqee.Data.Migrations
                     b.ToTable("PaymentMethods");
                 });
 
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ScheduleStatus", b =>
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ReceiptDoc", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ArabicName");
+                    b.Property<decimal>("Amount");
 
-                    b.Property<string>("EnglishName");
+                    b.Property<int?>("ContractId");
+
+                    b.Property<int?>("CustomerId");
+
+                    b.Property<string>("Note");
+
+                    b.Property<string>("ReceiptByUser");
+
+                    b.Property<string>("ReceiptByUserName");
+
+                    b.Property<string>("ReceiptDate");
+
+                    b.Property<int?>("ReceiptdocTypeId");
+
+                    b.Property<decimal>("VAT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ScheduleStatuses");
+                    b.HasIndex("ContractId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("ReceiptdocTypeId");
+
+                    b.ToTable("ReceiptDocs");
                 });
 
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.Specialty", b =>
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ReceiptDocType", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ArabicName");
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<string>("EnglishName");
-
-                    b.Property<string>("ImagePath");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Specialties");
+                    b.ToTable("ReceiptDocTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "سند صرف "
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "سند قبض"
+                        });
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.Religion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Religions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "مسلم"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "مسيحي"
+                        });
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.SocialStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SocialStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "عازب/ة"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "متزوج/ة"
+                        });
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.SpecialEmployee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.Property<int?>("NationalityId");
+
+                    b.Property<string>("PassportNo");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NationalityId");
+
+                    b.ToTable("SpecialEmployees");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.SpecificContract", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("ContractCost");
+
+                    b.Property<int?>("ContractStatusId");
+
+                    b.Property<int>("CustomerId");
+
+                    b.Property<string>("DelegationDate");
+
+                    b.Property<int?>("ForeignAgencyId");
+
+                    b.Property<string>("ForeignAgencyName");
+
+                    b.Property<string>("LicenceNumber");
+
+                    b.Property<int?>("SpecialEmployeeId");
+
+                    b.Property<decimal>("VAT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContractStatusId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("ForeignAgencyId");
+
+                    b.HasIndex("SpecialEmployeeId");
+
+                    b.ToTable("SpecificContracts");
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.User", b =>
@@ -1052,15 +1299,11 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<int>("DelegateTypeId");
 
-                    b.Property<string>("DelegateTypeName");
-
                     b.Property<decimal>("DeservedAmount");
 
                     b.Property<string>("Name");
 
                     b.Property<int>("NationalityId");
-
-                    b.Property<string>("NationalityName");
 
                     b.Property<decimal>("RemainderAmount");
 
@@ -1073,36 +1316,6 @@ namespace NajmetAlraqee.Data.Migrations
                     b.HasIndex("NationalityId");
 
                     b.ToTable("UserDelegates");
-                });
-
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.VacationStatus", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ArabicName");
-
-                    b.Property<string>("EnglishName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("VacationStatuses");
-                });
-
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.VacationType", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ArabicName");
-
-                    b.Property<string>("EnglishName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("VacationTypes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1153,9 +1366,123 @@ namespace NajmetAlraqee.Data.Migrations
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.City", b =>
                 {
                     b.HasOne("NajmetAlraqee.Data.Entities.Country", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryId")
+                        .WithOne("City")
+                        .HasForeignKey("NajmetAlraqee.Data.Entities.City", "CountryId")
                         .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.Contract", b =>
+                {
+                    b.HasOne("NajmetAlraqee.Data.Entities.City", "ArrivalCity")
+                        .WithMany()
+                        .HasForeignKey("ArrivalCityId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.ContractStatus", "ContractStatus")
+                        .WithMany()
+                        .HasForeignKey("ContractStatusId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.ContractType", "ContractType")
+                        .WithMany()
+                        .HasForeignKey("ContractTypeId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.Employee", "Employees")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.ForeignAgency", "ForeignAgency")
+                        .WithMany()
+                        .HasForeignKey("ForeignAgencyId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.JobType", "JobType")
+                        .WithMany()
+                        .HasForeignKey("JobTypeId");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ContractDelegation", b =>
+                {
+                    b.HasOne("NajmetAlraqee.Data.Entities.Contract", "Contract")
+                        .WithMany()
+                        .HasForeignKey("ContractId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.User", "DelegateBy")
+                        .WithMany()
+                        .HasForeignKey("DelegateById");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.ForeignAgency", "ForeignAgency")
+                        .WithMany()
+                        .HasForeignKey("ForeignAgencyId");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ContractHistory", b =>
+                {
+                    b.HasOne("NajmetAlraqee.Data.Entities.ContractAction", "Action")
+                        .WithMany()
+                        .HasForeignKey("ActionId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.Contract", "Contract")
+                        .WithMany()
+                        .HasForeignKey("ContractId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.ContractStatus", "ContractStatus")
+                        .WithMany()
+                        .HasForeignKey("ContractStatusId");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ContractSelect", b =>
+                {
+                    b.HasOne("NajmetAlraqee.Data.Entities.Contract", "Contract")
+                        .WithMany()
+                        .HasForeignKey("ContractId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.ForeignAgency", "ForeignAgency")
+                        .WithMany()
+                        .HasForeignKey("ForeignAgencyId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.User", "SelectBy")
+                        .WithMany()
+                        .HasForeignKey("SelectById");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ContractTicket", b =>
+                {
+                    b.HasOne("NajmetAlraqee.Data.Entities.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.Contract", "Contract")
+                        .WithMany()
+                        .HasForeignKey("ContractId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.User", "TicketBy")
+                        .WithMany()
+                        .HasForeignKey("TicketById");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ContractVisa", b =>
+                {
+                    b.HasOne("NajmetAlraqee.Data.Entities.Contract", "Contract")
+                        .WithMany()
+                        .HasForeignKey("ContractId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.User", "VisaBy")
+                        .WithMany()
+                        .HasForeignKey("VisaById");
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.Currency", b =>
@@ -1173,135 +1500,39 @@ namespace NajmetAlraqee.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("NajmetAlraqee.Data.Entities.UserDelegate", "UserDelegate")
-                        .WithMany()
-                        .HasForeignKey("UserDelegateId");
+                        .WithOne("Customer")
+                        .HasForeignKey("NajmetAlraqee.Data.Entities.Customer", "UserDelegateId");
                 });
 
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.Doctor", b =>
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.Employee", b =>
                 {
+                    b.HasOne("NajmetAlraqee.Data.Entities.EmployeeStatus", "EmployeeStatus")
+                        .WithMany()
+                        .HasForeignKey("EmployeeStatusId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.ForeignAgency", "ForeignAgency")
+                        .WithMany()
+                        .HasForeignKey("ForeignAgencyId");
+
                     b.HasOne("NajmetAlraqee.Data.Entities.Gender", "Gender")
                         .WithMany()
-                        .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("GenderId");
 
-                    b.HasOne("NajmetAlraqee.Data.Entities.Hospital", "Hospital")
+                    b.HasOne("NajmetAlraqee.Data.Entities.JobType", "JobType")
                         .WithMany()
-                        .HasForeignKey("HospitalId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("JobTypeId");
 
                     b.HasOne("NajmetAlraqee.Data.Entities.Nationality", "Nationality")
                         .WithMany()
-                        .HasForeignKey("NationalityId1");
+                        .HasForeignKey("NationalityId");
 
-                    b.HasOne("NajmetAlraqee.Data.Entities.User", "User")
+                    b.HasOne("NajmetAlraqee.Data.Entities.Religion", "Religion")
                         .WithMany()
-                        .HasForeignKey("UserId");
-                });
+                        .HasForeignKey("ReligionId");
 
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.DoctorEducationLevel", b =>
-                {
-                    b.HasOne("NajmetAlraqee.Data.Entities.Doctor")
-                        .WithMany("DoctorEducationLevels")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("NajmetAlraqee.Data.Entities.EducationLevel", "EducationLevel")
+                    b.HasOne("NajmetAlraqee.Data.Entities.SocialStatus", "SocialStatus")
                         .WithMany()
-                        .HasForeignKey("EducationLevelId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.DoctorFeedback", b =>
-                {
-                    b.HasOne("NajmetAlraqee.Data.Entities.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("NajmetAlraqee.Data.Entities.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.DoctorLanguage", b =>
-                {
-                    b.HasOne("NajmetAlraqee.Data.Entities.Doctor")
-                        .WithMany("DoctorLanguages")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("NajmetAlraqee.Data.Entities.Language", "Language")
-                        .WithMany()
-                        .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.DoctorSchedule", b =>
-                {
-                    b.HasOne("NajmetAlraqee.Data.Entities.Doctor", "Doctor")
-                        .WithMany("DoctorSchedules")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("NajmetAlraqee.Data.Entities.Hospital", "Hospital")
-                        .WithMany()
-                        .HasForeignKey("HospitalId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("NajmetAlraqee.Data.Entities.ScheduleStatus", "ScheduleStatus")
-                        .WithMany()
-                        .HasForeignKey("ScheduleStatusId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.DoctorScheduleConfiguration", b =>
-                {
-                    b.HasOne("NajmetAlraqee.Data.Entities.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("NajmetAlraqee.Data.Entities.Hospital", "Hospital")
-                        .WithMany()
-                        .HasForeignKey("HospitalId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.DoctorSpecialty", b =>
-                {
-                    b.HasOne("NajmetAlraqee.Data.Entities.Doctor")
-                        .WithMany("DoctorSpecialtys")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("NajmetAlraqee.Data.Entities.Specialty", "Specialty")
-                        .WithMany()
-                        .HasForeignKey("SpecialtyId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.DoctorVacation", b =>
-                {
-                    b.HasOne("NajmetAlraqee.Data.Entities.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("NajmetAlraqee.Data.Entities.Hospital", "Hospital")
-                        .WithMany()
-                        .HasForeignKey("HospitalId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("NajmetAlraqee.Data.Entities.VacationStatus", "VacationStatus")
-                        .WithMany()
-                        .HasForeignKey("VacationStatusId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("NajmetAlraqee.Data.Entities.VacationType", "VacationType")
-                        .WithMany()
-                        .HasForeignKey("VacationTypeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("SocialStatusId");
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.ForeignAgency", b =>
@@ -1323,69 +1554,46 @@ namespace NajmetAlraqee.Data.Migrations
                         .HasForeignKey("NationalityId");
                 });
 
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.Hospital", b =>
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ReceiptDoc", b =>
                 {
-                    b.HasOne("NajmetAlraqee.Data.Entities.City", "City")
+                    b.HasOne("NajmetAlraqee.Data.Entities.Contract", "Contract")
                         .WithMany()
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("ContractId");
 
-                    b.HasOne("NajmetAlraqee.Data.Entities.Country", "Country")
+                    b.HasOne("NajmetAlraqee.Data.Entities.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("CustomerId");
 
-                    b.HasOne("NajmetAlraqee.Data.Entities.HospitalType", "HospitalType")
+                    b.HasOne("NajmetAlraqee.Data.Entities.ReceiptDocType", "ReceiptdocType")
                         .WithMany()
-                        .HasForeignKey("HospitalTypeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("ReceiptdocTypeId");
                 });
 
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.HospitalOffer", b =>
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.SpecialEmployee", b =>
                 {
-                    b.HasOne("NajmetAlraqee.Data.Entities.Hospital", "Hospital")
-                        .WithMany()
-                        .HasForeignKey("HospitalId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.Patient", b =>
-                {
-                    b.HasOne("NajmetAlraqee.Data.Entities.Gender", "Gender")
-                        .WithMany()
-                        .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("NajmetAlraqee.Data.Entities.Nationality", "Nationality")
                         .WithMany()
-                        .HasForeignKey("NationalityId1");
-
-                    b.HasOne("NajmetAlraqee.Data.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("NationalityId");
                 });
 
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.PatientAppointment", b =>
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.SpecificContract", b =>
                 {
-                    b.HasOne("NajmetAlraqee.Data.Entities.AppointmentStatus", "AppointementStatus")
+                    b.HasOne("NajmetAlraqee.Data.Entities.ContractStatus", "ContractStatus")
                         .WithMany()
-                        .HasForeignKey("AppointementStatusId")
+                        .HasForeignKey("ContractStatusId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("NajmetAlraqee.Data.Entities.DoctorSchedule", "DoctorSchedule")
+                    b.HasOne("NajmetAlraqee.Data.Entities.ForeignAgency", "ForeignAgency")
                         .WithMany()
-                        .HasForeignKey("DoctorScheduleId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("ForeignAgencyId");
 
-                    b.HasOne("NajmetAlraqee.Data.Entities.Gender", "Gender")
+                    b.HasOne("NajmetAlraqee.Data.Entities.SpecialEmployee", "SpecialEmployee")
                         .WithMany()
-                        .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("NajmetAlraqee.Data.Entities.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("SpecialEmployeeId");
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.UserDelegate", b =>

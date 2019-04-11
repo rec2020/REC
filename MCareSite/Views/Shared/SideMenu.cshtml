@@ -42,10 +42,24 @@
                 </ul>
             </li>
             <li>
+                <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-pin-account"></i><span>@SharedLocalizer.GetLocalizedHtmlString("Contracts")</span></a>
+                <ul class="ml-menu">
+                    <li><a asp-action="Index" asp-controller="Contract">@SharedLocalizer.GetLocalizedHtmlString("Contracts")</a></li>
+                    <li><a asp-action="Add" asp-controller="Contract">@SharedLocalizer.GetLocalizedHtmlString("AddContract")</a></li>
+                </ul>
+            </li>
+            <li>
                 <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-pin-account"></i><span>@SharedLocalizer.GetLocalizedHtmlString("Customers")</span></a>
                 <ul class="ml-menu">
                     <li><a asp-action="Index" asp-controller="Customer">@SharedLocalizer.GetLocalizedHtmlString("Customers")</a></li>
                     <li><a asp-action="Add" asp-controller="Customer">@SharedLocalizer.GetLocalizedHtmlString("AddCustomer")</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-pin-account"></i><span>@SharedLocalizer.GetLocalizedHtmlString("Employees")</span></a>
+                <ul class="ml-menu">
+                    <li><a asp-action="Index" asp-controller="Employee">@SharedLocalizer.GetLocalizedHtmlString("Employees")</a></li>
+                    <li><a asp-action="Add" asp-controller="Employee">@SharedLocalizer.GetLocalizedHtmlString("AddEmployee")</a></li>
                 </ul>
             </li>
             <li>
@@ -66,7 +80,7 @@
             <li>
                 <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-reader"></i><span>@SharedLocalizer.GetLocalizedHtmlString("Partners")</span></a>
                 <ul class="ml-menu">
-                    <li><a asp-action="Index" asp-controller="Partners">@SharedLocalizer.GetLocalizedHtmlString("Partners")</a></li>
+                    <li><a asp-action="Index" asp-controller="Partner">@SharedLocalizer.GetLocalizedHtmlString("Partners")</a></li>
                 </ul>
             </li>
 
@@ -80,6 +94,8 @@
                     <li><a asp-action="Index" asp-controller="Nationalities">@SharedLocalizer.GetLocalizedHtmlString("Nationalities")</a></li>
                     <li><a asp-action="Index" asp-controller="Arrival">@SharedLocalizer.GetLocalizedHtmlString("Arrivals")</a></li>
                     <li><a asp-action="Index" asp-controller="PaymentMethod">@SharedLocalizer.GetLocalizedHtmlString("PaymentMethods")</a></li>
+                    <li><a asp-action="Index" asp-controller="Countries">@SharedLocalizer.GetLocalizedHtmlString("Countries")</a></li>
+                    <li><a asp-action="Index" asp-controller="Cities">@SharedLocalizer.GetLocalizedHtmlString("Cities")</a></li>
                 </ul>
             </li>
         </ul>

@@ -16,41 +16,15 @@ namespace NajmetAlraqeeSite.AutoMapper
             // city
             CreateMap<CityViewModel, City>();
             CreateMap<City, CityViewModel>();
-
-
             // Country 
             CreateMap<CountryViewModel, Country>();
             CreateMap<Country, CountryViewModel>();
-            // Doctor
-            CreateMap<Doctor, DoctorViewModel>();
-            CreateMap<DoctorViewModel, Doctor>();
-            //CreateMap<DoctorViewModel, Doctor>()
-            //    .ForPath(dest => dest.Gender.ArabicName, src => src.MapFrom(y => y.GenderName))
-            //    .ForPath(dest => dest.Hospital.EnglishName, src => src.MapFrom(y => y.HospitalName));
-
-            CreateMap<HospitalViewModel, Hospital>();
-            CreateMap<Hospital, HospitalViewModel>();
-
-            CreateMap<HospitalOfferViewModel, HospitalOffer>();
-            CreateMap<HospitalOffer, HospitalOfferViewModel>();
-
-            CreateMap<DoctorScheduleConfigurationViewModels, DoctorScheduleConfiguration>();
-            CreateMap<DoctorScheduleConfiguration, DoctorScheduleConfigurationViewModels>();
-
-
-            CreateMap<DoctorVacationViewModel, DoctorVacation>();
-            CreateMap<DoctorVacation, DoctorVacationViewModel>();
-
-
-            CreateMap<PatientAppointmentViewModel, PatientAppointment>();
-            CreateMap<PatientAppointment, PatientAppointmentViewModel>();
 
             CreateMap<NationalityViewModel, Nationality>();
             CreateMap<Nationality, NationalityViewModel>();
 
             CreateMap<JobTypeViewModels, JobType>();
             CreateMap<JobType, JobTypeViewModels>();
-
 
             CreateMap<BankDetailViewModels, BankDetail>();
             CreateMap<BankDetail, BankDetailViewModels>();
@@ -64,13 +38,11 @@ namespace NajmetAlraqeeSite.AutoMapper
             CreateMap<Currency, CurrencyViewModel>();
             CreateMap<CurrencyViewModel, Currency>();
 
-
             CreateMap<Arrival, ArrivalViewModel>();
             CreateMap<ArrivalViewModel, Arrival>();
 
             CreateMap<Expense, ExpenseViewModel>();
             CreateMap<ExpenseViewModel, Expense>();
-
 
             CreateMap<ForeignAgency, ForeignAgencyViewModel>();
             CreateMap<ForeignAgencyViewModel, ForeignAgency>();
@@ -80,6 +52,35 @@ namespace NajmetAlraqeeSite.AutoMapper
 
             CreateMap<Partner, PartnerViewModel>();
             CreateMap<PartnerViewModel, Partner>();
+
+            CreateMap<Employee, EmployeeViewModel>();
+            CreateMap<EmployeeViewModel, Employee>();
+
+            CreateMap<Contract, ContractViewModel>();
+            CreateMap<ContractViewModel, Contract>();
+
+            CreateMap<ContractSelect, ContractSelectViewModel>();
+            CreateMap<ContractSelectViewModel, ContractSelect>();
+
+
+            CreateMap<ContractDelegation, ContractDelegateViewModel>();
+            CreateMap<ContractDelegateViewModel, ContractDelegation>();
+
+
+            CreateMap<ContractVisa, ContractVisaViewModel>();
+            CreateMap<ContractVisaViewModel, ContractVisa>();
+
+            CreateMap<ContractTicket, ContractTicketViewModel>();
+            CreateMap<ContractTicketViewModel, ContractTicket>();
+
+            CreateMap<ReceiptDoc, ReceiptDocViewModel>();
+            CreateMap<ReceiptDocViewModel, ReceiptDoc>();
+
+            CreateMap<SpecialEmployee, SpecialEmployeeViewModel>();
+            CreateMap<SpecialEmployeeViewModel, SpecialEmployee>();
+
+            CreateMap<SpecificContract, SpecificContractViewModel>();
+            CreateMap<SpecificContractViewModel, SpecificContract>();
 
 
             //  CreateMap<ForeignAgency, ForeignAgencyViewModel>()

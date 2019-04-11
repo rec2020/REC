@@ -16,7 +16,7 @@ namespace NajmetAlraqee.Data.Repositories
             _context = context;
         }
 
-        public long AddCity(City city)
+        public int AddCity(City city)
         {
             _context.Cities.Add(city);
             _context.SaveChanges();
@@ -24,7 +24,7 @@ namespace NajmetAlraqee.Data.Repositories
             return city.Id;
         }
 
-        public City GetCityById(long id)
+        public City GetCityById(int id)
         {
             return _context.Cities                
                 .Find(id);
@@ -36,7 +36,7 @@ namespace NajmetAlraqee.Data.Repositories
                 .Include("Country");
         }
 
-        public bool RemoveCity(long id)
+        public bool RemoveCity(int id)
         {
             City city = GetCityById(id);
             if (city == null)
@@ -48,9 +48,18 @@ namespace NajmetAlraqee.Data.Repositories
             return true;
         }
 
-        public bool UpdateCity(long id, City City)
+        public bool UpdateCity(int id, City City)
         {
-            throw new NotImplementedException();
+            City existCity = GetCityById(id);
+            if (existCity == null)
+                return false;
+
+            existCity.Name = City.Name;
+            existCity.CountryId = City.CountryId;
+            _context.Update(existCity);
+            _context.SaveChanges();
+
+            return true;
         }
     }
 }

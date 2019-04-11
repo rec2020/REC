@@ -13,77 +13,111 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using NToastNotify;
 
 namespace NajmetAlraqeeSite.Controllers
 {
     [Authorize]
     public class CitiesController : Controller
     {
-        private readonly NajmetAlraqeeContext _context;
         private readonly ICityRepository _city;
         private readonly ICountryRepository _country;
         private readonly IMapper  _mapper;
+        private readonly IToastNotification _toastNotification;
 
-        public CitiesController(NajmetAlraqeeContext context, ICityRepository city , IMapper mapper , ICountryRepository country )
+        public CitiesController(ICityRepository city, IToastNotification toastNotification, IMapper mapper , ICountryRepository country )
         {
-            _context = context;
             _city = city;
             _mapper = mapper;
             _country = country;
+            _toastNotification = toastNotification;
         }
-
+       
         #region Index 
-        public async Task<IActionResult> Index(int? page)
+        public IActionResult Index(int? page)
         {
-            var city = _city.GetCities();
-            if (city.Count() <= 10) { page = 1; }
-            int pageSize = 10;
-            return View(await PaginatedList<City>.CreateAsync(city.AsNoTracking(), page ?? 1, pageSize));
+            var cityList = _city.GetCities();
+            ViewBag.Cities = cityList;
+            ViewBag.CountryId = new SelectList(_country.GetCountries(), "Id", "Name");
+            return View();
         }
-        #endregion 
+        #endregion
 
-      
+
 
 
         [HttpGet]
         public IActionResult Add()
         {
-            CityViewModel ob = new CityViewModel();
-           ViewBag.City = _city.GetCities();
-            ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "EnglishName");
-            return View(ob);
+            ViewBag.CountryId = new SelectList(_country.GetCountries(), "Id", "Name");
+            return View();
         }
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public IActionResult Add(CityViewModel cityviewmodel)
+        public IActionResult AddPost(CityViewModel cityViewModel)
         {
-            if (ModelState.IsValid)
+            ViewBag.CountryId = new SelectList(_country.GetCountries(), "Id", "Name");
+            var cityList = _city.GetCities();
+            ViewBag.Cities = cityList;
+            if (cityViewModel.CountryId == null) { ModelState.AddModelError("", "الرجاء ادخال البلد"); }
+            if (cityViewModel.Id == 0)
             {
-                var city = _mapper.Map<City>(cityviewmodel);
-                _context.Add(city);
-                _context.SaveChangesAsync();
-                ViewBag.SuccessMsg = "successfully added";
-                return RedirectToAction(nameof(Index));
+                ModelState.Remove("Id");
+                ModelState.Remove("CountryId");
+                if (ModelState.IsValid)
+                {
+                    var city = _mapper.Map<City>(cityViewModel);
+                    _city.AddCity(city);
+                    _toastNotification.AddSuccessToastMessage("تم أضافةالمدينة بنجاح");
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(nameof(Index), cityViewModel);
             }
-            ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "EnglishName");
-            return View(cityviewmodel);
+            else
+            {
+                ModelState.Remove("CountryId");
+                if (ModelState.IsValid)
+                {
+                    var city = _mapper.Map<City>(cityViewModel);
+                    _city.UpdateCity(cityViewModel.Id, city);
+                    _toastNotification.AddSuccessToastMessage("تم تعديل المدينة بنجاح");
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(nameof(Index), cityViewModel);
+            }
         }
 
-        #region Delete
-       
-        public IActionResult Delete(long id)
+        public IActionResult Edit(long? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            ViewBag.CountryId = new SelectList(_country.GetCountries(), "Id", "Name");
+            var city = _city.GetCityById((int)id);
+            var cityViewModel = _mapper.Map<CityViewModel>(city);
+            if (city == null)
+            {
+                return NotFound();
+            }
+            var cityList = _city.GetCities();
+            ViewBag.Cities = cityList;
+            return View("Index", cityViewModel);
+        }
+
+        //#region Delete
+
+        public IActionResult Delete(int id)
         {
             _city.RemoveCity(id);
+            _toastNotification.AddSuccessToastMessage("تم الحذف بنجاح");
             return RedirectToAction(nameof(Index));
         }
 
-        #endregion 
+        //#endregion
 
 
-        private bool CityExists(long id)
-        {
-            return _context.Cities.Any(e => e.Id == id);
-        }
+
     }
 }

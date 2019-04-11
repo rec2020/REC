@@ -1,0 +1,181 @@
+﻿
+@model NajmetAlraqee.Site.ViewModels.ReceiptDocViewModel
+@using NajmetAlraqee.Site.Services;
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("SnadReceipts");
+}
+
+<div class="block-header">
+    <ol class="breadcrumb breadcrumb-col-cyan">
+        <li><a href=@Url.Action("index","Home")><i class="material-icons">home</i>@SharedLocalizer.GetLocalizedHtmlString("Home") </a></li>
+        <li><a href="javascript:void(0);"><i class="material-icons">library_books</i> @SharedLocalizer.GetLocalizedHtmlString("SnadReceipts")</a></li>
+    </ol>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row clearfix" style="font-family:Droid Arabic Kufi">
+        <div class="col-md-12 col-xs-12">
+            <div class="card patients-list">
+                <div class="body">
+                    <h2 class="card-inside-title" style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("SnadReceipt")</h2>
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <form asp-action="AddSnadReceive" method="post" asp-controller="ReceiptDoc">
+                                @Html.HiddenFor(x => x.Id)
+                                @Html.HiddenFor(x => x.CustomerId)
+                                @Html.HiddenFor(x => x.ReceiptdocTypeId)
+                                <div class="row">
+                                    <div class="col-sm-2 col-xs-12"></div>
+                                    <div class="col-sm-8 col-xs-12">
+                                        <div asp-validation-summary="All" style="font-family:Droid Arabic Kufi" class="text-danger"></div>
+                                        @Html.HiddenFor(x => x.ContractId)
+                                    </div>
+                                    <div class="col-sm-2 col-xs-12"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ContractNo") </label>
+                                            <div class="form-line">
+                                                <input asp-for="ContractId" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Customer") </label>
+                                            <div class="form-line">
+                                                <select asp-for="CustomerId" class="form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.CustomerId"><option>@SharedLocalizer.GetLocalizedHtmlString("Customer")</option></select>
+                                                @*<input asp-for="CustomerId" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Customer")" />*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ReceiptdocType") </label>
+                                            <div class="form-line">
+                                                @*<input asp-for="ReceiptdocTypeId" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("ReceiptdocType")" />*@
+                                                <select asp-for="ReceiptdocTypeId" class="form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.ReceiptdocTypeId"><option>@SharedLocalizer.GetLocalizedHtmlString("ReceiptdocType")</option></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Amount") </label>
+                                            <div class="form-line">
+                                                <input asp-for="Amount" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Amount")" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ReceiptDate") </label>
+                                            <div class="form-line">
+                                                <input asp-for="ReceiptDate" type="date" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("ReceiptDate")" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Note") </label>
+                                            <div class="form-line">
+                                                <input asp-for="Note"  class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Note")" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <center>
+                                    <input type="submit" style="font-family:Droid Arabic Kufi;" value="@SharedLocalizer.GetLocalizedHtmlString("Save")" class="btn btn-raised bg-teal btn-sm" />
+                                </center>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-md-12 col-xs-12">
+            <div class="card patients-list">
+                <div class="body">
+                    <h2 class="card-inside-title" style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("SnadReceipts")</h2>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Code"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ContractNo"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ReceiptdocType"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Customer"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Amount"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Employee"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ReceiptDate"))
+                                    </th>
+                                    @*<th></th>*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.ReceiptDocs != null)
+                                {
+                                    @foreach (var item in ViewBag.ReceiptDocs)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.Id
+                                            </td>
+                                            <td>
+                                                @item.ContractId
+                                            </td>
+                                            <td>
+                                                @item.ReceiptdocType.Name
+                                            </td>
+                                            <td>
+                                                @item.Customer.FirstName
+                                            </td>
+                                            <td>
+                                                @item.Amount
+                                            </td>
+                                            <td>
+                                                @item.ReceiptByUserName
+                                            </td>
+                                            <td>
+                                                @item.ReceiptDate
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <a asp-action="Details" asp-controller="Contract" asp-route-id="@Model.ContractId" class="btn btn-raised" style="font-family:Droid Arabic Kufi;right:500px">@SharedLocalizer.GetLocalizedHtmlString("Close")</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+

@@ -1,0 +1,323 @@
+﻿@model NajmetAlraqee.Data.Entities.Employee
+@using NajmetAlraqee.Site.Services;
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("Employees");
+}
+<style>
+    i, h2 {
+        font-family: Droid Arabic Kufi
+    }
+</style>
+
+<div class="container-fluid" style="font-family:Droid Arabic Kufi">
+    <br />
+    <br />
+    <div class="row clearfix">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+            @*<div class="card l-blue">
+                    <div class="profile-sub-header">
+                        <ul class="text-center">
+                            <li><a href="#"><i class="zmdi zmdi-phone"></i><p>Call</p></a></li>
+                            <li> <a href="mail-inbox.html" class=""><i class="zmdi zmdi-email"></i><p>My Inbox</p></a></li>
+                            <li> <a href="image-gallery.html" class=""><i class="zmdi zmdi-camera"></i><p>Gallery</p></a></li>
+                            <li> <a href="doctor-schedule.html"><i class="zmdi zmdi-format-subject"></i><p>Schedule</p></a></li>
+                        </ul>
+                    </div>
+                </div>*@
+            <div class="card xl-parpl">
+                <div class="header xl-parpl">
+                    <h2>البيانات الاساسية للعامل</h2>
+                </div>
+                <div class="body">
+                    <div class="profile-info">
+                        <ul class="list-unstyled">
+                            <li>
+                                <i class="zmdi zmdi-label"></i>  @SharedLocalizer.GetLocalizedHtmlString("Employee")
+                                <div class="p-i-list">
+                                    @Model.FirstName   @Model.Father  @Model.GrandFather
+                                </div>
+                                <br />
+                            </li>
+
+                            <li>
+                                <i class="zmdi zmdi-file-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("FileNo")
+                                <div class="p-i-list text-justify">
+                                    @Model.FileNo
+                                </div>
+                                <br />
+                            </li>
+                            <li>
+                                <i class="zmdi zmdi-account-o"></i>  @SharedLocalizer.GetLocalizedHtmlString("Nationality")
+                                <div class="p-i-list">
+                                    <span class="text-muted"> @Model.Nationality.Name</span>
+                                </div>
+                                <br />
+                            </li>
+                            <li>
+                                <i class="zmdi zmdi-account-o"></i>  @SharedLocalizer.GetLocalizedHtmlString("Gender")
+                                <div class="p-i-list">
+                                    <span class="text-muted"> @Model.Gender.Name</span>
+                                </div>
+                                <br />
+                            </li>
+                            <li>
+                                <i class="zmdi zmdi-account-o"></i>  @SharedLocalizer.GetLocalizedHtmlString("Religon")
+                                <div class="p-i-list">
+                                    <span class="text-muted"> @Model.Religion.Name</span>
+                                </div>
+                                <br />
+                            </li>
+                            <li>
+                                <i class="zmdi zmdi-account-o"></i>  @SharedLocalizer.GetLocalizedHtmlString("SocialStatus")
+                                <div class="p-i-list">
+                                    <span class="text-muted"> @Model.SocialStatus.Name</span>
+                                </div>
+                                <br />
+                            </li>
+                            <li>
+                                <i class="zmdi zmdi-time"></i>  @SharedLocalizer.GetLocalizedHtmlString("Age")
+                                <div class="p-i-list">
+                                    <span class="text-muted">@Model.Age</span>
+                                </div>
+                                <br />
+                            </li>
+                            <li>
+                                <i class="zmdi zmdi-time-countdown"></i>  @SharedLocalizer.GetLocalizedHtmlString("NumberTime")
+                                <div class="p-i-list">
+                                    <span class="text-muted">@Model.NumberTime</span>
+                                </div>
+                                <br />
+                            </li>
+                            <li>
+                                <i class="zmdi zmdi-accounts"></i>  @SharedLocalizer.GetLocalizedHtmlString("FamilyNo")
+                                <div class="p-i-list">
+                                    <span class="text-muted">@Model.FamilyNo</span>
+                                </div>
+                                <br />
+                            </li>
+                            <li>
+                                <i class="zmdi zmdi-time-restore-setting"></i>  @SharedLocalizer.GetLocalizedHtmlString("BirhtDate")
+                                <div class="p-i-list">
+                                    <span class="text-muted">@Model.BirhtDate</span>
+                                </div>
+                                <br />
+                            </li>
+                            <li>
+                                <i class="zmdi zmdi-view-day"></i>   @SharedLocalizer.GetLocalizedHtmlString("ContractDate")
+                                <div class="p-i-list">
+                                    <span class="text-muted">@Model.ContractDate</span>
+                                </div>
+                                <br />
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12">
+            <div class="card">
+                <div class="body">
+
+                    <div class="row">
+                        <div class="col-md-8"></div>
+                        <div class="col-md-4">
+                            <a href="" class="btn btn-raised btn-warning btn-sm"><i class="zmdi zmdi-edit"></i> تعديل  </a>
+                            <a href="" class="btn btn-raised btn-danger btn-sm"><i class="zmdi zmdi-delete"></i> حذف</a>
+                        </div>
+                    </div>
+
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#timeline">بيانات الهوية</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#usersettings">بيانات الوظيفة</a></li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane  in active" id="timeline">
+                            <div class="body">
+                                <h2 class="card-inside-title">بيانات الهوية</h2>
+                                <div class="row clearfix">
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("PassportNo")</label>
+                                        <input asp-for="PassportNo" readonly="readonly" class="form-control" />
+
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>@SharedLocalizer.GetLocalizedHtmlString("IssuePlace")</label>
+                                        <input asp-for="IssuePlace" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>@SharedLocalizer.GetLocalizedHtmlString("IssueDate")</label>
+                                        <input asp-for="IssueDate" readonly="readonly" class="form-control" />
+
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>@SharedLocalizer.GetLocalizedHtmlString("ExpireDate")</label>
+                                        <input asp-for="ExpireDate" readonly="readonly" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("VisaNo")</label>
+                                        <input asp-for="VisaNo" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>@SharedLocalizer.GetLocalizedHtmlString("ArrivalDate")</label>
+                                        <input asp-for="ArrivalDate" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("EntrancePort")</label>
+                                        <input asp-for="EntrancePort" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("BorderNo")</label>
+                                        <input asp-for="BorderNo" readonly="readonly" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("IdentityNo")</label>
+                                        <input asp-for="IdentityNo" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("IdentitySource")</label>
+                                        <input asp-for="IdentitySource" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label style="padding-left:210Px">@SharedLocalizer.GetLocalizedHtmlString("IdentityIssueDate")</label>
+                                        <input asp-for="IdentityIssueDate" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label style="padding-left:210Px">@SharedLocalizer.GetLocalizedHtmlString("IdentityExpireDate")</label>
+                                        <input asp-for="IdentityExpireDate" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("KafeelNo")</label>
+                                        <input asp-for="KafeelNo" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("KafeelName")</label>
+                                        <input asp-for="KafeelName" readonly="readonly" class="form-control" />
+
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("NewKafeelNo")</label>
+                                        <input asp-for="NewKafeelNo" readonly="readonly" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("NewKafeelName")</label>
+                                        <input asp-for="NewKafeelName" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("NewKafeelAddress")</label>
+                                        <input asp-for="NewKafeelAddress" readonly="readonly" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("DriverLicenseNo")</label>
+                                        <input asp-for="DriverLicenseNo" readonly="readonly" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("DriverLicenseIssueDate")</label>
+                                        <input asp-for="DriverLicenseIssueDate" readonly="readonly" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("DriverLicenseExpireDate")</label>
+                                        <input asp-for="DriverLicenseExpireDate" readonly="readonly" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("LicenseNo")</label>
+                                        <input asp-for="LicenseNo" readonly="readonly" class="form-control" />
+
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("LicenseExpireDate")</label>
+                                        <input asp-for="LicenseExpireDate" readonly="readonly" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("AddressInOrigin")</label>
+                                        <input asp-for="AddressInOrigin" readonly="readonly" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <label for="inputEmail4" style="padding-left:180Px"> @SharedLocalizer.GetLocalizedHtmlString("PhoneInOrigin")</label>
+                                        <input asp-for="PhonrInOrigin" readonly="readonly" class="form-control" />
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="usersettings">
+                            <div class="body">
+                                <h2 class="card-inside-title">بيانات الوظيفة</h2>
+                                <div class="row clearfix">
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("BasicSalary")</label>
+                                        <input asp-for="BasicSalary" readonly="readonly" class="form-control" />
+
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>@SharedLocalizer.GetLocalizedHtmlString("HousingAllowance")</label>
+                                        <input asp-for="HousingAllowance" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>@SharedLocalizer.GetLocalizedHtmlString("TransportationAllowance")</label>
+                                        <input asp-for="TransportationAllowance" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("FuelAllowance")</label>
+                                        <input asp-for="FuelAllowance" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>@SharedLocalizer.GetLocalizedHtmlString("Telephoneallowance")</label>
+                                        <input asp-for="Telephoneallowance" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("Amountdeducted")</label>
+                                        <input asp-for="Amountdeducted" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("TotalSalary")</label>
+                                        <input asp-for="TotalSalary" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="inputEmail4" style="padding-left:230Px"> @SharedLocalizer.GetLocalizedHtmlString("Subsistence")</label>
+                                        <input asp-for="Subsistence" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>@SharedLocalizer.GetLocalizedHtmlString("JobType")</label>
+                                        <input asp-for="JobType.Name" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>@SharedLocalizer.GetLocalizedHtmlString("ForeignAgency")</label>
+                                        <input asp-for="ForeignAgency.OfficeName" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("GroupNo")</label>
+                                        <input asp-for="GroupNo" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("EmbassyContractNo")</label>
+                                        <input asp-for="EmbassyContractNo" readonly="readonly" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label> @SharedLocalizer.GetLocalizedHtmlString("EmbassyContractDate")</label>
+                                        <input asp-for="EmbassyContractDate" readonly="readonly" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>

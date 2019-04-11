@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 using NajmetAlraqee.Data.Entities;
 
 namespace NajmetAlraqee.Data.Repositories
@@ -16,14 +17,12 @@ namespace NajmetAlraqee.Data.Repositories
         {
             _context = context;
         }
+
+       
+
         public int AddCustomer(Customer customer)
         {
-            var customertype = _context.CurrencyTypes.SingleOrDefault(x => x.Id == customer.CustomerTypeId);
-            if (customertype != null) { customer.CustomerTypeName = customertype.Name; }
-
-            var delegateuser = _context.UserDelegates.SingleOrDefault(x => x.Id == customer.UserDelegateId);
-            if (delegateuser != null) { customer.UserDelegateName = delegateuser.Name; }
-            customer.Name = customer.FirstName + "  " + customer.MiddleName + "  " + customer.LastName;
+            customer.Name = customer.FirstName + "  " + customer.LastName; 
             customer.IsActive = true;
             _context.Customers.Add(customer);
             _context.SaveChanges();
@@ -33,13 +32,13 @@ namespace NajmetAlraqee.Data.Repositories
 
         public Customer GetCustomerById(int Id)
         {
-            return _context.Customers
+            return _context.Customers.Include(x => x.CustomerType).Include(x => x.UserDelegate)
                 .SingleOrDefault(p => p.Id == Id);
         }
 
         public IQueryable<Customer> GetCustomers()
         {
-            return _context.Customers;
+            return _context.Customers.Include(x=>x.CustomerType).Include(x=>x.UserDelegate);
         }
 
         public bool RemoveCustomer(int Id)
@@ -56,7 +55,6 @@ namespace NajmetAlraqee.Data.Repositories
 
         public bool UpdateCustomer(int Id, Customer customer)
         {
-
             Customer existcustomer = GetCustomerById(Id);
             if (existcustomer == null)
                 return false;
@@ -67,21 +65,24 @@ namespace NajmetAlraqee.Data.Repositories
             existcustomer.FamilyImage = customer.FamilyImage;
             existcustomer.IdentiyImage = customer.IdentiyImage;
             existcustomer.IdentityNo = customer.IdentityNo;
-            existcustomer.IsActive = customer.IsActive;
             existcustomer.SecondPhone = customer.IdentiyImage;
             existcustomer.FirstPhone = customer.IdentityNo;
             existcustomer.CustomerTypeId = customer.CustomerTypeId;
             existcustomer.UserDelegateId = customer.UserDelegateId;
+            existcustomer.Name = customer.FirstName + "  " + customer.LastName;
 
-            var customertype = _context.CurrencyTypes.SingleOrDefault(x => x.Id == existcustomer.CustomerTypeId);
-            if (customertype != null) { existcustomer.CustomerTypeName = customertype.Name; }
+            _context.Update(existcustomer);
+            _context.SaveChanges();
 
-            var delegateuser = _context.UserDelegates.SingleOrDefault(x => x.Id == existcustomer.UserDelegateId);
-            if (delegateuser != null) { existcustomer.UserDelegateName = delegateuser.Name; }
-            existcustomer.Name = existcustomer.FirstName + "" + existcustomer.MiddleName + "" + existcustomer.LastName;
+            return true;
+        }
 
-
-
+        public bool ActivationCustomer(int Id, Customer cust)
+        {
+            Customer existcustomer = GetCustomerById(Id);
+            if (existcustomer == null)
+                return false;
+            existcustomer.IsActive = cust.IsActive;
             _context.Update(existcustomer);
             _context.SaveChanges();
 

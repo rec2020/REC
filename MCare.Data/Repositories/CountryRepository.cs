@@ -15,7 +15,7 @@ namespace NajmetAlraqee.Data.Repositories
             _context = context;
         }
 
-        public long AddCountry(Country country)
+        public int AddCountry(Country country)
         {
             _context.Countries.Add(country);
             _context.SaveChanges();
@@ -23,7 +23,7 @@ namespace NajmetAlraqee.Data.Repositories
             return country.Id;
         }
 
-        public Country GetById(long id)
+        public Country GetById(int id)
         {
             return _context.Countries.Find(id);
         }
@@ -33,7 +33,7 @@ namespace NajmetAlraqee.Data.Repositories
             return _context.Countries;
         }
        
-        public bool RemoveCountry(long id)
+        public bool RemoveCountry(int id)
         {
             var country = _context.Countries.SingleOrDefault(x => x.Id == id);
             if (country == null)
@@ -44,9 +44,16 @@ namespace NajmetAlraqee.Data.Repositories
             return true;
         }
 
-        public bool UpdateCountry(long id, Country country)
+        public bool UpdateCountry(int id, Country country)
         {
-            throw new NotImplementedException();
+            Country existcountry = GetById(id);
+            if (existcountry == null)
+                return false;
+            existcountry.Name = country.Name;
+            _context.Update(existcountry);
+            _context.SaveChanges();
+
+            return true;
         }
     }
 }

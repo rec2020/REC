@@ -13,7 +13,7 @@ namespace NajmetAlraqee.Data.Entities
         public string Symbol { get; set; }
         public decimal ExchangeRate {get; set; }
         public int? CurrencyTypeId { get; set; }
-        public string CurrencyTypeName { get; set; }
         public virtual CurrencyType CurrencyType  { get; set; }
+        //public virtual ForeignAgency ForeignAgency { get; set; }
     }
 }

@@ -10,15 +10,13 @@ namespace NajmetAlraqee.Site.ViewModels
 {
     public class CityViewModel
     {
-        public long Id { get; set; }
-        [Required(ErrorMessage = "Please enter Country Name.")]
-        public long? CountryId { get; set; }
-        [Required(ErrorMessage = "Please enter Arabic Name.")]
-        public string ArabicName { get; set; }
-        [Required(ErrorMessage = "Please enter English Name.")]
-        public string EnglishName { get; set; }
-        public string CountryName { get; set; }
+        public int Id { get; set; }
+        [Required(ErrorMessage = "الرجاء اختيار البلد")]
+        public int? CountryId { get; set; }
+        [Required(ErrorMessage = "الرجاء ادخال المدينة")]
+        public string Name { get; set; }
+        //public string CountryName { get; set; }
         public SelectList countries { get; set; }
-        public CountryViewModel Country { get; set; }
+        
     }
 }

@@ -13,7 +13,7 @@ namespace NajmetAlraqee.Data.Initializer
         {
             List<Country> _items = new List<Country>
             {
-                new Country() {ArabicName = "المملكة العربية السعودية", EnglishName = "Saudi Arabia"},
+                new Country() {Name = "المملكة العربية السعودية"},
             };
 
             return _items;
@@ -23,11 +23,11 @@ namespace NajmetAlraqee.Data.Initializer
         {
             List<City> _items = new List<City>
             {
-                new City() {ArabicName = "الرياض", EnglishName = "Riyadh", CountryId = 1},
-                new City() {ArabicName = "جده", EnglishName = "Jeddah", CountryId = 1},
-                new City() {ArabicName = "مكة", EnglishName = "Makkah", CountryId = 1},
-                new City() {ArabicName = "الدمام", EnglishName = "Dammam", CountryId = 1},
-                new City() {ArabicName = "القصيم", EnglishName = "Qaseem", CountryId = 1},
+                new City() {Name = "الرياض", CountryId = 1},
+                new City() {Name = "جده", CountryId = 1},
+                new City() {Name = "مكة",  CountryId = 1},
+                new City() {Name = "الدمام",  CountryId = 1},
+                new City() {Name = "القصيم",  CountryId = 1},
             };
 
             return _items;
@@ -37,8 +37,8 @@ namespace NajmetAlraqee.Data.Initializer
         {
             List<Gender> _items = new List<Gender>
             {
-                new Gender() {ArabicName = "ذكر", EnglishName = "Male"},
-                new Gender() {ArabicName = "أنثى", EnglishName = "Female"},
+                new Gender() {Name = "ذكر"},
+                new Gender() {Name = "أنثى"}
             };
 
             return _items;
@@ -63,111 +63,7 @@ namespace NajmetAlraqee.Data.Initializer
             return _items;
         }
 
-        public static List<VacationType> GetVacationTypes()
-        {
-            List<VacationType> _items = new List<VacationType>
-            {
-                new VacationType() {ArabicName = "سنوية", EnglishName = "Annual"},
-                new VacationType() {ArabicName = "اضرارية", EnglishName = "Urgent"},
-                new VacationType() {ArabicName = "رسمية", EnglishName = "Offical"},
-            };
-
-            return _items;
-        }
-
-        public static List<VacationStatus> GetVacationStatus()
-        {
-            List<VacationStatus> _items = new List<VacationStatus>
-            {
-                new VacationStatus() {ArabicName = "اتنظار", EnglishName = "Pending"},
-                new VacationStatus() {ArabicName = "موافق", EnglishName = "Accepted"},
-                new VacationStatus() {ArabicName = "مرفوض", EnglishName = "Rejected"},
-            };
-
-            return _items;
-        }
-
-        public static IEnumerable<HospitalOffer> GetOffers()
-        {
-            var hospitalOffer = new Faker<HospitalOffer>()
-               .RuleFor(o => o.HospitalId, f => f.Random.Number(1, 199))
-               .RuleFor(u => u.ArabicTitle, f => f.Name.FullName())
-               .RuleFor(u => u.EnglishTitle, f => f.Name.FullName())             
-               .RuleFor(u => u.ArabicBody, f => f.Lorem.Paragraph())
-               .RuleFor(u => u.EnglishBody, f => f.Lorem.Paragraph())
-               .RuleFor(u => u.ArabicImagePath, f => f.Image.Business())
-               .RuleFor(u => u.EnglishImagePath, f => f.Image.Business())
-               .RuleFor(o => o.CreatedOn, f => f.Date.Past())
-               .RuleFor(o => o.HappendOn, f => f.Date.Future())
-               .RuleFor(o => o.EndOn, f => f.Date.Future())    
-               .Generate(100);
-
-            return hospitalOffer;
-        }
-
-        public static List<HospitalType> GetHospitalTypes()
-        {
-            List<HospitalType> _items = new List<HospitalType>
-            {
-                new HospitalType() {ArabicName = "مستشفى", EnglishName = "Hospital"},
-                new HospitalType() {ArabicName = "مستوصف", EnglishName = "Medical Center"},
-                new HospitalType() {ArabicName = "مركز الطبي", EnglishName = "Clinic"},
-                new HospitalType() {ArabicName = "مدينة طبية", EnglishName = "Medical City"},
-            };
-
-            return _items;
-        }
-        
-        public static List<Specialty> GetSpecialties()
-        {
-            var images = new Faker<Specialty>()
-             .RuleFor(u => u.ImagePath, f => f.Image.Business())
-             .Generate(20);
-
-            List<Specialty> _items = new List<Specialty>
-            {
-                new Specialty() {ArabicName = "باطنية", EnglishName = "Internist", ImagePath = images[0].ImagePath},
-                new Specialty() {ArabicName = "قلب", EnglishName = "cardiologist", ImagePath = images[1].ImagePath},
-                new Specialty() {ArabicName = "الغدد", EnglishName = "Endocrinologist", ImagePath = images[2].ImagePath},
-                new Specialty() {ArabicName = "نساء وولادة", EnglishName = "Gynaecologist", ImagePath = images[3].ImagePath},
-                new Specialty() {ArabicName = "عيون", EnglishName = "Ophthalmologist", ImagePath = images[4].ImagePath},
-                new Specialty() {ArabicName = "أعصاب", EnglishName = "Neurologist", ImagePath = images[5].ImagePath},
-                new Specialty() {ArabicName = "انف واذن وحنجرة", EnglishName = "ENT", ImagePath = images[6].ImagePath},
-                new Specialty() {ArabicName = "مسالك بولية", EnglishName = "Urologist", ImagePath = images[7].ImagePath},
-                new Specialty() {ArabicName = "جلدية", EnglishName = "Dermatologist", ImagePath = images[8].ImagePath},
-                new Specialty() {ArabicName = "الكبد", EnglishName = "Hepatologist", ImagePath = images[9].ImagePath},
-                new Specialty() {ArabicName = "نفسي", EnglishName = "Psychologist", ImagePath = images[10].ImagePath},
-                new Specialty() {ArabicName = "تخدير", EnglishName = "Anesthesiologist", ImagePath = images[11].ImagePath},
-            };
-
-            return _items;
-        }
-
-        public static List<AppointmentStatus> GetAppointmentStatus()
-        {
-            List<AppointmentStatus> _items = new List<AppointmentStatus>
-            {
-                new AppointmentStatus() {ArabicName = "انتظار", EnglishName = "Pending"},
-                new AppointmentStatus() {ArabicName = "مأكد", EnglishName = "Confirmed"},
-                new AppointmentStatus() {ArabicName = "ملغى", EnglishName = "Cancled"},
-                new AppointmentStatus() {ArabicName = "منتهى", EnglishName = "Completed"},
-            };
-
-            return _items;
-        }
-
-        public static List<ScheduleStatus> GetScheduleStatus()
-        {
-            List<ScheduleStatus> _items = new List<ScheduleStatus>
-            {
-                new ScheduleStatus() {ArabicName = "متاح", EnglishName = "Free"},
-                new ScheduleStatus() {ArabicName = "محجوز", EnglishName = "Booked"},
-                new ScheduleStatus() {ArabicName = "اجازة", EnglishName = "Vacation"},
-                new ScheduleStatus() {ArabicName = "غير متاح", EnglishName = "Not Allowed"},
-            };
-
-            return _items;
-        }
+    
 
         public static List<Language> GetLanguages()
         {
@@ -181,30 +77,7 @@ namespace NajmetAlraqee.Data.Initializer
             return _items;
         }
 
-        public static IEnumerable<Hospital> GetHospitals()
-        {            
-            var hospitals = new Faker<Hospital>()
-               .RuleFor(u => u.ArabicName, f => f.Name.FullName())
-               .RuleFor(u => u.EnglishName, f => f.Name.FullName())
-               .RuleFor(u => u.ArabicAddress, f => f.Address.FullAddress())
-               .RuleFor(u => u.EnglishAddress, f => f.Address.FullAddress())
-               .RuleFor(u => u.ArabicDescription, f => f.Lorem.Paragraph())
-               .RuleFor(u => u.EnglishDescription, f => f.Lorem.Paragraph())
-               .RuleFor(u => u.ImagePath, f => f.Image.Business())
-               .RuleFor(u => u.LogoPath, f => f.Internet.Avatar())
-               .RuleFor(o => o.HospitalTypeId, f => f.Random.Number(1, 3))
-               .RuleFor(o => o.CityId, f => f.Random.Number(1, 5))
-               .RuleFor(o => o.CountryId, f => f.Random.Number(1, 1))
-               .RuleFor(u => u.MapLocation, (f, u) => f.Address.Latitude() + "," + f.Address.Longitude())
-               .RuleFor(u => u.Latitude, (f, u) => f.Address.Latitude())
-               .RuleFor(u => u.Longitude, (f, u) => f.Address.Longitude())
-               .RuleFor(u => u.Phone1, f => f.Phone.PhoneNumber())
-               .RuleFor(u => u.Phone1, f => f.Phone.PhoneNumber())
-               .Generate(200);
-
-            return hospitals;
-        }
-
+       
         //public static List<Nationality> GetNationalties()
         //{
         //    var _service = new NationalityService();

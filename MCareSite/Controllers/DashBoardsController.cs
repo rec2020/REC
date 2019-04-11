@@ -30,15 +30,15 @@ namespace NajmetAlraqeeSite.Controllers
             AdminDashBoardViewModels dash = new AdminDashBoardViewModels();
             dash.Cities = _context.Cities.Count();
             dash.Countries = _context.Countries.Count();
-            dash.DoctorLanguages = _context.DoctorLanguages.Count();
-            dash.Doctors = _context.Doctors.Count();
-            dash.Hospitals = _context.Hospitals.Count();
-            dash.HospitalTypes = _context.HospitalTypes.Count();
-            dash.PatientAppointments = _context.PatientAppointments.Count();
-            dash.ConfirmAppointment = _context.PatientAppointments.Where(x=>x.AppointementStatusId== (long)ScheduleStatusEnum.Booked).Count();
-            dash.CanceledAppointment = _context.PatientAppointments.Where(x => x.AppointementStatusId == (long)ScheduleStatusEnum.NotAllowed).Count();
-            dash.Patients = _context.Patients.Count();
-            dash.Specialties = _context.Specialties.Count();
+            dash.DoctorLanguages =0;
+            dash.Doctors = 0;
+            dash.Hospitals = 0;
+            dash.HospitalTypes =0;
+            dash.PatientAppointments = 0;
+            dash.ConfirmAppointment = 0;
+            dash.CanceledAppointment =0;
+            dash.Patients = 0;
+            dash.Specialties = 0;
             return View(dash);
         }
 
@@ -46,14 +46,14 @@ namespace NajmetAlraqeeSite.Controllers
         {
             var username = User.Identity.Name;
             string useridentity =  _context.Users.Where(x=>x.UserName.Contains(username)).SingleOrDefault().Id ;
-           var Get =  _context.Doctors.Where(x => x.UserId.Contains(useridentity)).SingleOrDefault();
+           var Get =  "";
             HospitalDashBoardViewModels dash = new HospitalDashBoardViewModels();
             if (Get!=null) { 
-            var gethospital = Get.HospitalId;
-            dash.Doctors = _context.Doctors.Where(x=>x.HospitalId== gethospital).Count();
-            dash.Offers = _context.HospitalOffers.Where(x => x.HospitalId == gethospital).Count();
+           
+            dash.Doctors = 0;
+            dash.Offers = 0;
             //dash.Patients = _context.PatientAppointments.Where(x => x.DoctorSchedule.HospitalId == gethospital).Count();
-            dash.PatientAppointments = _context.DoctorSchedules.Where(x => x.HospitalId == gethospital && x.ScheduleStatusId == (long)ScheduleStatusEnum.Booked).Count();
+            dash.PatientAppointments = 0;
                // dash.Specialties = _context.Doctors.Where(x => x.HospitalId == gethospital).Select(x => x.DoctorSpecialtys).Count();
             }
             return View(dash);

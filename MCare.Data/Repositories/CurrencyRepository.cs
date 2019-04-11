@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 using NajmetAlraqee.Data.Entities;
 
 namespace NajmetAlraqee.Data.Repositories
@@ -17,9 +18,6 @@ namespace NajmetAlraqee.Data.Repositories
         }
         public int AddCurrency(Currency currency)
         {
-            var type = _context.CurrencyTypes.SingleOrDefault(x => x.Id == currency.CurrencyTypeId);
-            if (type != null) { currency.CurrencyTypeName = type.Name; }
-
             _context.Currencies.Add(currency);
             _context.SaveChanges();
 
@@ -28,7 +26,7 @@ namespace NajmetAlraqee.Data.Repositories
 
         public IQueryable<Currency> GetCurrencies()
         {
-            return _context.Currencies;
+            return _context.Currencies.Include(x=>x.CurrencyType);
         }
 
         public Currency GetCurrencyById(int id)
@@ -57,10 +55,7 @@ namespace NajmetAlraqee.Data.Repositories
 
             existcurrency.Name = currency.Name;
             existcurrency.CurrencyTypeId = currency.CurrencyTypeId;
-
-            var type = _context.CurrencyTypes.SingleOrDefault(x => x.Id == currency.CurrencyTypeId);
-            if (type != null) { existcurrency.CurrencyTypeName = type.Name; }
-
+         
             existcurrency.ExchangeRate = currency.ExchangeRate;
             existcurrency.Symbol = currency.Symbol;
 

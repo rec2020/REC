@@ -1,0 +1,171 @@
+﻿@model NajmetAlraqee.Site.ViewModels.ContractViewModel
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("AddContract");
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#CustomerId").customselect();
+        $("#ArrivalCityId").customselect();
+    }
+</script>
+
+
+<div class="container-fluid">
+    <div class="block-header">
+        @*<h2>Add Doctor</h2>*@
+        <ol class="breadcrumb breadcrumb-col-cyan">
+            <li><a href=@Url.Action("index","Contract")><i class="material-icons">home</i>@SharedLocalizer.GetLocalizedHtmlString("Contracts")</a></li>
+            <li><a href="javascript:void(0);"><i class="material-icons">library_books</i>@SharedLocalizer.GetLocalizedHtmlString("AddContract")</a></li>
+        </ol>
+    </div>
+
+
+    <div class="row clearfix">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <form asp-action="Add" method="post" enctype="multipart/form-data">
+
+                <div class="card">
+                    <div class="header">
+                        <h2 style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("BasicInformation")</h2>
+                        <ul class="header-dropdown m-r--5">
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
+                                <ul class="dropdown-menu pull-right"></ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-12"></div>
+                            <div class="col-sm-8 col-xs-12">
+                                <div asp-validation-summary="All" style="font-family:Droid Arabic Kufi" class="text-danger"></div>
+                                @Html.HiddenFor(x => x.Id)
+                            </div>
+                            <div class="col-sm-2 col-xs-12"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Customer") </label>
+                                    <div class="form-line">
+                                        <select asp-for="CustomerId" class="custom-select form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.CustomerId"><option>@SharedLocalizer.GetLocalizedHtmlString("Customer")</option></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ContractType") </label>
+                                    <div class="form-line">
+                                        <select asp-for="ContractTypeId" class="form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.ContractTypeId"><option>@SharedLocalizer.GetLocalizedHtmlString("ContractType")</option></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ContractInterVal")</label>
+                                    <div class="form-line">
+                                        <input asp-for="ContractInterVal" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("ContractInterVal")" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ContractDate") </label>
+                                    <div class="form-line">
+                                        <input asp-for="@Model.ContractDate" type="date" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("ContractDate")" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ContractCost") </label>
+                                    <div class="form-line">
+                                        <input asp-for="ContractCost" type="number" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("ContractCost")" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("SalaryMonth") </label>
+                                    <div class="form-line">
+                                        <input asp-for="SalaryMonth" type="number" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("SalaryMonth")" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("VicationDays") </label>
+                                    <div class="form-line">
+                                        <input asp-for="VicationDays" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("VicationDays")" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ArrivalCity") </label>
+                                    <div class="form-line">
+                                        <select asp-for="ArrivalCityId" class="custom-select form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.ArrivalCityId"><option>@SharedLocalizer.GetLocalizedHtmlString("ArrivalCity")</option></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ExperienceYear") </label>
+                                    <div class="form-line">
+                                        <input asp-for="ExperienceYear" type="number" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("ExperienceYear")" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("JobType") </label>
+                                    <div class="form-line">
+                                        <select asp-for="JobTypeId" class="form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.JobTypeId"><option>@SharedLocalizer.GetLocalizedHtmlString("JobType")</option></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("QulaficationNote") </label>
+                                    <div class="form-line">
+                                        <input asp-for="@Model.QulaficationNote" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("QulaficationNote")" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-12">
+                            <button type="submit" value="Add" style="font-family:Droid Arabic Kufi;right:950Px" class="btn btn-raised g-bg-cyan pull-left">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+                            <a asp-action="Index" class="btn btn-raised" style="font-family:Droid Arabic Kufi;right:950Px">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+@section Scripts {
+    <script src='~/js/jquery-customselect.js'></script>
+}
+@*<script type="text/javascript">
+    var contracttype = $("#ContractTypeId").val();
+    if (contracttype == 2) {
+            $("#RentValueSection").fadeIn('slow');
+            $("#RentTotalSection").fadeIn('slow');
+
+    };
+</script>*@

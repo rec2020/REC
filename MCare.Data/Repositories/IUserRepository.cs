@@ -8,6 +8,8 @@ namespace NajmetAlraqee.Data.Repositories
         IQueryable<User> GetAllUsers();
         User GetUser(string userId);
         User GetUserByMobile(string mobileNumber);
+
+        User GetUserByName(string Name);
         bool SetMobileAsVerified(string userId);
         bool UpdateOTP(string userId, string oTP);
     }

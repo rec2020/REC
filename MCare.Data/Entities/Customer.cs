@@ -18,17 +18,16 @@ namespace NajmetAlraqee.Data.Entities
         public string FirstPhone { get; set; }
         public string SecondPhone { get; set; }
         public int CustomerTypeId { get; set; }
-        public string CustomerTypeName { get; set; }
         public string IdentiyImage { get; set; }
         public string FamilyImage { get; set; }
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
         public int? UserDelegateId { get; set; }
-        public string UserDelegateName { get; set; }
        
         public string Address { get; set; }
         public virtual CustomerType CustomerType { get; set; }
-
         public virtual UserDelegate UserDelegate { get; set; }
+        //public virtual Contract Contract { get; set; }
+     
 
     }
 }

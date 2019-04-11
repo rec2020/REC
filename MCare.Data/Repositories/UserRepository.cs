@@ -49,5 +49,10 @@ namespace NajmetAlraqee.Data.Repositories
         {
             return _context.Users.FirstOrDefault(m => m.Mobile == mobileNumber);
         }
+
+        public User GetUserByName(string Name)
+        {
+            return _context.Users.FirstOrDefault(m => m.UserName == Name);
+        }
     }
 }

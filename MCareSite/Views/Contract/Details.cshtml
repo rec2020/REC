@@ -1,0 +1,786 @@
+﻿@model NajmetAlraqee.Site.ViewModels.ContractViewModel
+@using NajmetAlraqee.Site.Services;
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("Contracts");
+}
+<style>
+    i, h2 {
+        font-family: Droid Arabic Kufi
+    }
+</style>
+
+<div class="container-fluid" style="font-family:Droid Arabic Kufi">
+    <br />
+    <br />
+
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-8 col-sm-12">
+            <div class="card">
+                <div class="body">
+                    <div class="container">
+                        <div class="body">
+                            <div class="row">
+
+                                <div class="col-sm-3 col-xs-12">
+                                    <div class="form-group">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-xs-12">
+                                    <div class="form-group">
+                                        <label style="color:black;font-size:medium">   @SharedLocalizer.GetLocalizedHtmlString("ContractType")    </label>
+                                        <label style="color:black">     </label>
+                                        <label class="label bg-teal" style="color:white;font-size:medium">   @Model.ContractTypeName   </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-xs-12">
+                                    <div class="form-group">
+                                        <label style="color:black;font-size:medium">@SharedLocalizer.GetLocalizedHtmlString("ContractStatus") </label>
+                                        <label style="color:black">     </label>
+                                        <label class="label bg-teal" style="color:white;font-size:medium">   @Model.ContractStatusName </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-xs-12">
+                                    <div class="form-group">
+                                        @if (Model.ContractStatusId >= 5 && Model.ContractTypeId <= 1)
+                                        {
+                                            <div>
+                                                <a class="btn btn-raised btn-sm bg-teal" asp-action="Add" asp-route-contractType="3">@SharedLocalizer.GetLocalizedHtmlString("ContractSubstitue")</a>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <h2 class="card-inside-title">البيانات الاساسية للعقد </h2>
+                            <div class="panel-group" id="accordion_1" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" role="tab" id="headingThree_1234">
+                                        <h4 style="font-family:Droid Arabic Kufi" class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseThree_1234" aria-expanded="false" aria-controls="collapseThree_1234"> العقد  </a> </h4>
+                                    </div>
+                                    <div id="collapseThree_1234" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree_1234" aria-expanded="false">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <a href="" class="btn btn-raised btn-warning btn-sm"><i class="zmdi zmdi-edit"></i> تعديل  </a>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-3 col-xs-12">
+                                                    <div class="form-group">
+                                                        <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Customer") </label>
+                                                        <div class="form-line">
+                                                            <input asp-for="@Model.CustomerName" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-xs-12">
+                                                    <div class="form-group">
+                                                        <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ContractType") </label>
+                                                        <div class="form-line">
+                                                            <input asp-for="@Model.ContractTypeName" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-xs-12">
+                                                    <div class="form-group">
+                                                        <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ContractInterVal")</label>
+                                                        <div class="form-line">
+                                                            <input asp-for="ContractInterVal" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-xs-12">
+                                                    <div class="form-group">
+                                                        <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ContractDate") </label>
+                                                        <div class="form-line">
+                                                            <input asp-for="@Model.ContractDate" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-3 col-xs-12">
+                                                    <div class="form-group">
+                                                        <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ContractCost") </label>
+                                                        <div class="form-line">
+                                                            <input asp-for="ContractCost" type="number" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-xs-12">
+                                                    <div class="form-group">
+                                                        <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("SalaryMonth") </label>
+                                                        <div class="form-line">
+                                                            <input asp-for="SalaryMonth" type="number" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-xs-12">
+                                                    <div class="form-group">
+                                                        <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("VicationDays") </label>
+                                                        <div class="form-line">
+                                                            <input asp-for="VicationDays" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-xs-12">
+                                                    <div class="form-group">
+                                                        <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ArrivalCity") </label>
+                                                        <div class="form-line">
+                                                            <input asp-for="@Model.ArrivalCityName" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-3 col-xs-12">
+                                                    <div class="form-group">
+                                                        <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ExperienceYear") </label>
+                                                        <div class="form-line">
+                                                            <input asp-for="ExperienceYear" type="number" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-xs-12">
+                                                    <div class="form-group">
+                                                        <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("JobType") </label>
+                                                        <div class="form-line">
+                                                            <input asp-for="@Model.JobTypeName" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <div class="form-group">
+                                                        <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("QulaficationNote") </label>
+                                                        <div class="form-line">
+                                                            <input asp-for="@Model.QulaficationNote" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h2 class="card-inside-title">العمليات  </h2>
+                            <div class="panel-group" id="accordion_1" role="tablist" aria-multiselectable="true">
+                                @if (Model.ContractTypeId == 1 || Model.ContractTypeId == 2)
+                                {
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" role="tab" id="headingOne_1">
+                                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseOne_1" aria-expanded="false" aria-controls="collapseOne_1" class="collapsed" style="font-family:Droid Arabic Kufi"> الاختيار </a> </h4>
+                                        </div>
+                                        <div id="collapseOne_1" class="panel-collapse in collapse" role="tabpanel" aria-labelledby="headingOne_1" aria-expanded="false" style="">
+                                            <div class="card-body">
+                                                <div class="body">
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            @*<a href="" class="btn btn-raised btn-warning btn-sm"><i class="zmdi zmdi-edit"></i> تعديل  </a>*@
+                                                            <a href="@Url.Action("Index","ContractSelect",new { ContractId = Model.Id})" class="btn btn-raised bg-teal waves-effect btn-sm"><i class="zmdi zmdi-collection-add"></i> أختيار </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-12 col-xs-12">
+                                                            <div class="card patients-list">
+                                                                <div class="body">
+                                                                    <h2 class="card-inside-title" style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("ContractSelects")</h2>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-bordered table-striped table-hover">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>
+                                                                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Code"))
+                                                                                    </th>
+                                                                                    <th>
+                                                                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ContractNo"))
+                                                                                    </th>
+                                                                                    <th>
+                                                                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("PolNumer"))
+                                                                                    </th>
+                                                                                    <th>
+                                                                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("PolNumerDate"))
+                                                                                    </th>
+                                                                                    <th>
+                                                                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ForeignAgency"))
+                                                                                    </th>
+                                                                                    <th>
+                                                                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("SelectDate"))
+                                                                                    </th>
+                                                                                    <th></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                @if (ViewBag.ContractSelect != null)
+                                                                                {
+                                                                                    @foreach (var item in ViewBag.ContractSelect)
+                                                                                    {
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                @item.Id
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                @item.ContractId
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                @item.PolNumer
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                @item.PolNumerDate
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                @item.ForeignAgency.OfficeName
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                @item.SelectDate
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <a asp-action="Edit" asp-controller="ContractSelect" asp-route-id="@item.Id" class="btn btn-raised bg-teal btn-sm"><i class="material-icons" title="@SharedLocalizer.GetLocalizedHtmlString("Edit")">create</i></a>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    }
+                                                                                }
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" role="tab" id="headingTwo_1">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseTwo_1" aria-expanded="false" aria-controls="collapseTwo_1" style="font-family:Droid Arabic Kufi"> التفويض </a> </h4>
+                                        </div>
+                                        <div id="collapseTwo_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo_1" aria-expanded="false">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        @*<a href="" class="btn btn-raised btn-warning btn-sm"><i class="zmdi zmdi-edit"></i> تعديل  </a>*@
+                                                        <a href="@Url.Action("Index","ContractDelegation",new { ContractId = Model.Id})" class="btn btn-raised bg-teal waves-effect btn-sm"><i class="zmdi zmdi-collection-add"></i> أجراءالتفويض </a>
+                                                    </div>
+                                                </div>
+                                                <div class="row clearfix">
+                                                    <div class="col-md-12 col-xs-12">
+                                                        <div class="card patients-list">
+                                                            <div class="body">
+                                                                <h2 class="card-inside-title" style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("ContractDelegations")</h2>
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-bordered table-striped table-hover">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>
+                                                                                    @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Code"))
+                                                                                </th>
+                                                                                <th>
+                                                                                    @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ContractNo"))
+                                                                                </th>
+                                                                                <th>
+                                                                                    @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ForeignAgency"))
+                                                                                </th>
+                                                                                <th>
+                                                                                    @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("DelegationDate"))
+                                                                                </th>
+                                                                                <th></th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @if (ViewBag.ContractDelegation != null)
+                                                                            {
+                                                                                @foreach (var item in ViewBag.ContractDelegation)
+                                                                                {
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            @item.Id
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @item.ContractId
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @item.ForeignAgency.OfficeName
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @item.DelegationDate
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <a asp-action="Edit" asp-controller="ContractDelegation" asp-route-id="@item.Id" class="btn btn-raised bg-teal btn-sm"><i class="material-icons" title="@SharedLocalizer.GetLocalizedHtmlString("Edit")">create</i></a>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                }
+                                                                            }
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" role="tab" id="headingThree_1">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseThree_1" aria-expanded="false" aria-controls="collapseThree_1" style="font-family:Droid Arabic Kufi"> التفيز </a> </h4>
+                                        </div>
+                                        <div id="collapseThree_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree_1" aria-expanded="false">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        @*<a href="" class="btn btn-raised btn-warning btn-sm"><i class="zmdi zmdi-edit"></i> تعديل  </a>*@
+                                                        <a href="@Url.Action("Index","ContractVisa",new { ContractId = Model.Id})" class="btn btn-raised bg-teal waves-effect btn-sm"><i class="zmdi zmdi-collection-add"></i> أجراءالتفيز </a>
+                                                    </div>
+                                                </div>
+                                                <div class="row clearfix">
+                                                    <div class="col-md-12 col-xs-12">
+                                                        <div class="card patients-list">
+                                                            <div class="body">
+                                                                <h2 class="card-inside-title" style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("ContractVisas")</h2>
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-bordered table-striped table-hover">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>
+                                                                                    @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Code"))
+                                                                                </th>
+                                                                                <th>
+                                                                                    @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ContractNo"))
+                                                                                </th>
+                                                                                <th>
+                                                                                    @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Employee"))
+                                                                                </th>
+                                                                                <th>
+                                                                                    @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("VisaDate"))
+                                                                                </th>
+                                                                                <th></th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @if (ViewBag.ContractVisa != null)
+                                                                            {
+                                                                                @foreach (var item in ViewBag.ContractVisa)
+                                                                                {
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            @item.Id
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @item.ContractId
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @item.Employee.FirstName
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @item.VisaDate
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <a asp-action="Edit" asp-controller="ContractVisa" asp-route-id="@item.Id" class="btn btn-raised bg-teal btn-sm"><i class="material-icons" title="@SharedLocalizer.GetLocalizedHtmlString("Edit")">create</i></a>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                }
+                                                                            }
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" role="tab" id="headingThree_12">
+                                            <h4 style="font-family:Droid Arabic Kufi" class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseThree_12" aria-expanded="false" aria-controls="collapseThree_12"> تذاكر الطيران </a> </h4>
+                                        </div>
+                                        <div id="collapseThree_12" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree_12" aria-expanded="false">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        @*<a href="" class="btn btn-raised btn-warning btn-sm"><i class="zmdi zmdi-edit"></i> تعديل  </a>*@
+                                                        <a href="@Url.Action("Index","ContractTicket",new { contractId = Model.Id})" class="btn btn-raised bg-teal waves-effect btn-sm"><i class="zmdi zmdi-collection-add"></i> أجراءحجز التذكرة </a>
+                                                    </div>
+                                                </div>
+                                                <div class="row clearfix">
+                                                    <div class="col-md-12 col-xs-12">
+                                                        <div class="card patients-list">
+                                                            <div class="body">
+                                                                <h2 class="card-inside-title" style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("ContractVisas")</h2>
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-bordered table-striped table-hover">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>
+                                                                                    @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Code"))
+                                                                                </th>
+                                                                                <th>
+                                                                                    @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ContractNo"))
+                                                                                </th>
+                                                                                <th>
+                                                                                    @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("AirLineName"))
+                                                                                </th>
+                                                                                <th>
+                                                                                    @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("TicketDate"))
+                                                                                </th>
+                                                                                <th>
+                                                                                    @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ArrivalDate"))
+                                                                                </th>
+                                                                                <th>
+                                                                                    @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ArrivalCity"))
+                                                                                </th>
+                                                                                <th>
+                                                                                    @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Employee"))
+                                                                                </th>
+                                                                                <th>
+                                                                                    @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Approved"))
+                                                                                </th>
+                                                                                <th></th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @if (ViewBag.ContractTickets != null)
+                                                                            {
+                                                                                @foreach (var item in ViewBag.ContractTickets)
+                                                                                {
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            @item.Id
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @item.ContractId
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @item.AirLineName
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @item.TicketDate
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @item.ArrivalDate
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @item.City.Name
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @item.Employee.FirstName
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @if (item.IsApproved)
+                                                                                            {<span class="label label-success">@SharedLocalizer.GetLocalizedHtmlString("ApprovedAccept")</span> }
+                                                                                        else
+                                                                                        {<span class="label label-warning">@SharedLocalizer.GetLocalizedHtmlString("ApprovedReject")</span>}
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <a asp-action="Edit" asp-controller="ContractTicket" asp-route-id="@item.Id" class="btn btn-raised bg-teal btn-sm"><i class="material-icons" title="@SharedLocalizer.GetLocalizedHtmlString("Edit")">create</i></a>
+                                                                                            @if (!item.IsApproved)
+                                                                                            {
+                                                                                                <a asp-action="ApprovedTicket" asp-controller="ContractTicket" asp-route-id="@item.Id" title="@SharedLocalizer.GetLocalizedHtmlString("Approved")" class="btn btn-raised btn-success btn-sm zmdi zmdi-power"></a>
+                                                                                            }
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                }
+                                                                            }
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" role="tab" id="headingThree_123">
+                                        <h4 style="font-family:Droid Arabic Kufi" class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseThree_123" aria-expanded="false" aria-controls="collapseThree_123"> متابعة العمليات  </a> </h4>
+                                    </div>
+                                    <div id="collapseThree_123" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree_123" aria-expanded="false">
+                                        <div class="card-body">
+                                            <div class="row clearfix">
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="card patients-list">
+                                                        <div class="body">
+                                                            <h2 class="card-inside-title" style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("ContractHistory")</h2>
+                                                            <div class="table-responsive">
+                                                                <table class="table table-bordered table-striped table-hover">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Code"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ContractNo"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Customer"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ForeignAgency"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Employee"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Action"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ActionByName"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Date"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ContractStatus"))
+                                                                            </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @if (ViewBag.ContractHistory != null)
+                                                                        {
+                                                                            @foreach (var item in ViewBag.ContractHistory)
+                                                                            {
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        @item.Id
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.ContractId
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.CustomerName
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.ForeignAgencyName
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.EmployeeName
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <label class=" label bg-brown">@item.Action.Name</label>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.ActionByName
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.ActionDate
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <label class=" label bg-teal">@item.ContractStatus.Name</label>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            }
+                                                                        }
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" role="tab" id="headingThree_555">
+                                        <h4 style="font-family:Droid Arabic Kufi" class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseThree_555" aria-expanded="false" aria-controls="collapseThree_555"> @SharedLocalizer.GetLocalizedHtmlString("SnadReceipts") </a> </h4>
+                                    </div>
+                                    <div id="collapseThree_555" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree_555" aria-expanded="false">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                            </div>
+                                            <div class="col-md-2">
+                                                @*<a href="" class="btn btn-raised btn-warning btn-sm"><i class="zmdi zmdi-edit"></i> تعديل  </a>*@
+                                                <a href="@Url.Action("SnadReceiveIndex","ReceiptDoc",new { ContractId = Model.Id})" class="btn btn-raised bg-teal waves-effect btn-sm"><i class="zmdi zmdi-collection-add"></i> سند صرف </a>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row clearfix">
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="card patients-list">
+                                                        <div class="body">
+                                                            <h2 class="card-inside-title" style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("SnadReceipts")</h2>
+                                                            <div class="table-responsive">
+                                                                <table class="table table-hover">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Code"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ContractNo"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ReceiptdocType"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Customer"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Amount"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Employee"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ReceiptDate"))
+                                                                            </th>
+                                                                            <th></th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @if (ViewBag.ReceiptDocs != null)
+                                                                        {
+                                                                            @foreach (var item in ViewBag.ReceiptDocs)
+                                                                            {
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        @item.Id
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.ContractId
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <label class=" label bg-teal"> @item.ReceiptdocType.Name  </label>
+</td>
+                                                                                    <td>
+                                                                                        @item.Customer.FirstName
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.Amount
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.ReceiptByUserName
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.ReceiptDate
+                                                                                    </td>
+                                                                                </tr>
+                                                                            }
+                                                                        }
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" role="tab" id="headingThree_666">
+                                        <h4 style="font-family:Droid Arabic Kufi" class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseThree_666" aria-expanded="false" aria-controls="collapseThree_666"> @SharedLocalizer.GetLocalizedHtmlString("SnadTakings") </a> </h4>
+                                    </div>
+                                    <div id="collapseThree_666" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree_666" aria-expanded="false">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                            </div>
+                                            <div class="col-md-2">
+                                                @*<a href="" class="btn btn-raised btn-warning btn-sm"><i class="zmdi zmdi-edit"></i> تعديل  </a>*@
+                                                <a href="@Url.Action("SnadTakingIndex","ReceiptDoc",new { ContractId = Model.Id})" class="btn btn-raised bg-teal waves-effect btn-sm"><i class="zmdi zmdi-collection-add"></i> سند قبض </a>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row clearfix">
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="card patients-list">
+                                                        <div class="body">
+                                                            <h2 class="card-inside-title" style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("SnadTakings")</h2>
+                                                            <div class="table-responsive">
+                                                                <table class="table table-hover">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Code"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ContractNo"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ReceiptdocType"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Customer"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Amount"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Employee"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ReceiptDate"))
+                                                                            </th>
+                                                                            <th></th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @if (ViewBag.TakingDocs != null)
+                                                                        {
+                                                                            @foreach (var item in ViewBag.TakingDocs)
+                                                                            {
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        @item.Id
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.ContractId
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <label class=" label bg-teal"> @item.ReceiptdocType.Name </label>
+</td>
+                                                                                    <td>
+                                                                                        @item.Customer.FirstName
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.Amount
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.ReceiptByUserName
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.ReceiptDate
+                                                                                    </td>
+                                                                                </tr>
+                                                                            }
+                                                                        }
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+

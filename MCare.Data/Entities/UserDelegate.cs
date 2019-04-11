@@ -7,15 +7,13 @@ namespace NajmetAlraqee.Data.Entities
 {
     public class UserDelegate
     {
-
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         [Required(ErrorMessage = "الرجاء ادخال جنسية المندوب")]
         public int NationalityId { get; set; }
-        public string NationalityName { get; set; }
         public int DelegateTypeId { get; set; }
-        public string DelegateTypeName { get; set; }
+        //public string DelegateTypeName { get; set; }
         public Decimal CommissionValue { get; set; }
         public Decimal CommissionPrecentage { get; set; }
 
@@ -27,8 +25,7 @@ namespace NajmetAlraqee.Data.Entities
         public Decimal TransferAmount { get; set; }
 
         public virtual Nationality Nationality  { get; set; }
-
-
         public virtual DelegateType DelegateType { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

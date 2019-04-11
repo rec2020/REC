@@ -50,7 +50,7 @@ namespace NajmetAlraqeeSite
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddDbContext<NajmetAlraqeeContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
                 //options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
@@ -61,17 +61,13 @@ namespace NajmetAlraqeeSite
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-            services.AddTransient<IDoctorRepository, DoctorRepository>();
+         
             services.AddTransient<ICityRepository, CityRepository>();
             services.AddTransient<ICountryRepository, CountryRepository>();
-            services.AddTransient<IHospitalRepository, HospitalRepository>();
-            services.AddTransient<IHospitalOfferRepository, HospitalOfferRepository>();
-            services.AddTransient<IDoctorLanguageRepository, DoctorLanguageRepository>();
-            services.AddTransient<IDoctorEducationLevelRepository, DoctorEducationLevelRepository>();
-            services.AddTransient<IDoctorSpecialtyRepository, DoctorSpecialtyRepository>();
+         
             services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<IDoctorVacationRepository, DoctorVacationRepository>();
-            services.AddTransient<IPatientAppointmentRepository, PatientAppointmentRepository>();
+           
+         
 
             services.AddTransient<INationalityRepository, NationalityRepository>();
             services.AddTransient<IBankDetailRepository, BankDetailRepository>();
@@ -87,7 +83,20 @@ namespace NajmetAlraqeeSite
             services.AddTransient<ICustomerTypeRepository,CustomerTypeRepository>();
             services.AddTransient<IPaymentMethodRepository, PaymentMethodRepository>();
             services.AddTransient<IPartnerRepository, PartnerRepository>();
-
+            services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+            services.AddTransient<IGenderRepository, GenderRepository>();
+            services.AddTransient<IReligionRepository, ReligionRepository>();
+            services.AddTransient<ISocialStatusRepository, SocialStatusRepository>();
+            services.AddTransient<IContractRepository, ContractRepository>();
+            services.AddTransient<IContractTypeRepository, ContractTypeRepository>();
+            services.AddTransient<IContractSelectRepository, ContractSelectRepository>();
+            services.AddTransient<IContractDelegateRepository, ContractDelegateRepository>();
+            services.AddTransient<IContractVisaRepository, ContractVisaRepository>();
+            services.AddTransient<IContractTicketRepository, ContractTicketRepository>();
+            services.AddTransient<IContractHistoryRepository, ContractHistoryRepository>();
+            services.AddTransient<IReceiptDocRepository, ReceiptDocRepository>();
+            services.AddTransient<IReceiptDocTypeRepository, ReceiptDocTypeRepository>();
+            services.AddTransient<ISpecialEmployeeRepository, SpecialEmployeeRepository>();
             //// configure identity server with in-memory stores, keys, clients and scopes
             //services.AddIdentityServer()
             //    .AddDeveloperSigningCredential()

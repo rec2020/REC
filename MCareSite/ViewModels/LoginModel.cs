@@ -15,6 +15,6 @@ namespace NajmetAlraqee.Site.ViewModels
     {
         public string Token { get; set; }
         public string Expiration { get; set; }
-        public PatientViewModel PatientProfile { get; set; }
+        //public PatientViewModel PatientProfile { get; set; }
     }
 }

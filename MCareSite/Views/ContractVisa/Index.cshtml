@@ -1,0 +1,142 @@
+﻿
+@model NajmetAlraqee.Site.ViewModels.ContractVisaViewModel
+@using NajmetAlraqee.Site.Services;
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("ContractVisas");
+}
+
+<div class="block-header">
+    <ol class="breadcrumb breadcrumb-col-cyan">
+        <li><a href=@Url.Action("index","Home")><i class="material-icons">home</i>@SharedLocalizer.GetLocalizedHtmlString("Home") </a></li>
+        <li><a href="javascript:void(0);"><i class="material-icons">library_books</i> @SharedLocalizer.GetLocalizedHtmlString("ContractVisas")</a></li>
+    </ol>
+</div>
+
+
+
+<div class="container-fluid">
+
+    <div class="row clearfix" style="font-family:Droid Arabic Kufi">
+        <div class="col-md-12 col-xs-12">
+            <div class="card patients-list">
+                <div class="body">
+                    <h2 class="card-inside-title" style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("ContractVisas")</h2>
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <form asp-action="Add" method="post" asp-controller="ContractVisa">
+                                @Html.HiddenFor(x => x.Id)
+                                <div class="row">
+                                    <div class="col-sm-2 col-xs-12"></div>
+                                    <div class="col-sm-8 col-xs-12">
+                                        <div asp-validation-summary="All" style="font-family:Droid Arabic Kufi" class="text-danger"></div>
+                                        @Html.HiddenFor(x => x.ContractId)
+                                    </div>
+                                    <div class="col-sm-2 col-xs-12"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ContractNo") </label>
+                                            <div class="form-line">
+                                                <input asp-for="ContractId" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("VisaDate") </label>
+                                            <div class="form-line">
+                                                <input asp-for="VisaDate" type="date" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("VisaDate")" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Employee") </label>
+                                            <div class="form-line">
+                                                <select asp-for="EmployeeId" class="form-control" style="font-family:Droid Arabic Kufi" asp-items="@ViewBag.EmployeeId">
+                                                    <option>@SharedLocalizer.GetLocalizedHtmlString("Employee")</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <center>
+                                    <input type="submit" style="font-family:Droid Arabic Kufi;" value="@SharedLocalizer.GetLocalizedHtmlString("Save")" class="btn btn-raised bg-teal btn-sm" />
+                                </center>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-md-12 col-xs-12">
+            <div class="card patients-list">
+                <div class="body">
+                    <h2 class="card-inside-title" style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("ContractVisas")</h2>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Code"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ContractNo"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Employee"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("VisaDate"))
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.ContractVisa != null)
+                                {
+                                    @foreach (var item in ViewBag.ContractVisa)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.Id
+                                            </td>
+                                            <td>
+                                                @item.ContractId
+                                            </td>
+                                            <td>
+                                                @item.Employee.FirstName
+                                            </td>
+                                            <td>
+                                                @item.VisaDate
+                                            </td>
+                                            <td>
+                                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-raised bg-teal btn-sm"><i class="material-icons" title="@SharedLocalizer.GetLocalizedHtmlString("Edit")">create</i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <a asp-action="Details" asp-controller="Contract" asp-route-id="@Model.ContractId" class="btn btn-raised" style="font-family:Droid Arabic Kufi;right:500px">@SharedLocalizer.GetLocalizedHtmlString("Close")</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+

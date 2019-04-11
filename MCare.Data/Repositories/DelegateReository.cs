@@ -1,4 +1,5 @@
-﻿using NajmetAlraqee.Data.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using NajmetAlraqee.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +19,6 @@ namespace NajmetAlraqee.Data.Repositories
 
         public int AddDelegate(UserDelegate deleg)
         {
-            var delegatetype = _context.DelegateTypes.SingleOrDefault(x=>x.Id==deleg.DelegateTypeId);
-            if (delegatetype!=null) { deleg.DelegateTypeName = delegatetype.Name;  }
-
-            var nationality = _context.Nationalities.SingleOrDefault(x => x.Id == deleg.NationalityId);
-            if (delegatetype != null) { deleg.NationalityName = nationality.Name; }
-
             _context.UserDelegates.Add(deleg);
             _context.SaveChanges();
 
@@ -38,7 +33,7 @@ namespace NajmetAlraqee.Data.Repositories
 
         public IQueryable<UserDelegate> GetDelegates()
         {
-            return _context.UserDelegates;
+            return _context.UserDelegates.Include("DelegateType").Include(x=>x.Nationality);
         }
 
         public bool RemoveDelegate(int Id)
@@ -69,11 +64,11 @@ namespace NajmetAlraqee.Data.Repositories
             existdelegateuser.RemainderAmount = del.RemainderAmount;
             existdelegateuser.TransferAmount = del.TransferAmount;
 
-            var delegatetype = _context.DelegateTypes.SingleOrDefault(x => x.Id == existdelegateuser.DelegateTypeId);
-            if (delegatetype != null) { existdelegateuser.DelegateTypeName = delegatetype.Name; }
+            //var delegatetype = _context.DelegateTypes.SingleOrDefault(x => x.Id == existdelegateuser.DelegateTypeId);
+            ////if (delegatetype != null) { existdelegateuser.DelegateTypeName = delegatetype.Name; }
 
-            var nationality = _context.Nationalities.SingleOrDefault(x => x.Id == existdelegateuser.NationalityId);
-            if (delegatetype != null) { existdelegateuser.NationalityName = nationality.Name; }
+            //var nationality = _context.Nationalities.SingleOrDefault(x => x.Id == existdelegateuser.NationalityId);
+            //if (delegatetype != null) { existdelegateuser.NationalityName = nationality.Name; }
 
 
             _context.Update(existdelegateuser);

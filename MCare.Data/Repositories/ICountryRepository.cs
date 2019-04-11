@@ -9,10 +9,10 @@ namespace NajmetAlraqee.Data.Repositories
     public interface ICountryRepository
     {
         IQueryable<Country> GetCountries();
-        Country GetById(long id);
-        long AddCountry(Country country);
-        bool UpdateCountry(long id, Country country);
-        bool RemoveCountry(long id);
+        Country GetById(int id);
+        int AddCountry(Country country);
+        bool UpdateCountry(int id, Country country);
+        bool RemoveCountry(int id);
        
     }
 }

@@ -18,11 +18,11 @@ namespace NajmetAlraqee.Data.Initializer
     {
         public static void Initialize(IServiceProvider serviceProvider, NajmetAlraqeeContext _context)
         {
-            if (!_context.Countries.Any())
-            {
-                _context.Countries.AddRange(LookupsInitializer.GetCountries());
-                _context.SaveChanges();
-            }
+            //if (!_context.Countries.Any())
+            //{
+            //    _context.Countries.AddRange(LookupsInitializer.GetCountries());
+            //    _context.SaveChanges();
+            //}
 
             if (!_context.Cities.Any())
             {
@@ -42,35 +42,7 @@ namespace NajmetAlraqee.Data.Initializer
                 _context.SaveChanges();
             }
 
-            if (!_context.HospitalTypes.Any())
-            {
-                _context.HospitalTypes.AddRange(LookupsInitializer.GetHospitalTypes());
-                _context.SaveChanges();
-            }
-
-            if (!_context.Languages.Any())
-            {
-                _context.Languages.AddRange(LookupsInitializer.GetLanguages());
-                _context.SaveChanges();
-            }
-
-            if (!_context.ScheduleStatuses.Any())
-            {
-                _context.ScheduleStatuses.AddRange(LookupsInitializer.GetScheduleStatus());
-                _context.SaveChanges();
-            }
-
-            if (!_context.AppointmentStatuses.Any())
-            {
-                _context.AppointmentStatuses.AddRange(LookupsInitializer.GetAppointmentStatus());
-                _context.SaveChanges();
-            }
-
-            if (!_context.Specialties.Any())
-            {
-                _context.Specialties.AddRange(LookupsInitializer.GetSpecialties());
-                _context.SaveChanges();
-            }
+           
 
             //if (!_context.Nationalities.Any())
             //{
@@ -78,17 +50,7 @@ namespace NajmetAlraqee.Data.Initializer
             //    _context.SaveChanges();
             //}
 
-            if (!_context.VacationTypes.Any())
-            {
-                _context.VacationTypes.AddRange(LookupsInitializer.GetVacationTypes());
-                _context.SaveChanges();
-            }
-
-            if (!_context.VacationStatuses.Any())
-            {
-                _context.VacationStatuses.AddRange(LookupsInitializer.GetVacationStatus());
-                _context.SaveChanges();
-            }
+          
 
             IdentityInitializing.AddUser(serviceProvider,
                 "root@hotmail.com", "NajmetAlraqee@2018", "Administrator", "0568356825", ROLES.Root.ToString());
@@ -101,21 +63,21 @@ namespace NajmetAlraqee.Data.Initializer
 
         private static void DummyData(IServiceProvider serviceProvider, NajmetAlraqeeContext _context)
         {
-            if (!_context.Hospitals.Any())
-            {
-                var hospitals = LookupsInitializer.GetHospitals();
-                _context.Hospitals.AddRange(hospitals);
-                _context.SaveChanges();
-            }
+            //if (!_context.Hospitals.Any())
+            //{
+            //    var hospitals = LookupsInitializer.GetHospitals();
+            //    _context.Hospitals.AddRange(hospitals);
+            //    _context.SaveChanges();
+            //}
 
-            if (!_context.HospitalOffers.Any())
-            {
-                var offers = LookupsInitializer.GetOffers();
-                _context.HospitalOffers.AddRange(offers);
-                _context.SaveChanges();
-            }
+            //if (!_context.HospitalOffers.Any())
+            //{
+            //    var offers = LookupsInitializer.GetOffers();
+            //    _context.HospitalOffers.AddRange(offers);
+            //    _context.SaveChanges();
+            //}
 
-            DoctorInitializer.GenerateDoctorUsers(serviceProvider, _context);
+            //DoctorInitializer.GenerateDoctorUsers(serviceProvider, _context);
         }
     }
 }

@@ -8,11 +8,11 @@ namespace NajmetAlraqee.Site.ViewModels
 {
     public class CountryViewModel
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
+        [Required(ErrorMessage = "الرجاء ادخال اسم البلد")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Please enter Arabic Name.")]
-        public string ArabicName { get; set; }
-        [Required(ErrorMessage = "Please enter English Name.")]
-        public string EnglishName { get; set; }
+        
+      
+       
     }
 }

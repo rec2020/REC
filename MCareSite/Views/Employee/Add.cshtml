@@ -1,0 +1,436 @@
+﻿@model NajmetAlraqee.Site.ViewModels.EmployeeViewModel
+@{
+    Layout = null;
+}
+@using NajmetAlraqee.Site.Services;
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("Employees");
+}
+<head>
+
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Include SmartWizard CSS -->
+    <link href="~/DataTables/css/smart_wizard.css" rel="stylesheet" />
+    <!-- Optional SmartWizard theme -->
+    <link href="~/DataTables/css/smart_wizard_theme_arrows.css" rel="stylesheet" />
+    <link href="~/DataTables/css/smart_wizard_theme_circles.css" rel="stylesheet" />
+    <link href="~/DataTables/css/smart_wizard_theme_dots.css" rel="stylesheet" />
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/droid-arabic-kufi" type="text/css" />
+
+</head>
+<br />
+<br />
+<body style="font-family:Droid Arabic Kufi;background-color:lightgray">
+    <br />
+    <div class="container" dir="rtl">
+        <form asp-action="Add" asp-controller="Employee" id="myForm" role="form" data-toggle="validator" method="post">
+            @*<form asp-action="AddPost" asp-controller="Employee" id="myForm">*@
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => x.Id)
+            <div class="container" dir="rtl" style="background-color:white">
+                <br />
+                <div class="raw">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+                <br />
+            </div>
+            <div id="smartwizard">
+                <ul style="background-color:white">
+                    <li><a href="#step-1" style="background-color:black">البيانات الاساسية للعامل <br /><small></small></a></li>
+                    <li><a href="#step-2">بيانات الهوية<br /><small></small></a></li>
+                    <li><a href="#step-3">بيانات الوظيفة<br /><small></small></a></li>
+                </ul>
+                <div>
+                    <div id="step-1">
+                        <br />
+                        <div id="form-step-0" role="form" data-toggle="validator" class="row">
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:260Px"> @SharedLocalizer.GetLocalizedHtmlString("FirstName")</label>
+                                <input asp-for="FirstName" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("FirstName")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:5000Px">@SharedLocalizer.GetLocalizedHtmlString("Father")</label>
+                                <input asp-for="Father" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Father")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:250Px">@SharedLocalizer.GetLocalizedHtmlString("GrandFather")</label>
+                                <input asp-for="GrandFather" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("GrandFather")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:5000Px">@SharedLocalizer.GetLocalizedHtmlString("Family")</label>
+                                <input asp-for="Family" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Family")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:250Px">@SharedLocalizer.GetLocalizedHtmlString("FileNo")</label>
+                                <input asp-for="FileNo" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("FileNo")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:250Px">@SharedLocalizer.GetLocalizedHtmlString("Nationality")</label>
+                                <select asp-for="@Model.NationalityId" class="form-control" asp-items="ViewBag.NationalityId" required><option>@SharedLocalizer.GetLocalizedHtmlString("Nationality")</option></select>
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:5000Px">@SharedLocalizer.GetLocalizedHtmlString("Gender")</label>
+                                <select asp-for="GenderId" class="form-control" asp-items="ViewBag.GenderId" required><option>@SharedLocalizer.GetLocalizedHtmlString("Gender")</option></select>
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:300Px">@SharedLocalizer.GetLocalizedHtmlString("Religon")</label>
+                                <select asp-for="@Model.ReligionId" class="form-control" asp-items="ViewBag.ReligionId" required><option>@SharedLocalizer.GetLocalizedHtmlString("Religon")</option></select>
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:210Px">@SharedLocalizer.GetLocalizedHtmlString("SocialStatus")</label>
+                                <select asp-for="@Model.SocialStatusId" class="form-control" asp-items="ViewBag.SocialStatusId" required><option>@SharedLocalizer.GetLocalizedHtmlString("SocialStatus")</option></select>
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:250Px">@SharedLocalizer.GetLocalizedHtmlString("BirhtDate")</label>
+                                <input asp-for="@Model.BirhtDate" type="date" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("BirhtDate")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:300Px">@SharedLocalizer.GetLocalizedHtmlString("Age")</label>
+                                <input asp-for="Age" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Age")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:210Px">@SharedLocalizer.GetLocalizedHtmlString("FamilyNo")</label>
+                                <input asp-for="FamilyNo" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("FamilyNo")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:210Px">@SharedLocalizer.GetLocalizedHtmlString("NumberTime")</label>
+                                <input asp-for="NumberTime" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("NumberTime")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:250Px">@SharedLocalizer.GetLocalizedHtmlString("ContractDate")</label>
+                                <input asp-for="ContractDate" type="date" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("ContractDate")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div id="step-2">
+                        <div id="form-step-1" role="form" data-toggle="validator" dir="rtl" class="row">
+
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:230Px"> @SharedLocalizer.GetLocalizedHtmlString("PassportNo")</label>
+                                <input asp-for="PassportNo" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("PassportNo")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:230Px">@SharedLocalizer.GetLocalizedHtmlString("IssuePlace")</label>
+                                <input asp-for="IssuePlace" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("IssuePlace")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:230Px">@SharedLocalizer.GetLocalizedHtmlString("IssueDate")</label>
+                                <input asp-for="IssueDate" type="date" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("IssueDate")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:230Px">@SharedLocalizer.GetLocalizedHtmlString("ExpireDate")</label>
+                                <input asp-for="ExpireDate" type="date" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("ExpireDate")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:230Px"> @SharedLocalizer.GetLocalizedHtmlString("VisaNo")</label>
+                                <input asp-for="VisaNo" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("VisaNo")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:230Px">@SharedLocalizer.GetLocalizedHtmlString("ArrivalDate")</label>
+                                <input asp-for="ArrivalDate" type="date" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("ArrivalDate")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:230Px"> @SharedLocalizer.GetLocalizedHtmlString("EntrancePort")</label>
+                                <input asp-for="EntrancePort" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("EntrancePort")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:230Px"> @SharedLocalizer.GetLocalizedHtmlString("BorderNo")</label>
+                                <input asp-for="BorderNo" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("BorderNo")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:230Px"> @SharedLocalizer.GetLocalizedHtmlString("IdentityNo")</label>
+                                <input asp-for="IdentityNo" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("IdentityNo")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:230Px"> @SharedLocalizer.GetLocalizedHtmlString("IdentitySource")</label>
+                                <input asp-for="IdentitySource" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("IdentitySource")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:210Px">@SharedLocalizer.GetLocalizedHtmlString("IdentityIssueDate")</label>
+                                <input asp-for="IdentityIssueDate" type="date" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("IdentityIssueDate")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:210Px">@SharedLocalizer.GetLocalizedHtmlString("IdentityExpireDate")</label>
+                                <input asp-for="IdentityExpireDate" type="date" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("IdentityExpireDate")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:210Px"> @SharedLocalizer.GetLocalizedHtmlString("KafeelNo")</label>
+                                <input asp-for="KafeelNo" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("KafeelNo")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:210Px"> @SharedLocalizer.GetLocalizedHtmlString("KafeelName")</label>
+                                <input asp-for="KafeelName" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("KafeelName")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:210Px"> @SharedLocalizer.GetLocalizedHtmlString("NewKafeelNo")</label>
+                                <input asp-for="NewKafeelNo" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("NewKafeelNo")" />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:210Px"> @SharedLocalizer.GetLocalizedHtmlString("NewKafeelName")</label>
+                                <input asp-for="NewKafeelName" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("NewKafeelName")" />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:200Px"> @SharedLocalizer.GetLocalizedHtmlString("NewKafeelAddress")</label>
+                                <input asp-for="NewKafeelAddress" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("NewKafeelAddress")" />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:210Px"> @SharedLocalizer.GetLocalizedHtmlString("DriverLicenseNo")</label>
+                                <input asp-for="DriverLicenseNo" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("DriverLicenseNo")" required />
+                                <div class="help-block with-errors" style="color:red">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:210Px"> @SharedLocalizer.GetLocalizedHtmlString("DriverLicenseIssueDate")</label>
+                                <input asp-for="DriverLicenseIssueDate" type="date" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("DriverLicenseIssueDate")" required />
+                                <div class="help-block with-errors" style="color:red">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:210Px"> @SharedLocalizer.GetLocalizedHtmlString("DriverLicenseExpireDate")</label>
+                                <input asp-for="DriverLicenseExpireDate" type="date" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("DriverLicenseExpireDate")" required />
+                                <div class="help-block with-errors" style="color:red">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:210Px"> @SharedLocalizer.GetLocalizedHtmlString("LicenseNo")</label>
+                                <input asp-for="LicenseNo" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("LicenseNo")" required />
+                                <div class="help-block with-errors" style="color:red">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:170Px"> @SharedLocalizer.GetLocalizedHtmlString("LicenseExpireDate")</label>
+                                <input asp-for="LicenseExpireDate" type="date" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("LicenseExpireDate")" required />
+                                <div class="help-block with-errors" style="color:red">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:180Px"> @SharedLocalizer.GetLocalizedHtmlString("AddressInOrigin")</label>
+                                <input asp-for="AddressInOrigin" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("AddressInOrigin")" required />
+                                <div class="help-block with-errors" style="color:red">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:180Px"> @SharedLocalizer.GetLocalizedHtmlString("PhoneInOrigin")</label>
+                                <input asp-for="PhoneInOrigin" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("PhoneInOrigin")" required />
+                                <div class="help-block with-errors" style="color:red">
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div id="step-3">
+                        <div id="form-step-2" role="form" data-toggle="validator" class="row">
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:230Px"> @SharedLocalizer.GetLocalizedHtmlString("BasicSalary")</label>
+                                <input asp-for="BasicSalary" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("BasicSalary")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:230Px">@SharedLocalizer.GetLocalizedHtmlString("HousingAllowance")</label>
+                                <input asp-for="HousingAllowance" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("HousingAllowance")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:230Px">@SharedLocalizer.GetLocalizedHtmlString("TransportationAllowance")</label>
+                                <input asp-for="TransportationAllowance" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("TransportationAllowance")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:230Px"> @SharedLocalizer.GetLocalizedHtmlString("FuelAllowance")</label>
+                                <input asp-for="FuelAllowance" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("FuelAllowance")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:200Px">@SharedLocalizer.GetLocalizedHtmlString("Telephoneallowance")</label>
+                                <input asp-for="Telephoneallowance" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Telephoneallowance")" required />
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:230Px"> @SharedLocalizer.GetLocalizedHtmlString("Amountdeducted")</label>
+                                <input asp-for="Amountdeducted" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Amountdeducted")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:230Px"> @SharedLocalizer.GetLocalizedHtmlString("TotalSalary")</label>
+                                <input asp-for="TotalSalary" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("TotalSalary")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:230Px"> @SharedLocalizer.GetLocalizedHtmlString("Subsistence")</label>
+                                <input asp-for="Subsistence" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Subsistence")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="padding-left:5000Px">@SharedLocalizer.GetLocalizedHtmlString("JobType")</label>
+                                <select asp-for="@Model.JobTypeId" class="form-control" asp-items="ViewBag.JobTypeId" required><option>@SharedLocalizer.GetLocalizedHtmlString("JobType")</option></select>
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            @*<div class="form-group col-md-4">
+                                <label style="padding-left:230Px">@SharedLocalizer.GetLocalizedHtmlString("ForeignAgency")</label>
+                                <select asp-for="@Model.ForeignAgencyId" class="form-control" asp-items="ViewBag.ForeignAgencyId" required><option>@SharedLocalizer.GetLocalizedHtmlString("ForeignAgency")</option></select>
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>*@
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:230Px"> @SharedLocalizer.GetLocalizedHtmlString("GroupNo")</label>
+                                <input asp-for="GroupNo" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("GroupNo")" required />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:200Px"> @SharedLocalizer.GetLocalizedHtmlString("EmbassyContractNo")</label>
+                                <input asp-for="EmbassyContractNo" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("EmbassyContractNo")"  />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4" style="padding-left:200Px"> @SharedLocalizer.GetLocalizedHtmlString("EmbassyContractDate")</label>
+                                <input asp-for="EmbassyContractDate" type="date" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("EmbassyContractDate")"  />
+                                <div class="help-block with-errors" style="color:red"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include jQuery Validator plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+    <!-- Include SmartWizard JavaScript source -->
+    <script src="~/DataTables/dist/js/jquery.smartWizard.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            // Toolbar extra buttons
+            var btnFinish = $('<button></button>').text('أنهاء')
+                .addClass('btn btn-info')
+                .on('click', function () {
+                    if (!$(this).hasClass('disabled')) {
+                        var elmForm = $("#myForm");
+                        if (elmForm) {
+                            elmForm.validator('validate');
+                            var elmErr = elmForm.find('.has-error');
+                            if (elmErr && elmErr.length > 0) {
+                                alert('Oops we still have error in the form');
+                                return false;
+                            } else {
+                                alert('Great! we are ready to submit form');
+                                elmForm.submit();
+                                return false;
+                            }
+                        }
+                    }
+                });
+            var btnCancel = $('<button></button>').text('الغاء')
+                .addClass('btn btn-danger')
+                .on('click', function () {
+                    $('#smartwizard').smartWizard("reset");
+                    $('#myForm').find("input, textarea").val("");
+                });
+
+
+
+            // Smart Wizard
+            $('#smartwizard').smartWizard({
+                selected: 0,
+                theme: 'default',
+                transitionEffect: 'fade',
+                toolbarSettings: {
+                    toolbarPosition: 'bottom',
+                    toolbarExtraButtons: [btnFinish, btnCancel]
+                },
+                anchorSettings: {
+                    markDoneStep: true, // add done css
+                    markAllPreviousStepsAsDone: true, // When a step selected by url hash, all previous steps are marked done
+                    removeDoneStepOnNavigateBack: true, // While navigate back done step after active step will be cleared
+                    enableAnchorOnDoneStep: true // Enable/Disable the done steps navigation
+                }
+            });
+
+            $("#smartwizard").on("leaveStep", function (e, anchorObject, stepNumber, stepDirection) {
+
+                var elmForm = $("#form-step-" + stepNumber);
+
+                // stepDirection === 'forward' :- this condition allows to do the form validation
+                // only on forward navigation, that makes easy navigation on backwards still do the validation when going next
+                if (stepDirection === 'forward' && elmForm) {
+                    elmForm.validator('validate');
+                    var elmErr = elmForm.children('.has-error');
+                    if (elmErr && elmErr.length > 0) {
+                        // Form validation failed
+                        return false;
+                    }
+                }
+                return true;
+            });
+
+            $("#smartwizard").on("showStep", function (e, anchorObject, stepNumber, stepDirection) {
+                // Enable finish button only on last step
+                if (stepNumber == 2) {
+                    $('.btn-finish').removeClass('disabled');
+                } else {
+                    $('.btn-finish').addClass('disabled');
+                }
+            });
+        });
+    </script>
+
+
+</body>
+
+
+
+
+
+
+
+
+

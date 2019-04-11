@@ -5,10 +5,10 @@ namespace NajmetAlraqee.Data.Repositories
 {
     public interface ICityRepository
     {
-        long AddCity(City city);
+        int AddCity(City city);
         IQueryable<City> GetCities();
-        City GetCityById(long id);
-        bool RemoveCity(long id);
-        bool UpdateCity(long id, City City);
+        City GetCityById(int id);
+        bool RemoveCity(int id);
+        bool UpdateCity(int id, City City);
     }
 }

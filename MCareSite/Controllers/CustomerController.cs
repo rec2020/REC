@@ -14,6 +14,8 @@ using NajmetAlraqee.Site.Services;
 using NajmetAlraqee.Site.ViewModels;
 using NajmetAlraqeeSite.Services;
 using NToastNotify;
+using Microsoft.AspNetCore.Http;
+
 
 namespace NajmetAlraqee.Site.Controllers
 {
@@ -26,6 +28,7 @@ namespace NajmetAlraqee.Site.Controllers
         private readonly IDelegateReository _userdelegate;
         public readonly ICustomerTypeRepository _customertype;
         private readonly IHostingEnvironment _environment;
+
         public CustomerController(NajmetAlraqeeContext context, IHostingEnvironment environment, ICustomerTypeRepository customertype, ICustomerRepository customer, IDelegateReository userdelegate, IMapper mapper, IToastNotification toastNotification)
         {
             _context = context;
@@ -64,15 +67,20 @@ namespace NajmetAlraqee.Site.Controllers
             {
                 return NotFound();
             }
-
             var customer = _customer.GetCustomerById((int)id);
-            var customerViewModels = _mapper.Map<CustomerViewModel>(customer);
-            if (customerViewModels == null)
+            var customerViewModel = _mapper.Map<CustomerViewModel>(customer);
+            if (customer != null)
+            {
+                customerViewModel.UserDelegateName = customer.UserDelegate.Name;
+                customerViewModel.CustomerTypeName = customer.CustomerType.Name;
+            }
+
+            if (customerViewModel == null)
             {
                 return NotFound();
             }
 
-            return View(customerViewModels);
+            return View(customerViewModel);
         }
         #endregion
 
@@ -89,14 +97,16 @@ namespace NajmetAlraqee.Site.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(CustomerViewModel customerViewModels)
         {
+            ViewBag.CustomerTypeId = new SelectList(_customertype.GetCustomerTypes(), "Id", "Name", customerViewModels.CustomerTypeId);
+            ViewBag.DelegateId = new SelectList(_userdelegate.GetDelegates(), "Id", "Name", customerViewModels.UserDelegateId);
             string familyImageValue = null;
             string identiyImageValue = null;
-            if (customerViewModels.FamilyImageFile !=null )
+            if (customerViewModels.FamilyImageFile != null)
             {
                 familyImageValue = await FileService.UploadFileAsync(customerViewModels.FamilyImageFile, _environment);
                 customerViewModels.FamilyImage = familyImageValue;
             }
-            if (customerViewModels.IdentiyImageFile!= null)
+            if (customerViewModels.IdentiyImageFile != null)
             {
                 identiyImageValue = await FileService.UploadFileAsync(customerViewModels.IdentiyImageFile, _environment);
                 customerViewModels.IdentiyImage = identiyImageValue;
@@ -127,6 +137,7 @@ namespace NajmetAlraqee.Site.Controllers
                 }
                 return View(customerViewModels);
             }
+
         }
 
         public IActionResult Edit(long? id)
@@ -162,7 +173,7 @@ namespace NajmetAlraqee.Site.Controllers
         {
             var item = _customer.GetCustomerById(id);
             item.IsActive = true;
-            _customer.UpdateCustomer(id, item);
+            _customer.ActivationCustomer(id, item);
             _toastNotification.AddSuccessToastMessage("تم التفعيل بنجاح");
             return RedirectToAction(nameof(Index));
         }
@@ -171,63 +182,63 @@ namespace NajmetAlraqee.Site.Controllers
         {
             var item = _customer.GetCustomerById(id);
             item.IsActive = false;
-            _customer.UpdateCustomer(id, item);
+            _customer.ActivationCustomer(id, item);
             _toastNotification.AddSuccessToastMessage("تم الايقاف بنجاح");
             return RedirectToAction(nameof(Index));
         }
-        #endregion 
+        #endregion
 
-        public IActionResult TestTable()
-        {
-            try
-            {
-                string draw = HttpContext.Request.Form["draw"].FirstOrDefault();
-                // Skiping number of Rows count  
-                var start = Request.Form["start"].FirstOrDefault();
-                // Paging Length 10,20  
-                var length = Request.Form["length"].FirstOrDefault();
-                // Sort Column Name  
-                var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
-                // Sort Column Direction ( asc ,desc)  
-                var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
-                // Search Value from (Search box)  
-                var searchValue = Request.Form["search[value]"].FirstOrDefault();
+        //public IActionResult TestTable()
+        //{
+        //    try
+        //    {
+        //        string draw = HttpContext.Request.Form["draw"].FirstOrDefault();
+        //        // Skiping number of Rows count  
+        //        var start = Request.Form["start"].FirstOrDefault();
+        //        // Paging Length 10,20  
+        //        var length = Request.Form["length"].FirstOrDefault();
+        //        // Sort Column Name  
+        //        var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
+        //        // Sort Column Direction ( asc ,desc)  
+        //        var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
+        //        // Search Value from (Search box)  
+        //        var searchValue = Request.Form["search[value]"].FirstOrDefault();
 
-                //Paging Size (10,20,50,100)  
-                int pageSize = length != null ? Convert.ToInt32(length) : 0;
-                int skip = start != null ? Convert.ToInt32(start) : 0;
-                int recordsTotal = 0;
+        //        //Paging Size (10,20,50,100)  
+        //        int pageSize = length != null ? Convert.ToInt32(length) : 0;
+        //        int skip = start != null ? Convert.ToInt32(start) : 0;
+        //        int recordsTotal = 0;
 
-                // Getting all Customer data  
-                var customerData = (from tempcustomer in _customer.GetCustomers()
-                                    select tempcustomer);
+        //        // Getting all Customer data  
+        //        var customerData = (from tempcustomer in _customer.GetCustomers()
+        //                            select tempcustomer);
 
-                //Sorting  
-                if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
-                {
-                    customerData = customerData.OrderBy(x=>x.Id);
-                }
-                //Search  
-                if (!string.IsNullOrEmpty(searchValue))
-                {
-                    customerData = customerData.Where(m => m.Name == searchValue);
-                }
+        //        //Sorting  
+        //        if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
+        //        {
+        //            customerData = customerData.OrderBy(x=>x.Id);
+        //        }
+        //        //Search  
+        //        if (!string.IsNullOrEmpty(searchValue))
+        //        {
+        //            customerData = customerData.Where(m => m.Name == searchValue);
+        //        }
 
-                //total number of rows count   
-                recordsTotal = customerData.Count();
-                //Paging   
-                var data = customerData.Skip(skip).Take(pageSize).ToList();
-                //Returning Json Data  
-                return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
+        //        //total number of rows count   
+        //        recordsTotal = customerData.Count();
+        //        //Paging   
+        //        var data = customerData.Skip(skip).Take(pageSize).ToList();
+        //        //Returning Json Data  
+        //        return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
 
-            }
-            catch (Exception ex )
-            {
-                throw ex ;
-            }
+        //    }
+        //    catch (Exception ex )
+        //    {
+        //        throw ex ;
+        //    }
 
-        }  
-  
+        //}  
+
 
     }
 }

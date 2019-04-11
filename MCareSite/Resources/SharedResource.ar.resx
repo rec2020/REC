@@ -879,4 +879,295 @@
   <data name="TreeAccountNo" xml:space="preserve">
     <value>رقم حساب الدليل</value>
   </data>
+  <data name="AddressInOrigin" xml:space="preserve">
+    <value>العنوان في بلد المنشاء</value>
+  </data>
+  <data name="Age" xml:space="preserve">
+    <value>العمر</value>
+  </data>
+  <data name="Amountdeducted" xml:space="preserve">
+    <value>المبلغ المخصوم</value>
+  </data>
+  <data name="ArrivalDate" xml:space="preserve">
+    <value>تاريخ الوصول</value>
+  </data>
+  <data name="BasicSalary" xml:space="preserve">
+    <value>الراتب الاساسي</value>
+  </data>
+  <data name="BirhtDate" xml:space="preserve">
+    <value>تاريخ الميلاد</value>
+  </data>
+  <data name="BorderNo" xml:space="preserve">
+    <value>رقم الحدود</value>
+  </data>
+  <data name="ContractDate" xml:space="preserve">
+    <value>تاريخ العقد</value>
+  </data>
+  <data name="ContractType" xml:space="preserve">
+    <value>نوع العقد</value>
+  </data>
+  <data name="DriverLicenseExpireDate" xml:space="preserve">
+    <value>تاريخ انتهاء الرخصة</value>
+  </data>
+  <data name="DriverLicenseIssueDate" xml:space="preserve">
+    <value>تاريخ أصدار الرخصة</value>
+  </data>
+  <data name="DriverLicenseNo" xml:space="preserve">
+    <value>رقم الرخصة</value>
+  </data>
+  <data name="EmbassyContractDate" xml:space="preserve">
+    <value>تاريخ عقد السفارة</value>
+  </data>
+  <data name="EmbassyContractNo" xml:space="preserve">
+    <value>رقم عقد السفارة</value>
+  </data>
+  <data name="EmployeeStatus" xml:space="preserve">
+    <value>حالة الموظف</value>
+  </data>
+  <data name="EntrancePort" xml:space="preserve">
+    <value>منفذ الدخول</value>
+  </data>
+  <data name="ExpireDate" xml:space="preserve">
+    <value>تاريخ الانتهاء</value>
+  </data>
+  <data name="Family" xml:space="preserve">
+    <value>الاسرة</value>
+  </data>
+  <data name="FamilyNo" xml:space="preserve">
+    <value>عدد افراد الاسرة</value>
+  </data>
+  <data name="Father" xml:space="preserve">
+    <value>الاب</value>
+  </data>
+  <data name="FileNo" xml:space="preserve">
+    <value>رقم الملف</value>
+  </data>
+  <data name="FuelAllowance" xml:space="preserve">
+    <value>بدل الوقود</value>
+  </data>
+  <data name="GrandFather" xml:space="preserve">
+    <value>الجد </value>
+  </data>
+  <data name="GroupNo" xml:space="preserve">
+    <value>رقم المجموعة </value>
+  </data>
+  <data name="HousingAllowance" xml:space="preserve">
+    <value>بدل السكن</value>
+  </data>
+  <data name="IdentityExpireDate" xml:space="preserve">
+    <value>تاريخ انتهاء الهوية</value>
+  </data>
+  <data name="IdentityIssueDate" xml:space="preserve">
+    <value>تاريخ اصدار الهوية</value>
+  </data>
+  <data name="IdentitySource" xml:space="preserve">
+    <value>مصدر الهوية</value>
+  </data>
+  <data name="IssueDate" xml:space="preserve">
+    <value>تاريخ الاصدار</value>
+  </data>
+  <data name="IssuePlace" xml:space="preserve">
+    <value>مكان الاصدار</value>
+  </data>
+  <data name="KafeelName" xml:space="preserve">
+    <value>اسم الكفيل</value>
+  </data>
+  <data name="KafeelNo" xml:space="preserve">
+    <value>رقم الكفيل</value>
+  </data>
+  <data name="LicenseExpireDate" xml:space="preserve">
+    <value>تاريخ انتهاء رخصة العمل</value>
+  </data>
+  <data name="LicenseNo" xml:space="preserve">
+    <value>رقم رخصة العمل</value>
+  </data>
+  <data name="NewKafeelAddress" xml:space="preserve">
+    <value>عنوان الكفيل الجديد</value>
+  </data>
+  <data name="NewKafeelName" xml:space="preserve">
+    <value>اسم الكفيل الجديد</value>
+  </data>
+  <data name="NewKafeelNo" xml:space="preserve">
+    <value>رقم الكفيل الجديد</value>
+  </data>
+  <data name="NumberTime" xml:space="preserve">
+    <value>عدد مرات التجربة</value>
+  </data>
+  <data name="PassportNo" xml:space="preserve">
+    <value>رقم جواز السفر </value>
+  </data>
+  <data name="PhoneInOrigin" xml:space="preserve">
+    <value>الهاتف في بلد المنشاء</value>
+  </data>
+  <data name="Religon" xml:space="preserve">
+    <value>الديانة</value>
+  </data>
+  <data name="SocialStatus" xml:space="preserve">
+    <value>الحالة الاجتماعية</value>
+  </data>
+  <data name="Subsistence" xml:space="preserve">
+    <value>الاعاشة</value>
+  </data>
+  <data name="Telephoneallowance" xml:space="preserve">
+    <value>بدل فاتورة جوال</value>
+  </data>
+  <data name="TotalSalary" xml:space="preserve">
+    <value>الراتب الكلي </value>
+  </data>
+  <data name="TransportationAllowance" xml:space="preserve">
+    <value>بدل النقل</value>
+  </data>
+  <data name="VisaNo" xml:space="preserve">
+    <value>رقم الفيزاء</value>
+  </data>
+  <data name="AddEmployee" xml:space="preserve">
+    <value>أضافة موظف</value>
+  </data>
+  <data name="DeleteEmployee" xml:space="preserve">
+    <value>حذف موظف</value>
+  </data>
+  <data name="EditEmployee" xml:space="preserve">
+    <value>تعديل موظف</value>
+  </data>
+  <data name="Employee" xml:space="preserve">
+    <value>الموظف</value>
+  </data>
+  <data name="Employees" xml:space="preserve">
+    <value>قائمة الموظفين</value>
+  </data>
+  <data name="AddContract" xml:space="preserve">
+    <value>أضافة عقد</value>
+  </data>
+  <data name="Contract" xml:space="preserve">
+    <value>العقد</value>
+  </data>
+  <data name="Contracts" xml:space="preserve">
+    <value>قائمة العقود</value>
+  </data>
+  <data name="ContractStatus" xml:space="preserve">
+    <value>حالة العقد</value>
+  </data>
+  <data name="ContractCost" xml:space="preserve">
+    <value>قيمة العقد</value>
+  </data>
+  <data name="ContractInterVal" xml:space="preserve">
+    <value>فترة العقد</value>
+  </data>
+  <data name="ContractNo" xml:space="preserve">
+    <value>رقم العقد</value>
+  </data>
+  <data name="ExperienceYear" xml:space="preserve">
+    <value>عدد سنين الخبرة</value>
+  </data>
+  <data name="ArrivalCity" xml:space="preserve">
+    <value>مدينة  الوصول</value>
+  </data>
+  <data name="QulaficationNote" xml:space="preserve">
+    <value>الموهلات </value>
+  </data>
+  <data name="SalaryMonth" xml:space="preserve">
+    <value>الراتب الشهري </value>
+  </data>
+  <data name="VicationDays" xml:space="preserve">
+    <value>عدد ايام الاجازة </value>
+  </data>
+  <data name="AirLineName" xml:space="preserve">
+    <value>الخطوط الجوية</value>
+  </data>
+  <data name="ContractDelegation" xml:space="preserve">
+    <value>تفويض وكالة</value>
+  </data>
+  <data name="ContractDelegations" xml:space="preserve">
+    <value>قائمة التفويض </value>
+  </data>
+  <data name="ContractSelect" xml:space="preserve">
+    <value>قم بالاختيار </value>
+  </data>
+  <data name="ContractSelects" xml:space="preserve">
+    <value>قائمة الاختيار للعقد</value>
+  </data>
+  <data name="ContractTicket" xml:space="preserve">
+    <value>تذكرة الطيران </value>
+  </data>
+  <data name="ContractTickets" xml:space="preserve">
+    <value>قائمة تذكرة الطيران</value>
+  </data>
+  <data name="ContractVisa" xml:space="preserve">
+    <value>التفيز </value>
+  </data>
+  <data name="ContractVisas" xml:space="preserve">
+    <value>قائمة التفيز</value>
+  </data>
+  <data name="DelegationDate" xml:space="preserve">
+    <value>تاريخ التفويض </value>
+  </data>
+  <data name="PolNumer" xml:space="preserve">
+    <value>رقم البولو </value>
+  </data>
+  <data name="PolNumerDate" xml:space="preserve">
+    <value>تاريخ ادخال البولو</value>
+  </data>
+  <data name="SelectDate" xml:space="preserve">
+    <value>تاريخ الاختيار </value>
+  </data>
+  <data name="TicketDate" xml:space="preserve">
+    <value>تاريخ تذكرة الطيران </value>
+  </data>
+  <data name="VisaDate" xml:space="preserve">
+    <value>تاريخ التفيز </value>
+  </data>
+  <data name="ContractHistory" xml:space="preserve">
+    <value>قائمة العمليات علي العقد</value>
+  </data>
+  <data name="ActionByName" xml:space="preserve">
+    <value>المختص</value>
+  </data>
+  <data name="ContractSubstitue" xml:space="preserve">
+    <value>أنشاء عقد بديل</value>
+  </data>
+  <data name="CloseContract" xml:space="preserve">
+    <value>أنهاء العقد</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>حالة الاعتماد</value>
+  </data>
+  <data name="ApprovedAccept" xml:space="preserve">
+    <value>معتمدة </value>
+  </data>
+  <data name="ApprovedReject" xml:space="preserve">
+    <value>غير معتمدة</value>
+  </data>
+  <data name="AddSnadReceipt" xml:space="preserve">
+    <value>أَضافة سند صرف </value>
+  </data>
+  <data name="AddSnadTaking" xml:space="preserve">
+    <value>أضافة سند قبض</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>المبلغ </value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>الملاحظة </value>
+  </data>
+  <data name="ReceiptByUser" xml:space="preserve">
+    <value>السند بواسطة </value>
+  </data>
+  <data name="ReceiptDate" xml:space="preserve">
+    <value>تاريخ السند </value>
+  </data>
+  <data name="SnadReceipts" xml:space="preserve">
+    <value>قائمة سندات الصرف </value>
+  </data>
+  <data name="ReceiptdocType" xml:space="preserve">
+    <value>نوع السند </value>
+  </data>
+  <data name="SnadReceipt" xml:space="preserve">
+    <value>سند صرف</value>
+  </data>
+  <data name="SnadTaking" xml:space="preserve">
+    <value>سند قبض</value>
+  </data>
+  <data name="SnadTakings" xml:space="preserve">
+    <value>قائمة سندات القبض</value>
+  </data>
 </root>
