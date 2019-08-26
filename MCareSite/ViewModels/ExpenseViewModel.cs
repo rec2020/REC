@@ -18,7 +18,5 @@ namespace NajmetAlraqee.Site.ViewModels
         public string Name { get; set; }
         [Required(ErrorMessage = "الرجاء أدخال رقم الحساب ")]
         public string AccountNumber { get; set; }
-        [Required(ErrorMessage = "الرجاء أدخال كود الشريك ")]
-        public string PartnerCode { get; set; }
     }
 }

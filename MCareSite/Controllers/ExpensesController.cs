@@ -37,10 +37,7 @@ namespace NajmetAlraqee.Site.Controllers
             return View();
         }
         #endregion
-
-
-
-
+        
 
 
         [HttpPost]

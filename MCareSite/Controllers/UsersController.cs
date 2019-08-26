@@ -28,9 +28,6 @@ namespace NajmetAlraqeeSite.Controllers
         private readonly SignInManager<User> _signInManager;
        
 
-     
-         
-
         public UsersController(NajmetAlraqeeContext context, IUserRepository user, IHostingEnvironment environment, IMapper mapper ,UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _context = context;
@@ -77,7 +74,7 @@ namespace NajmetAlraqeeSite.Controllers
                 if (result.Succeeded)
                 {
                     // Add a user to the default role, or any role you prefer here
-                    await _userManager.AddToRoleAsync(user, "Customer");
+                    await _userManager.AddToRoleAsync(user, "USEREMP");
                     return RedirectToAction("Index","Users");
                 }
             }

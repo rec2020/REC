@@ -26,6 +26,6 @@ namespace NajmetAlraqee.Data.Entities
 
         public virtual Nationality Nationality  { get; set; }
         public virtual DelegateType DelegateType { get; set; }
-        public virtual Customer Customer { get; set; }
+        //public virtual Customer Customer { get; set; }
     }
 }

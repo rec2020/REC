@@ -1,0 +1,162 @@
+﻿
+@model PaginatedList<NajmetAlraqee.Data.Entities.ForeignAgencyTransfer>
+@using NajmetAlraqee.Site.Services;
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("ForeignAgencyTransfers");
+}
+
+<div class="block-header">
+    <ol class="breadcrumb breadcrumb-col-cyan">
+        <li><a href=@Url.Action("index","Home")><i class="material-icons">home</i>@SharedLocalizer.GetLocalizedHtmlString("Home") </a></li>
+        <li><a href="javascript:void(0);"><i class="material-icons">library_books</i> @SharedLocalizer.GetLocalizedHtmlString("ForeignAgencyTransfers")</a></li>
+    </ol>
+    @*<div>
+            <a class="btn btn-round pull-right bg-cyan waves-effect" asp-action="Add">@SharedLocalizer.GetLocalizedHtmlString("AddCountry")</a>
+        </div>*@
+</div>
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="body">
+            <form asp-action="Index">
+                <div class="form-group m-t-0">
+                    <div class="form-line">
+                        <input class="form-control" id="SearchString" name="SearchString" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Search")..." type="text">
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <button class="btn btn-raised btn-sm btn-success m-b-0 m-t-0" style="font-family:Droid Arabic Kufi;right:1080px" type="submit">@SharedLocalizer.GetLocalizedHtmlString("Search")</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+
+    <div>
+        <a class="btn btn-raised btn-sm btn-success" style="right:1000Px" asp-action="Add">@SharedLocalizer.GetLocalizedHtmlString("AddForeignAgencyTransfer")</a>
+    </div>
+
+
+    <div class="row clearfix">
+        <div class="col-md-12 col-xs-12">
+            <div class="card patients-list">
+                <div class="body">
+                    <h2 class="card-inside-title" style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("ForeignAgencyTransfers")</h2>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ForeignAgency"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("TransferDate"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("PaymentMethod"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Bank"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("TransferPurpose"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Amount"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Currency"))
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.AgencyTransfer != null)
+                                {
+                                    @foreach (var item in ViewBag.AgencyTransfer)
+                                    {
+                                <tr>
+                                    <td>
+                                        @item.ForeignAgency.OfficeName
+                                    </td>
+                                    <td>
+                                        @item.TransferDate
+                                    </td>
+                                    <td>
+                                        @item.PaymentMethod.Name
+                                    </td>
+
+                                    <td>
+                                        @item.TransferBank.Name
+                                    </td>
+                                    <td>
+                                        @item.Purpose.Name
+                                    </td>
+                                    <td>
+                                        @item.Amount
+                                    </td>
+                                    <td>
+                                        @item.Currency.Name
+                                    </td>
+                                    <td>
+                                        @if (User.IsInRole("ADMIN"))
+                                        {
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-raised btn-secondary btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Edit")</a>
+                                        }
+                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-raised btn-info btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Details")</a>
+                                    </td>
+                                </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <ul class="pagination" style="color:cadetblue">
+            <li class="page-item @(!Model.HasPreviousPage? "disabled":"")">
+                <a asp-action="Index"
+                   asp-route-page="@(Model.PageIndex - 1)"
+                   class="page-link @prevDisabled">
+                    @SharedLocalizer.GetLocalizedHtmlString("Previous")
+                </a>
+            </li>
+            @for (var i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                    <a asp-action="Index"
+                       asp-route-page="@(i)" class="page-link">@i</a>
+                </li>
+            }
+            <li class="page-item  @(!Model.HasNextPage? "disabled":"")">
+                <a asp-action="Index"
+                   asp-route-page="@(Model.PageIndex + 1)"
+                   class="page-link @nextDisabled">
+                    @SharedLocalizer.GetLocalizedHtmlString("Next")
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-1"></div>
+</div>
+
+

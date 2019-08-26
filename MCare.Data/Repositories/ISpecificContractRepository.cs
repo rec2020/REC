@@ -13,5 +13,6 @@ namespace NajmetAlraqee.Data.Repositories
         IQueryable<SpecificContract> GetSpecificContracts();
         bool RemoveSpecificContract(int Id);
         bool UpdateSpecificContract(int Id, SpecificContract spec_cont);
+        bool CloseSpecificContract(int Id, SpecificContract spec_cont);
     }
 }

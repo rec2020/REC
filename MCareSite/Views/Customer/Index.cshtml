@@ -106,8 +106,10 @@
                                                 @item.FirstPhone
                                             </td>
                                             <td>
-                                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-raised btn-secondary btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Edit")</a> |
-                                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-raised btn-danger btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Delete")</a> |
+                                                @if (User.IsInRole("ADMIN"))
+                                                {
+                                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-raised btn-secondary btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Edit")</a>
+                                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-raised btn-danger btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Delete")</a>}
                                                 <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-raised btn-info btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Details")</a> |
                                                 @if (item.IsActive)
                                                 {
@@ -137,15 +139,34 @@
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
 
-<a asp-action="Index"
-   asp-route-page="@(Model.PageIndex - 1)"
-   class="btn btn-default @prevDisabled">
-    @SharedLocalizer.GetLocalizedHtmlString("Previous")
-</a>
-<a asp-action="Index"
-   asp-route-page="@(Model.PageIndex + 1)"
-   class="btn btn-default @nextDisabled">
-    @SharedLocalizer.GetLocalizedHtmlString("Next")
-</a>
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <ul class="pagination" style="color:cadetblue">
+            <li class="page-item @(!Model.HasPreviousPage? "disabled":"")">
+                <a asp-action="Index"
+                   asp-route-page="@(Model.PageIndex - 1)"
+                   class="page-link @prevDisabled">
+                    @SharedLocalizer.GetLocalizedHtmlString("Previous")
+                </a>
+            </li>
+            @for (var i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                    <a asp-action="Index"
+                       asp-route-page="@(i)" class="page-link">@i</a>
+                </li>
+            }
+            <li class="page-item  @(!Model.HasNextPage? "disabled":"")">
+                <a asp-action="Index"
+                   asp-route-page="@(Model.PageIndex + 1)"
+                   class="page-link @nextDisabled">
+                    @SharedLocalizer.GetLocalizedHtmlString("Next")
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-1"></div>
+</div>
 
 

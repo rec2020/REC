@@ -38,7 +38,7 @@ namespace NajmetAlraqee.Site.Controllers
         {
             ContractTicketViewModel ticket = new ContractTicketViewModel();
             ticket.ContractId = contractId;
-            var contractTicketList = _ticket.GetContractTickets();
+            var contractTicketList = _ticket.GetContractTickets().Where(x => x.ContractId == contractId);
             ViewBag.ContractTickets = contractTicketList;
             ViewBag.CityId = new SelectList(_city.GetCities(), "Id", "Name");
             //ViewBag.EmpoyeeId = new SelectList(_employee.GetEmployees(), "Id", "FirstName");
@@ -65,7 +65,7 @@ namespace NajmetAlraqee.Site.Controllers
             ticketViewModel.TicketByName = User.Identity.Name;
             var ticketById = _user.GetUserByName(ticketViewModel.TicketByName);
             ticketViewModel.TicketById = ticketById.Id;
-            var contractTicketList = _ticket.GetContractTickets();
+            var contractTicketList = _ticket.GetContractTickets().Where(x => x.ContractId == ticketViewModel.ContractId);
             ViewBag.ContractTickets = contractTicketList;
             ViewBag.CityId = new SelectList(_city.GetCities(), "Id", "Name", ticketViewModel.CityId);
             if (ticketViewModel.CityId == null) { ModelState.AddModelError("", "الرجاء تحديد مدينة الوصول"); }
@@ -113,7 +113,7 @@ namespace NajmetAlraqee.Site.Controllers
             {
                 return NotFound();
             }
-            var contractTicketList = _ticket.GetContractTickets();
+            var contractTicketList = _ticket.GetContractTickets().Where(x => x.ContractId == contractTicket.ContractId); ;
             ViewBag.ContractTickets = contractTicketList;
             ViewBag.CityId = new SelectList(_city.GetCities(), "Id", "Name", contractTicketViewModel.CityId);
             ViewBag.EmpoyeeId = new SelectList(_employee.GetEmployees(), "Id", "FirstName", contractTicketViewModel.EmployeeId);

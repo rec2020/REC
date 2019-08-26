@@ -23,11 +23,11 @@ namespace NajmetAlraqee.Site.ViewModels
         public decimal? CommissionPrecentage { get; set; }
         [Required(ErrorMessage = "الرجاء ادخال حساب الدليل")]
         public string AccountNoTree { get; set; }
-        [Required(ErrorMessage = "الرجاء ادخال المستحق")]
+        
         public decimal? DeservedAmount { get; set; }
-        [Required(ErrorMessage = "الرجاء ادخال المتبقي")]
+        
         public decimal? RemainderAmount { get; set; }
-        [Required(ErrorMessage = "الرجاء ادخال المحول")]
+       
         public decimal? TransferAmount { get; set; }
 
     }

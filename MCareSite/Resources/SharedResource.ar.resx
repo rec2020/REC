@@ -775,10 +775,10 @@
     <value>رقم حساب البنك</value>
   </data>
   <data name="ForeignAgencies" xml:space="preserve">
-    <value>قائمة الوكالات الخارجية </value>
+    <value>قائمة الوكلاء الخارجية </value>
   </data>
   <data name="ForeignAgency" xml:space="preserve">
-    <value>وكالة خارجية</value>
+    <value>وكلاء خارجية</value>
   </data>
   <data name="IsActive" xml:space="preserve">
     <value>مفعل</value>
@@ -1033,7 +1033,7 @@
     <value>الموظف</value>
   </data>
   <data name="Employees" xml:space="preserve">
-    <value>قائمة الموظفين</value>
+    <value>قائمة العمالة المنزلية</value>
   </data>
   <data name="AddContract" xml:space="preserve">
     <value>أضافة عقد</value>
@@ -1169,5 +1169,302 @@
   </data>
   <data name="SnadTakings" xml:space="preserve">
     <value>قائمة سندات القبض</value>
+  </data>
+  <data name="AddSpecialEmployee" xml:space="preserve">
+    <value>أضافة موظف خاصة </value>
+  </data>
+  <data name="SpecialEmployee" xml:space="preserve">
+    <value>موظف خاص</value>
+  </data>
+  <data name="SpecialEmployees" xml:space="preserve">
+    <value>قائمة الموظفين الخاصة</value>
+  </data>
+  <data name="AddSpecificContract" xml:space="preserve">
+    <value>أضافة عقد معين</value>
+  </data>
+  <data name="SpecificContract" xml:space="preserve">
+    <value>عقد معين</value>
+  </data>
+  <data name="SpecificContracts" xml:space="preserve">
+    <value>قائمة العقود المعينة </value>
+  </data>
+  <data name="AirLine" xml:space="preserve">
+    <value>الخطوط الجوية</value>
+  </data>
+  <data name="CancelDate" xml:space="preserve">
+    <value>تاريخ الالغاء </value>
+  </data>
+  <data name="CancelNote" xml:space="preserve">
+    <value>سبب الالغاء</value>
+  </data>
+  <data name="ContractReturn" xml:space="preserve">
+    <value>عقد مسترجع</value>
+  </data>
+  <data name="ContractReturns" xml:space="preserve">
+    <value>قائمة عقود الاسترجاع </value>
+  </data>
+  <data name="EmployeeReturnDate" xml:space="preserve">
+    <value>تاريخ الاسترجاع</value>
+  </data>
+  <data name="ExitDate" xml:space="preserve">
+    <value>تاريخ الخروج النهائي</value>
+  </data>
+  <data name="ExitTime" xml:space="preserve">
+    <value>زمن الخروج</value>
+  </data>
+  <data name="KafeelAddress" xml:space="preserve">
+    <value>عنوان الكفيل</value>
+  </data>
+  <data name="KafeelPhone" xml:space="preserve">
+    <value>رقم الكفيل</value>
+  </data>
+  <data name="KfalaTranportDate" xml:space="preserve">
+    <value>تاريخ نقل الكفالة</value>
+  </data>
+  <data name="ReturnReason" xml:space="preserve">
+    <value>حالة الرجوع</value>
+  </data>
+  <data name="AddContractReturn" xml:space="preserve">
+    <value>أرجاع العقد</value>
+  </data>
+  <data name="TotalClose" xml:space="preserve">
+    <value>العقود المنتهية</value>
+  </data>
+  <data name="TotalContracts" xml:space="preserve">
+    <value>العقود</value>
+  </data>
+  <data name="TotalCustomers" xml:space="preserve">
+    <value>العملاء</value>
+  </data>
+  <data name="TotalDelegation" xml:space="preserve">
+    <value>العقود المفوضة</value>
+  </data>
+  <data name="TotalEmployee" xml:space="preserve">
+    <value>الموظفون </value>
+  </data>
+  <data name="TotalForigenAgency" xml:space="preserve">
+    <value>الوكالات الخارجية</value>
+  </data>
+  <data name="TotalPartener" xml:space="preserve">
+    <value>الشركاء</value>
+  </data>
+  <data name="TotalSelect" xml:space="preserve">
+    <value>العقود المختارة</value>
+  </data>
+  <data name="TotalTicket" xml:space="preserve">
+    <value>العقود في حالة التذاكر </value>
+  </data>
+  <data name="TotalVisa" xml:space="preserve">
+    <value>العقود في حالة التفيز  </value>
+  </data>
+  <data name="AddSnadReceiptOffice" xml:space="preserve">
+    <value>أضافة سند صرف </value>
+  </data>
+  <data name="FinancialYear" xml:space="preserve">
+    <value>العام المالي</value>
+  </data>
+  <data name="QuidNumber" xml:space="preserve">
+    <value>رقم القيد</value>
+  </data>
+  <data name="SnadByUserName" xml:space="preserve">
+    <value>الصارف</value>
+  </data>
+  <data name="SnadDate" xml:space="preserve">
+    <value>تاريخ السند </value>
+  </data>
+  <data name="SnadReceiptCaluse" xml:space="preserve">
+    <value>بند الصرف </value>
+  </data>
+  <data name="SnadReceiptOffice" xml:space="preserve">
+    <value>سند صرف يومي</value>
+  </data>
+  <data name="SnadReceiptOffices" xml:space="preserve">
+    <value>قائمة الصرف اليومي</value>
+  </data>
+  <data name="SnadReceiptType" xml:space="preserve">
+    <value>نوع سند الصرف </value>
+  </data>
+  <data name="AddForeignAgencyTransfer" xml:space="preserve">
+    <value>أضافة سند صرف للوكيل </value>
+  </data>
+  <data name="ForeignAgencyTransfer" xml:space="preserve">
+    <value>سند صرف للوكيل </value>
+  </data>
+  <data name="ForeignAgencyTransfers" xml:space="preserve">
+    <value>قائمة التحويلات للوكيل </value>
+  </data>
+  <data name="TransferDate" xml:space="preserve">
+    <value>تاريخ الحوالة </value>
+  </data>
+  <data name="TransferPurpose" xml:space="preserve">
+    <value>الغرض من الحوالة </value>
+  </data>
+  <data name="AddDelegateTransfer" xml:space="preserve">
+    <value>أضافة سند صرف للمندوب</value>
+  </data>
+  <data name="DelegateTransfer" xml:space="preserve">
+    <value>سند صرف  للمندوب</value>
+  </data>
+  <data name="DelegateTransfers" xml:space="preserve">
+    <value>قائمة التحويلات للمندوب</value>
+  </data>
+  <data name="ForeignAgencyJobs" xml:space="preserve">
+    <value>قائمة الوظائف المتوفرة</value>
+  </data>
+  <data name="SnadNo" xml:space="preserve">
+    <value>رقم السند </value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>فترة التجربة</value>
+  </data>
+  <data name="TestDay" xml:space="preserve">
+    <value>فترة التجربة</value>
+  </data>
+  <data name="OldContractNo" xml:space="preserve">
+    <value>رقم العقد السابق </value>
+  </data>
+  <data name="Visa_Date" xml:space="preserve">
+    <value>تاريخ التاشيرة</value>
+  </data>
+  <data name="Visa_Number" xml:space="preserve">
+    <value>رقم التاشيرة</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>طباعة</value>
+  </data>
+  <data name="QaidNo" xml:space="preserve">
+    <value>رقم القيد</value>
+  </data>
+  <data name="AddFinancialPeriod" xml:space="preserve">
+    <value>أضافة فترة مالية</value>
+  </data>
+  <data name="FinancialPeriod" xml:space="preserve">
+    <value>الفترة المالية </value>
+  </data>
+  <data name="FinancialPeriods" xml:space="preserve">
+    <value>قائمة الفترات المالية </value>
+  </data>
+  <data name="FinancialPeriodStatus" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>الشهر </value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>السنة </value>
+  </data>
+  <data name="Financ" xml:space="preserve">
+    <value>المالية</value>
+  </data>
+  <data name="AccountClassification" xml:space="preserve">
+    <value>تبويب الحسابات</value>
+  </data>
+  <data name="AccountClassifications" xml:space="preserve">
+    <value>قائممة تبويبب الحسابات</value>
+  </data>
+  <data name="AccountClassificationType" xml:space="preserve">
+    <value>نوع التبويب</value>
+  </data>
+  <data name="AddAccountClassification" xml:space="preserve">
+    <value>أضافة تبويب حساب</value>
+  </data>
+  <data name="DescriptionAr" xml:space="preserve">
+    <value>الوصف</value>
+  </data>
+  <data name="DescriptionEn" xml:space="preserve">
+    <value>DEC</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>الشركة</value>
+  </data>
+  <data name="AccDescriptionAr" xml:space="preserve">
+    <value>وصف الحساب </value>
+  </data>
+  <data name="AccDescriptionEn" xml:space="preserve">
+    <value>الحساب</value>
+  </data>
+  <data name="AccountLevel" xml:space="preserve">
+    <value>مستوي الحساب</value>
+  </data>
+  <data name="AccountNo" xml:space="preserve">
+    <value>رقم الحساب</value>
+  </data>
+  <data name="AccountTree" xml:space="preserve">
+    <value>الشجرة </value>
+  </data>
+  <data name="AccountTrees" xml:space="preserve">
+    <value> قائمة شجرة الحسابات </value>
+  </data>
+  <data name="AccountType" xml:space="preserve">
+    <value>نوع الحساب</value>
+  </data>
+  <data name="Accprev" xml:space="preserve">
+    <value>الحساب الاب </value>
+  </data>
+  <data name="AddAccountTree" xml:space="preserve">
+    <value>أضافة حساب في الشجرة </value>
+  </data>
+  <data name="CostCenter" xml:space="preserve">
+    <value>مركز التكلفة</value>
+  </data>
+  <data name="Credit" xml:space="preserve">
+    <value>قيد له حساب</value>
+  </data>
+  <data name="Debit" xml:space="preserve">
+    <value>المطلوب منه</value>
+  </data>
+  <data name="EhalkPrecent" xml:space="preserve">
+    <value>نسبة الاهلاك</value>
+  </data>
+  <data name="FixedAssetDate" xml:space="preserve">
+    <value>تاريخ الأصول الثابتة</value>
+  </data>
+  <data name="HighLimitForBalance" xml:space="preserve">
+    <value>الحد الاعلي للرصيد</value>
+  </data>
+  <data name="JE" xml:space="preserve">
+    <value>JE</value>
+  </data>
+  <data name="PriceInExhibtion" xml:space="preserve">
+    <value>السعر في المعرض</value>
+  </data>
+  <data name="Balance" xml:space="preserve">
+    <value>الرصيد</value>
+  </data>
+  <data name="AddInvoice" xml:space="preserve">
+    <value>أضافة فانورة </value>
+  </data>
+  <data name="Invoice" xml:space="preserve">
+    <value>الفاتورة</value>
+  </data>
+  <data name="InvoiceDate" xml:space="preserve">
+    <value>تاريخ الفاتورة</value>
+  </data>
+  <data name="Invoices" xml:space="preserve">
+    <value>قائمة الفواتير </value>
+  </data>
+  <data name="MainAccount" xml:space="preserve">
+    <value>الحساب الرئيسي </value>
+  </data>
+  <data name="Discount" xml:space="preserve">
+    <value>الخصم </value>
+  </data>
+  <data name="AddRecruitmentQaid" xml:space="preserve">
+    <value>أضافة قيد أستقدام</value>
+  </data>
+  <data name="FromAccount" xml:space="preserve">
+    <value>من حساب </value>
+  </data>
+  <data name="QaidDate" xml:space="preserve">
+    <value>تاريخ القيد</value>
+  </data>
+  <data name="RecruitmentQaid" xml:space="preserve">
+    <value>قيد أستقدام</value>
+  </data>
+  <data name="RecruitmentQaids" xml:space="preserve">
+    <value>قائمة قيود الاستقدام</value>
+  </data>
+  <data name="ToAccount" xml:space="preserve">
+    <value>الي حساب</value>
   </data>
 </root>

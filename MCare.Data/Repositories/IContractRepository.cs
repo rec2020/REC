@@ -14,5 +14,6 @@ namespace NajmetAlraqee.Data.Repositories
         bool RemoveContract(int Id);
         bool UpdateContract(int Id, Contract contract);
         bool CloseContract(int Id, Contract contract);
+        bool UpdateTestDay(int id);
     }
 }

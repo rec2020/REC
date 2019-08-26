@@ -28,6 +28,8 @@
                                 @Html.HiddenFor(x => x.Id)
                                 @Html.HiddenFor(x => x.CustomerId)
                                 @Html.HiddenFor(x => x.ReceiptdocTypeId)
+                                @Html.HiddenFor(x => x.ContractTypeId)
+                                @*@Html.HiddenFor(x => x.PaymentMethodId)*@
                                 <div class="row">
                                     <div class="col-sm-2 col-xs-12"></div>
                                     <div class="col-sm-8 col-xs-12">
@@ -63,15 +65,33 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Amount") </label>
+                                            <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("PaymentMethod") </label>
                                             <div class="form-line">
-                                                <input asp-for="Amount" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Amount")" />
+                                                <select asp-for="PaymentMethodId" class="form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.PaymentMethodId"><option>@SharedLocalizer.GetLocalizedHtmlString("PaymentMethod")</option></select>
+                                                @*<input asp-for="CustomerId" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Customer")" />*@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Amount") </label>
+                                            <div class="form-line">
+                                                <input asp-for="Amount" class="form-control" style="font-family:Droid Arabic Kufi" onkeyup="CalVAT()" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Amount")" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("VAT") </label>
+                                            <div class="form-line">
+                                                <input asp-for="VAT" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
                                         <div class="form-group">
                                             <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ReceiptDate") </label>
                                             <div class="form-line">
@@ -83,7 +103,7 @@
                                         <div class="form-group">
                                             <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Note") </label>
                                             <div class="form-line">
-                                                <input asp-for="Note"  class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Note")" />
+                                                <input asp-for="Note" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Note")" />
                                             </div>
                                         </div>
                                     </div>
@@ -110,7 +130,7 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Code"))
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("SnadNo"))
                                     </th>
                                     <th>
                                         @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ContractNo"))
@@ -168,7 +188,14 @@
                     </div>
                 </div>
                 <div class="col-sm-12">
-                    <a asp-action="Details" asp-controller="Contract" asp-route-id="@Model.ContractId" class="btn btn-raised" style="font-family:Droid Arabic Kufi;right:500px">@SharedLocalizer.GetLocalizedHtmlString("Close")</a>
+                    @if (Model.ContractTypeId == 1 || Model.ContractTypeId == 2)
+                    {
+                        <a asp-action="Details" asp-controller="Contract" asp-route-id="@Model.ContractId" class="btn btn-raised" style="font-family:Droid Arabic Kufi;right:500px">@SharedLocalizer.GetLocalizedHtmlString("Close")</a>
+                    }
+                    else
+                    {
+                        <a asp-action="Details" asp-controller="SpecificContracts" asp-route-id="@Model.ContractId" class="btn btn-raised" style="font-family:Droid Arabic Kufi;right:500px">@SharedLocalizer.GetLocalizedHtmlString("Close")</a>
+                    }
                 </div>
             </div>
         </div>
@@ -178,4 +205,14 @@
 
 
 </div>
+@section Scripts {
+    <script src='~/js/jquery-customselect.js'></script>
+    <script>
+        function CalVAT() {
+            var x = document.getElementById("Amount");
+            var y = document.getElementById("VAT");
+            y.value = x.value * (0.05);
+        }
+    </script>
 
+}

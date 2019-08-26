@@ -35,12 +35,12 @@ namespace NajmetAlraqee.Site.ViewModels
        
         public string IdentiyImage { get; set; }
 
-        [Required(ErrorMessage = " الرجاء ارفاق الهوية")]
+        //[Required(ErrorMessage = " الرجاء ارفاق الهوية")]
         public IFormFile IdentiyImageFile { get; set; }
 
         public string FamilyImage { get; set; }
 
-        [Required(ErrorMessage = "الرجاء ارفاق كرت العائلة")]
+        //[Required(ErrorMessage = "الرجاء ارفاق كرت العائلة")]
         public IFormFile FamilyImageFile { get; set; }
         public bool IsActive { get; set; }
 

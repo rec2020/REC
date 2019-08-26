@@ -1,0 +1,162 @@
+﻿@model PaginatedList<NajmetAlraqee.Data.Entities.FinancialPeriod>
+@using NajmetAlraqee.Site.Services;
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("FinancialPeriods");
+}
+
+<div class="block-header">
+    <ol class="breadcrumb breadcrumb-col-cyan">
+        <li><a href=@Url.Action("index","Home")><i class="material-icons">home</i>@SharedLocalizer.GetLocalizedHtmlString("Home") </a></li>
+        <li><a href="javascript:void(0);"><i class="material-icons">library_books</i> @SharedLocalizer.GetLocalizedHtmlString("FinancialPeriods")</a></li>
+    </ol>
+</div>
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="body">
+            <form asp-action="Index">
+                <div class="form-group m-t-0">
+                    <div class="form-line">
+                        <input class="form-control" id="SearchString" name="SearchString" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="4" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Search")..." type="text">
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <button class="btn btn-raised btn-sm btn-success m-b-0 m-t-0" style="font-family:Droid Arabic Kufi;right:1080px" type="submit">@SharedLocalizer.GetLocalizedHtmlString("Search")</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+
+    @*<div>
+            <a class="btn btn-raised btn-sm btn-success" style="right:1080px" asp-action="Add">@SharedLocalizer.GetLocalizedHtmlString("AddFinancialPeriod")</a>
+        </div>*@
+
+
+    <div class="row clearfix" style="font-family:Droid Arabic Kufi">
+        <div class="col-md-12 col-xs-12">
+            <div class="card patients-list">
+                <div class="body">
+                    <h2 class="card-inside-title" style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("AddFinancialPeriod")</h2>
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <form asp-action="AddPost" asp-controller="FinancialPeriod">
+                                <div class="row">
+                                    <div class="col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input id="year" name="year" type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="4" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Year")" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <center>
+                                    <input type="submit" style="font-family:Droid Arabic Kufi;" value="@SharedLocalizer.GetLocalizedHtmlString("Save")" class="btn btn-raised btn-success btn-sm" />
+                                </center>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-md-12 col-xs-12">
+            <div class="card patients-list">
+                <div class="body">
+                    <h2 class="card-inside-title" style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("FinancialPeriods")</h2>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Code"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Year"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Month"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("FromDate"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ToDate"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("FinancialPeriodStatus"))
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Id)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Year)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Month)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.FromData)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ToDate)
+                                            </td>
+                                            <td>
+                                                <span class="label bg-success"> @Html.DisplayFor(modelItem => item.FinancialPeriodStatus.Name)</span>
+                                            <td>
+                                                @if (User.IsInRole("ADMIN") && item.FinancialPeriodStatusId == 2)
+                                                {
+                                                    <a asp-action="ActivatedFinancialPeriod" asp-route-id="@item.Id" class="btn btn-raised btn-success btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Activated")</a>
+                                                    @*<a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-raised btn-danger btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Delete")</a>*@
+                                                }
+                                                @if (User.IsInRole("ADMIN") && item.FinancialPeriodStatusId == 1)
+                                                {
+                                                    <a asp-action="CloseFinancialPeriod" asp-route-id="@item.Id" class="btn btn-raised btn-info btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Close")</a>
+                                                    @*<a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-raised btn-danger btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Delete")</a>*@
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex - 1)"
+   class="btn btn-default @prevDisabled">
+    @SharedLocalizer.GetLocalizedHtmlString("Previous")
+</a>
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex + 1)"
+   class="btn btn-default @nextDisabled">
+    @SharedLocalizer.GetLocalizedHtmlString("Next")
+</a>
+

@@ -34,9 +34,11 @@ namespace NajmetAlraqee.Site.Controllers
         #region Index 
         public IActionResult Index(int ContractId)
         {
-            ContractDelegateViewModel deleget = new ContractDelegateViewModel();
-            deleget.ContractId = ContractId;
-            var contractDelegationList = _delegate.GetContractDelegations();
+            ContractDelegateViewModel deleget = new ContractDelegateViewModel
+            {
+                ContractId = ContractId
+            };
+            var contractDelegationList = _delegate.GetContractDelegations().Where(x=>x.ContractId == ContractId);
             ViewBag.ContractDelegation = contractDelegationList;
             ViewBag.ForeignAgencyId = new SelectList(_agency.GetAgencies(), "Id", "OfficeName");
             return View(deleget);
@@ -61,7 +63,7 @@ namespace NajmetAlraqee.Site.Controllers
             delegetViewModel.DelegateByName = User.Identity.Name;
             var delegateByid = _user.GetUserByName(delegetViewModel.DelegateByName);
             delegetViewModel.DelegateById = delegateByid.Id;
-            var contractDelegationList = _delegate.GetContractDelegations();
+            var contractDelegationList = _delegate.GetContractDelegations().Where(x => x.ContractId == delegetViewModel.ContractId);
             ViewBag.ContractDelegation = contractDelegationList;
             ViewBag.ForeignAgencyId = new SelectList(_agency.GetAgencies(), "Id", "OfficeName", delegetViewModel.ForeignAgencyId);
             if (delegetViewModel.ForeignAgencyId == null) { ModelState.AddModelError("", "الرجاء تحديد الوكالة الخارجية"); }
@@ -111,7 +113,7 @@ namespace NajmetAlraqee.Site.Controllers
             {
                 return NotFound();
             }
-            var contractDelegationList = _delegate.GetContractDelegations();
+            var contractDelegationList = _delegate.GetContractDelegations().Where(x => x.ContractId == contractDelegate.ContractId); ;
             ViewBag.ContractDelegation = contractDelegationList;
             ViewBag.ForeignAgencyId = new SelectList(_agency.GetAgencies(), "Id", "OfficeName", contractDelegateViewModel.ForeignAgencyId);
             return View("Index", contractDelegateViewModel);

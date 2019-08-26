@@ -1,0 +1,123 @@
+﻿
+@model PaginatedList<NajmetAlraqee.Data.Entities.ContractReturn>
+@using NajmetAlraqee.Site.Services;
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("ContractReturns");
+}
+
+<div class="block-header">
+    <ol class="breadcrumb breadcrumb-col-cyan">
+        <li><a href=@Url.Action("index","Home")><i class="material-icons">home</i>@SharedLocalizer.GetLocalizedHtmlString("Home") </a></li>
+        <li><a href="javascript:void(0);"><i class="material-icons">library_books</i> @SharedLocalizer.GetLocalizedHtmlString("ContractReturns")</a></li>
+    </ol>
+</div>
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="body">
+            <form asp-action="Index">
+                <div class="form-group m-t-0">
+                    <div class="form-line">
+                        <input class="form-control" id="SearchString" name="SearchString" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Search")..." type="text">
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <button class="btn btn-raised btn-sm btn-success m-b-0 m-t-0" style="font-family:Droid Arabic Kufi;right:1080px" type="submit">@SharedLocalizer.GetLocalizedHtmlString("Search")</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+
+    @*<div>
+        <a class="btn btn-raised btn-sm btn-success" style="right:1080px" asp-action="Add" asp-route-contractType="1">@SharedLocalizer.GetLocalizedHtmlString("AddContract")</a>
+    </div>*@
+
+
+    <div class="row clearfix">
+        <div class="col-md-12 col-xs-12">
+            <div class="card patients-list">
+                <div class="body">
+                    <h2 class="card-inside-title" style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("ContractReturns")</h2>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Code"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ContractNo"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ContractType"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ReturnReason"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Employee"))
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Id)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ContractId)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ContractType.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ReturnReason.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Employee.FirstName)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-raised btn-info btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Details")</a>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex - 1)"
+   class="btn btn-default @prevDisabled">
+    @SharedLocalizer.GetLocalizedHtmlString("Previous")
+</a>
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex + 1)"
+   class="btn btn-default @nextDisabled">
+    @SharedLocalizer.GetLocalizedHtmlString("Next")
+</a>
+

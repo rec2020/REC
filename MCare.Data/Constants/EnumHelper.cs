@@ -43,5 +43,18 @@ namespace NajmetAlraqee.Data.Constants
             SnadReceive = 1,
             SnadTaking
         }
+        public enum ContractType
+        {
+            New = 1,
+            Substitute,
+            Specific
+
+        }
+        public enum FinancPeriodStatus
+        {
+            CURRENT = 1,
+            OPEN,
+            CLOSE
+        }
     }
 }

@@ -22,14 +22,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>:: Najmet Alraqee::</title>
+    <title>:: Maharat Alsharq::</title>
     <meta name="description" content="WrapTheme, Hospital Admin">
     <meta name="keywords" content="adminX, Bootstrap4, Hospital, Angular4, Material Design">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <environment include="Development">
         <link href="~/themeforest/HTML/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/droid-arabic-kufi" type="text/css" />
+        @*<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/droid-arabic-kufi" type="text/css" />*@
+        <link href="~/css/DropKofiFont.css" rel="stylesheet" />
         @*<link href="~/themeforest/HTML/assets/plugins/morrisjs/morris.css" rel="stylesheet" />*@
         <!-- Custom Css -->
 
@@ -39,7 +40,8 @@
             <link href="~/themeforest/HTML/assets/css/main.css" rel="stylesheet">
             @*<link href="~/themeforest/Documentation/assets/css/mainAr.css" rel="stylesheet"/>*@
             <link href="~/themeforest/HTML/assets/css/rtl.css" rel="stylesheet">
-            <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/droid-arabic-kufi" type="text/css" />
+            @*<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/droid-arabic-kufi" type="text/css" />*@
+            <link href="~/css/DropKofiFont.css" rel="stylesheet" />
         }
         else
         {
@@ -55,10 +57,38 @@
 
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+        @*<link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />*@
+        <link href="~/themeforest/HTML/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+        @*<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/droid-arabic-kufi" type="text/css" />*@
+        @*<link href="~/themeforest/HTML/assets/plugins/morrisjs/morris.css" rel="stylesheet" />*@
+        <link href="~/css/DropKofiFont.css" rel="stylesheet" />
+        <!-- Custom Css -->
+
+        @if (requestCulture.RequestCulture.Culture.Name == "ar")
+        {
+            @*<link href="~/themeforest/Documentation/assets/css/mainAR.css" rel="stylesheet">*@
+            <link href="~/themeforest/HTML/assets/css/main.css" rel="stylesheet">
+            @*<link href="~/themeforest/Documentation/assets/css/mainAr.css" rel="stylesheet"/>*@
+            <link href="~/themeforest/HTML/assets/css/rtl.css" rel="stylesheet">
+            @*<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/droid-arabic-kufi" type="text/css" />*@
+            <link href="~/css/DropKofiFont.css" rel="stylesheet" />
+        }
+        else
+        {
+            <link href="~/themeforest/HTML/assets/css/main.css" rel="stylesheet">
+        }
+        <link href='~/js/jquery-customselect.css' rel='stylesheet' />
+
+
+        <!-- choose a theme from css/themes instead of get all themes -->
+        <link href="~/themeforest/HTML/assets/css/themes/all-themes.css" rel="stylesheet" />
+
+        <link href="~/themeforest/HTML/assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+
     </environment>
 
 </head>
@@ -90,7 +120,7 @@
                 <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="zmdi zmdi-sort-amount-desc"></i></a></li>
             </ul>
             <div class="navbar-header">
-                <a href="javascript:void(0);" class="bars"></a> <a class="navbar-brand" href="@Url.Action("Index","Home")"><img class="logo" src="~/themeforest/HTML/assets/images/logo.svg" alt="profile img">Najmet Alraqee</a>
+                <a href="javascript:void(0);" class="bars"></a> <a class="navbar-brand" href="@Url.Action("Index","Home")"><img class="logo" src="~/themeforest/HTML/assets/images/logo.svg" alt="profile img">Maharat Alsharq</a>
 
             </div>}
         else
@@ -172,6 +202,31 @@
         </script>
         @*<script src="~/js/site.min.js" asp-append-version="true"></script>*@
 
+        @*//*@
+        <!-- Jquery Core Js -->
+        <script src="~/themeforest/HTML/assets/bundles/libscripts.bundle.js"></script> <!-- Bootstrap JS and jQuery v3.2.1 -->
+        <script src="~/themeforest/HTML/assets/bundles/vendorscripts.bundle.js"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+        <script src="~/themeforest/HTML/assets/bundles/sparkline.bundle.js"></script> <!-- Sparkline Plugin Js -->
+        <script src="~/themeforest/HTML/assets/bundles/flotscripts.bundle.js"></script><!-- Flot Charts Plugin Js -->
+        <script src="~/themeforest/HTML/assets/bundles/morrisscripts.bundle.js"></script> <!-- Morris Plugin Js -->
+        <script src="~/themeforest/HTML/assets/plugins/jquery-knob/jquery.knob.min.js"></script> <!-- Jquery Knob Plugin Js -->
+        <script src="~/themeforest/HTML/assets/bundles/countto.bundle.js"></script> <!-- Jquery CountTo Plugin Js -->
+        <script src="~/themeforest/HTML/assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script> <!-- JVectorMap Plugin Js -->
+        <script src="~/themeforest/HTML/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script> <!-- JVectorMap Plugin Js -->
+
+        <script src="~/themeforest/HTML/assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
+        @*<script src="~/themeforest/HTML/assets/js/pages/index.js"></script>*@
+        <script src="~/themeforest/HTML/assets/js/pages/charts/sparkline.js"></script>
+        <script src="~/themeforest/HTML/assets/js/pages/maps/jvectormap.js"></script>
+        <script src="~/themeforest/HTML/assets/js/pages/charts/jquery-knob.js"></script>
+        <script src="~/themeforest/HTML/assets/js/index.js"></script>
+
+
+        <script src="~/themeforest/HTML/assets/js/pages/ui/modals.js"></script>
+        <script src="~/themeforest/HTML/assets/plugins/jquery-sparkline/jquery.sparkline.js"></script> <!-- Sparkline Plugin Js -->
+        <script src="~/themeforest/HTML/assets/plugins/chartjs/Chart.bundle.min.js"></script> <!-- Chart Plugins Js -->
+        @*<script src="~/themeforest/HTML/assets/plugins/morrisjs/morris.js"></script>*@ <!-- Morris Plugin Js -->
+        @*<script src="~/themeforest/HTML/assets/js/pages/charts/chartjs.js"></script>*@
     </environment>
 
     @RenderSection("Scripts", required: false)

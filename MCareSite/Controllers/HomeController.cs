@@ -11,13 +11,20 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
 
 namespace NajmetAlraqeeSite.Controllers
-{     [Authorize]
+{
+    [Authorize]
     public class HomeController : BaseController
     {
         public IActionResult Index()
         {
             return View();
         }
+
+        public IActionResult Index2()
+        {
+            return View();
+        }
+
 
         public IActionResult About()
         {
@@ -35,8 +42,9 @@ namespace NajmetAlraqeeSite.Controllers
 
         //public IActionResult Error()
         //{
-        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //    ViewData["Error"] = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+        //    return View(  );
         //}
-       
+
     }
 }

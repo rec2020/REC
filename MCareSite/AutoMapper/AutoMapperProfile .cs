@@ -83,6 +83,37 @@ namespace NajmetAlraqeeSite.AutoMapper
             CreateMap<SpecificContractViewModel, SpecificContract>();
 
 
+            CreateMap<ContractReturn, ContractReturnViewModel>();
+            CreateMap<ContractReturnViewModel, ContractReturn>();
+
+
+            CreateMap<SnadReceipt, SnadReceiptViewModel>();
+            CreateMap<SnadReceiptViewModel, SnadReceipt>();
+
+
+            CreateMap<ForeignAgencyTransfer, ForeignAgencyTransferViewModel>();
+            CreateMap<ForeignAgencyTransferViewModel, ForeignAgencyTransfer>();
+
+
+            CreateMap<DelegateTransfer, DelegateTransferViewModel>();
+            CreateMap<DelegateTransferViewModel, DelegateTransfer>();
+
+            CreateMap<ForeignAgencyJob, ForeignAgencyJobViewModel>();
+            CreateMap<ForeignAgencyJobViewModel, ForeignAgencyJob>();
+
+            CreateMap<AccountClassification, AccountClassificationViewModel>();
+            CreateMap<AccountClassificationViewModel, AccountClassification>();
+
+            CreateMap<AccountTree, AccountTreeViewModel>();
+            CreateMap<AccountTreeViewModel, AccountTree>();
+
+            CreateMap<Invoice, InvoiceViewModel>();
+            CreateMap<InvoiceViewModel, Invoice>();
+
+            CreateMap<RecruitmentQaid, RecruitmentQaidViewModel>();
+            CreateMap<RecruitmentQaidViewModel, RecruitmentQaid>();
+
+
             //  CreateMap<ForeignAgency, ForeignAgencyViewModel>()
             // .ForMember(d => d.BankName, o => o.MapFrom(s => s.BankDetail.Name))
             // .ForMember(d => d.BankAccountNo, o => o.MapFrom(s => s.BankDetail.AccountNumber))

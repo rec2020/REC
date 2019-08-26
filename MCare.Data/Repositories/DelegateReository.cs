@@ -19,6 +19,9 @@ namespace NajmetAlraqee.Data.Repositories
 
         public int AddDelegate(UserDelegate deleg)
         {
+            deleg.DeservedAmount = 0;
+            deleg.RemainderAmount = 0;
+            deleg.TransferAmount = 0;
             _context.UserDelegates.Add(deleg);
             _context.SaveChanges();
 
@@ -60,9 +63,9 @@ namespace NajmetAlraqee.Data.Repositories
             existdelegateuser.CommissionValue = del.CommissionValue;
             existdelegateuser.CommissionPrecentage = del.CommissionPrecentage;
             existdelegateuser.AccountNoTree = del.AccountNoTree;
-            existdelegateuser.DeservedAmount = del.DeservedAmount;
-            existdelegateuser.RemainderAmount = del.RemainderAmount;
-            existdelegateuser.TransferAmount = del.TransferAmount;
+            //existdelegateuser.DeservedAmount = del.DeservedAmount;
+            //existdelegateuser.RemainderAmount = del.RemainderAmount;
+            //existdelegateuser.TransferAmount = del.TransferAmount;
 
             //var delegatetype = _context.DelegateTypes.SingleOrDefault(x => x.Id == existdelegateuser.DelegateTypeId);
             ////if (delegatetype != null) { existdelegateuser.DelegateTypeName = delegatetype.Name; }

@@ -1,0 +1,241 @@
+﻿@model NajmetAlraqee.Data.Entities.ContractReturn
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("AddContractReturn");
+}
+
+
+<div class="container-fluid">
+    <div class="block-header">
+        @*<h2>Add Doctor</h2>*@
+        <ol class="breadcrumb breadcrumb-col-cyan">
+            <li><a href=@Url.Action("index","Contract")><i class="material-icons">home</i>@SharedLocalizer.GetLocalizedHtmlString("ContractReturns")</a></li>
+            <li><a href="javascript:void(0);"><i class="material-icons">library_books</i>@SharedLocalizer.GetLocalizedHtmlString("AddContractReturn")</a></li>
+        </ol>
+    </div>
+
+
+    <div class="row clearfix">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <form asp-action="Add" method="post" enctype="multipart/form-data">
+
+                <div class="card">
+                    <div class="header">
+                        <h2 style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("BasicInformation")</h2>
+                        <ul class="header-dropdown m-r--5">
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
+                                <ul class="dropdown-menu pull-right"></ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-12"></div>
+                            <div class="col-sm-8 col-xs-12">
+                                <div asp-validation-summary="All" style="font-family:Droid Arabic Kufi" class="text-danger"></div>
+                                @Html.HiddenFor(x => x.Id)
+                                @Html.HiddenFor(x => x.ContractId)
+                                @Html.HiddenFor(x => x.ContractTypeId)
+                                @Html.HiddenFor(x => x.EmployeeId)
+                            </div>
+                            <div class="col-sm-2 col-xs-12"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ContractNo")</label>
+                                    <div class="form-line">
+                                        <input asp-for="ContractId" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ContractType") </label>
+                                    <div class="form-line">
+                                        <input asp-for="ContractType.Name" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ReturnReason") </label>
+                                    <div class="form-line">
+                                        <input asp-for="ReturnReason.Name" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @if (Model.ReturnReasonId == 1)
+                        {
+                            <div class="col-sm-4 col-xs-12" id="ReturnDateId">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("EmployeeReturnDate") </label>
+                                    <div class="form-line">
+                                        <input asp-for="@Model.EmployeeReturnDate" type="date" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        @if (Model.ReturnReasonId == 2)
+                        {
+                            <div class="row" id="KafeelId">
+                                <div class="col-sm-3 col-xs-12">
+                                    <div class="form-group">
+                                        <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("KafeelName") </label>
+                                        <div class="form-line">
+                                            <input asp-for="KafeelName" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-xs-12">
+                                    <div class="form-group">
+                                        <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("KafeelPhone") </label>
+                                        <div class="form-line">
+                                            <input asp-for="KafeelPhone" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-xs-12">
+                                    <div class="form-group">
+                                        <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("KafeelAddress") </label>
+                                        <div class="form-line">
+                                            <input asp-for="KafeelAddress" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-xs-12">
+                                    <div class="form-group">
+                                        <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("KfalaTranportDate") </label>
+                                        <div class="form-line">
+                                            <input asp-for="KfalaTranportDate" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        @if (Model.ReturnReasonId == 3)
+                        {
+                            <div class="row" id="ExistId">
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("AirLine") </label>
+                                        <div class="form-line">
+                                            <input asp-for="AirLine" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ExitDate") </label>
+                                        <div class="form-line">
+                                            <input asp-for="ExitDate" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ExitTime") </label>
+                                        <div class="form-line">
+                                            <input asp-for="ExitTime" type="time" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        @if (Model.ReturnReasonId == 4)
+                        {
+                            <div class="row" id="CloseId">
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("CancelDate") </label>
+                                        <div class="form-line">
+                                            <input asp-for="CancelDate" type="date" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("CancelNote") </label>
+                                        <div class="form-line">
+                                            <input asp-for="CancelNote" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+                        <div class="col-sm-12">
+                            <a asp-action="Index" class="btn btn-raised" style="font-family:Droid Arabic Kufi;right:500px">@SharedLocalizer.GetLocalizedHtmlString("Close")</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+@section Scripts {
+    <script src='~/js/jquery-customselect.js'></script>
+    <script>
+        function CalVAT() {
+            var x = document.getElementById("ContractCost");
+            var y = document.getElementById("VatCost");
+            y.value = x.value * (0.05);
+        }
+
+
+        $("#ReturnReasonId").change(function () {
+            if ($("#ReturnReasonId").val() == 1) {
+                $("#ReturnDateId").fadeIn('slow');
+            } else { $("#ReturnDateId").fadeOut('slow'); }
+            if ($("#ReturnReasonId").val() == 2) {
+                $("#KafeelId").fadeIn('slow');
+            } else { $("#KafeelId").fadeOut('slow'); }
+            if ($("#ReturnReasonId").val() == 3) {
+                $("#ExistId").fadeIn('slow');
+            } else { $("#ExistId").fadeOut('slow'); }
+            if ($("#ReturnReasonId").val() == 4) {
+                $("#CloseId").fadeIn('slow');
+            }
+            else { $("#CloseId").fadeOut('slow'); }
+        });
+    </script>
+
+}
+
+
+
+
+
+@*<script type="text/javascript">
+        var contracttype = $("#ContractTypeId").val();
+        if (contracttype == 2) {
+                $("#RentValueSection").fadeIn('slow');
+                $("#RentTotalSection").fadeIn('slow');
+
+        };
+    </script>*@
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            function CalVAT() {
+                var value1 = parseFloat(document.getElementById("Quantity").value);
+                document.getElementById("CurrentQuantitty").value = value1;
+                var value2 = parseFloat(document.getElementById("ApproximatePrice").value);
+                var sum = value1 * value2;
+                document.getElementById("TotalAmount").value = sum;
+                document.getElementById("CurrentAmount").value = document.getElementById("TotalAmount").value;
+
+            }
+        }
+
+
+
+    </script>*@
+

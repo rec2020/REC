@@ -16,6 +16,6 @@ namespace NajmetAlraqee.Data.Entities
 
         public string   AccountNumber { get; set; }
 
-        public string PartnerCode { get; set; }
+        //public string PartnerCode { get; set; }
     }
 }

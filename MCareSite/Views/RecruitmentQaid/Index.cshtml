@@ -1,0 +1,148 @@
+﻿
+@model PaginatedList<NajmetAlraqee.Data.Entities.RecruitmentQaid>
+@using NajmetAlraqee.Site.Services;
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("RecruitmentQaids");
+}
+
+<div class="block-header">
+    <ol class="breadcrumb breadcrumb-col-cyan">
+        <li><a href=@Url.Action("index","Home")><i class="material-icons">home</i>@SharedLocalizer.GetLocalizedHtmlString("Home") </a></li>
+        <li><a href="javascript:void(0);"><i class="material-icons">library_books</i> @SharedLocalizer.GetLocalizedHtmlString("RecruitmentQaids")</a></li>
+    </ol>
+    @*<div>
+            <a class="btn btn-round pull-right bg-cyan waves-effect" asp-action="Add">@SharedLocalizer.GetLocalizedHtmlString("AddCountry")</a>
+        </div>*@
+</div>
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="body">
+            <form asp-action="Index">
+                <div class="form-group m-t-0">
+                    <div class="form-line">
+                        <input class="form-control" id="SearchString" name="SearchString" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Search")..." type="text">
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <button class="btn btn-raised btn-sm btn-success m-b-0 m-t-0" style="font-family:Droid Arabic Kufi;right:1080px" type="submit">@SharedLocalizer.GetLocalizedHtmlString("Search")</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+
+    <div>
+        <a class="btn btn-raised btn-success btn-sm waves-effect" style="right:1040Px" asp-action="Add">@SharedLocalizer.GetLocalizedHtmlString("AddRecruitmentQaid")</a>
+    </div>
+
+
+    <div class="row clearfix">
+        <div class="col-md-12 col-xs-12">
+            <div class="card patients-list">
+                <div class="body">
+                    <h2 class="card-inside-title" style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("RecruitmentQaids")</h2>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("No"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("QaidDate"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("FromAccount"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ToAccount"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Amount"))
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.RecruitmentQaids != null)
+                                {
+                                    @foreach (var item in ViewBag.RecruitmentQaids)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.Id
+                                            </td>
+                                            <td>
+                                                @item.QaidDate
+                                            </td>
+                                            <td>
+                                                <label class="label label bg-cyan">  @item.FromAccount.DescriptionAr </label>
+                                            <td>
+                                                <label class="label label bg-cyan"> @item.ToAccount.DescriptionAr </label>
+                                            </td>
+                                            <td>
+                                                @item.Amount
+                                            </td>
+                                            <td>
+                                                @if (User.IsInRole("ADMIN"))
+                                                {
+                                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-raised btn-secondary btn-sm waves-effect"><i class="material-icons">border_color</i> @SharedLocalizer.GetLocalizedHtmlString("Edit")</a>
+                                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-raised btn-info btn-sm waves-effect"><i class="material-icons">info</i> @SharedLocalizer.GetLocalizedHtmlString("Details")</a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <ul class="pagination" style="color:cadetblue">
+            <li class="page-item @(!Model.HasPreviousPage? "disabled":"")">
+                <a asp-action="Index"
+                   asp-route-page="@(Model.PageIndex - 1)"
+                   class="page-link @prevDisabled">
+                    @SharedLocalizer.GetLocalizedHtmlString("Previous")
+                </a>
+            </li>
+            @for (var i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                    <a asp-action="Index"
+                       asp-route-page="@(i)" class="page-link">@i</a>
+                </li>
+            }
+            <li class="page-item  @(!Model.HasNextPage? "disabled":"")">
+                <a asp-action="Index"
+                   asp-route-page="@(Model.PageIndex + 1)"
+                   class="page-link @nextDisabled">
+                    @SharedLocalizer.GetLocalizedHtmlString("Next")
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-1"></div>
+</div>
+
+

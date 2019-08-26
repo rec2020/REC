@@ -1,0 +1,83 @@
+﻿@model NajmetAlraqee.Data.Entities.ReceiptDoc
+
+@{
+    Layout = null;
+}
+@using NajmetAlraqee.Site.Services;
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("SnadReceive");
+}
+
+<!DOCTYPE html>
+
+<html>
+
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@SharedLocalizer.GetLocalizedHtmlString("SnadReceive") - @Model.Id</title>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/droid-arabic-kufi" type="text/css" />
+</head>
+<body style="font-family:Droid Arabic Kufi">
+    <div style="direction:rtl">
+        <div class="raw">
+        </div>
+        <p align="justify">
+            <font color="Black">
+                <div style="border:double;align-content:center;padding:10Px">
+                    <h4>
+                        <br />
+                        <br />
+                        الرقم الضريبي  : 123646544  &emsp;  &emsp; سند صرف رقم : <b style="border:groove;background-color:silver;color:darkred;"> &emsp;  &emsp;  @Model.Id &emsp; &emsp; </b>  &emsp;&emsp;&emsp; &emsp;تاريخ تحرير السـند :  @Model.ReceiptDate  م  &emsp;
+                        <br />
+                        <br />
+                        &emsp;  &emsp; &emsp; &emsp;  &emsp; &emsp;&emsp; &emsp; &emsp; &emsp; &emsp;  &emsp; &emsp;&emsp; &emsp;  &emsp; هللة  &emsp;  &emsp;  ريال  &emsp; &emsp;   &emsp;  &emsp; &emsp; &emsp;&emsp; &emsp;الموافق   :  ......................  هـ  &emsp;
+                        <br />
+                        <br />
+                        &emsp; &emsp; &emsp;  &emsp; &emsp;&emsp; &emsp; &emsp; &emsp; &emsp;  &emsp; &emsp;&emsp;  <b style="border:groove"> &emsp; ........... &emsp; </b><b style="border:groove"> &emsp;  @Model.Amount.ToString("0") &emsp; </b>  &emsp;نقدا   &emsp; &emsp; &emsp;&emsp; &emsp; &emsp; &emsp;&emsp; &emsp; &emsp; &emsp; &emsp;
+                        <br />
+                        <br />
+                    </h4>
+                    <h4>
+                        استلمنا المكرم  : &nbsp;&emsp;  @Model.Customer.FirstName  &nbsp;  @Model.Customer.LastName  &nbsp;  &emsp; &emsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;
+                        <br />
+                        <br />
+                        مبلغ قدره &nbsp; : &nbsp;&emsp; &nbsp; <b>@ViewBag.ContractAmount</b>  &nbsp; &nbsp;  &emsp; &nbsp;  &emsp;&emsp; ريال  &emsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;
+                        <br />
+                        <br />
+                        وذلك مقابل   &nbsp; : ..................................................................................................................&nbsp;&nbsp;&nbsp;
+                        <br />
+                        <br />
+                        وضريبة القيمة المضافة  &nbsp; : @Model.VAT  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <br />
+                        <br />
+                        ملاحظات  &nbsp; :@Model.Note  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        رقم الشيك /الحوالة:&nbsp;.............................&emsp; التاريخ :.....................................&emsp; البنك : ....................................&nbsp;&nbsp;&nbsp;
+                        <br />
+                        <br />
+                        أمين الصندوق &emsp;&emsp; &emsp; &emsp;&emsp;&emsp; &emsp; &emsp;  &emsp; &emsp;&emsp; المحاسب &emsp;&emsp; &emsp; &emsp;&emsp; &emsp; &emsp;  &emsp;&emsp;&emsp; الاعتماد &emsp;&emsp; &emsp; &emsp;&emsp; &emsp; &emsp;  &emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <br />
+                        <br />
+                        ...........................................................&emsp; ...................................................  &emsp; ..............................................&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                    </h4>
+                </div>
+
+            </font>
+        </p>
+    </div>
+</body>
+</html>
+
+
+

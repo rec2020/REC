@@ -34,9 +34,11 @@ namespace NajmetAlraqee.Site.Controllers
         #region Index 
         public IActionResult Index(int ContractId )
         {
-            ContractSelectViewModel select = new ContractSelectViewModel();
-            select.ContractId = ContractId;
-            var contractSelectList = _select.GetContractSelects();
+            ContractSelectViewModel select = new ContractSelectViewModel
+            {
+                ContractId = ContractId
+            };
+            var contractSelectList = _select.GetContractSelects().Where(x=>x.ContractId== ContractId);
             ViewBag.ContractSelect = contractSelectList;
             ViewBag.ForeignAgencyId = new SelectList(_agency.GetAgencies(), "Id", "OfficeName");
             return View(select);
@@ -61,7 +63,7 @@ namespace NajmetAlraqee.Site.Controllers
             selectViewModel.SelectByName = User.Identity.Name;
             var selectById = _user.GetUserByName(selectViewModel.SelectByName);
             selectViewModel.SelectById = selectById.Id;
-            var contractSelectList = _select.GetContractSelects();
+            var contractSelectList = _select.GetContractSelects().Where(x => x.ContractId == selectViewModel.ContractId);
             ViewBag.ContractSelect = contractSelectList;
             ViewBag.ForeignAgencyId = new SelectList(_agency.GetAgencies(), "Id", "OfficeName", selectViewModel.ForeignAgencyId);
             if (selectViewModel.ForeignAgencyId == null) { ModelState.AddModelError("", "الرجاء تحديد الوكالة الخارجية"); }
@@ -112,7 +114,7 @@ namespace NajmetAlraqee.Site.Controllers
             {
                 return NotFound();
             }
-            var contractSelectList = _select.GetContractSelects();
+            var contractSelectList = _select.GetContractSelects().Where(x => x.ContractId == contractSelected.ContractId);
             ViewBag.ContractSelect = contractSelectList;
             ViewBag.ForeignAgencyId = new SelectList(_agency.GetAgencies(), "Id", "OfficeName");
             return View("Index", contractselectedViewModel);

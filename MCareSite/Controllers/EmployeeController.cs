@@ -48,7 +48,6 @@ namespace NajmetAlraqee.Site.Controllers
         public async Task<IActionResult> Index(int? page, string SearchString)
         {
             var employeeList = _emp.GetEmployees();
-
             if (SearchString != null)
             {
                 employeeList = _emp.GetEmployees().Where(x => x.FirstName.Contains(SearchString));
@@ -57,10 +56,11 @@ namespace NajmetAlraqee.Site.Controllers
             {
                 employeeList = _emp.GetEmployees();
             }
-            ViewBag.Employee = employeeList;
             if (employeeList.Count() <= 10) { page = 1; }
             int pageSize = 10;
-            return View(await PaginatedList<Employee>.CreateAsync(employeeList.AsNoTracking(), page ?? 1, pageSize));
+            var employeePagingList = await PaginatedList<Employee>.CreateAsync(employeeList.AsNoTracking(), page ?? 1, pageSize);
+            ViewBag.Employee = employeePagingList;
+            return View(employeePagingList);
         }
 
 
@@ -90,7 +90,7 @@ namespace NajmetAlraqee.Site.Controllers
             ViewBag.NationalityId = new SelectList(_nationality.GetNationalities(), "Id", "Name");
             ViewBag.GenderId = new SelectList(_gender.GetGenders(), "Id", "Name");
             ViewBag.SocialStatusId = new SelectList(_socialstatus.GetSocialStatuss(), "Id", "Name");
-            ViewBag.ReligonId = new SelectList(_religion.GetReligions(), "Id", "Name");
+            ViewBag.ReligionId = new SelectList(_religion.GetReligions(), "Id", "Name");
             ViewBag.JobTypeId = new SelectList(_jobtype.GetJobTypes(), "Id", "Name"); ;
             //ViewBag.ForeignAgencyId = new SelectList(_foreignagency.GetAgencies(), "Id", "OfficeName"); ;
 

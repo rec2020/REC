@@ -22,19 +22,24 @@ namespace NajmetAlraqee.Data.Repositories
 
         public int AddContract(Contract contract)
         {
-
+            contract.Remainder = contract.ContractCost;
+            contract.Paid = 0;
+            contract.TestDay = 0;
+            contract.OldContractNo = 0;
             _context.Contracts.Add(contract);
             _context.SaveChanges();
 
             // Adding To Contract History 
-            ContractHistory history = new ContractHistory();
-            history.ContractId = contract.Id;
-            history.CustomerId = contract.CustomerId;
-            history.ForeignAgencyId = contract.ForeignAgencyId;
-            history.EmployeeId = contract.EmployeeId;
-            history.ActionId = (int)EnumHelper.ContractAction.New;
-            history.ContractStatusId = contract.ContractStatusId;
-            history.ActionById = contract.CreatedById;
+            ContractHistory history = new ContractHistory
+            {
+                ContractId = contract.Id,
+                CustomerId = contract.CustomerId,
+                ForeignAgencyId = contract.ForeignAgencyId,
+                EmployeeId = contract.EmployeeId,
+                ActionId = (int)EnumHelper.ContractAction.New,
+                ContractStatusId = contract.ContractStatusId,
+                ActionById = contract.CreatedById
+            };
             history.ActionByName = _context.Users.Where(x => x.Id.Contains(history.ActionById)).SingleOrDefault().UserName;
             //var emp = _context.Employees.SingleOrDefault(x => x.Id == history.EmployeeId);
             //if (emp != null) { history.EmployeeName = emp.FirstName + ' ' + employee.Father; }
@@ -92,16 +97,17 @@ namespace NajmetAlraqee.Data.Repositories
             if (existcontract == null)
                 return false;
             existcontract.ArrivalCityId = contract.ArrivalCityId;
+            existcontract.NationalityId = contract.NationalityId;
             existcontract.ContractCost = contract.ContractCost;
             existcontract.ContractDate = contract.ContractDate;
             existcontract.ContractInterVal = contract.ContractInterVal;
             existcontract.ContractNote = contract.ContractNote;
-            //existcontract.ContractStatusId = contract.ContractStatusId;
-            //existcontract.ContractTypeId = contract.ContractTypeId;
+            existcontract.VatCost = contract.VatCost;
+            existcontract.VisaNumber = contract.VisaNumber;
             existcontract.ContractYear = contract.ContractYear;
             existcontract.CustomerId = contract.CustomerId;
             existcontract.EmployeeCost = contract.EmployeeCost;
-            //existcontract.EmployeeId = contract.EmployeeId;
+            existcontract.VisaDate = contract.VisaDate;
             existcontract.EmployeeNumber = contract.EmployeeNumber;
             existcontract.ExperienceYear = contract.ExperienceYear;
             existcontract.QulaficationNote = contract.QulaficationNote;
@@ -118,36 +124,36 @@ namespace NajmetAlraqee.Data.Repositories
 
         public bool CloseContract(int Id, Contract contract)
         {
-
             Contract existcontract = GetContractById(Id);
             if (existcontract == null)
                 return false;
             existcontract.ContractStatusId = contract.ContractStatusId;
-            existcontract.EmployeeId = contract.EmployeeId;
             _context.Update(existcontract);
             _context.SaveChanges();
 
 
 
             // Adding To Contract History 
-            ContractHistory history = new ContractHistory();
-            history.ContractId = existcontract.Id;
-            history.CustomerId = existcontract.CustomerId;
-            history.ForeignAgencyId = existcontract.ForeignAgencyId;
-            history.EmployeeId = contract.EmployeeId;
-            history.ActionId = (int)EnumHelper.ContractAction.Close;
-            history.ContractStatusId = contract.ContractStatusId;
-            history.ActionById = contract.CreatedById;
+            ContractHistory history = new ContractHistory
+            {
+                ContractId = existcontract.Id,
+                CustomerId = existcontract.CustomerId,
+                ForeignAgencyId = existcontract.ForeignAgencyId,
+                EmployeeId = contract.EmployeeId,
+                ActionId = (int)EnumHelper.ContractAction.Close,
+                ContractStatusId = contract.ContractStatusId,
+                ActionById = contract.CreatedById
+            };
             history.ActionByName = _context.Users.Where(x => x.Id.Contains(history.ActionById)).SingleOrDefault().UserName;
             var emp = _context.Employees.SingleOrDefault(x => x.Id == history.EmployeeId);
             if (emp != null) { history.EmployeeName = emp.FirstName + ' ' + emp.Father; }
             var cust = _context.Customers.SingleOrDefault(x => x.Id == history.CustomerId);
             if (cust != null) { history.CustomerName = cust.Name; }
-            //var foreignAgencies = _context.ForeignAgencies.SingleOrDefault(x => x.Id == history.ForeignAgencyId);
-            //if (foreignAgencies != null) { history.ForeignAgencyName = foreignAgencies.OfficeName; }
+            var foreignAgencies = _context.ForeignAgencies.SingleOrDefault(x => x.Id == history.ForeignAgencyId);
+            if (foreignAgencies != null) { history.ForeignAgencyName = foreignAgencies.OfficeName; }
             //var Action = _context.ContractAction.SingleOrDefault(x => x.Id == history.ActionId);
             //if (Action != null) { history.ActionName = Action.Name; }
-          
+
 
             history.ActionDate = DateTime.UtcNow.ToString("dd/MM/yyyy",
                                        CultureInfo.InvariantCulture);
@@ -156,6 +162,26 @@ namespace NajmetAlraqee.Data.Repositories
             _context.SaveChanges();
 
 
+            return true;
+        }
+
+        public bool UpdateTestDay(int id)
+        {
+            string format = "MM/dd/yyyy";
+            var contractTicket = _context.ContractTickets.Where(x => x.ContractId == id && x.IsApproved == true).SingleOrDefault();
+            var arrivalDatestring= String.Format("{0:MM/dd/yyyy}", contractTicket.ArrivalDate);
+            var arrivalDate = DateTime.ParseExact(arrivalDatestring, format, CultureInfo.InvariantCulture);
+            var currentDateString = DateTime.Now.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture);
+            var currentDate = DateTime.ParseExact(currentDateString, format, CultureInfo.InvariantCulture);
+            var reminder = (currentDate - arrivalDate).TotalDays;
+            Contract existcontract = GetContractById(id);
+            if (existcontract == null)
+                return false;
+            if (reminder >0) {
+                existcontract.TestDay = (int)(existcontract.TestDay - reminder);
+            }
+            _context.Update(existcontract);
+            _context.SaveChanges();
             return true;
         }
     }

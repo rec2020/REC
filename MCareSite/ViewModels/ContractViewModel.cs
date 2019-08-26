@@ -11,6 +11,9 @@ namespace NajmetAlraqee.Site.ViewModels
         public int Id { get; set; }
         [Required(ErrorMessage = "الرجاء تحديد نوع العقد")]
         public int? ContractTypeId { get; set; }
+        [Required(ErrorMessage = "الرجاء تحديد جنسية العامل ")]
+        public int? NationalityId { get; set; }
+        public string NationalityName { get; set; }
         public string ContractTypeName { get; set; }
         public int? ContractStatusId { get; set; }
 
@@ -34,6 +37,8 @@ namespace NajmetAlraqee.Site.ViewModels
         [Required(ErrorMessage = "الرجاء تحديد مدينة الوصول ")]
         public int? ArrivalCityId { get; set; }
         public string ArrivalCityName { get; set; }
+        public decimal? Remainder { get; set; }
+        public decimal? Paid { get; set; }
         public string ContractNote { get; set; }
         public int? ForeignAgencyId { get; set; }
         public int? TestDay { get; set; }
@@ -47,6 +52,12 @@ namespace NajmetAlraqee.Site.ViewModels
         public int? VicationDays { get; set; }
         [Required(ErrorMessage = "الرجاء تحديد الموهلات/المهارات ")]
         public string QulaficationNote { get; set; }
+        public int? OldContractNo { get; set; }
+
+        [Required(ErrorMessage = "الرجاء أدخال رقم التاشيرة  ")]
+        public int? VisaNumber { get; set; }
+        [Required(ErrorMessage = "الرجاء تحديد تاريخ التاشيرة ")]
+        public string VisaDate { get; set; }
 
         public string CreatedById { get; set; }
         public string CreatedByName { get; set; }

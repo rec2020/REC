@@ -23,9 +23,14 @@ namespace NajmetAlraqee.Data.Repositories
             _context.ContractSelects.Add(contractSelect);
             _context.SaveChanges();
 
-
             // Contract Info 
             var cont = _context.Contracts.Find(contractSelect.ContractId);
+
+            // Get JoB Salary 
+            var agency = _context.ForeignAgencyJobs.Where(x=>x.ForeignAgencyId==contractSelect.ForeignAgencyId 
+            && x.IsActive==true && x.JobTypeId ==cont.JobTypeId).SingleOrDefault();
+
+         
             if (cont != null)
             {
                 cont.ContractStatusId = (int)EnumHelper.ContractStatus.Select;
@@ -38,6 +43,7 @@ namespace NajmetAlraqee.Data.Repositories
                 _context.SaveChanges();
             }
 
+          
 
 
             // Adding To Contract History 

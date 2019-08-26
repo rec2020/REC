@@ -1,0 +1,181 @@
+﻿@{
+    Layout = null;
+}
+@using NajmetAlraqee.Site.Services;
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">*@
+    <link rel="stylesheet" href="~/KendoStyle/kendoCSS/kendo/2017.1.118/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="~/KendoStyle/kendoCSS/kendo/2017.1.118/kendo.material.min.css" />
+    <link rel="stylesheet" href="~/KendoStyle/kendoCSS/kendo/2017.1.118/kendo.material.mobile.min.css" />
+
+    <script src="~/KendoStyle/JS/2017.1.118/jquery.min.js"></script>
+    <script src="~/KendoStyle/JS/2017.1.118/kendo.all.min.js"></script>
+
+    <link href="@Url.Content("~/KendoStyle/kendoCSS/kendo/2017.1.118/kendo.common-material.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/KendoStyle/kendoCSS/kendo/2017.1.118/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/KendoStyle/kendoCSS/kendo/2017.1.118/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/KendoStyle/kendoCSS/kendo/2017.1.118/kendo.material.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/KendoStyle/kendoCSS/kendo/2017.1.118/kendo.dataviz.material.min.css")" rel="stylesheet" type="text/css" />
+
+    <script src="@Url.Content("~/KendoStyle/JS/2017.1.118/jquery.min.js")"></script>
+    <script src="@Url.Content("~/KendoStyle/JS/2017.1.118/angular.min.js")"></script>
+    <script src="@Url.Content("~/KendoStyle/JS/2017.1.118/jszip.min.js")"></script>
+    <script src="@Url.Content("~/KendoStyle/JS/2017.1.118/kendo.all.min.js")"></script>
+    @*<link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/droidarabickufi.css" type="text/css" media="screen" />*@
+    <link href="~/css/DropKofiFont.css" rel="stylesheet" />
+</head>
+<body style="font-family:Droid Arabic Kufi">
+    <br />
+    <br />
+    <br />
+    <div class="container" style="direction:rtl;font-family:Droid Arabic Kufi;">
+
+        
+        <div class="card">
+            <div class="card-body">
+                <div class="col-12">
+                    <div id="example">
+
+                        <div id="treelist"></div>
+                        <script>
+                $(document).ready(function () {
+                    var dataSource = new kendo.data.TreeListDataSource({
+                        transport: {
+                            read: {
+                                    url: '@Url.Action("TreeData", "AccountTree")',
+                                    dataType: "Json"
+                            },
+                            update: {
+                                url: '@Url.Action("TreeData", "AccountTree")',
+                                dataType: "Json"
+                            },
+                            Add: {
+                                url: '@Url.Action("Add", "AccountTree")',
+                                dataType: "Json"
+                            },
+                            parameterMap: function (options, operation) {
+                                if (operation !== "read" && options.models) {
+                                    return { models: kendo.stringify(options.models) };
+                                }
+                            }
+                        },
+                        batch: true,
+                        schema: {
+                            model: {
+                                id: "id",
+                                parentId: "parentId",
+                                fields: {
+                                    parentId: { field: "parentId", nullable: true },
+                                    id: { field: "id", type: "number" },
+                                    //Extension: { field: "Extension", type: "number" }
+                                },
+                                expanded: true
+                            }
+                        },
+
+                    });
+
+                     function AddNewTree(e)
+                    {
+                        e.preventDefault();
+                        //var d = this.dataItem($(e.currentTarget).closest("tr"));
+                         window.location.href = '@Url.Action("Add", "AccountTree")?accountId=' + 0 ;
+                    }
+                    function AddChild(e)
+                    {
+                        e.preventDefault();
+                        var d = this.dataItem($(e.currentTarget).closest("tr"));
+                         //alert("Selected item ID is:" + d.id);
+                         window.location.href = '@Url.Action("Add", "AccountTree")?accountId=' + d.id ;
+                    }
+
+                    function UpdateAccount(e)
+                    {
+                        e.preventDefault();
+                        var d = this.dataItem($(e.currentTarget).closest("tr"));
+                        //alert("Selected item ID is:" + d.id);
+                        window.location.href = '@Url.Action("Edit", "AccountTree")?id=' + d.id ;
+                    }
+
+                    $("#treelist").kendoTreeList({
+                        dataSource: dataSource,
+                        toolbar: [{ name: "Add", text: " أضافة حساب للشجرة  ", click: AddNewTree }],
+                        //editable: "popup",
+                        height: 540,
+                        filterable: true,
+                        sortable: true,
+                        selectable: true,
+                        pageable: true,
+                        columns: [
+                            {
+                                field: "accountNo", title: "رقم الحساب ", width: 320
+                            },
+                            { field: "accType", title: "نوع الحساب" },
+                            { field: "descriptionAr", title: "الوصف" },
+                            //{ field: "descriptionEn ", title: " الحساب" },
+                            //{ field: "accprev", title: "الحساب الرئيسي" },
+                            { field: "classificationType", title: "التبويب" },
+                            //{ field: "accountLevel", title: "المستوي" },
+                            { field: "balance", title: "الرصيد" },
+                            {
+                                field: "credit", title: "قيد له حساب"
+                            },
+                            { field: "debit", title: "المطلوب منه" },
+                            {
+                                command: [{ name: "Addchild", text: " أضافة ابن", click: AddChild }
+                                    //,{ name: "edit", text: "  تعديل  ",}
+                                    , { name: "edit12", text: "  تعديل  ", click: UpdateAccount }
+                                ], width: 300
+                            }
+                        ]
+                        ,
+                        pageable: {
+                            refresh: true,
+                            alwaysVisible: false,
+                            pageSizes: [20, 40, 60, 80, 100],
+                            //pageSizes: true
+                        }
+                    });
+                });
+                        </script>
+
+                        <style>
+                            /*.k-treelist .k-command-cell .k-button {
+                                min-width: 0px;
+                                padding: 10px 10px 10px 10px;
+                            }
+
+                            .k-header .k-link {
+                                text-align: center;
+                            }
+
+                            .k-pager-wrap {
+                                min-height: 2.56em;
+                            }*/
+                        </style>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <a asp-action="Index" asp-controller="Home" class="btn btn-outline-primary">@SharedLocalizer.GetLocalizedHtmlString("Close")</a>
+                </div>
+                
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+</body>
+</html>

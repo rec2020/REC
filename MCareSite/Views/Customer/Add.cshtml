@@ -129,7 +129,7 @@
                                 <div class="form-group">
                                     <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("IdentityNo")</label>
                                     <div class="form-line">
-                                        <input asp-for="IdentityNo" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("IdentityNo")" />
+                                        <input asp-for="IdentityNo" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  maxlength="10" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("IdentityNo")" />
                                     </div>
                                 </div>
                             </div>
@@ -137,7 +137,7 @@
                                 <div class="form-group">
                                     <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("FirstPhone") </label>
                                     <div class="form-line">
-                                        <input asp-for="@Model.FirstPhone" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("FirstPhone")" />
+                                        <input asp-for="@Model.FirstPhone" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="10" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("FirstPhone")" />
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +145,7 @@
                                 <div class="form-group">
                                     <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("SecondPhone") </label>
                                     <div class="form-line">
-                                        <input asp-for="@Model.SecondPhone" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("SecondPhone")" />
+                                        <input asp-for="@Model.SecondPhone"   class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="10"  style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("SecondPhone")" />
                                     </div>
                                 </div>
                             </div>

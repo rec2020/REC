@@ -67,6 +67,7 @@
     <PackageReference Include="Microsoft.jQuery.Unobtrusive.Validation" Version="3.2.4" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" PrivateAssets="All" />
     <PackageReference Include="NToastNotify" Version="5.0.9" />
+    <PackageReference Include="Rotativa.AspNetCore" Version="1.1.1" />
     <PackageReference Include="toastr" Version="2.1.1" />
   </ItemGroup>
 
@@ -97,6 +98,10 @@
     <None Include="wwwroot\DatePickers\jquery.calendars.plus.min.js" />
     <None Include="wwwroot\DatePickers\jquery.plugin.js" />
     <None Include="wwwroot\DatePickers\jquery.plugin.min.js" />
+    <None Include="wwwroot\Rotativa\help-wkhtmltoimage.txt" />
+    <None Include="wwwroot\Rotativa\help-wkhtmltopdf.txt" />
+    <None Include="wwwroot\Rotativa\wkhtmltoimage.exe" />
+    <None Include="wwwroot\Rotativa\wkhtmltopdf.exe" />
   </ItemGroup>
 
   <ItemGroup>
@@ -104,6 +109,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\KendoStyle\" />
     <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>
 

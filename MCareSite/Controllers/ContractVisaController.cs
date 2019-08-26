@@ -36,7 +36,7 @@ namespace NajmetAlraqee.Site.Controllers
         {
             ContractVisaViewModel visa = new ContractVisaViewModel();
             visa.ContractId = ContractId;
-            var contractVisaList = _visa.GetContractVisas();
+            var contractVisaList = _visa.GetContractVisas().Where(x=>x.ContractId== ContractId);
             ViewBag.ContractVisa = contractVisaList;
             ViewBag.EmployeeId = new SelectList(_employee.GetEmployees(), "Id", "FirstName");
             return View(visa);
@@ -62,7 +62,7 @@ namespace NajmetAlraqee.Site.Controllers
             visaViewModel.VisaByName = User.Identity.Name;
             var visitbyid = _user.GetUserByName(visaViewModel.VisaByName);
             visaViewModel.VisaById = visitbyid.Id;
-            var contractVisaList = _visa.GetContractVisas();
+            var contractVisaList = _visa.GetContractVisas().Where(x => x.ContractId == visaViewModel.ContractId);
             ViewBag.ContractVisa = contractVisaList;
             ViewBag.EmployeeId = new SelectList(_employee.GetEmployees(), "Id", "FirstName",visaViewModel.EmployeeId);
             if (visaViewModel.EmployeeId == null) { ModelState.AddModelError("", "الرجاء تحدد الموظف"); }
@@ -112,7 +112,7 @@ namespace NajmetAlraqee.Site.Controllers
             {
                 return NotFound();
             }
-            var contractVisaList = _visa.GetContractVisas();
+            var contractVisaList = _visa.GetContractVisas().Where(x => x.ContractId == contractVisa.ContractId); ;
             ViewBag.ContractVisa = contractVisaList;
             ViewBag.EmployeeId = new SelectList(_employee.GetEmployees(), "Id", "FirstName", contractVisaViewModel.EmployeeId);
             return View("Index", contractVisaViewModel);

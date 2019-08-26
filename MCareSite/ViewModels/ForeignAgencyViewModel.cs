@@ -12,9 +12,9 @@ namespace NajmetAlraqee.Site.ViewModels
 
         [Required (ErrorMessage ="الرجاء ادخال رقم المكتب ")]
         public int? OfficeNumber { get; set; }
-        [Required(ErrorMessage = "الرجاء ادخال الجنسية ")]
-        public int? NationalityId { get; set; }
-        public string NationalityName { get; set; }
+        //[Required(ErrorMessage = "الرجاء ادخال الجنسية ")]
+        //public int? NationalityId { get; set; }
+        //public string NationalityName { get; set; }
         [Required(ErrorMessage = "الرجاء ادخال اسم المكتب ")]
         public string OfficeName { get; set; }
         [Required(ErrorMessage = "الرجاء ادخال رقم حساب المكتب")]
@@ -27,17 +27,17 @@ namespace NajmetAlraqee.Site.ViewModels
         public string Phone { get; set; }
         [Required(ErrorMessage = "الرجاء ادخال البنك")]
         public int? BankDetailId { get; set; }
-        public string BankName { get; set; }
-        public string  BankAccountNo { get; set; }
-        public bool IsActive { get; set; }
-        [Required(ErrorMessage = "الرجاء ادخال الوظيفة ")]
-        public int? JobTypeId { get; set; }
-        public string JobTypeName { get; set; }
-        [Required(ErrorMessage = "الرجاء ادخال السعر")]
-        public decimal? Price { get; set; }
-        [Required(ErrorMessage = "الرجاء ادخال العملة ")]
-        public int? CurrencyId { get; set; }
+        //public string BankName { get; set; }
+        //public string  BankAccountNo { get; set; }
+        //public bool IsActive { get; set; }
+        //[Required(ErrorMessage = "الرجاء ادخال الوظيفة ")]
+        //public int? JobTypeId { get; set; }
+        //public string JobTypeName { get; set; }
+        //[Required(ErrorMessage = "الرجاء ادخال السعر")]
+        //public decimal? Price { get; set; }
+        //[Required(ErrorMessage = "الرجاء ادخال العملة ")]
+        //public int? CurrencyId { get; set; }
 
-        public string CurrencyName { get; set; }
+        //public string CurrencyName { get; set; }
     }
 }

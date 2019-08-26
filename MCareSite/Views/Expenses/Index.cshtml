@@ -39,31 +39,24 @@
                                     <div class="col-sm-2 col-xs-12"></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <input asp-for="Code" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Code")" />
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <input asp-for="Name" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Expense")" />
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <input asp-for="AccountNumber" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("AccountNumber")" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <input asp-for="PartnerCode" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("PartnerCode")" />
                                             </div>
                                         </div>
                                     </div>
@@ -97,9 +90,6 @@
                                     <th>
                                         @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("AccountNumber"))
                                     </th>
-                                    <th>
-                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("PartnerCode"))
-                                    </th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -117,9 +107,6 @@
                                             </td>
                                             <td>
                                                 @item.AccountNumber
-                                            </td>
-                                            <td>
-                                                @item.PartnerCode
                                             </td>
                                             <td>
                                                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-raised btn-secondary btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Edit")</a> |

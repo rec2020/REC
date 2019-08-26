@@ -50,6 +50,43 @@ namespace NajmetAlraqee.Data
                     Name = "مندوب خارجي ",
                 }
             );
+
+
+
+            modelbuilder.Entity<TransferPurpose>()
+           .HasData(new TransferPurpose
+           {
+               Id = 1,
+               Name = "رسوم عمالة",
+           },
+           new TransferPurpose
+           {
+               Id = 2,
+               Name = "تذكرة سفر",
+           }
+           ,
+           new TransferPurpose
+           {
+               Id = 3,
+               Name = "راتب",
+           },
+           new TransferPurpose
+           {
+               Id = 4,
+               Name = "انجاز ",
+           },
+           new TransferPurpose
+           {
+               Id = 5,
+               Name = "غرامة تاخير",
+           },
+           new TransferPurpose
+           {
+               Id = 6,
+               Name = "أخري",
+           }
+       );
+
             modelbuilder.Entity<Nationality>()
                 .HasData(new Nationality
                 {
@@ -182,11 +219,11 @@ namespace NajmetAlraqee.Data
                  Id = 1,
                  Name = "أستقدام",
              },
-             //new ContractType
-             //{
-             //    Id = 3,
-             //    Name = "أستقدام",
-             //},
+             new ContractType
+             {
+                 Id = 3,
+                 Name = "معين",
+             },
              new ContractType
              {
                  Id = 2,
@@ -238,6 +275,86 @@ namespace NajmetAlraqee.Data
                   Name = "سند قبض",
               }
           );
+            modelbuilder.Entity<ReturnReason>()
+              .HasData(new ReturnReason
+              {
+                  Id = 1,
+                  Name = "السكن"
+              },
+              new ReturnReason
+              {
+                  Id = 2,
+                  Name = "نقل الكفالة",
+              },
+              new ReturnReason
+              {
+                  Id = 3,
+                  Name = "خروج نهائي",
+              },
+              new ReturnReason
+              {
+                  Id = 4,
+                  Name = "الغاء التعامل",
+              }
+          );
+
+            modelbuilder.Entity<SnadReceiptType>()
+             .HasData(new SnadReceiptType
+             {
+                 Id = 1,
+                 Name = "ضريبي"
+             },
+             new SnadReceiptType
+             {
+                 Id = 2,
+                 Name = "غير ضريبي"
+             }
+         );
+
+            modelbuilder.Entity<SnadReceiptCaluse>()
+            .HasData(new SnadReceiptCaluse
+            {
+                Id = 1,
+                Name = "أيجار"
+            },
+            new SnadReceiptCaluse
+            {
+                Id = 2,
+                Name = "رسوم حكومية"
+            }
+        );
+
+
+            modelbuilder.Entity<FinancialPeriodStatus>()
+           .HasData(new FinancialPeriodStatus
+           {
+               Id = 1,
+               Name = "CURRENT"
+           },
+           new FinancialPeriodStatus
+           {
+               Id = 2,
+               Name = "OPEN"
+           },
+           new FinancialPeriodStatus
+           {
+               Id = 3,
+               Name = "CLOSE"
+           }
+         );
+
+            modelbuilder.Entity<AccountClassificationType>()
+          .HasData(new AccountClassificationType
+          {
+              Id = 1,
+              Name = "ميزانية"
+          },
+          new AccountClassificationType
+          {
+              Id = 2,
+              Name = "قائمة الدخل"
+          }
+        );
 
         }
 
@@ -283,7 +400,7 @@ namespace NajmetAlraqee.Data
         public DbSet<Partner> Partners { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmployeeStatus> EmployeeStatuses { get; set; }
-        
+
         public DbSet<Religion> Religions { get; set; }
         public DbSet<SocialStatus> SocialStatuses { get; set; }
 
@@ -302,6 +419,25 @@ namespace NajmetAlraqee.Data
 
         public DbSet<SpecialEmployee> SpecialEmployees { get; set; }
         public DbSet<SpecificContract> SpecificContracts { get; set; }
+
+        public DbSet<ContractReturn> ContractReturns { get; set; }
+        public DbSet<ReturnReason> ReturnReasons { get; set; }
+        public DbSet<SnadReceipt> SnadReceipts { get; set; }
+        public DbSet<SnadReceiptType> SnadReceiptTypes { get; set; }
+        public DbSet<SnadReceiptCaluse> SnadReceiptCaluses { get; set; }
+
+        public DbSet<TransferPurpose> TransferPurposes { get; set; }
+        public DbSet<ForeignAgencyTransfer> ForeignAgencyTransfers { get; set; }
+        public DbSet<DelegateTransfer> DelegateTransfers { get; set; }
+        public DbSet<ForeignAgencyJob> ForeignAgencyJobs { get; set; }
+
+        public DbSet<AccountClassification> AccountClassifications { get; set; }
+        public DbSet<AccountClassificationType> AccountClassificationTypes { get; set; }
+        public DbSet<FinancialPeriod> FinancialPeriods { get; set; }
+        public DbSet<FinancialPeriodStatus> FinancialPeriodStatuses { get; set; }
+        public DbSet<AccountTree> AccountTrees { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<RecruitmentQaid> RecruitmentQaids { get; set; }
 
     }
 }

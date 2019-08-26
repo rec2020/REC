@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-//using NajmetAlraqeeSite.Data;
 using NajmetAlraqeeSite.Models;
 using NajmetAlraqeeSite.Services;
 using NajmetAlraqee.Data.Entities;
@@ -27,6 +26,8 @@ using Microsoft.Extensions.Options;
 using NajmetAlraqeeSite.Resources;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
+using Rotativa.AspNetCore;
+
 //using NToastNotify;
 
 namespace NajmetAlraqeeSite
@@ -97,6 +98,28 @@ namespace NajmetAlraqeeSite
             services.AddTransient<IReceiptDocRepository, ReceiptDocRepository>();
             services.AddTransient<IReceiptDocTypeRepository, ReceiptDocTypeRepository>();
             services.AddTransient<ISpecialEmployeeRepository, SpecialEmployeeRepository>();
+            services.AddTransient<ISpecificContractRepository, SpecificContractRepository>();
+            services.AddTransient<IContractReturnRepository, ContractReturnRepository>();
+            services.AddTransient<IReturnReasonRepository, ReturnReasonRepository>();
+
+            services.AddTransient<ISnadReceiptTypeRepository, SnadReceiptTypeRepository>();
+            services.AddTransient<ISnadReceiptCaluseRepository, SnadReceiptCaluseRepository>();
+            services.AddTransient<ISnadReceiptRepository, SnadReceiptRepository>();
+
+            services.AddTransient<ITransferPurposeRepository, TransferPurposeRepository>();
+            services.AddTransient<IForeignAgencyTransferRepository, ForeignAgencyTransferRepository>();
+            services.AddTransient<IDelegateTransferRepository, DelegateTransferRepository>();
+            services.AddTransient<IForeignAgencyJobRepository, ForeignAgencyJobRepository>();
+
+
+            services.AddTransient<IAccountClassificationRepository, AccountClassificationRepository>();
+            services.AddTransient<IAccountClassificationTypeRepository, AccountClassificationTypeRepository>();
+            services.AddTransient<IFinancialPeriodRepository, FinancialPeriodRepository>();
+            services.AddTransient<IFinancialPeriodStatusRepository, FinancialPeriodStatusRepository>();
+            services.AddTransient<IAccountTreeRepository, AccountTreeRepository>();
+            services.AddTransient<IInvoiceRepository, InvoiceRepository>();
+            services.AddTransient<IRecruitmentQaidRepository, RecruitmentQaidRepository>();
+
             //// configure identity server with in-memory stores, keys, clients and scopes
             //services.AddIdentityServer()
             //    .AddDeveloperSigningCredential()
@@ -158,13 +181,14 @@ namespace NajmetAlraqeeSite
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
+                app.UseDeveloperExceptionPage();
+                //app.UseExceptionHandler("/Home/Error");
+                //app.UseHsts();
             }
             var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(locOptions.Value);
             app.UseStaticFiles();
-
+           
             //app.UseIdentity();
             app.UseAuthentication();
             app.UseNToastNotify();
@@ -177,6 +201,9 @@ namespace NajmetAlraqeeSite
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            // var webRootPath = env.WebRootPath;
+            // call rotativa conf passing env to get web root path
+            RotativaConfiguration.Setup(env);
         }
     }
 }

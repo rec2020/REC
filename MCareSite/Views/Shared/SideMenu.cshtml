@@ -20,7 +20,7 @@
         <ul class="list">
             <li>
                 <div class="user-info">
-                    <div class="admin-image"> <img src="~/images/najmatAlrareeLog.jpg" alt="profile img"> </div>
+                    <div class="admin-image"> <img src="~/images/MainLOG.jpg" alt="profile img"> </div>
                     <div class="admin-action-info">
                         <span>@SharedLocalizer.GetLocalizedHtmlString("Welcome")</span>
                         <h3>@User.Identity.Name</h3>
@@ -32,110 +32,133 @@
 
             @*@if (User.IsInRole("Administrator"))*@
             @*{*@
-            <li><a asp-action="Index" asp-controller="DashBoards"> <i class="zmdi zmdi-home"></i><span>@SharedLocalizer.GetLocalizedHtmlString("Dashboard")</span></a></li>
-            <li>
-                <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-accounts"></i><span>@SharedLocalizer.GetLocalizedHtmlString("Users")</span> </a>
-                <ul class="ml-menu">
-                    <li> <a asp-action="Index" asp-controller="Users">@SharedLocalizer.GetLocalizedHtmlString("Users")</a></li>
-                    <li> <a asp-action="Add" asp-controller="Users">@SharedLocalizer.GetLocalizedHtmlString("AddUser")</a></li>
-                    <li> <a asp-action="Index" asp-controller="ApplicationRoles">@SharedLocalizer.GetLocalizedHtmlString("Roles")</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-pin-account"></i><span>@SharedLocalizer.GetLocalizedHtmlString("Contracts")</span></a>
-                <ul class="ml-menu">
-                    <li><a asp-action="Index" asp-controller="Contract">@SharedLocalizer.GetLocalizedHtmlString("Contracts")</a></li>
-                    <li><a asp-action="Add" asp-controller="Contract">@SharedLocalizer.GetLocalizedHtmlString("AddContract")</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-pin-account"></i><span>@SharedLocalizer.GetLocalizedHtmlString("Customers")</span></a>
-                <ul class="ml-menu">
-                    <li><a asp-action="Index" asp-controller="Customer">@SharedLocalizer.GetLocalizedHtmlString("Customers")</a></li>
-                    <li><a asp-action="Add" asp-controller="Customer">@SharedLocalizer.GetLocalizedHtmlString("AddCustomer")</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-pin-account"></i><span>@SharedLocalizer.GetLocalizedHtmlString("Employees")</span></a>
-                <ul class="ml-menu">
-                    <li><a asp-action="Index" asp-controller="Employee">@SharedLocalizer.GetLocalizedHtmlString("Employees")</a></li>
-                    <li><a asp-action="Add" asp-controller="Employee">@SharedLocalizer.GetLocalizedHtmlString("AddEmployee")</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-circle"></i><span>@SharedLocalizer.GetLocalizedHtmlString("Delegates")</span> </a>
-                <ul class="ml-menu">
-                    <li><a asp-action="Index" asp-controller="Delegates">@SharedLocalizer.GetLocalizedHtmlString("Delegates")</a></li>
-                    <li><a asp-action="Add" asp-controller="Delegates">@SharedLocalizer.GetLocalizedHtmlString("AddDelegate")</a></li>
-                </ul>
-            </li>
 
-            <li>
-                <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-airplane"></i><span>@SharedLocalizer.GetLocalizedHtmlString("ForeignAgencies")</span></a>
-                <ul class="ml-menu">
-                    <li><a asp-action="Index" asp-controller="ForeginAgencies">@SharedLocalizer.GetLocalizedHtmlString("ForeignAgencies")</a></li>
-                    <li><a asp-action="Add" asp-controller="ForeginAgencies">@SharedLocalizer.GetLocalizedHtmlString("AddForeignAgency")</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-reader"></i><span>@SharedLocalizer.GetLocalizedHtmlString("Partners")</span></a>
-                <ul class="ml-menu">
-                    <li><a asp-action="Index" asp-controller="Partner">@SharedLocalizer.GetLocalizedHtmlString("Partners")</a></li>
-                </ul>
-            </li>
+            @if (User.IsInRole("ADMIN"))
+            {
+                <li><a asp-action="Index" asp-controller="DashBoards"> <i class="zmdi zmdi-home"></i><span>@SharedLocalizer.GetLocalizedHtmlString("Dashboard")</span></a></li>
+            }
 
-            <li>
-                <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-settings"></i><span>@SharedLocalizer.GetLocalizedHtmlString("Setting")</span> </a>
-                <ul class="ml-menu">
-                    <li><a asp-action="Index" asp-controller="BankDetails">@SharedLocalizer.GetLocalizedHtmlString("Banks")</a></li>
-                    <li><a asp-action="Index" asp-controller="Expenses">@SharedLocalizer.GetLocalizedHtmlString("Expenses")</a></li>
-                    <li><a asp-action="Index" asp-controller="JobTypes">@SharedLocalizer.GetLocalizedHtmlString("JobTypes")</a></li>
-                    <li><a asp-action="Index" asp-controller="Currencies">@SharedLocalizer.GetLocalizedHtmlString("Currencies")</a></li>
-                    <li><a asp-action="Index" asp-controller="Nationalities">@SharedLocalizer.GetLocalizedHtmlString("Nationalities")</a></li>
-                    <li><a asp-action="Index" asp-controller="Arrival">@SharedLocalizer.GetLocalizedHtmlString("Arrivals")</a></li>
-                    <li><a asp-action="Index" asp-controller="PaymentMethod">@SharedLocalizer.GetLocalizedHtmlString("PaymentMethods")</a></li>
-                    <li><a asp-action="Index" asp-controller="Countries">@SharedLocalizer.GetLocalizedHtmlString("Countries")</a></li>
-                    <li><a asp-action="Index" asp-controller="Cities">@SharedLocalizer.GetLocalizedHtmlString("Cities")</a></li>
-                </ul>
-            </li>
+            @if (User.IsInRole("ADMIN") || User.IsInRole("SUPERUSER") || User.IsInRole("USEREMP"))
+            {
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-pin-account"></i><span>@SharedLocalizer.GetLocalizedHtmlString("Customers")</span></a>
+                    <ul class="ml-menu">
+                        <li><a asp-action="Index" asp-controller="Customer">@SharedLocalizer.GetLocalizedHtmlString("Customers")</a></li>
+                        <li><a asp-action="Add" asp-controller="Customer">@SharedLocalizer.GetLocalizedHtmlString("AddCustomer")</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-pin-account"></i><span>@SharedLocalizer.GetLocalizedHtmlString("Contracts")</span></a>
+                    <ul class="ml-menu">
+                        <li><a asp-action="Index" asp-controller="Contract">@SharedLocalizer.GetLocalizedHtmlString("Contracts")</a></li>
+                        <li><a asp-action="Add" asp-controller="Contract" asp-route-contractType="1">@SharedLocalizer.GetLocalizedHtmlString("AddContract")</a></li>
+                        <li><a asp-action="Index" asp-controller="SpecificContracts">@SharedLocalizer.GetLocalizedHtmlString("SpecificContracts")</a></li>
+                        <li><a asp-action="Index" asp-controller="ContractReturn">@SharedLocalizer.GetLocalizedHtmlString("ContractReturns")</a></li>
+                        <li><a asp-action="Index" asp-controller="Invoice">@SharedLocalizer.GetLocalizedHtmlString("Invoices")</a></li>
+                    </ul>
+                </li>
+
+            }
+
+            @if (User.IsInRole("ADMIN"))
+            {
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-reader"></i><span>@SharedLocalizer.GetLocalizedHtmlString("SnadReceipts")</span></a>
+                    <ul class="ml-menu">
+                        <li><a asp-action="Index" asp-controller="SnadReceipt">@SharedLocalizer.GetLocalizedHtmlString("SnadReceipts")</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-reader"></i><span>قائمة التحويلات </span></a>
+                    <ul class="ml-menu">
+                        <li><a asp-action="Index" asp-controller="ForeignAgencyTransfer">@SharedLocalizer.GetLocalizedHtmlString("ForeignAgencyTransfers")</a></li>
+                        <li><a asp-action="Index" asp-controller="UserDelegateTransfers">@SharedLocalizer.GetLocalizedHtmlString("DelegateTransfers")</a></li>
+                    </ul>
+                </li>
+            }
+            @if (User.IsInRole("ADMIN"))
+            {
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-settings"></i><span>@SharedLocalizer.GetLocalizedHtmlString("Financ")</span> </a>
+                    <ul class="ml-menu">
+                        <li><a asp-action="Index" asp-controller="AccountTree">@SharedLocalizer.GetLocalizedHtmlString("AccountTrees")</a></li>
+                        <li><a asp-action="Index" asp-controller="FinancialPeriod">@SharedLocalizer.GetLocalizedHtmlString("FinancialPeriods")</a></li>
+                        <li><a asp-action="Index" asp-controller="AccountClassification">@SharedLocalizer.GetLocalizedHtmlString("AccountClassifications")</a></li>
+                        <li><a asp-action="Index" asp-controller="RecruitmentQaid">@SharedLocalizer.GetLocalizedHtmlString("RecruitmentQaids")</a></li>
+                    </ul>
+                </li>
+            }
+            @if (User.IsInRole("ADMIN"))
+            {
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-accounts"></i><span>@SharedLocalizer.GetLocalizedHtmlString("Company")</span> </a>
+                    <ul class="ml-menu">
+                        <li> <a asp-action="Index" asp-controller="Users">@SharedLocalizer.GetLocalizedHtmlString("Users")</a></li>
+                        @*<li> <a asp-action="Add" asp-controller="Users">@SharedLocalizer.GetLocalizedHtmlString("AddUser")</a></li>*@
+                        <li> <a asp-action="Index" asp-controller="ApplicationRoles">@SharedLocalizer.GetLocalizedHtmlString("Roles")</a></li>
+                        <li><a asp-action="Index" asp-controller="Employee">@SharedLocalizer.GetLocalizedHtmlString("Employees")</a></li>
+                        <li><a asp-action="Index" asp-controller="SpecialEmployee">@SharedLocalizer.GetLocalizedHtmlString("SpecialEmployees")</a></li>
+                        <li><a asp-action="Index" asp-controller="ForeginAgencies">@SharedLocalizer.GetLocalizedHtmlString("ForeignAgencies")</a></li>
+                        <li><a asp-action="Index" asp-controller="Delegates">@SharedLocalizer.GetLocalizedHtmlString("Delegates")</a></li>
+                        <li><a asp-action="Index" asp-controller="Partner">@SharedLocalizer.GetLocalizedHtmlString("Partners")</a></li>
+                    </ul>
+                </li>
+            }
+            @if (User.IsInRole("ADMIN"))
+            {
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-settings"></i><span>@SharedLocalizer.GetLocalizedHtmlString("Setting")</span> </a>
+                    <ul class="ml-menu">
+                        <li><a asp-action="Index" asp-controller="BankDetails">@SharedLocalizer.GetLocalizedHtmlString("Banks")</a></li>
+                        <li><a asp-action="Index" asp-controller="Expenses">@SharedLocalizer.GetLocalizedHtmlString("Expenses")</a></li>
+                        <li><a asp-action="Index" asp-controller="JobTypes">@SharedLocalizer.GetLocalizedHtmlString("JobTypes")</a></li>
+                        <li><a asp-action="Index" asp-controller="Currencies">@SharedLocalizer.GetLocalizedHtmlString("Currencies")</a></li>
+                        <li><a asp-action="Index" asp-controller="Nationalities">@SharedLocalizer.GetLocalizedHtmlString("Nationalities")</a></li>
+                        <li><a asp-action="Index" asp-controller="Arrival">@SharedLocalizer.GetLocalizedHtmlString("Arrivals")</a></li>
+                        <li><a asp-action="Index" asp-controller="PaymentMethod">@SharedLocalizer.GetLocalizedHtmlString("PaymentMethods")</a></li>
+                        <li><a asp-action="Index" asp-controller="Countries">@SharedLocalizer.GetLocalizedHtmlString("Countries")</a></li>
+                        <li><a asp-action="Index" asp-controller="Cities">@SharedLocalizer.GetLocalizedHtmlString("Cities")</a></li>
+                    </ul>
+                </li>
+            }
         </ul>
-    <div class="tab-content">
-        <div role="tabpanel" class="tab-pane in active" id="settings">
-            <div class="slim-scroll">
-                <div class="card">
-                    <div class="header">
-                        <h2>@SharedLocalizer.GetLocalizedHtmlString("ColorOPTIONS")</h2>
-                    </div>
-                    <div class="body">
-                        <ul class="choose-skin m-b-0">
-                            <li data-theme="purple">
-                                <div class="purple"></div>
-                            </li>
-                            <li data-theme="blue">
-                                <div class="blue"></div>
-                            </li>
-                            <li data-theme="cyan" class="active">
-                                <div class="cyan"></div>
-                            </li>
-                            <li data-theme="green">
-                                <div class="green"></div>
-                            </li>
-                            <li data-theme="blush">
-                                <div class="blush"></div>
-                            </li>
-                        </ul>
-                        <ul class="list-unstyled m-b-0 theme-light-dark m-t-15">
-                            <li>
-                                <div class="t-dark">Dark</div>
-                            </li>
-                            <li>
-                                <div class="t-light">Light</div>
-                            </li>
-                        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane in active" id="settings">
+                <div class="slim-scroll">
+                    <div class="card">
+                        <div class="header">
+                            <h2>@SharedLocalizer.GetLocalizedHtmlString("ColorOPTIONS")</h2>
+                        </div>
+                        <div class="body">
+                            <ul class="choose-skin m-b-0">
+                                <li data-theme="purple">
+                                    <div class="purple"></div>
+                                </li>
+                                <li data-theme="blue">
+                                    <div class="blue"></div>
+                                </li>
+                                <li data-theme="cyan" class="active">
+                                    <div class="cyan"></div>
+                                </li>
+                                <li data-theme="green">
+                                    <div class="green"></div>
+                                </li>
+                                <li data-theme="blush">
+                                    <div class="blush"></div>
+                                </li>
+                            </ul>
+                            <ul class="list-unstyled m-b-0 theme-light-dark m-t-15">
+                                <li>
+                                    <div class="t-dark">Dark</div>
+                                </li>
+                                <li>
+                                    <div class="t-light">Light</div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-        </div>
 </aside>

@@ -49,10 +49,12 @@ namespace NajmetAlraqee.Site.Controllers
             {
                 delegateList = _Delegate.GetDelegates();
             }
-            ViewBag.Delegates = delegateList;
+            
             if (delegateList.Count() <= 10) { page = 1; }
             int pageSize = 10;
-            return View(await PaginatedList<UserDelegate>.CreateAsync(delegateList.AsNoTracking(), page ?? 1, pageSize));
+            var delgatepaging = await PaginatedList<UserDelegate>.CreateAsync(delegateList.AsNoTracking(), page ?? 1, pageSize);
+            ViewBag.Delegates = delgatepaging;
+            return View(delgatepaging);
         }
         #endregion
 

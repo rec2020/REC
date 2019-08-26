@@ -14,10 +14,6 @@
         <li><a href=@Url.Action("index","Home")><i class="material-icons">home</i>@SharedLocalizer.GetLocalizedHtmlString("Home") </a></li>
         <li><a href="javascript:void(0);"><i class="material-icons">library_books</i> @SharedLocalizer.GetLocalizedHtmlString("Partners")</a></li>
     </ol>
-    @*<div>
-            <a class="btn btn-round pull-right bg-cyan waves-effect" asp-action="Add">@SharedLocalizer.GetLocalizedHtmlString("AddCountry")</a>
-        </div>*@
-
 </div>
 
 
@@ -158,8 +154,10 @@
                                                 @item.Remiander
                                             </td>
                                             <td>
-                                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-raised btn-secondary btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Edit")</a> |
+                                                @if (User.IsInRole("ADMIN")) { 
+                                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-raised btn-secondary btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Edit")</a> 
                                                 <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-raised btn-danger btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Delete")</a>
+                                                }
                                             </td>
                                         </tr>
                                     }

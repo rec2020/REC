@@ -18,19 +18,22 @@ namespace NajmetAlraqee.Data.Repositories
         }
         public int AddAgency(ForeignAgency agency)
         {
-            agency.IsActive = true;
+            //agency.IsActive = true;
+            agency.DeservedAmount = 0;
+            agency.RemainderAmount = 0;
+            agency.TransferAmount = 0;
             _context.ForeignAgencies.Add(agency);
             _context.SaveChanges();
             return agency.Id;
         }
         public ForeignAgency GetAgencyById(int Id)
         {
-            return _context.ForeignAgencies
+            return _context.ForeignAgencies.Include(x => x.BankDetail)
                 .SingleOrDefault(p => p.Id == Id);
         }
         public IQueryable<ForeignAgency> GetAgencies()
         {
-            return _context.ForeignAgencies.Include(x=>x.BankDetail).Include(x=>x.Currency).Include(x=>x.JobType).Include(x=>x.Nationality) ;
+            return _context.ForeignAgencies.Include(x=>x.BankDetail);
         }
         public bool RemoveAggency(int Id)
         {
@@ -47,15 +50,15 @@ namespace NajmetAlraqee.Data.Repositories
             if (existagency == null)
                 return false;
             existagency.OfficeName = agency.OfficeName;
-            existagency.NationalityId = agency.NationalityId;
+            //existagency.NationalityId = agency.NationalityId;
             existagency.BankDetailId = agency.BankDetailId;
             existagency.AccountNumber = agency.AccountNumber;
             existagency.Email = agency.Email;
-            existagency.IsActive = agency.IsActive;
-            existagency.JobTypeId = agency.JobTypeId;
+            //existagency.IsActive = agency.IsActive;
+            //existagency.JobTypeId = agency.JobTypeId;
             existagency.OfficeNumber = agency.OfficeNumber;
             existagency.Phone = agency.Phone;
-            existagency.Price = agency.Price;
+            //existagency.Price = agency.Price;
             existagency.ResponsibleUser = agency.ResponsibleUser;
 
             _context.Update(existagency);

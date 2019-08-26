@@ -53,10 +53,12 @@ namespace NajmetAlraqee.Site.Controllers
             {
                 customerList = _customer.GetCustomers();
             }
-            ViewBag.Customers = customerList;
+            
             if (customerList.Count() <= 10) { page = 1; }
             int pageSize = 10;
-            return View(await PaginatedList<Customer>.CreateAsync(customerList.AsNoTracking(), page ?? 1, pageSize));
+            var customerpaging = await PaginatedList<Customer>.CreateAsync(customerList.AsNoTracking(), page ?? 1, pageSize);
+            ViewBag.Customers = customerpaging;
+            return View(customerpaging);
         }
         #endregion
 

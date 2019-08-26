@@ -26,6 +26,20 @@ namespace NajmetAlraqee.Site.Services
                 return (PageIndex > 1);
             }
         }
+        public bool ShowFirst
+        {
+            get
+            {
+                return (PageIndex != 1);
+            }
+        }
+        public bool ShowLast
+        {
+            get
+            {
+                return (PageIndex != TotalPages);
+            }
+        } 
 
         public bool HasNextPage
         {

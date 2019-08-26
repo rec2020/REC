@@ -73,10 +73,12 @@ namespace NajmetAlraqee.Site.Controllers
             {
                 contractList = _Contract.GetContracts();
             }
-            ViewBag.Contracts = contractList;
+           
             if (contractList.Count() <= 10) { page = 1; }
             int pageSize = 10;
-            return View(await PaginatedList<Contract>.CreateAsync(contractList.AsNoTracking(), page ?? 1, pageSize));
+            var contractPaging = await PaginatedList<Contract>.CreateAsync(contractList.AsNoTracking(), page ?? 1, pageSize);
+            ViewBag.Contracts = contractPaging;
+            return View(contractPaging);
         }
         #endregion
 
@@ -98,8 +100,14 @@ namespace NajmetAlraqee.Site.Controllers
             ViewBag.ContractVisa = _visa.GetContractVisas().Where(x => x.ContractId == id);
             ViewBag.ContractTickets = _ticket.GetContractTickets().Where(x => x.ContractId == id);
             ViewBag.ContractHistory = _history.GetContractHistorys().Where(x => x.ContractId == id);
-            ViewBag.ReceiptDocs = _receipt.GetReceiptDocs().Where(x => x.ContractId==id && x.ReceiptdocTypeId ==(int)EnumHelper.ReceiptdocType.SnadReceive);
+            ViewBag.ReceiptDocs = _receipt.GetReceiptDocs().Where(x => x.ContractId == id && x.ReceiptdocTypeId == (int)EnumHelper.ReceiptdocType.SnadReceive && x.ContractTypeId == contract.ContractTypeId);
             ViewBag.TakingDocs = _receipt.GetReceiptDocs().Where(x => x.ContractId == id && x.ReceiptdocTypeId == (int)EnumHelper.ReceiptdocType.SnadTaking);
+            if (contract != null)
+            {
+                //var CheckTestDay = _Contract.UpdateTestDay(contract.Id);
+            }
+            var nationalityNmae = _nationality.GetNationalities().SingleOrDefault(x => x.Id == contractViewModels.NationalityId);
+            contractViewModels.NationalityName = nationalityNmae.Name;
             return View(contractViewModels);
         }
         #endregion
@@ -107,22 +115,26 @@ namespace NajmetAlraqee.Site.Controllers
         #region Add
 
         [HttpGet]
-        public IActionResult Add(int contractType)
+        public IActionResult Add(int contractType, int? contractId)
         {
             ContractViewModel contractViewModel = new ContractViewModel();
-          
-            if (contractType <= 1) {
-                ViewBag.ContractTypeId = new SelectList(_contract_Type.GetContractTypes().Where(x => x.Id <= 1), "Id", "Name");
-            }
-            else
+
+
+            if (contractType == (int)EnumHelper.ContractType.New)
             {
+                ViewBag.ContractTypeId = new SelectList(_contract_Type.GetContractTypes().Where(x => x.Id == (int)EnumHelper.ContractType.New), "Id", "Name");
+            }
+            if (contractType == (int)EnumHelper.ContractType.Substitute)
+            {
+                contractViewModel.OldContractNo = contractId;
                 contractViewModel.ContractTypeId = contractType;
-                ViewBag.ContractTypeId = new SelectList(_contract_Type.GetContractTypes().Where(x => x.Id > 1), "Id", "Name");
+                ViewBag.ContractTypeId = new SelectList(_contract_Type.GetContractTypes().Where(x => x.Id == (int)EnumHelper.ContractType.Substitute), "Id", "Name");
             }
             //ViewBag.ContractTypeId = new SelectList(_contract_Type.GetContractTypes().Where(x => x.Id <= 2), "Id", "Name");
             ViewBag.CustomerId = new SelectList(_customer.GetCustomers(), "Id", "FirstName");
             ViewBag.ArrivalCityId = new SelectList(_city.GetCities(), "Id", "Name");
             ViewBag.JobTypeId = new SelectList(_jobtype.GetJobTypes(), "Id", "Name");
+            ViewBag.NationalityId = new SelectList(_nationality.GetNationalities(), "Id", "Name");
             return View(contractViewModel);
         }
 
@@ -133,21 +145,23 @@ namespace NajmetAlraqee.Site.Controllers
             contractViewModel.CreatedByName = User.Identity.Name;
             var CreatedBy = _user.GetUserByName(contractViewModel.CreatedByName);
             contractViewModel.CreatedById = CreatedBy.Id;
-            if (contractViewModel.ContractTypeId <= 1)
+            if (contractViewModel.ContractTypeId == (int)EnumHelper.ContractType.New)
             {
-                ViewBag.ContractTypeId = new SelectList(_contract_Type.GetContractTypes().Where(x => x.Id <= 1), "Id", "Name", contractViewModel.ContractTypeId);
+                ViewBag.ContractTypeId = new SelectList(_contract_Type.GetContractTypes().Where(x => x.Id == (int)EnumHelper.ContractType.New), "Id", "Name", contractViewModel.ContractTypeId);
             }
-            else
+            if (contractViewModel.ContractTypeId == (int)EnumHelper.ContractType.Substitute)
             {
-                ViewBag.ContractTypeId = new SelectList(_contract_Type.GetContractTypes().Where(x => x.Id > 1), "Id", "Name", contractViewModel.ContractTypeId);
+                ViewBag.ContractTypeId = new SelectList(_contract_Type.GetContractTypes().Where(x => x.Id == (int)EnumHelper.ContractType.Substitute), "Id", "Name", contractViewModel.ContractTypeId);
             }
             ViewBag.CustomerId = new SelectList(_customer.GetCustomers(), "Id", "Name", contractViewModel.CustomerId);
             ViewBag.ArrivalCityId = new SelectList(_city.GetCities(), "Id", "Name", contractViewModel.ArrivalCityId);
             ViewBag.JobTypeId = new SelectList(_jobtype.GetJobTypes(), "Id", "Name", contractViewModel.JobTypeId);
+            ViewBag.NationalityId = new SelectList(_nationality.GetNationalities(), "Id", "Name", contractViewModel.NationalityId);
             if (contractViewModel.ContractTypeId == null) { ModelState.AddModelError("", "الرجاء تحديد نوع العقد"); }
             if (contractViewModel.CustomerId == null) { ModelState.AddModelError("", "الرجاء تحدد العميل"); }
             if (contractViewModel.ArrivalCityId == null) { ModelState.AddModelError("", "الرجاء تحديد مدينة الوصول"); }
             if (contractViewModel.JobTypeId == null) { ModelState.AddModelError("", "الرجاء تحديد الوظيفة "); }
+            if (contractViewModel.NationalityId == null) { ModelState.AddModelError("", "الرجاء تحديد جنسبة العامل "); }
             if (contractViewModel.Id == 0)
             {
                 contractViewModel.ContractStatusId = (int)EnumHelper.ContractStatus.New;
@@ -156,6 +170,7 @@ namespace NajmetAlraqee.Site.Controllers
                 ModelState.Remove("CustomerId");
                 ModelState.Remove("ArrivalCityId");
                 ModelState.Remove("JobTypeId");
+                ModelState.Remove("NationalityId");
                 if (ModelState.IsValid)
                 {
 
@@ -172,6 +187,7 @@ namespace NajmetAlraqee.Site.Controllers
                 ModelState.Remove("ContractTypeId");
                 ModelState.Remove("CustomerId");
                 ModelState.Remove("ArrivalCityId");
+                ModelState.Remove("NationalityId");
                 if (ModelState.IsValid)
                 {
                     var contract = _mapper.Map<Contract>(contractViewModel);
@@ -202,11 +218,11 @@ namespace NajmetAlraqee.Site.Controllers
             }
             if (contractViewModel.ContractTypeId <= 1)
             {
-                ViewBag.ContractTypeId = new SelectList(_contract_Type.GetContractTypes().Where(x => x.Id <= 1), "Id", "Name", contractViewModel.ContractTypeId);
+                ViewBag.ContractTypeId = new SelectList(_contract_Type.GetContractTypes().Where(x => x.Id == (int)EnumHelper.ContractType.New), "Id", "Name", contractViewModel.ContractTypeId);
             }
             else
             {
-                ViewBag.ContractTypeId = new SelectList(_contract_Type.GetContractTypes().Where(x => x.Id > 1), "Id", "Name", contractViewModel.ContractTypeId);
+                ViewBag.ContractTypeId = new SelectList(_contract_Type.GetContractTypes().Where(x => x.Id == (int)EnumHelper.ContractType.Substitute), "Id", "Name", contractViewModel.ContractTypeId);
             }
             ViewBag.CustomerId = new SelectList(_customer.GetCustomers(), "Id", "Name", contractViewModel.CustomerId);
             ViewBag.ArrivalCityId = new SelectList(_city.GetCities(), "Id", "Name", contractViewModel.ArrivalCityId);
@@ -225,6 +241,25 @@ namespace NajmetAlraqee.Site.Controllers
         }
 
         #endregion
+
+
+        #region CloseContract 
+        public IActionResult CloseContract(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var contract = _Contract.GetContractById((int)id);
+            if (contract != null)
+            {
+                contract.ContractStatusId = (int)EnumHelper.ContractStatus.Close;
+                _Contract.CloseContract(contract.Id, contract);
+            }
+
+            return RedirectToAction("Details", new { id = contract.Id });
+        }
+        #endregion 
 
     }
 }

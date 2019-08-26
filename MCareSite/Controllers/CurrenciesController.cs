@@ -86,11 +86,7 @@ namespace NajmetAlraqee.Site.Controllers
             }
 
         }
-        //return View("Index",currencyViewModel);
-
-
-
-
+      
         #region Edit
         // GET: Doctors1/Edit/5
         public IActionResult Edit(long? id)

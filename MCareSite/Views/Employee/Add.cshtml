@@ -75,7 +75,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label style="padding-left:250Px">@SharedLocalizer.GetLocalizedHtmlString("FileNo")</label>
-                                <input asp-for="FileNo" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("FileNo")" required />
+                                <input asp-for="FileNo"  onkeypress="return event.charCode >= 48 && event.charCode <= 57"  maxlength="6"class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("FileNo")" required />
                                 <div class="help-block with-errors" style="color:red"></div>
                             </div>
                             <div class="form-group col-md-4">
@@ -107,7 +107,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label style="padding-left:300Px">@SharedLocalizer.GetLocalizedHtmlString("Age")</label>
-                                <input asp-for="Age" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Age")" required />
+                                <input asp-for="Age"   max="50" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Age")" required />
                                 <div class="help-block with-errors" style="color:red"></div>
                             </div>
                             <div class="form-group col-md-4">
@@ -118,7 +118,7 @@
 
                             <div class="form-group col-md-4">
                                 <label style="padding-left:210Px">@SharedLocalizer.GetLocalizedHtmlString("NumberTime")</label>
-                                <input asp-for="NumberTime" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("NumberTime")" required />
+                                <input asp-for="NumberTime"   max="20" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("NumberTime")" required />
                                 <div class="help-block with-errors" style="color:red"></div>
                             </div>
                             <div class="form-group col-md-4">
@@ -176,7 +176,7 @@
 
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4" style="padding-left:230Px"> @SharedLocalizer.GetLocalizedHtmlString("IdentityNo")</label>
-                                <input asp-for="IdentityNo" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("IdentityNo")" required />
+                                <input asp-for="IdentityNo" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  maxlength="10" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("IdentityNo")" required />
                                 <div class="help-block with-errors" style="color:red"></div>
                             </div>
                             <div class="form-group col-md-4">
@@ -259,7 +259,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4" style="padding-left:180Px"> @SharedLocalizer.GetLocalizedHtmlString("PhoneInOrigin")</label>
-                                <input asp-for="PhoneInOrigin" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("PhoneInOrigin")" required />
+                                <input asp-for="PhoneInOrigin" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  maxlength="10" placeholder="@SharedLocalizer.GetLocalizedHtmlString("PhoneInOrigin")" required />
                                 <div class="help-block with-errors" style="color:red">
                                 </div>
                             </div>

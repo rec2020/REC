@@ -63,12 +63,20 @@
                             </div>
                             <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Nationality") </label>
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("AccountNumber") </label>
                                     <div class="form-line">
-                                        <select asp-for="@Model.NationalityId" class="form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.NationalityId"><option>@SharedLocalizer.GetLocalizedHtmlString("Nationality")</option></select>
+                                        <input asp-for="@Model.AccountNumber" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("AccountNumber")" />
                                     </div>
                                 </div>
                             </div>
+                            @*<div class="col-sm-4 col-xs-12">
+            <div class="form-group">
+                <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Nationality") </label>
+                <div class="form-line">
+                    <select asp-for="@Model.NationalityId" class="form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.NationalityId"><option>@SharedLocalizer.GetLocalizedHtmlString("Nationality")</option></select>
+                </div>
+            </div>
+        </div>*@
                         </div>
                         <div class="row">
                             <div class="col-sm-4 col-xs-12">
@@ -83,7 +91,7 @@
                                 <div class="form-group">
                                     <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Email") </label>
                                     <div class="form-line">
-                                        <input asp-for="@Model.Email" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Email")" />
+                                        <input asp-for="@Model.Email"  class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Email")" />
                                     </div>
                                 </div>
                             </div>
@@ -91,20 +99,13 @@
                                 <div class="form-group">
                                     <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Phone") </label>
                                     <div class="form-line">
-                                        <input asp-for="@Model.Phone" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Phone")" />
+                                        <input asp-for="@Model.Phone" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  maxlength="10" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Phone")" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-4 col-xs-12">
-                                <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("AccountNumber") </label>
-                                    <div class="form-line">
-                                        <input asp-for="@Model.AccountNumber" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("AccountNumber")" />
-                                    </div>
-                                </div>
-                            </div>
+                           
                             <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
                                     <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Bank") </label>
@@ -113,16 +114,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-4 col-xs-12">
+                            @*<div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
                                     <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("JobType") </label>
                                     <div class="form-line">
                                         <select asp-for="@Model.JobTypeId" class="form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.JobTypeId"><option>@SharedLocalizer.GetLocalizedHtmlString("JobType")</option></select>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
-                        <div class="row">
+                        @*<div class="row">
                             <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
                                     <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Price") </label>
@@ -139,7 +140,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
                         <div class="col-sm-12">
                             <button type="submit" value="Add" style="font-family:Droid Arabic Kufi;right:950Px" class="btn btn-raised g-bg-cyan pull-left">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
                             <a asp-action="Index" class="btn btn-raised" style="font-family:Droid Arabic Kufi;right:950Px">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</a>

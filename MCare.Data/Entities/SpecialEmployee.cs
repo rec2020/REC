@@ -10,7 +10,6 @@ namespace NajmetAlraqee.Data.Entities
         public string  Name  { get; set; }
         public string  PassportNo { get; set; }
         public int?  NationalityId { get; set; }
-
         public virtual Nationality Nationality { get; set; }
     }
 }

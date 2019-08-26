@@ -129,6 +129,101 @@ namespace NajmetAlraqee.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.AccountClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DescriptionAr");
+
+                    b.Property<string>("DescriptionEn");
+
+                    b.Property<int?>("TypeId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TypeId");
+
+                    b.ToTable("AccountClassifications");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.AccountClassificationType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AccountClassificationTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "ميزانية"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "قائمة الدخل"
+                        });
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.AccountTree", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AccClassificationId");
+
+                    b.Property<int?>("AccTypeId");
+
+                    b.Property<int?>("AccountLevel");
+
+                    b.Property<string>("AccountNo");
+
+                    b.Property<string>("Accprev");
+
+                    b.Property<decimal?>("Balance");
+
+                    b.Property<string>("CostCenter");
+
+                    b.Property<decimal?>("Credit");
+
+                    b.Property<decimal?>("Debit");
+
+                    b.Property<string>("DescriptionAr");
+
+                    b.Property<string>("DescriptionEn");
+
+                    b.Property<int?>("EhalkPrecent");
+
+                    b.Property<string>("FixedAssetDate");
+
+                    b.Property<decimal?>("HighLimitForBalance");
+
+                    b.Property<string>("JE");
+
+                    b.Property<int?>("ParentId");
+
+                    b.Property<decimal?>("PriceInExhibtion");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccClassificationId");
+
+                    b.HasIndex("AccTypeId");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("AccountTrees");
+                });
+
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.Arrival", b =>
                 {
                     b.Property<int>("Id")
@@ -173,8 +268,7 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CountryId")
-                        .IsUnique();
+                    b.HasIndex("CountryId");
 
                     b.ToTable("Cities");
                 });
@@ -217,13 +311,21 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<int?>("ForeignAgencyId");
 
+                    b.Property<bool?>("IsDone");
+
                     b.Property<int?>("JobTypeId");
 
                     b.Property<string>("ModifybyId");
 
+                    b.Property<int?>("NationalityId");
+
                     b.Property<int?>("OldContractNo");
 
+                    b.Property<decimal?>("Paid");
+
                     b.Property<string>("QulaficationNote");
+
+                    b.Property<decimal?>("Remainder");
 
                     b.Property<decimal?>("SalaryMonth");
 
@@ -232,6 +334,10 @@ namespace NajmetAlraqee.Data.Migrations
                     b.Property<decimal>("VatCost");
 
                     b.Property<int?>("VicationDays");
+
+                    b.Property<string>("VisaDate");
+
+                    b.Property<int?>("VisaNumber");
 
                     b.HasKey("Id");
 
@@ -248,6 +354,8 @@ namespace NajmetAlraqee.Data.Migrations
                     b.HasIndex("ForeignAgencyId");
 
                     b.HasIndex("JobTypeId");
+
+                    b.HasIndex("NationalityId");
 
                     b.ToTable("Contracts");
                 });
@@ -366,6 +474,55 @@ namespace NajmetAlraqee.Data.Migrations
                     b.HasIndex("ContractStatusId");
 
                     b.ToTable("ContractHistories");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ContractReturn", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AirLine");
+
+                    b.Property<string>("CancelDate");
+
+                    b.Property<string>("CancelNote");
+
+                    b.Property<int?>("ContractId");
+
+                    b.Property<int?>("ContractTypeId");
+
+                    b.Property<string>("CreatedById");
+
+                    b.Property<int?>("EmployeeId");
+
+                    b.Property<string>("EmployeeReturnDate");
+
+                    b.Property<string>("ExitDate");
+
+                    b.Property<string>("ExitTime");
+
+                    b.Property<string>("KafeelAddress");
+
+                    b.Property<string>("KafeelName");
+
+                    b.Property<string>("KafeelPhone");
+
+                    b.Property<string>("KfalaTranportDate");
+
+                    b.Property<int?>("ReturnReasonId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContractId");
+
+                    b.HasIndex("ContractTypeId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("ReturnReasonId");
+
+                    b.ToTable("ContractReturns");
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.ContractSelect", b =>
@@ -506,6 +663,11 @@ namespace NajmetAlraqee.Data.Migrations
                         },
                         new
                         {
+                            Id = 3,
+                            Name = "معين"
+                        },
+                        new
+                        {
                             Id = 2,
                             Name = "بديل"
                         });
@@ -631,9 +793,7 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.HasIndex("CustomerTypeId");
 
-                    b.HasIndex("UserDelegateId")
-                        .IsUnique()
-                        .HasFilter("[UserDelegateId] IS NOT NULL");
+                    b.HasIndex("UserDelegateId");
 
                     b.ToTable("Customers");
                 });
@@ -661,6 +821,43 @@ namespace NajmetAlraqee.Data.Migrations
                             Id = 2,
                             Name = "خارجي"
                         });
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.DelegateTransfer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Amount");
+
+                    b.Property<int?>("CurrencyId");
+
+                    b.Property<string>("Notes");
+
+                    b.Property<int?>("PaymentMethodId");
+
+                    b.Property<int?>("PurposeId");
+
+                    b.Property<int?>("TransferBankId");
+
+                    b.Property<string>("TransferDate");
+
+                    b.Property<int?>("UserDelegateId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CurrencyId");
+
+                    b.HasIndex("PaymentMethodId");
+
+                    b.HasIndex("PurposeId");
+
+                    b.HasIndex("TransferBankId");
+
+                    b.HasIndex("UserDelegateId");
+
+                    b.ToTable("DelegateTransfers");
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.DelegateType", b =>
@@ -894,11 +1091,62 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("PartnerCode");
-
                     b.HasKey("Id");
 
                     b.ToTable("Expenses");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.FinancialPeriod", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("FinancialPeriodStatusId");
+
+                    b.Property<string>("FromData");
+
+                    b.Property<int?>("Month");
+
+                    b.Property<string>("ToDate");
+
+                    b.Property<int>("Year");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FinancialPeriodStatusId");
+
+                    b.ToTable("FinancialPeriods");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.FinancialPeriodStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FinancialPeriodStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "CURRENT"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "OPEN"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "CLOSE"
+                        });
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.ForeignAgency", b =>
@@ -913,9 +1161,42 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<int?>("BankDetailId");
 
-                    b.Property<int?>("CurrencyId");
+                    b.Property<decimal?>("CloseBalance");
+
+                    b.Property<decimal?>("DeservedAmount");
 
                     b.Property<string>("Email");
+
+                    b.Property<string>("OfficeName");
+
+                    b.Property<int?>("OfficeNumber");
+
+                    b.Property<decimal?>("OpenBalance");
+
+                    b.Property<string>("Phone");
+
+                    b.Property<decimal?>("RemainderAmount");
+
+                    b.Property<string>("ResponsibleUser");
+
+                    b.Property<decimal?>("TransferAmount");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BankDetailId");
+
+                    b.ToTable("ForeignAgencies");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ForeignAgencyJob", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CurrencyId");
+
+                    b.Property<int?>("ForeignAgencyId");
 
                     b.Property<bool?>("IsActive");
 
@@ -923,27 +1204,56 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<int?>("NationalityId");
 
-                    b.Property<string>("OfficeName");
-
-                    b.Property<int?>("OfficeNumber");
-
-                    b.Property<string>("Phone");
-
                     b.Property<decimal?>("Price");
-
-                    b.Property<string>("ResponsibleUser");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BankDetailId");
-
                     b.HasIndex("CurrencyId");
+
+                    b.HasIndex("ForeignAgencyId");
 
                     b.HasIndex("JobTypeId");
 
                     b.HasIndex("NationalityId");
 
-                    b.ToTable("ForeignAgencies");
+                    b.ToTable("ForeignAgencyJobs");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ForeignAgencyTransfer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Amount");
+
+                    b.Property<int?>("CurrencyId");
+
+                    b.Property<int?>("ForeignAgencyId");
+
+                    b.Property<string>("Notes");
+
+                    b.Property<int?>("PaymentMethodId");
+
+                    b.Property<int?>("PurposeId");
+
+                    b.Property<int?>("TransferBankId");
+
+                    b.Property<string>("TransferDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CurrencyId");
+
+                    b.HasIndex("ForeignAgencyId");
+
+                    b.HasIndex("PaymentMethodId");
+
+                    b.HasIndex("PurposeId");
+
+                    b.HasIndex("TransferBankId");
+
+                    b.ToTable("ForeignAgencyTransfers");
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.Gender", b =>
@@ -969,6 +1279,39 @@ namespace NajmetAlraqee.Data.Migrations
                             Id = 2,
                             Name = "أنثي"
                         });
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.Invoice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Amount");
+
+                    b.Property<int?>("ContractId");
+
+                    b.Property<int?>("ContractNo");
+
+                    b.Property<string>("Customer");
+
+                    b.Property<decimal>("Discount");
+
+                    b.Property<string>("InvoiceDate");
+
+                    b.Property<string>("Note");
+
+                    b.Property<decimal>("Total");
+
+                    b.Property<decimal>("VatPercentage");
+
+                    b.Property<decimal>("VatValue");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContractId");
+
+                    b.ToTable("Invoices");
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.JobType", b =>
@@ -1072,9 +1415,15 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<int?>("ContractId");
 
+                    b.Property<int?>("ContractTypeId");
+
                     b.Property<int?>("CustomerId");
 
                     b.Property<string>("Note");
+
+                    b.Property<int?>("PaymentMethodId");
+
+                    b.Property<int>("QaidNo");
 
                     b.Property<string>("ReceiptByUser");
 
@@ -1091,6 +1440,8 @@ namespace NajmetAlraqee.Data.Migrations
                     b.HasIndex("ContractId");
 
                     b.HasIndex("CustomerId");
+
+                    b.HasIndex("PaymentMethodId");
 
                     b.HasIndex("ReceiptdocTypeId");
 
@@ -1122,6 +1473,31 @@ namespace NajmetAlraqee.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.RecruitmentQaid", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Amount");
+
+                    b.Property<int?>("FromAccountId");
+
+                    b.Property<string>("Note");
+
+                    b.Property<string>("QaidDate");
+
+                    b.Property<int?>("ToAccountId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FromAccountId");
+
+                    b.HasIndex("ToAccountId");
+
+                    b.ToTable("RecruitmentQaids");
+                });
+
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.Religion", b =>
                 {
                     b.Property<int>("Id")
@@ -1144,6 +1520,130 @@ namespace NajmetAlraqee.Data.Migrations
                         {
                             Id = 2,
                             Name = "مسيحي"
+                        });
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ReturnReason", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ReturnReasons");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "السكن"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "نقل الكفالة"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "خروج نهائي"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "الغاء التعامل"
+                        });
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.SnadReceipt", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Amount");
+
+                    b.Property<int?>("ExpenseId");
+
+                    b.Property<int>("FinancialYear");
+
+                    b.Property<string>("Note");
+
+                    b.Property<int?>("PaymentMethodId");
+
+                    b.Property<int>("QuidNumber");
+
+                    b.Property<string>("SnadByUser");
+
+                    b.Property<string>("SnadByUserName");
+
+                    b.Property<string>("SnadDate");
+
+                    b.Property<int?>("SnadReceiptTypeId");
+
+                    b.Property<decimal>("VAT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExpenseId");
+
+                    b.HasIndex("PaymentMethodId");
+
+                    b.HasIndex("SnadReceiptTypeId");
+
+                    b.ToTable("SnadReceipts");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.SnadReceiptCaluse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SnadReceiptCaluses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "أيجار"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "رسوم حكومية"
+                        });
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.SnadReceiptType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SnadReceiptTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "ضريبي"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "غير ضريبي"
                         });
                 });
 
@@ -1199,7 +1699,17 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<decimal>("ContractCost");
 
+                    b.Property<string>("ContractDate");
+
+                    b.Property<decimal>("ContractInterVal");
+
                     b.Property<int?>("ContractStatusId");
+
+                    b.Property<int?>("ContractTypeId");
+
+                    b.Property<int?>("CountryId");
+
+                    b.Property<string>("CreatedById");
 
                     b.Property<int>("CustomerId");
 
@@ -1209,7 +1719,15 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<string>("ForeignAgencyName");
 
+                    b.Property<int?>("JobTypeId");
+
                     b.Property<string>("LicenceNumber");
+
+                    b.Property<decimal?>("Paid");
+
+                    b.Property<string>("QulaficationNote");
+
+                    b.Property<decimal?>("Remainder");
 
                     b.Property<int?>("SpecialEmployeeId");
 
@@ -1219,13 +1737,64 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.HasIndex("ContractStatusId");
 
+                    b.HasIndex("ContractTypeId");
+
+                    b.HasIndex("CountryId");
+
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("ForeignAgencyId");
 
+                    b.HasIndex("JobTypeId");
+
                     b.HasIndex("SpecialEmployeeId");
 
                     b.ToTable("SpecificContracts");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.TransferPurpose", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TransferPurposes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "رسوم عمالة"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "تذكرة سفر"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "راتب"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "انجاز "
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "غرامة تاخير"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "أخري"
+                        });
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.User", b =>
@@ -1363,11 +1932,33 @@ namespace NajmetAlraqee.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.AccountClassification", b =>
+                {
+                    b.HasOne("NajmetAlraqee.Data.Entities.AccountClassificationType", "Type")
+                        .WithMany()
+                        .HasForeignKey("TypeId");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.AccountTree", b =>
+                {
+                    b.HasOne("NajmetAlraqee.Data.Entities.AccountClassification", "AccClassification")
+                        .WithMany()
+                        .HasForeignKey("AccClassificationId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.AccountClassificationType", "AccType")
+                        .WithMany()
+                        .HasForeignKey("AccTypeId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.AccountTree", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId");
+                });
+
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.City", b =>
                 {
                     b.HasOne("NajmetAlraqee.Data.Entities.Country", "Country")
-                        .WithOne("City")
-                        .HasForeignKey("NajmetAlraqee.Data.Entities.City", "CountryId")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
@@ -1400,6 +1991,10 @@ namespace NajmetAlraqee.Data.Migrations
                     b.HasOne("NajmetAlraqee.Data.Entities.JobType", "JobType")
                         .WithMany()
                         .HasForeignKey("JobTypeId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.Nationality", "Nationality")
+                        .WithMany()
+                        .HasForeignKey("NationalityId");
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.ContractDelegation", b =>
@@ -1431,6 +2026,25 @@ namespace NajmetAlraqee.Data.Migrations
                     b.HasOne("NajmetAlraqee.Data.Entities.ContractStatus", "ContractStatus")
                         .WithMany()
                         .HasForeignKey("ContractStatusId");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ContractReturn", b =>
+                {
+                    b.HasOne("NajmetAlraqee.Data.Entities.Contract", "Contract")
+                        .WithMany()
+                        .HasForeignKey("ContractId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.ContractType", "ContractType")
+                        .WithMany()
+                        .HasForeignKey("ContractTypeId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.ReturnReason", "ReturnReason")
+                        .WithMany()
+                        .HasForeignKey("ReturnReasonId");
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.ContractSelect", b =>
@@ -1500,8 +2114,31 @@ namespace NajmetAlraqee.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("NajmetAlraqee.Data.Entities.UserDelegate", "UserDelegate")
-                        .WithOne("Customer")
-                        .HasForeignKey("NajmetAlraqee.Data.Entities.Customer", "UserDelegateId");
+                        .WithMany()
+                        .HasForeignKey("UserDelegateId");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.DelegateTransfer", b =>
+                {
+                    b.HasOne("NajmetAlraqee.Data.Entities.Currency", "Currency")
+                        .WithMany()
+                        .HasForeignKey("CurrencyId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.PaymentMethod", "PaymentMethod")
+                        .WithMany()
+                        .HasForeignKey("PaymentMethodId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.TransferPurpose", "Purpose")
+                        .WithMany()
+                        .HasForeignKey("PurposeId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.BankDetail", "TransferBank")
+                        .WithMany()
+                        .HasForeignKey("TransferBankId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.UserDelegate", "UserDelegate")
+                        .WithMany()
+                        .HasForeignKey("UserDelegateId");
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.Employee", b =>
@@ -1535,15 +2172,29 @@ namespace NajmetAlraqee.Data.Migrations
                         .HasForeignKey("SocialStatusId");
                 });
 
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.FinancialPeriod", b =>
+                {
+                    b.HasOne("NajmetAlraqee.Data.Entities.FinancialPeriodStatus", "FinancialPeriodStatus")
+                        .WithMany()
+                        .HasForeignKey("FinancialPeriodStatusId");
+                });
+
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.ForeignAgency", b =>
                 {
                     b.HasOne("NajmetAlraqee.Data.Entities.BankDetail", "BankDetail")
                         .WithMany()
                         .HasForeignKey("BankDetailId");
+                });
 
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ForeignAgencyJob", b =>
+                {
                     b.HasOne("NajmetAlraqee.Data.Entities.Currency", "Currency")
                         .WithMany()
                         .HasForeignKey("CurrencyId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.ForeignAgency", "ForeignAgency")
+                        .WithMany()
+                        .HasForeignKey("ForeignAgencyId");
 
                     b.HasOne("NajmetAlraqee.Data.Entities.JobType", "JobType")
                         .WithMany()
@@ -1552,6 +2203,36 @@ namespace NajmetAlraqee.Data.Migrations
                     b.HasOne("NajmetAlraqee.Data.Entities.Nationality", "Nationality")
                         .WithMany()
                         .HasForeignKey("NationalityId");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.ForeignAgencyTransfer", b =>
+                {
+                    b.HasOne("NajmetAlraqee.Data.Entities.Currency", "Currency")
+                        .WithMany()
+                        .HasForeignKey("CurrencyId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.ForeignAgency", "ForeignAgency")
+                        .WithMany()
+                        .HasForeignKey("ForeignAgencyId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.PaymentMethod", "PaymentMethod")
+                        .WithMany()
+                        .HasForeignKey("PaymentMethodId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.TransferPurpose", "Purpose")
+                        .WithMany()
+                        .HasForeignKey("PurposeId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.BankDetail", "TransferBank")
+                        .WithMany()
+                        .HasForeignKey("TransferBankId");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.Invoice", b =>
+                {
+                    b.HasOne("NajmetAlraqee.Data.Entities.Contract", "Contract")
+                        .WithMany()
+                        .HasForeignKey("ContractId");
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.ReceiptDoc", b =>
@@ -1564,9 +2245,39 @@ namespace NajmetAlraqee.Data.Migrations
                         .WithMany()
                         .HasForeignKey("CustomerId");
 
+                    b.HasOne("NajmetAlraqee.Data.Entities.PaymentMethod", "PaymentMethod")
+                        .WithMany()
+                        .HasForeignKey("PaymentMethodId");
+
                     b.HasOne("NajmetAlraqee.Data.Entities.ReceiptDocType", "ReceiptdocType")
                         .WithMany()
                         .HasForeignKey("ReceiptdocTypeId");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.RecruitmentQaid", b =>
+                {
+                    b.HasOne("NajmetAlraqee.Data.Entities.AccountTree", "FromAccount")
+                        .WithMany()
+                        .HasForeignKey("FromAccountId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.AccountTree", "ToAccount")
+                        .WithMany()
+                        .HasForeignKey("ToAccountId");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.SnadReceipt", b =>
+                {
+                    b.HasOne("NajmetAlraqee.Data.Entities.Expense", "Expense")
+                        .WithMany()
+                        .HasForeignKey("ExpenseId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.PaymentMethod", "PaymentMethod")
+                        .WithMany()
+                        .HasForeignKey("PaymentMethodId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.SnadReceiptType", "SnadReceiptType")
+                        .WithMany()
+                        .HasForeignKey("SnadReceiptTypeId");
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.SpecialEmployee", b =>
@@ -1582,6 +2293,14 @@ namespace NajmetAlraqee.Data.Migrations
                         .WithMany()
                         .HasForeignKey("ContractStatusId");
 
+                    b.HasOne("NajmetAlraqee.Data.Entities.ContractType", "ContractType")
+                        .WithMany()
+                        .HasForeignKey("ContractTypeId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId");
+
                     b.HasOne("NajmetAlraqee.Data.Entities.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
@@ -1590,6 +2309,10 @@ namespace NajmetAlraqee.Data.Migrations
                     b.HasOne("NajmetAlraqee.Data.Entities.ForeignAgency", "ForeignAgency")
                         .WithMany()
                         .HasForeignKey("ForeignAgencyId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.JobType", "JobType")
+                        .WithMany()
+                        .HasForeignKey("JobTypeId");
 
                     b.HasOne("NajmetAlraqee.Data.Entities.SpecialEmployee", "SpecialEmployee")
                         .WithMany()

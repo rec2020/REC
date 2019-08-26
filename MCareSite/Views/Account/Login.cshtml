@@ -1,87 +1,137 @@
 ﻿@using System.Collections.Generic
-        @using System.Linq
-        @using Microsoft.AspNetCore.Http
-        @using Microsoft.AspNetCore.Http.Authentication
-        @model LoginViewModel
-        @inject SignInManager<User> SignInManager
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@model LoginViewModel
+@inject SignInManager<User> SignInManager
 
-        @{
-            Layout = null;
-        }
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <title>:: NajmetAlraqee Hospital::</title>
-        <meta name="description" content="WrapTheme, Hospital Admin">
-        <meta name="keywords" content="adminX, Bootstrap4, Hospital, Angular4, Material Design">
-        <link rel="icon" href="~/themeforest/Documentation/favicon.ico" type="image/x-icon">
-        <!-- Custom Css -->
-        <link href="~/themeforest/HTML/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/droidarabickufi.css" type="text/css" media="screen" />
-        <link href="~/themeforest/HTML/assets/css/main.css" rel="stylesheet">
-        <link href="~/themeforest/HTML/assets/css/login.css" rel="stylesheet">
-
-
-        <!-- adminX You can choose a theme from css/themes instead of get all themes -->
-        <link href="~/themeforest/HTML/assets/css/themes/all-themes.css" rel="stylesheet" />
-    </head>
-
-    <body class="theme-cyan"style="overflow: hidden">
-        <div class="authentication">
-            <div class="container-fluid">
-                <div class="row clearfix">
-                    <div class="col-xl-3 col-lg-4 col-md-12 col-sm-12 p-r-0">
-                        <div class="card position">
-                            <h4 class="l-login" style="font-family:Droid Arabic Kufi;margin-left: 90px">تسجيل الدخول </h4>
-                            <section>
-                                <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
-                                    <div asp-validation-summary="All" class="text-danger"></div>
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <label class="form-label" style="font-family:Droid Arabic Kufi;margin-left:210px" dir="rtl">البريد الالكتروني</label>
-                                            <input asp-for="Email" type="text" class="form-control" style="font-family:Droid Arabic Kufi" dir="rtl">
-                                            @*<span asp-validation-for="Email" class="text-danger"></span>*@
+@{
+    Layout = null;
+}
+<!DOCTYPE html >
+<html class="loading" lang="ar" dir="rtl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Stack admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, stack admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="PIXINVENT">
+    <title>:: Maharat Alsharq ::</title>
+    <link rel="apple-touch-icon" href="~/LoginStylee/app-assets/images/ico/apple-icon-120.png">
+    <link rel="shortcut icon" type="image/x-icon" href="~/LoginStylee//app-assets/images/ico/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i%7COpen+Sans:300,300i,400,400i,600,600i,700,700i"
+          rel="stylesheet">
+    <!-- BEGIN VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="~/LoginStylee/app-assets/css-rtl/vendors.css">
+    <link rel="stylesheet" type="text/css" href="~/LoginStylee/app-assets/vendors/css/forms/icheck/icheck.css">
+    <link rel="stylesheet" type="text/css" href="~/LoginStylee/app-assets/vendors/css/forms/icheck/custom.css">
+    <!-- END VENDOR CSS-->
+    <!-- BEGIN STACK CSS-->
+    <link rel="stylesheet" type="text/css" href="~/LoginStylee/app-assets/css-rtl/app.css">
+    <link rel="stylesheet" type="text/css" href="~/LoginStylee/app-assets/css-rtl/custom-rtl.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/droidarabickufi.css" type="text/css" media="screen" />
+    <!-- END STACK CSS-->
+    <!-- BEGIN Page Level CSS-->
+    <link rel="stylesheet" type="text/css" href="~/LoginStylee/app-assets/css-rtl/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="~/LoginStylee/app-assets/css-rtl/core/colors/palette-gradient.css">
+    <link rel="stylesheet" type="text/css" href="~/LoginStylee/app-assets/css-rtl/pages/login-register.css">
+    <!-- END Page Level CSS-->
+    <!-- BEGIN Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="~/LoginStylee/assets/css/style-rtl.css">
+    <!-- END Custom CSS-->
+</head>
+<body class="vertical-layout vertical-menu 1-column   bg-lighten-2 menu-expanded blank-page blank-page"
+      data-open="click" data-menu="vertical-menu" data-col="1-column" style="direction:rtl;background-color:#404E67">
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+    <div class="app-content content" style="font-family:Droid Arabic Kufi">
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <section class="flexbox-container">
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <div class="col-md-4 col-10 box-shadow-2 p-0">
+                            <div class="card border-grey border-lighten-3 m-0">
+                                <div class="card-header border-0">
+                                    <div class="card-title text-center">
+                                        <div class="p-1">
+                                            <h6 class="card-subtitle line-on-side text-muted text-center font-large-1 pt-1" style="direction:rtl;">
+                                                <span style="font-family:Droid Arabic Kufi">مهارة الشرق للاستقدام</span>
+                                            </h6>
+                                            @*<img src="~/LoginStylee/app-assets/images/logo/stack-logo-dark.png" alt="branding logo">*@
                                         </div>
                                     </div>
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <label class="form-label" style="font-family:Droid Arabic Kufi;margin-left:240px" dir="rtl">كلمة المرور</label>
-                                            <input asp-for="Password" class="form-control" placeholder="" style="font-family:Droid Arabic Kufi" dir="rtl" />
-                                            @*<span asp-validation-for="Password" class="text-danger"></span>*@
-                                        </div>
+                                   
+                                </div>
+                                <div class="card-content">
+                                    @*<div class="card-body pt-0 text-center">
+                                        <a href="#" class="btn btn-social mb-1 mr-1 btn-outline-facebook">
+                                            <span class="fa fa-facebook"></span>
+                                            <span class="px-1">facebook</span>
+                                        </a>
+                                        <a href="#" class="btn btn-social mb-1 mr-1 btn-outline-google">
+                                            <span class="fa fa-google-plus font-medium-4"></span>
+                                            <span class="px-1">google</span>
+                                        </a>
                                     </div>
-                                    <div>
-                                        <input asp-for="RememberMe" type="checkbox" dir="rtl"  name="rememberme" id="rememberme" class="filled-in chk-col-cyan">
-                                        <label for="rememberme" style="font-family:Droid Arabic Kufi;margin-left:240px">تذكرني</label>
+                                    <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2">
+                                        <span>OR Using Account Details</span>
+                                    </p>*@
+                                    <div class="card-body pt-0" style="direction:rtl">
+                                        <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                                            <div asp-validation-summary="All" class="text-danger"></div>
+                                            <fieldset class="form-group floating-label-form-group" dir="rtl">
+                                                <label for="user-name" dir="rtl">البريد الالكتروني</label>
+                                                <input asp-for="Email" type="text" class="form-control" placeholder="البريد الالكتروني" required style="font-family:Droid Arabic Kufi" dir="rtl">
+                                            </fieldset>
+                                            <fieldset class="form-group floating-label-form-group mb-1">
+                                                <label for="user-password">كلمة المرور</label>
+                                                <input asp-for="Password" class="form-control" placeholder="كلمة المرور" required  style="font-family:Droid Arabic Kufi" dir="rtl" />
+                                            </fieldset>
+                                            <div class="form-group row">
+                                                <div class="col-md-6 col-12 text-center text-sm-left">
+                                                    <fieldset>
+                                                        <input type="checkbox" id="remember-me" class="chk-remember">
+                                                        <label for="remember-me">تذكرني</label>
+                                                    </fieldset>
+                                                </div>
+                                                @*<div class="col-md-6 col-12 float-sm-left text-center text-sm-right"><a href="recover-password.html" class="card-link">Forgot Password?</a></div>*@
+                                            </div>
+                                            @*<button type="submit" class="btn btn-outline-primary btn-block"><i class=""></i>تسجيل الدخول  </button>*@
+                                            <button type="submit" class="btn btn-primary btn-lg btn-block"><i class="ft-unlock"></i> تسجيل الدخول</button>
+                                        </form>
                                     </div>
-                                    <a href="@Url.Action("Register","Account")" class="btn btn-raised waves-effect" style="font-family:Droid Arabic Kufi">تسجيل</a>
-                                    <input type="submit" value="دخول" style="font-family:Droid Arabic Kufi" class="btn btn-raised g-bg-cyan waves-effect" />
-                                    @*<div class="text-left"> <a href="forgot-password.html">Forgot Password?</a> </div>*@
-                                </form>
-                            </section>
+                                    @*<p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1">
+                                        <span>New to Stack ?</span>
+                                    </p>
+                                    <div class="card-body">
+                                        <a href="register-with-bg.html" class="btn btn-outline-danger btn-block"><i class="ft-user"></i> Register</a>
+                                    </div>*@
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12 p-l-0">
-                        <div class="l-detail">
-                            <h5 class="position">Welcome</h5>
-                            <h1 class="position"><img src="~/themeforest/HTML/assets/images/logo.svg" alt="profile img"><span>MC</span>are <span>H</span>ospitals</h1>
-                            @*<h3 class="position">Sign in to start your session</h3>
-        <p class="position">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>*@
-                        </div>
-
-                    </div>
-                </div>
+                </section>
+            </div>
         </div>
-</div>
-        <!-- Jquery Core Js -->
-        <script src="~/themeforest/HTML/assets/bundles/libscripts.bundle.js"></script> <!-- Bootstrap JS and jQuery v3.2.1 -->
-        <script src="~/themeforest/HTML/assets/bundles/vendorscripts.bundle.js"></script> <!-- slimscroll, waves Scripts Plugin Js -->
-
-        <script src="~/themeforest/HTML/assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
-    </body>
-    </html>
+    </div>
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+    <!-- BEGIN VENDOR JS-->
+    <script src="~/LoginStylee/app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN PAGE VENDOR JS-->
+    <script src="~/LoginStylee/app-assets/vendors/js/forms/icheck/icheck.min.js" type="text/javascript"></script>
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN STACK JS-->
+    <script src="~/LoginStylee/app-assets/js/core/app-menu.js" type="text/javascript"></script>
+    <script src="~/LoginStylee/app-assets/js/core/app.js" type="text/javascript"></script>
+    <script src="~/LoginStylee/app-assets/js/scripts/customizer.js" type="text/javascript"></script>
+    <!-- END STACK JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script src="~/LoginStylee/app-assets/js/scripts/forms/form-login-register.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL JS-->
+</body>
+</html>
 
 

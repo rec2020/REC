@@ -19,6 +19,9 @@ namespace NajmetAlraqee.Data.Entities
         public decimal? EmployeeCost { get; set; }
         public decimal VatCost { get; set; }
         public decimal  ContractCost { get; set; }
+        public decimal? Remainder { get; set; }
+        public decimal? Paid { get; set; }
+        public int? NationalityId { get; set; }
         public int? ArrivalCityId { get; set; }
         public string ContractNote  { get; set; }
         public int?  TestDay { get; set; }
@@ -31,6 +34,9 @@ namespace NajmetAlraqee.Data.Entities
         public int? ForeignAgencyId { get; set; }
         public int?  OldContractNo { get; set; }
 
+        public int? VisaNumber { get; set; }
+        public string VisaDate { get; set; }
+        public bool? IsDone { get; set; }
 
         public virtual ContractStatus ContractStatus { get; set; }
         public virtual ContractType ContractType { get; set; }
@@ -39,6 +45,7 @@ namespace NajmetAlraqee.Data.Entities
         public virtual  City ArrivalCity { get; set; }
         public virtual ForeignAgency ForeignAgency { get; set; }
         public virtual JobType JobType { get; set; }
+        public virtual Nationality Nationality { get; set; }
 
     }
 }

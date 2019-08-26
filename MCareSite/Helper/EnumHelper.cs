@@ -43,5 +43,14 @@ namespace NajmetAlraqee.Site.Helper
             SnadReceive = 1,
             SnadTaking
         }
+
+        public enum ContractType
+        {
+            New = 1,
+            Substitute,
+            Specific
+           
+        }
+       
     }
 }

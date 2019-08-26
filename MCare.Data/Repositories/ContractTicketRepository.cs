@@ -148,6 +148,19 @@ namespace NajmetAlraqee.Data.Repositories
             existticket.IsApproved = ticket.IsApproved;
             _context.Update(existticket);
             _context.SaveChanges();
+
+            //Adding TestDays
+
+            var cont = _context.Contracts.Find(existticket.ContractId);
+            if (cont != null)
+            {
+                    cont.TestDay = 90;
+                    //cont.EmployeeName = contractVisa.EmployeeName;
+                _context.Update(cont);
+                _context.SaveChanges();
+            }
+
+
             return true;
         }
     }

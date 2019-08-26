@@ -46,6 +46,7 @@
                             <div class="col-sm-8 col-xs-12">
                                 <div asp-validation-summary="All" style="font-family:Droid Arabic Kufi" class="text-danger"></div>
                                 @Html.HiddenFor(x => x.Id)
+                                @Html.HiddenFor(x => x.OldContractNo)
                             </div>
                             <div class="col-sm-2 col-xs-12"></div>
                         </div>
@@ -84,11 +85,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-4 col-xs-12">
+                            <div class="col-sm-2 col-xs-12">
                                 <div class="form-group">
                                     <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ContractCost") </label>
                                     <div class="form-line">
-                                        <input asp-for="ContractCost" type="number" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("ContractCost")" />
+                                        <input asp-for="ContractCost" type="number" class="form-control" onkeyup="CalVAT()" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("ContractCost")" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("VAT") </label>
+                                    <div class="form-line">
+                                        <input asp-for="VatCost" type="number" class="form-control" style="font-family:Droid Arabic Kufi" readonly="readonly" />
                                     </div>
                                 </div>
                             </div>
@@ -102,15 +111,15 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-4 col-xs-12">
+                            <div class="col-sm-3 col-xs-12">
                                 <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("VicationDays") </label>
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Nationality") </label>
                                     <div class="form-line">
-                                        <input asp-for="VicationDays" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("VicationDays")" />
+                                        <select asp-for="NationalityId" class="custom-select form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.NationalityId"><option>@SharedLocalizer.GetLocalizedHtmlString("Nationality")</option></select>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-4 col-xs-12">
+                            <div class="col-sm-3 col-xs-12">
                                 <div class="form-group">
                                     <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ArrivalCity") </label>
                                     <div class="form-line">
@@ -118,7 +127,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-4 col-xs-12">
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("VicationDays") </label>
+                                    <div class="form-line">
+                                        <input asp-for="VicationDays" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("VicationDays")" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
                                 <div class="form-group">
                                     <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ExperienceYear") </label>
                                     <div class="form-line">
@@ -130,13 +147,29 @@
                         <div class="row">
                             <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Visa_Number") </label>
+                                    <div class="form-line">
+                                        <input asp-for="VisaNumber" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  maxlength="10" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Visa_Number")" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Visa_Date") </label>
+                                    <div class="form-line">
+                                        <input asp-for="@Model.VisaDate" type="date" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Visa_Date")" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
                                     <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("JobType") </label>
                                     <div class="form-line">
                                         <select asp-for="JobTypeId" class="form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.JobTypeId"><option>@SharedLocalizer.GetLocalizedHtmlString("JobType")</option></select>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-xs-12">
+                            <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
                                     <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("QulaficationNote") </label>
                                     <div class="form-line">
@@ -144,7 +177,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div class="col-sm-12">
                             <button type="submit" value="Add" style="font-family:Droid Arabic Kufi;right:950Px" class="btn btn-raised g-bg-cyan pull-left">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
@@ -160,12 +192,42 @@
 </div>
 @section Scripts {
     <script src='~/js/jquery-customselect.js'></script>
-}
-@*<script type="text/javascript">
-    var contracttype = $("#ContractTypeId").val();
-    if (contracttype == 2) {
-            $("#RentValueSection").fadeIn('slow');
-            $("#RentTotalSection").fadeIn('slow');
+    <script>
+       function CalVAT() {
+           var x = document.getElementById("ContractCost");
+           var y = document.getElementById("VatCost");
+             y.value = x.value * (0.05);
+                }
+    </script>
 
-    };
-</script>*@
+}
+
+
+
+
+
+@*<script type="text/javascript">
+        var contracttype = $("#ContractTypeId").val();
+        if (contracttype == 2) {
+                $("#RentValueSection").fadeIn('slow');
+                $("#RentTotalSection").fadeIn('slow');
+
+        };
+    </script>*@
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            function CalVAT() {
+                var value1 = parseFloat(document.getElementById("Quantity").value);
+                document.getElementById("CurrentQuantitty").value = value1;
+                var value2 = parseFloat(document.getElementById("ApproximatePrice").value);
+                var sum = value1 * value2;
+                document.getElementById("TotalAmount").value = sum;
+                document.getElementById("CurrentAmount").value = document.getElementById("TotalAmount").value;
+
+            }
+        }
+
+
+
+    </script>*@
+

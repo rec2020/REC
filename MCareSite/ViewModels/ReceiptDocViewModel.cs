@@ -14,9 +14,12 @@ namespace NajmetAlraqee.Site.ViewModels
         public int? ReceiptdocTypeId { get; set; }
         public string ReceiptdocTypeName { get; set; }
         public int? ContractId { get; set; }
-
-        [Required(ErrorMessage = "الرجاءادخال العميل  ")]
+        public int? ContractTypeId { get; set; }
+        public int? ContractType { get; set; }
+        [Required(ErrorMessage = "الرجاءادخال العميل")]
         public int? CustomerId { get; set; }
+        [Required(ErrorMessage = "الرجاءادخال طريقة الدفع")]
+        public int? PaymentMethodId { get; set; }
         public string  CustomerName { get; set; }
         [Required(ErrorMessage = "الرجاءادخال المبلغ  ")]
         public decimal Amount { get; set; }
@@ -27,5 +30,6 @@ namespace NajmetAlraqee.Site.ViewModels
         public string ReceiptDate { get; set; }
         public string ReceiptByUser { get; set; }
         public string ReceiptByUserName { get; set; }
+        public int QaidNo { get; set; }
     }
 }

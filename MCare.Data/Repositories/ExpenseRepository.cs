@@ -53,7 +53,6 @@ namespace NajmetAlraqee.Data.Repositories
             existexpense.Name = expense.Name;
             existexpense.Code = expense.Code;
             existexpense.AccountNumber = expense.AccountNumber;
-            existexpense.PartnerCode = expense.PartnerCode;
 
             _context.Update(existexpense);
             _context.SaveChanges();
