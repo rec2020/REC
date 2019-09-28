@@ -42,7 +42,19 @@ namespace NajmetAlraqee.Site.Controllers
 
 
         #endregion
-        public ContractController(ICityRepository city, IEmployeeRepository emp, IReceiptDocRepository receipt, IContractSelectRepository select, IUserRepository user, IContractHistoryRepository history, IContractTicketRepository ticket, IContractVisaRepository visa, IContractDelegateRepository deleg, IJobTypeReository jobtype, ICustomerRepository customer, INationalityRepository nationality, IContractRepository contract, IContractTypeRepository contract_Type, IMapper mapper, IToastNotification toastNotification)
+        public ContractController(ICityRepository city,
+            IEmployeeRepository emp, 
+            IReceiptDocRepository receipt,
+            IContractSelectRepository select,
+            IUserRepository user, 
+            IContractHistoryRepository history,
+            IContractTicketRepository ticket,
+            IContractVisaRepository visa,
+            IContractDelegateRepository deleg,
+            IJobTypeReository jobtype, 
+            ICustomerRepository customer, INationalityRepository nationality,
+            IContractRepository contract, IContractTypeRepository contract_Type, IMapper mapper,
+            IToastNotification toastNotification)
         {
             _receipt = receipt;
             _Contract = contract;
@@ -133,7 +145,7 @@ namespace NajmetAlraqee.Site.Controllers
                 ViewBag.ContractTypeId = new SelectList(_contract_Type.GetContractTypes().Where(x => x.Id == (int)EnumHelper.ContractType.Substitute), "Id", "Name");
             }
             //ViewBag.ContractTypeId = new SelectList(_contract_Type.GetContractTypes().Where(x => x.Id <= 2), "Id", "Name");
-            ViewBag.CustomerId = new SelectList(_customer.GetCustomers(), "Id", "FirstName");
+            ViewBag.CustomerId = new SelectList(_customer.GetCustomers(), "Id", "Name");
             ViewBag.ArrivalCityId = new SelectList(_city.GetCities(), "Id", "Name");
             ViewBag.JobTypeId = new SelectList(_jobtype.GetJobTypes(), "Id", "Name");
             ViewBag.NationalityId = new SelectList(_nationality.GetNationalities(), "Id", "Name");

@@ -86,7 +86,7 @@
                                         @Html.DisplayFor(modelItem => item.Id)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Customer.FirstName)
+                                        @Html.DisplayFor(modelItem => item.Customer.Name)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.ContractType.Name)
@@ -116,7 +116,7 @@
                                             @*<a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-raised btn-danger btn-sm"><i class="material-icons" title="@SharedLocalizer.GetLocalizedHtmlString("Delete")">delete_sweep</i></a>*@
                                         }
                                         <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-raised btn-info btn-sm"><i class="material-icons" title="@SharedLocalizer.GetLocalizedHtmlString("Details")">toc</i></a>
-                                        <a asp-action="Add" asp-controller="Invoice"  asp-route-contractId="@item.Id" class="btn  btn-raised btn-sm bg-cyan waves-effect"><i class="material-icons" title="@SharedLocalizer.GetLocalizedHtmlString("AddInvoice")">insert_drive_file</i></a>
+                                        @*<a asp-action="Add" asp-controller="Invoice"  asp-route-contractId="@item.Id" class="btn  btn-raised btn-sm bg-cyan waves-effect"><i class="material-icons" title="@SharedLocalizer.GetLocalizedHtmlString("AddInvoice")">insert_drive_file</i></a>*@
 
                                     </td>
                                 </tr>

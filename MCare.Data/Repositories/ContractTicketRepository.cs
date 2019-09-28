@@ -155,6 +155,7 @@ namespace NajmetAlraqee.Data.Repositories
             if (cont != null)
             {
                     cont.TestDay = 90;
+                cont.ContractStatusId = (int)EnumHelper.ContractStatus.UnderTest;
                     //cont.EmployeeName = contractVisa.EmployeeName;
                 _context.Update(cont);
                 _context.SaveChanges();

@@ -26,7 +26,8 @@ namespace NajmetAlraqee.Site.Helper
             Visa,
             Ticket,
             Return,
-            Close
+            Close,
+            UnderTest
         }
         public enum ContractAction
         {

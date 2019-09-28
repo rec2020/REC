@@ -1021,7 +1021,7 @@
     <value>رقم الفيزاء</value>
   </data>
   <data name="AddEmployee" xml:space="preserve">
-    <value>أضافة موظف</value>
+    <value>أضافة عامل/ة</value>
   </data>
   <data name="DeleteEmployee" xml:space="preserve">
     <value>حذف موظف</value>
@@ -1030,7 +1030,7 @@
     <value>تعديل موظف</value>
   </data>
   <data name="Employee" xml:space="preserve">
-    <value>الموظف</value>
+    <value>العامل/ة</value>
   </data>
   <data name="Employees" xml:space="preserve">
     <value>قائمة العمالة المنزلية</value>

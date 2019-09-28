@@ -17,7 +17,6 @@ namespace NajmetAlraqee.Data.Entities
         public decimal VatValue { get; set; }// 
         public decimal  Total { get; set; }//
 
-
         public virtual Contract Contract { get; set; }
     }
 }

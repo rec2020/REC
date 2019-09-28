@@ -13,9 +13,6 @@
         <li><a href=@Url.Action("index","Home")><i class="material-icons">home</i>@SharedLocalizer.GetLocalizedHtmlString("Home") </a></li>
         <li><a href="javascript:void(0);"><i class="material-icons">library_books</i> @SharedLocalizer.GetLocalizedHtmlString("Customers")</a></li>
     </ol>
-    @*<div>
-            <a class="btn btn-round pull-right bg-cyan waves-effect" asp-action="Add">@SharedLocalizer.GetLocalizedHtmlString("AddCountry")</a>
-        </div>*@
 </div>
 
 <div class="col-md-12">
@@ -36,11 +33,9 @@
 </div>
 
 <div class="container-fluid">
-
     <div>
         <a class="btn btn-raised btn-sm btn-success" style="right:1080Px" asp-action="Add">@SharedLocalizer.GetLocalizedHtmlString("AddCustomer")</a>
     </div>
-
 
     <div class="row clearfix">
         <div class="col-md-12 col-xs-12">
@@ -72,6 +67,9 @@
                                     <th>
                                         @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("FirstPhone"))
                                     </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("AccountNo"))
+                                    </th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -80,47 +78,50 @@
                                 {
                                     @foreach (var item in ViewBag.Customers)
                                     {
-                                        <tr>
-                                            <td>
-                                                @item.FirstName  @item.LastName
-                                            </td>
-                                            <td>
-                                                @item.IdentityNo
-                                            </td>
-                                            <td>
-                                                @item.Address
-                                            </td>
-                                            <td>
-                                                @item.CustomerType.Name
-                                            </td>
-                                            <td>
-                                                @if (item.IsActive)
-                                                {<span class="label label-success">@SharedLocalizer.GetLocalizedHtmlString("Active")</span> }
-                                            else
-                                            {<span class="label label-warning">@SharedLocalizer.GetLocalizedHtmlString("InActive")</span>}
-                                            </td>
-                                            <td>
-                                                @item.UserDelegate.Name
-                                            </td>
-                                            <td>
-                                                @item.FirstPhone
-                                            </td>
-                                            <td>
-                                                @if (User.IsInRole("ADMIN"))
-                                                {
-                                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-raised btn-secondary btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Edit")</a>
-                                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-raised btn-danger btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Delete")</a>}
-                                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-raised btn-info btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Details")</a> |
-                                                @if (item.IsActive)
-                                                {
-                                                    <a asp-action="DisActivated" asp-route-id="@item.Id" title="@SharedLocalizer.GetLocalizedHtmlString("DisActivated")" class="btn btn-raised btn-danger btn-sm zmdi zmdi-power"></a>
-                                                }
-                                                else
-                                                {
-                                                    <a asp-action="Activated" asp-route-id="@item.Id" title="@SharedLocalizer.GetLocalizedHtmlString("Activated")" class="btn btn-raised btn-success btn-sm zmdi zmdi-power"></a>
-                                                }
-                                            </td>
-                                        </tr>
+                                <tr>
+                                    <td>
+                                        @item.FirstName  @item.LastName
+                                    </td>
+                                    <td>
+                                        @item.IdentityNo
+                                    </td>
+                                    <td>
+                                        @item.Address
+                                    </td>
+                                    <td>
+                                        @item.CustomerType.Name
+                                    </td>
+                                    <td>
+                                        @if (item.IsActive)
+                                        {<span class="label label-success">@SharedLocalizer.GetLocalizedHtmlString("Active")</span> }
+                                    else
+                                    {<span class="label label-warning">@SharedLocalizer.GetLocalizedHtmlString("InActive")</span>}
+                                    </td>
+                                    <td>
+                                        @item.UserDelegate.Name
+                                    </td>
+                                    <td>
+                                        @item.FirstPhone
+                                    </td>
+                                    <td>
+                                      <label class="label label-success">  @item.AccountTree.AccountNo </label>
+                                    </td>
+                                    <td>
+                                        @if (User.IsInRole("ADMIN"))
+                                        {
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-raised btn-secondary btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Edit")</a>
+                                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-raised btn-danger btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Delete")</a>}
+                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-raised btn-info btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Details")</a> |
+                                        @if (item.IsActive)
+                                        {
+                                            <a asp-action="DisActivated" asp-route-id="@item.Id" title="@SharedLocalizer.GetLocalizedHtmlString("DisActivated")" class="btn btn-raised btn-danger btn-sm zmdi zmdi-power"></a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-action="Activated" asp-route-id="@item.Id" title="@SharedLocalizer.GetLocalizedHtmlString("Activated")" class="btn btn-raised btn-success btn-sm zmdi zmdi-power"></a>
+                                        }
+                                    </td>
+                                </tr>
                                     }
                                 }
                             </tbody>

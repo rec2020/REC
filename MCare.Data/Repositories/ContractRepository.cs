@@ -29,6 +29,24 @@ namespace NajmetAlraqee.Data.Repositories
             _context.Contracts.Add(contract);
             _context.SaveChanges();
 
+            // Add Invoice 
+            Invoice contractInvoice = new Invoice {
+                ContractNo = contract.Id,
+                InvoiceDate = DateTime.UtcNow.ToString("dd/MM/yyyy",CultureInfo.InvariantCulture),
+                Amount = contract.ContractCost - contract.VatCost,
+                VatValue= contract.VatCost,
+                Discount=0,
+                Note = contract.ContractNote,
+                VatPercentage =(contract.VatCost/ contract.ContractCost) *100 ,
+                Total= contract.ContractCost
+            };
+            var customerInvoice = _context.Customers.Where(x => x.Id == contract.CustomerId).SingleOrDefault();
+            if (customerInvoice!= null) {
+                contractInvoice.Customer = customerInvoice.Name;
+            }
+            _context.Invoices.Add(contractInvoice);
+            _context.SaveChanges();
+
             // Adding To Contract History 
             ContractHistory history = new ContractHistory
             {
@@ -54,7 +72,6 @@ namespace NajmetAlraqee.Data.Repositories
 
             history.ActionDate = DateTime.UtcNow.ToString("dd/MM/yyyy",
                                        CultureInfo.InvariantCulture);
-
             _context.ContractHistories.Add(history);
             _context.SaveChanges();
 

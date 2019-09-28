@@ -17,9 +17,7 @@ namespace NajmetAlraqee.Data.Repositories
         {
             _context = context;
         }
-
        
-
         public int AddCustomer(Customer customer)
         {
             // Add Customer Account In the Tree 
@@ -73,13 +71,15 @@ namespace NajmetAlraqee.Data.Repositories
 
         public Customer GetCustomerById(int Id)
         {
-            return _context.Customers.Include(x => x.CustomerType).Include(x => x.UserDelegate)
+            return _context.Customers.Include(x => x.CustomerType)
+                .Include(x => x.UserDelegate)
+                .Include(x => x.AccountTree)
                 .SingleOrDefault(p => p.Id == Id);
         }
 
         public IQueryable<Customer> GetCustomers()
         {
-            return _context.Customers.Include(x=>x.CustomerType).Include(x=>x.UserDelegate);
+            return _context.Customers.Include(x=>x.CustomerType).Include(x => x.AccountTree).Include(x=>x.UserDelegate);
         }
 
         public bool RemoveCustomer(int Id)
