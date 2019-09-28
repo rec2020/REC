@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NajmetAlraqee.Data;
 
 namespace NajmetAlraqee.Data.Migrations
 {
     [DbContext(typeof(NajmetAlraqeeContext))]
-    partial class NajmetAlraqeeContextModelSnapshot : ModelSnapshot
+    [Migration("20190928031346_AddAccounttreeToBankDetails")]
+    partial class AddAccounttreeToBankDetails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -767,8 +769,6 @@ namespace NajmetAlraqee.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AccountTreeId");
-
                     b.Property<string>("Address");
 
                     b.Property<int>("CustomerTypeId");
@@ -796,8 +796,6 @@ namespace NajmetAlraqee.Data.Migrations
                     b.Property<int?>("UserDelegateId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccountTreeId");
 
                     b.HasIndex("CustomerTypeId");
 
@@ -2125,10 +2123,6 @@ namespace NajmetAlraqee.Data.Migrations
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.Customer", b =>
                 {
-                    b.HasOne("NajmetAlraqee.Data.Entities.AccountTree", "AccountTree")
-                        .WithMany()
-                        .HasForeignKey("AccountTreeId");
-
                     b.HasOne("NajmetAlraqee.Data.Entities.CustomerType", "CustomerType")
                         .WithMany()
                         .HasForeignKey("CustomerTypeId")

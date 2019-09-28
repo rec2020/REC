@@ -22,11 +22,12 @@ namespace NajmetAlraqee.Data.Entities
         public string FamilyImage { get; set; }
         public bool? IsActive { get; set; }
         public int? UserDelegateId { get; set; }
-       
+        public int? AccountTreeId { get; set; }
+
         public string Address { get; set; }
         public virtual CustomerType CustomerType { get; set; }
         public virtual UserDelegate UserDelegate { get; set; }
-        //public virtual Contract Contract { get; set; }
+        public virtual AccountTree AccountTree { get; set; }
      
 
     }

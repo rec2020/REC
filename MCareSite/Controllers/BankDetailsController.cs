@@ -60,7 +60,7 @@ namespace NajmetAlraqee.Site.Controllers
             var banksList = _bank.GetBankDetails();
             ViewBag.Banks = banksList;
             ViewBag.AccountTreeId = new SelectList(_Acctree.GetAccountTrees(), "Id", "DescriptionAr");
-            if (bankDetailViewModels.AccountTreeId == null) { ModelState.AddModelError("", "الرجاء تحدد رقم الحساب"); }
+            if (bankDetailViewModels.AccountTreeId == null) { ModelState.AddModelError("", "الرجاء تحدد رقم الحساب في الشجرة"); }
             if (bankDetailViewModels.Id == 0)
             {
                 ModelState.Remove("Id");

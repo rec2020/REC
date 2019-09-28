@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 using NajmetAlraqee.Data.Entities;
 
 namespace NajmetAlraqee.Data.Repositories
@@ -26,13 +27,13 @@ namespace NajmetAlraqee.Data.Repositories
 
         public BankDetail GetBankDetailById(int Id)
         {
-            return _context.BankDetails
+            return _context.BankDetails.Include(x=>x.AccountTree)
                .SingleOrDefault(p => p.Id == Id);
         }
 
         public IQueryable<BankDetail> GetBankDetails()
         {
-            return _context.BankDetails;
+            return _context.BankDetails.Include(x => x.AccountTree);
         }
 
         public bool RemoveBankDetail(int Id)

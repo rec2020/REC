@@ -22,7 +22,48 @@ namespace NajmetAlraqee.Data.Repositories
 
         public int AddCustomer(Customer customer)
         {
-            customer.Name = customer.FirstName + "  " + customer.LastName; 
+            // Add Customer Account In the Tree 
+            var getLastCustomerAccount = _context.AccountTrees.Where(x => x.Accprev.Contains("01002006000")).LastOrDefault();
+            var getCustomerAccount = _context.AccountTrees.Where(x => x.AccountNo.Contains("01002006000")).SingleOrDefault();
+            if (getCustomerAccount !=null) { 
+            AccountTree Acc = new AccountTree
+            {
+                DescriptionAr = customer.FirstName + "    " + customer.LastName,
+                DescriptionEn = customer.FirstName + "    " + customer.LastName,
+                AccountLevel = getCustomerAccount.AccountLevel + 1 , 
+                AccClassificationId = getCustomerAccount.AccClassificationId,
+                AccTypeId = getCustomerAccount.AccTypeId , 
+                Accprev = getCustomerAccount.AccountNo,
+                CostCenter = getCustomerAccount.CostCenter,
+                ParentId = getCustomerAccount.Id,
+                EhalkPrecent = 0,
+                HighLimitForBalance = 0,
+                PriceInExhibtion=0,
+                JE = null,
+                Debit = 0,
+                Credit = 0,
+                Balance = 0,
+            };
+                if (getLastCustomerAccount != null)
+                {
+                    var newacouuntnumber = int.Parse(getLastCustomerAccount.AccountNo);
+                    newacouuntnumber += 1;
+                    Acc.AccountNo = "0" + newacouuntnumber.ToString();
+                }
+                else
+                {
+                    var newacouuntnumber = int.Parse(getCustomerAccount.AccountNo);
+                    newacouuntnumber += 1;
+                    Acc.AccountNo = "0" + newacouuntnumber.ToString();
+                }
+
+                _context.AccountTrees.Add(Acc);
+            _context.SaveChanges();
+            customer.AccountTreeId = Acc.Id;
+            }
+            // 
+            customer.Name = customer.FirstName + "  " + customer.LastName;
+           
             customer.IsActive = true;
             _context.Customers.Add(customer);
             _context.SaveChanges();

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NajmetAlraqee.Data;
 
 namespace NajmetAlraqee.Data.Migrations
 {
     [DbContext(typeof(NajmetAlraqeeContext))]
-    partial class NajmetAlraqeeContextModelSnapshot : ModelSnapshot
+    [Migration("20190928033545_AddAccounttreeToCustomers")]
+    partial class AddAccounttreeToCustomers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
