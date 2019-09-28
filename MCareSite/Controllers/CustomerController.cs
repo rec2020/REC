@@ -15,10 +15,11 @@ using NajmetAlraqee.Site.ViewModels;
 using NajmetAlraqeeSite.Services;
 using NToastNotify;
 using Microsoft.AspNetCore.Http;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace NajmetAlraqee.Site.Controllers
 {
+    [Authorize]
     public class CustomerController : Controller
     {
         private readonly NajmetAlraqeeContext _context;

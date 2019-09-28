@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="09/14/2019 22:26:10" ReportInfo.Modified="09/16/2019 15:39:31" ReportInfo.CreatorVersion="2019.3.24.0">
+  <Styles Name="Gray">
+    <Style Name="Title" Font="Arial, 12pt, style=Bold"/>
+    <Style Name="Header" Fill.Color="Gainsboro" Font="Arial, 10pt, style=Bold"/>
+    <Style Name="Group" Font="Arial, 10pt, style=Bold"/>
+    <Style Name="Data" Font="Arial, 10pt"/>
+    <Style Name="Footer" Fill.Color="Gainsboro" Font="Arial, 10pt"/>
+    <Style Name="EvenRows" Fill.Color="WhiteSmoke" Font="Arial, 10pt"/>
+  </Styles>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqMh8sRi+glD5C5+Hd3tuDHDAfP2fE8hFw+WouMg+IjD2gTlt1t6zLuMPlz6ro5lGFrASDJeo9HQz1I2vC88h82zAPb/V5K8oXv6NwVH6WmRs+QTkibqF07/X0kRBLUqY47FQxZsN00Ao+pD9RD4bhxTXu18zfhFg0F8rvpiHwYyPlX/87IF5k6GCt6EIsBls0M+Nkz3wLmJiboPigolSJGOtcFMf+BLHQU+YazUvLFohjhSLcUQ0gesVslWZi/yqE">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="Select &#13;&#10;con.Id  Contract_No, &#13;&#10; con.ContractDate ,&#13;&#10; stat.Name Status ,&#13;&#10; (select cd.DelegationDate  from [dbo].[ContractDelegations] cd where cd.ContractId = con.Id) DelegationDate,con.LateDays ,&#13;&#10; ( select cus.Name From [dbo].[Customers] cus  where cus.Id = con.CustomerId) Customer ,&#13;&#10;  con.VisaNumber ,&#13;&#10;  (select city.Name From [dbo].[Cities] city where city.Id =con.ArrivalCityId ) ArrivalCity ,&#13;&#10;   (select job.Name From [dbo].[JobTypes] job where job.Id = con.JobTypeId) Job, &#13;&#10;   (select  Nat.Name From [dbo].[Nationalities] Nat where Nat.Id= con.NationalityId ) Nationality ,&#13;&#10;   &#13;&#10;  ( select agency.OfficeName From [dbo].[ForeignAgencies] agency  where agency.Id = con.ForeignAgencyId ) 'ForeignAgencies' &#13;&#10;From [dbo].[Contracts] con &#13;&#10;inner join [dbo].[ContractStatuses] stat on stat.Id = con.ContractStatusId">
+        <Column Name="Contract_No" DataType="System.Int32"/>
+        <Column Name="ContractDate" DataType="System.String"/>
+        <Column Name="Status" DataType="System.String"/>
+        <Column Name="DelegationDate" DataType="System.String"/>
+        <Column Name="LateDays" DataType="System.Int32"/>
+        <Column Name="Customer" DataType="System.String"/>
+        <Column Name="VisaNumber" DataType="System.Int32"/>
+        <Column Name="ArrivalCity" DataType="System.String"/>
+        <Column Name="Job" DataType="System.String"/>
+        <Column Name="Nationality" DataType="System.String"/>
+        <Column Name="ForeignAgencies" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="Country" DataType="System.String"/>
+    <Parameter Name="LateDate" DataType="System.String"/>
+    <Parameter Name="ForiegnAgency" DataType="System.String"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" RawPaperSize="9" Guides="954.45,718.2" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="160.65">
+      <TextObject Name="Text1" Width="1047.06" Height="160.65" Dock="Fill" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+      <PictureObject Name="Picture1" Top="9.45" Width="1048.95" Height="113.4" Border.Lines="All" ImageLocation="D:\NajmatAppv1\NajmetAlraqee\MCareSite\wwwroot\images\MainLOG.jpg"/>
+      <TextObject Name="Text25" Left="94.5" Top="18.9" Width="236.25" Height="103.95" Text="Kingdom Of Saudi Arabia &#13;&#10;&#13;&#10;Maharat Alsharq&#13;&#10;&#13;&#10;Main Branch " HorzAlign="Center" Font="Calibri Light, 12pt, style=Bold"/>
+      <TextObject Name="Text26" Left="746.55" Top="18.9" Width="207.9" Height="94.5" Text="المملكة العربية السعودية &#13;&#10;&#13;&#10;مكتب مهارة الشرق &#13;&#10;&#13;&#10;الفرع الرئيسي &#13;&#10;" HorzAlign="Center" Font="Arial, 12pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="163.51" Width="1047.06" Height="37.8">
+      <TextObject Name="Text3" Width="66.15" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="رقم العقد" HorzAlign="Center" Font="Calibri Light, 12pt, style=Bold"/>
+      <TextObject Name="Text5" Left="66.15" Width="94.5" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="التاريخ" HorzAlign="Center" Font="Calibri Light, 12pt, style=Bold"/>
+      <TextObject Name="Text7" Left="160.65" Width="75.6" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="الحالة " HorzAlign="Center" Font="Calibri Light, 12pt, style=Bold"/>
+      <TextObject Name="Text9" Left="236.25" Width="94.5" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="تاريخ التفويض" HorzAlign="Center" Font="Calibri Light, 12pt, style=Bold"/>
+      <TextObject Name="Text11" Left="330.75" Width="75.6" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="ايام التاخير" HorzAlign="Center" Font="Calibri Light, 12pt, style=Bold"/>
+      <TextObject Name="Text13" Left="406.35" Width="103.95" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="العميل" HorzAlign="Center" Font="Calibri Light, 12pt, style=Bold"/>
+      <TextObject Name="Text15" Left="510.3" Width="103.95" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="رقم التاشيرة" HorzAlign="Center" Font="Calibri Light, 12pt, style=Bold"/>
+      <TextObject Name="Text17" Left="614.25" Width="113.4" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="مدينة الوصول" HorzAlign="Center" Font="Calibri Light, 12pt, style=Bold"/>
+      <TextObject Name="Text19" Left="727.65" Width="94.5" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="المهنة " HorzAlign="Center" Font="Calibri Light, 12pt, style=Bold"/>
+      <TextObject Name="Text21" Left="822.15" Width="103.95" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="البلد" HorzAlign="Center" Font="Calibri Light, 12pt, style=Bold"/>
+      <TextObject Name="Text23" Left="926.1" Width="122.85" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="الوكالة " HorzAlign="Center" Font="Calibri Light, 12pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="204.16" Width="1047.06" Height="28.35" EvenStyle="EvenRows" DataSource="Table" Filter="([Table.ForeignAgencies].Contains([ForiegnAgency]))||([Table.LateDays]==[LateDate])||([Table.Nationality].Contains([Country]))">
+      <TextObject Name="Text2" Width="66.15" Height="28.35" Border.Lines="All" Text="[Table.Contract_No]" HorzAlign="Center" Font="Calibri Light, 12pt"/>
+      <TextObject Name="Text4" Left="66.15" Width="94.5" Height="28.35" Border.Lines="All" Text="[Table.ContractDate]" HorzAlign="Center" Font="Calibri Light, 12pt"/>
+      <TextObject Name="Text6" Left="160.65" Width="75.6" Height="28.35" Border.Lines="All" Text="[Table.Status]" HorzAlign="Center" Font="Calibri Light, 12pt"/>
+      <TextObject Name="Text8" Left="236.25" Width="94.5" Height="28.35" Border.Lines="All" Text="[Table.DelegationDate]" HorzAlign="Center" Font="Calibri Light, 12pt"/>
+      <TextObject Name="Text10" Left="330.75" Width="75.6" Height="28.35" Border.Lines="All" Text="[Table.LateDays]" HorzAlign="Center" Font="Calibri Light, 12pt"/>
+      <TextObject Name="Text12" Left="406.35" Width="103.95" Height="28.35" Border.Lines="All" Text="[Table.Customer]" HorzAlign="Center" Font="Calibri Light, 12pt"/>
+      <TextObject Name="Text14" Left="510.3" Width="103.95" Height="28.35" Border.Lines="All" Text="[Table.VisaNumber]" HorzAlign="Center" Font="Calibri Light, 12pt"/>
+      <TextObject Name="Text16" Left="614.25" Width="113.4" Height="28.35" Border.Lines="All" Text="[Table.ArrivalCity]" HorzAlign="Center" Font="Calibri Light, 12pt"/>
+      <TextObject Name="Text18" Left="727.65" Width="94.5" Height="28.35" Border.Lines="All" Text="[Table.Job]" HorzAlign="Center" Font="Calibri Light, 12pt"/>
+      <TextObject Name="Text20" Left="822.15" Width="103.95" Height="28.35" Border.Lines="All" Text="[Table.Nationality]" HorzAlign="Center" Font="Calibri Light, 12pt"/>
+      <TextObject Name="Text22" Left="926.1" Width="122.85" Height="28.35" Border.Lines="All" Text="[Table.ForeignAgencies]" HorzAlign="Center" Font="Calibri Light, 12pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="235.37" Width="1047.06" Height="28.35">
+      <TextObject Name="Text24" Width="1047.06" Height="28.35" Dock="Fill" Fill.Color="Gainsboro" Text="[PageN]" HorzAlign="Center" Font="Arial, 12pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

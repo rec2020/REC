@@ -17,7 +17,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace NajmetAlraqeeSite.Controllers
 {
-//    [Authorize(Roles = "Administrator,Hospital")]
+    [Authorize]
     public class UsersController : Controller
     {
         private readonly NajmetAlraqeeContext _context;

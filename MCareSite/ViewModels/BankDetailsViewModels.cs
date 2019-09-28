@@ -18,6 +18,6 @@ namespace NajmetAlraqee.Site.ViewModels
         public string AccountNumber { get; set; }
 
         [Required(ErrorMessage = "الرجاء أدخال حساب الدليل")]
-        public string AccountNumberInTree { get; set; }
+        public int? AccountTreeId { get; set; }
     }
 }

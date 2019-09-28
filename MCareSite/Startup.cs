@@ -27,6 +27,7 @@ using NajmetAlraqeeSite.Resources;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 using Rotativa.AspNetCore;
+using NajmetAlraqee.Site;
 
 //using NToastNotify;
 
@@ -50,11 +51,12 @@ namespace NajmetAlraqeeSite
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            //services.AddDevExpressControls(); // DevExpress Report
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddDbContext<NajmetAlraqeeContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-                //options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<NajmetAlraqeeContext>()
@@ -139,7 +141,7 @@ namespace NajmetAlraqeeSite
 
             services.AddSingleton<LocService>();
             services.AddLocalization(options => options.ResourcesPath = "Resources");
-
+            //services.AddDevExpressControls();
             services.AddMvc()
                 .AddViewLocalization()
                 .AddDataAnnotationsLocalization(options =>
@@ -188,7 +190,13 @@ namespace NajmetAlraqeeSite
             var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(locOptions.Value);
             app.UseStaticFiles();
-           
+            //app.UseStaticFiles(new StaticFileOptions
+            //{
+            //    FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "node_modules")),
+            //    RequestPath = "/node_modules"
+            //});
+            FastReport.Utils.RegisteredObjects.AddConnection(typeof(MsSqlDataConnection));
+            app.UseFastReport();
             //app.UseIdentity();
             app.UseAuthentication();
             app.UseNToastNotify();

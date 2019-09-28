@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="09/14/2019 10:21:49" ReportInfo.Modified="09/16/2019 15:41:58" ReportInfo.CreatorVersion="2019.3.24.0">
+  <Styles Name="Gray">
+    <Style Name="Title" Font="Arial, 12pt, style=Bold"/>
+    <Style Name="Header" Fill.Color="Gainsboro" Font="Arial, 10pt, style=Bold"/>
+    <Style Name="Group" Font="Arial, 10pt, style=Bold"/>
+    <Style Name="Data" Font="Arial, 10pt"/>
+    <Style Name="Footer" Fill.Color="Gainsboro" Font="Arial, 10pt"/>
+    <Style Name="EvenRows" Fill.Color="WhiteSmoke" Font="Arial, 10pt"/>
+  </Styles>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqMh8sRi+glD5C5+Hd3tuDHDAfP2fE8hFw+WouMg+IjD2gTlt1t6zLuMPlz6ro5lGFrASDJeo9HQz1I2vC88h82zAPb/V5K8oXv6NwVH6WmRs+QTkibqF07/X0kRBLUqY47FQxZsN00Ao+pD9RD4bhxTXu18zfhFg0F8rvpiHwYyPlX/87IF5k6GCt6EIsBls0M+Nkz3wLmJiboPigolSJGOtcFMf+BLHQU+YazUvLFoiN6oa6Yd0i/MzNn/Q6vKnc">
+      <TableDataSource Name="AccountTrees" DataType="System.Int32" Enabled="true" TableName="AccountTrees">
+        <Column Name="Id" Enabled="false" DataType="System.Int32"/>
+        <Column Name="AccountNo" Enabled="false" DataType="System.String"/>
+        <Column Name="DescriptionAr" DataType="System.String"/>
+        <Column Name="DescriptionEn" DataType="System.String"/>
+        <Column Name="AccountLevel" DataType="System.Int32"/>
+        <Column Name="AccClassificationId" Enabled="false" DataType="System.Int32"/>
+        <Column Name="AccTypeId" Enabled="false" DataType="System.Int32"/>
+        <Column Name="Accprev" Enabled="false" DataType="System.String"/>
+        <Column Name="Debit" DataType="System.Decimal"/>
+        <Column Name="Credit" DataType="System.Decimal"/>
+        <Column Name="Balance" DataType="System.Decimal"/>
+        <Column Name="ParentId" Enabled="false" DataType="System.Int32"/>
+        <Column Name="PriceInExhibtion" Enabled="false" DataType="System.Decimal"/>
+        <Column Name="HighLimitForBalance" Enabled="false" DataType="System.Decimal"/>
+        <Column Name="EhalkPrecent" Enabled="false" DataType="System.Int32"/>
+        <Column Name="FixedAssetDate" DataType="System.String"/>
+        <Column Name="JE" Enabled="false" DataType="System.String"/>
+        <Column Name="CostCenter" Enabled="false" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="AccountLevel" DataType="System.String"/>
+    <Parameter Name="AccountName" DataType="System.String" Expression="null&#13;&#10;"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="56.7">
+      <TextObject Name="Text1" Width="1047.06" Height="56.7" Dock="Fill" Text="Account Trees" HorzAlign="Center" VertAlign="Center" Font="Calibri Light, 14pt, style=Bold"/>
+      <PictureObject Name="Picture1" Left="28.35" Width="302.4" Height="47.25" ImageLocation="D:\NajmatAppv1\NajmetAlraqee\MCareSite\wwwroot\images\MainLOG.jpg"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="59.56" Width="1047.06" Height="28.35" Guides="9.45,9.45,0,9.45,9.45">
+      <TextObject Name="Text3" Width="151.2" Height="28.35" Border.Lines="All" Fill.Color="Gainsboro" Text="AccountNo" HorzAlign="Center" Font="Calibri Light, 12pt, style=Bold"/>
+      <TextObject Name="Text5" Left="151.2" Width="151.2" Height="28.35" Border.Lines="All" Fill.Color="Gainsboro" Text="DescriptionAr" Font="Calibri Light, 12pt, style=Bold"/>
+      <TextObject Name="Text7" Left="302.4" Width="151.2" Height="28.35" Border.Lines="All" Fill.Color="Gainsboro" Text="DescriptionEn" Font="Calibri Light, 12pt, style=Bold"/>
+      <TextObject Name="Text9" Left="453.6" Width="151.2" Height="28.35" Border.Lines="All" Fill.Color="Gainsboro" Text="AccountLevel" Font="Calibri Light, 12pt, style=Bold"/>
+      <TextObject Name="Text11" Left="604.8" Width="151.2" Height="28.35" Border.Lines="All" Fill.Color="Gainsboro" Text="Debit" HorzAlign="Center" Font="Calibri Light, 12pt, style=Bold"/>
+      <TextObject Name="Text13" Left="756" Width="141.75" Height="28.35" Border.Lines="All" Fill.Color="Gainsboro" Text="Credit" Font="Calibri Light, 12pt, style=Bold"/>
+      <TextObject Name="Text15" Left="897.75" Width="141.75" Height="28.35" Border.Lines="All" Fill.Color="Gainsboro" Text="Balance" Font="Calibri Light, 12pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="90.76" Width="1047.06" Height="28.35" EvenStyle="EvenRows" DataSource="AccountTrees" Filter="([AccountTrees.AccountLevel]==[AccountLevel])||([AccountTrees.DescriptionAr].Contains([AccountName]))">
+      <TextObject Name="Text2" Width="151.2" Height="28.35" Border.Lines="All" Text="[AccountTrees.AccountNo]" HorzAlign="Center" Font="Arial, 10pt" Style="Data"/>
+      <TextObject Name="Text4" Left="151.2" Width="151.2" Height="28.35" Border.Lines="All" Text="[AccountTrees.DescriptionAr]" HorzAlign="Right" Font="Arial, 10pt" Style="Data"/>
+      <TextObject Name="Text6" Left="302.4" Width="151.2" Height="28.35" Border.Lines="All" Text="[AccountTrees.DescriptionEn]" HorzAlign="Center" Font="Arial, 10pt" Style="Data"/>
+      <TextObject Name="Text8" Left="453.6" Width="151.2" Height="28.35" Border.Lines="All" Text="[AccountTrees.AccountLevel]" HorzAlign="Center" Font="Arial, 10pt" Style="Data"/>
+      <TextObject Name="Text10" Left="604.8" Width="151.2" Height="28.35" Border.Lines="All" Text="[AccountTrees.Debit]" HorzAlign="Center" Font="Arial, 10pt" Style="Data"/>
+      <TextObject Name="Text12" Left="756" Width="141.75" Height="28.35" Border.Lines="All" Text="[AccountTrees.Credit]" HorzAlign="Right" Font="Arial, 10pt" Style="Data"/>
+      <TextObject Name="Text14" Left="897.75" Width="141.75" Height="28.35" Border.Lines="All" Text="[AccountTrees.Balance]" HorzAlign="Center" Font="Arial, 10pt" Style="Data"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="121.97" Width="1047.06" Height="18.9">
+      <TextObject Name="Text16" Width="1047.06" Height="18.9" Dock="Fill" Fill.Color="Gainsboro" Text="[PageN]" HorzAlign="Right" Font="Arial, 10pt" Style="Footer"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

@@ -1467,4 +1467,10 @@
   <data name="ToAccount" xml:space="preserve">
     <value>الي حساب</value>
   </data>
+  <data name="AccountTreeReport" xml:space="preserve">
+    <value>شجرة الحسابات</value>
+  </data>
+  <data name="Reports" xml:space="preserve">
+    <value>قائمة التقارير</value>
+  </data>
 </root>

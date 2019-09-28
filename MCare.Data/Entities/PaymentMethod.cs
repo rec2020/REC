@@ -11,7 +11,8 @@ namespace NajmetAlraqee.Data.Entities
         public int Id { get; set; }
 
         public string Name { get; set; }
+        public int? AccountTreeId { get; set; }
 
-        public string TreeAccountNo { get; set; }
+        public virtual  AccountTree AccountTree { get; set; }
     }
 }

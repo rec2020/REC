@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <UserSecretsId>aspnet-MCareSite-6EB2DF22-CB01-483C-9FFB-FE8B9F0EE5C8</UserSecretsId>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -54,12 +55,21 @@
     <Compile Remove="Models\User.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="wwwroot\Reporting\AccountTreeReport.repx" />
+    <None Remove="wwwroot\Reporting\ContractReport.xpo" />
+    <None Remove="wwwroot\Reporting\ContractReport.xpo.diagram" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
     <PackageReference Include="Bogus" Version="22.0.2" />
     <PackageReference Include="bootstrap" Version="4.0.0" />
+    <PackageReference Include="FastReport.OpenSource" Version="2019.3.19" />
+    <PackageReference Include="FastReport.OpenSource.Export.PdfSimple" Version="2019.3.19" />
+    <PackageReference Include="FastReport.OpenSource.Web" Version="2019.3.19" />
     <PackageReference Include="Microsoft.AspNetCore.All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.1" PrivateAssets="All" />

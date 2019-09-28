@@ -1,0 +1,79 @@
+﻿@model FastReport.Web.WebReport
+@using NajmetAlraqee.Site.Services;
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+
+<div class="block-header">
+    <ol class="breadcrumb breadcrumb-col-cyan">
+        <li><a href=@Url.Action("index","Home")><i class="material-icons">home</i>@SharedLocalizer.GetLocalizedHtmlString("Home") </a></li>
+        <li><a href="javascript:void(0);"><i class="material-icons">library_books</i> @SharedLocalizer.GetLocalizedHtmlString("Contracts")</a></li>
+    </ol>
+</div>
+
+<div class="col-md-12">
+    <div class="card">
+        <br />
+        <form asp-action="ContractIndex">
+            <div class="raw">
+                <div class="col-md-12">
+                    <div class="row clearfix">
+                        <div class="col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label style="color:black">من تاريخ  </label>
+                                <div class="form-line">
+                                    <input id="FromDate" name="FromDate" type="date" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="من تاريخ">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label style="color:black">الي تاريخ  </label>
+                                <div class="form-line">
+                                    <input id="ToDate" name="ToDate" type="date" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="الي تاريخ">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="Country" name="Country" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="البلد">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="LateDate" name="LateDate" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="أيام التاخير">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="ForiegnAgency" name="ForiegnAgency" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="الوكالة">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <button class="btn btn-raised btn-sm btn-info m-b-0 m-t-0" style="font-family:Droid Arabic Kufi;right:1080px" type="submit">@SharedLocalizer.GetLocalizedHtmlString("Search")</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <br />
+    </div>
+</div>
+<br />
+<div class="card">
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            @await Model.Render()
+        </div>
+        <br />
+    </div>
+</div>
+
+

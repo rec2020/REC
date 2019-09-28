@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NajmetAlraqee.Data;
 
 namespace NajmetAlraqee.Data.Migrations
 {
     [DbContext(typeof(NajmetAlraqeeContext))]
-    partial class NajmetAlraqeeContextModelSnapshot : ModelSnapshot
+    [Migration("20190914185327_AddLateDayContract")]
+    partial class AddLateDayContract
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1398,13 +1400,11 @@ namespace NajmetAlraqee.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AccountTreeId");
-
                     b.Property<string>("Name");
 
-                    b.HasKey("Id");
+                    b.Property<string>("TreeAccountNo");
 
-                    b.HasIndex("AccountTreeId");
+                    b.HasKey("Id");
 
                     b.ToTable("PaymentMethods");
                 });
@@ -2237,13 +2237,6 @@ namespace NajmetAlraqee.Data.Migrations
                     b.HasOne("NajmetAlraqee.Data.Entities.Contract", "Contract")
                         .WithMany()
                         .HasForeignKey("ContractId");
-                });
-
-            modelBuilder.Entity("NajmetAlraqee.Data.Entities.PaymentMethod", b =>
-                {
-                    b.HasOne("NajmetAlraqee.Data.Entities.AccountTree", "AccountTree")
-                        .WithMany()
-                        .HasForeignKey("AccountTreeId");
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.ReceiptDoc", b =>

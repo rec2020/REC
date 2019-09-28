@@ -121,6 +121,16 @@
                     </ul>
                 </li>
             }
+            @if (User.IsInRole("ADMIN"))
+            {
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-settings"></i><span>@SharedLocalizer.GetLocalizedHtmlString("Reports")</span> </a>
+                    <ul class="ml-menu">
+                        <li><a asp-action="AccountTreeIndex" asp-controller="Report">@SharedLocalizer.GetLocalizedHtmlString("AccountTreeReport")</a></li>
+                        <li><a asp-action="ContractIndex" asp-controller="Report">@SharedLocalizer.GetLocalizedHtmlString("Contracts")</a></li>
+                    </ul>
+                </li>
+            }
         </ul>
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane in active" id="settings">

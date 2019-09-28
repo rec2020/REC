@@ -12,6 +12,6 @@ namespace NajmetAlraqee.Site.ViewModels
         [Required(ErrorMessage = "الرجاء ادخال طريقة الدفع ")]
         public string Name { get; set; }
         [Required(ErrorMessage = "الرجاء ادخال حساب الدليل ")]
-        public string TreeAccountNo { get; set; }
+        public int? AccountTreeId { get; set; }
     }
 }

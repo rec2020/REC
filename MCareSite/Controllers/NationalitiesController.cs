@@ -11,10 +11,12 @@ using NajmetAlraqee.Site.ViewModels;
 using NajmetAlraqee.Site.Services;
 using NajmetAlraqee.Data.Entities;
 using NToastNotify;
+using Microsoft.AspNetCore.Authorization;
 //using NToastNotify;
 
 namespace NajmetAlraqee.Site.Controllers
 {
+    [Authorize]
     public class NationalitiesController : Controller
     {
         private readonly NajmetAlraqeeContext _context;

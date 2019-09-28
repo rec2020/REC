@@ -14,10 +14,6 @@
         <li><a href=@Url.Action("index","Home")><i class="material-icons">home</i>@SharedLocalizer.GetLocalizedHtmlString("Home") </a></li>
         <li><a href="javascript:void(0);"><i class="material-icons">library_books</i> @SharedLocalizer.GetLocalizedHtmlString("PaymentMethods")</a></li>
     </ol>
-    @*<div>
-            <a class="btn btn-round pull-right bg-cyan waves-effect" asp-action="Add">@SharedLocalizer.GetLocalizedHtmlString("AddCountry")</a>
-        </div>*@
-
 </div>
 
 
@@ -52,7 +48,7 @@
                                     <div class="col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input asp-for="TreeAccountNo" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("TreeAccountNo")" />
+                                                <select asp-for="@Model.AccountTreeId" class="form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.AccountTreeId"><option>@SharedLocalizer.GetLocalizedHtmlString("TreeAccountNo")</option></select>
                                             </div>
                                         </div>
                                     </div>
@@ -85,6 +81,9 @@
                                     <th>
                                         @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("TreeAccountNo"))
                                     </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("DescriptionAr"))
+                                    </th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -93,21 +92,24 @@
                                 {
                                     @foreach (var item in ViewBag.PaymentMethod)
                                     {
-                                        <tr>
-                                            <td>
-                                                @item.Id
-                                            </td>
-                                            <td>
-                                                @item.Name
-                                            </td>
-                                            <td>
-                                                @item.TreeAccountNo
-                                            </td>
-                                            <td>
-                                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-raised btn-secondary btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Edit")</a> |
-                                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-raised btn-danger btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Delete")</a>
-                                            </td>
-                                        </tr>
+                                <tr>
+                                    <td>
+                                        @item.Id
+                                    </td>
+                                    <td>
+                                        @item.Name
+                                    </td>
+                                    <td>
+                                        @item.AccountTree.AccountNo
+                                    </td>
+                                    <td>
+                                        @item.AccountTree.DescriptionAr 
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-raised btn-secondary btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Edit")</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-raised btn-danger btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Delete")</a>
+                                    </td>
+                                </tr>
                                     }
                                 }
                             </tbody>

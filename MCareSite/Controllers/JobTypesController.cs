@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NajmetAlraqee.Data;
 using NajmetAlraqee.Data.Entities;
@@ -12,6 +13,7 @@ using NToastNotify;
 
 namespace NajmetAlraqee.Site.Controllers
 {
+    [Authorize]
     public class JobTypesController : Controller
     {
         private readonly NajmetAlraqeeContext _context;

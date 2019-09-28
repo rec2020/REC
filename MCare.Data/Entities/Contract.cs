@@ -37,6 +37,7 @@ namespace NajmetAlraqee.Data.Entities
         public int? VisaNumber { get; set; }
         public string VisaDate { get; set; }
         public bool? IsDone { get; set; }
+        public int?  LateDays { get; set; }
 
         public virtual ContractStatus ContractStatus { get; set; }
         public virtual ContractType ContractType { get; set; }

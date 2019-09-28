@@ -54,7 +54,7 @@ namespace NajmetAlraqee.Data.Repositories
                 return false;
             existbank.Name = detail.Name;
             existbank.AccountNumber = detail.AccountNumber;
-            existbank.AccountNumberInTree = detail.AccountNumberInTree;
+            existbank.AccountTreeId = detail.AccountTreeId;
             _context.Update(existbank);
             _context.SaveChanges();
 

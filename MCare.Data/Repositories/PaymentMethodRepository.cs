@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 using NajmetAlraqee.Data.Entities;
 
 namespace NajmetAlraqee.Data.Repositories
@@ -25,12 +26,12 @@ namespace NajmetAlraqee.Data.Repositories
 
         public PaymentMethod GetPaymentMethodById(int id)
         {
-            return _context.PaymentMethods.Find(id);
+            return _context.PaymentMethods.Include(x=>x.AccountTree).Where(x=>x.Id==id).SingleOrDefault();
         }
 
         public IQueryable<PaymentMethod> GetPaymentMethods()
         {
-            return _context.PaymentMethods;
+            return _context.PaymentMethods.Include(x => x.AccountTree);
         }
 
         public bool RemovePaymentMethod(int id)
@@ -50,7 +51,7 @@ namespace NajmetAlraqee.Data.Repositories
             if (existpaymentmethod == null)
                 return false;
             existpaymentmethod.Name = paymentMethod.Name;
-            existpaymentmethod.TreeAccountNo = paymentMethod.TreeAccountNo;
+            existpaymentmethod.AccountTreeId = paymentMethod.AccountTreeId;
             _context.Update(existpaymentmethod);
             _context.SaveChanges();
 
