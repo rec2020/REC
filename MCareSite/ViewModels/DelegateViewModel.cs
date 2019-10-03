@@ -22,7 +22,7 @@ namespace NajmetAlraqee.Site.ViewModels
         [Required(ErrorMessage = "الرجاء ادخال نسبة العمولة")]
         public decimal? CommissionPrecentage { get; set; }
         [Required(ErrorMessage = "الرجاء ادخال حساب الدليل")]
-        public string AccountNoTree { get; set; }
+        public string AccountTreeId { get; set; }
         
         public decimal? DeservedAmount { get; set; }
         

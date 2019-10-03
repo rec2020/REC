@@ -113,6 +113,9 @@ namespace NajmetAlraqeeSite.AutoMapper
             CreateMap<RecruitmentQaid, RecruitmentQaidViewModel>();
             CreateMap<RecruitmentQaidViewModel, RecruitmentQaid>();
 
+            CreateMap<RecruitmentQaidDetail, RecruitmentQaidDetailViewModel>();
+            CreateMap<RecruitmentQaidDetailViewModel, RecruitmentQaidDetail>();
+
 
             //  CreateMap<ForeignAgency, ForeignAgencyViewModel>()
             // .ForMember(d => d.BankName, o => o.MapFrom(s => s.BankDetail.Name))

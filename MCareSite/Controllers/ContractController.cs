@@ -116,9 +116,10 @@ namespace NajmetAlraqee.Site.Controllers
             ViewBag.ContractHistory = _history.GetContractHistorys().Where(x => x.ContractId == id);
             ViewBag.ReceiptDocs = _receipt.GetReceiptDocs().Where(x => x.ContractId == id && x.ReceiptdocTypeId == (int)EnumHelper.ReceiptdocType.SnadReceive && x.ContractTypeId == contract.ContractTypeId);
             ViewBag.TakingDocs = _receipt.GetReceiptDocs().Where(x => x.ContractId == id && x.ReceiptdocTypeId == (int)EnumHelper.ReceiptdocType.SnadTaking);
-            if (contract != null)
+            if (contract.FinancialPeriodId != null)
             {
-                //var CheckTestDay = _Contract.UpdateTestDay(contract.Id);
+                contractViewModels.FinancialPeriodYear = contract.FinancialPeriod.Year;
+                contractViewModels.FinancialPeriodMonth = contract.FinancialPeriod.Month;
             }
             var nationalityNmae = _nationality.GetNationalities().SingleOrDefault(x => x.Id == contractViewModels.NationalityId);
             contractViewModels.NationalityName = nationalityNmae.Name;

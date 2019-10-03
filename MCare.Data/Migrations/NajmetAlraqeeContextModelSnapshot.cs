@@ -311,6 +311,8 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<string>("ExperienceYear");
 
+                    b.Property<int?>("FinancialPeriodId");
+
                     b.Property<int?>("ForeignAgencyId");
 
                     b.Property<bool?>("IsDone");
@@ -354,6 +356,8 @@ namespace NajmetAlraqee.Data.Migrations
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("EmployeeId");
+
+                    b.HasIndex("FinancialPeriodId");
 
                     b.HasIndex("ForeignAgencyId");
 
@@ -841,11 +845,15 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<int?>("CurrencyId");
 
+                    b.Property<int?>("FinancialPeriodId");
+
                     b.Property<string>("Notes");
 
                     b.Property<int?>("PaymentMethodId");
 
                     b.Property<int?>("PurposeId");
+
+                    b.Property<int>("QaidNo");
 
                     b.Property<int?>("TransferBankId");
 
@@ -856,6 +864,8 @@ namespace NajmetAlraqee.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CurrencyId");
+
+                    b.HasIndex("FinancialPeriodId");
 
                     b.HasIndex("PaymentMethodId");
 
@@ -1093,13 +1103,15 @@ namespace NajmetAlraqee.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AccountNumber");
+                    b.Property<int?>("AccountTreeId");
 
                     b.Property<int?>("Code");
 
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AccountTreeId");
 
                     b.ToTable("Expenses");
                 });
@@ -1163,7 +1175,7 @@ namespace NajmetAlraqee.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AccountNumber");
+                    b.Property<int?>("AccountTreeId");
 
                     b.Property<string>("BankAccountNo");
 
@@ -1190,6 +1202,8 @@ namespace NajmetAlraqee.Data.Migrations
                     b.Property<decimal?>("TransferAmount");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AccountTreeId");
 
                     b.HasIndex("BankDetailId");
 
@@ -1237,6 +1251,8 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<int?>("CurrencyId");
 
+                    b.Property<int?>("FinancialPeriodId");
+
                     b.Property<int?>("ForeignAgencyId");
 
                     b.Property<string>("Notes");
@@ -1245,6 +1261,8 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<int?>("PurposeId");
 
+                    b.Property<int>("QaidNo");
+
                     b.Property<int?>("TransferBankId");
 
                     b.Property<string>("TransferDate");
@@ -1252,6 +1270,8 @@ namespace NajmetAlraqee.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CurrencyId");
+
+                    b.HasIndex("FinancialPeriodId");
 
                     b.HasIndex("ForeignAgencyId");
 
@@ -1429,6 +1449,8 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<int?>("CustomerId");
 
+                    b.Property<int?>("FinancialPeriodId");
+
                     b.Property<string>("Note");
 
                     b.Property<int?>("PaymentMethodId");
@@ -1450,6 +1472,8 @@ namespace NajmetAlraqee.Data.Migrations
                     b.HasIndex("ContractId");
 
                     b.HasIndex("CustomerId");
+
+                    b.HasIndex("FinancialPeriodId");
 
                     b.HasIndex("PaymentMethodId");
 
@@ -1489,23 +1513,132 @@ namespace NajmetAlraqee.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Amount");
-
-                    b.Property<int?>("FromAccountId");
-
-                    b.Property<string>("Note");
+                    b.Property<int?>("FinancialPeriodId");
 
                     b.Property<string>("QaidDate");
 
-                    b.Property<int?>("ToAccountId");
+                    b.Property<int?>("StatusId");
+
+                    b.Property<int?>("TypeId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FromAccountId");
+                    b.HasIndex("FinancialPeriodId");
 
-                    b.HasIndex("ToAccountId");
+                    b.HasIndex("StatusId");
+
+                    b.HasIndex("TypeId");
 
                     b.ToTable("RecruitmentQaids");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.RecruitmentQaidDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AccountTreeId");
+
+                    b.Property<decimal?>("Credit");
+
+                    b.Property<decimal?>("Debit");
+
+                    b.Property<string>("Note");
+
+                    b.Property<int?>("QaidId");
+
+                    b.Property<int?>("TypeId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountTreeId");
+
+                    b.HasIndex("QaidId");
+
+                    b.HasIndex("TypeId");
+
+                    b.ToTable("RecruitmentQaidDetails");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.RecruitmentQaidDetailType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RecruitmentQaidDetailTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Credit"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Debit"
+                        });
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.RecruitmentQaidStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RecruitmentQaidStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "مفتوح"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "مغلق"
+                        });
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.RecruitmentQaidType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RecruitmentQaidTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "صرف"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "قبض"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "حوالة"
+                        });
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.Religion", b =>
@@ -1578,11 +1711,15 @@ namespace NajmetAlraqee.Data.Migrations
 
                     b.Property<int?>("ExpenseId");
 
+                    b.Property<int?>("FinancialPeriodId");
+
                     b.Property<int>("FinancialYear");
 
                     b.Property<string>("Note");
 
                     b.Property<int?>("PaymentMethodId");
+
+                    b.Property<int>("QaidNo");
 
                     b.Property<int>("QuidNumber");
 
@@ -1599,6 +1736,8 @@ namespace NajmetAlraqee.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ExpenseId");
+
+                    b.HasIndex("FinancialPeriodId");
 
                     b.HasIndex("PaymentMethodId");
 
@@ -1870,7 +2009,7 @@ namespace NajmetAlraqee.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AccountNoTree");
+                    b.Property<int?>("AccountTreeId");
 
                     b.Property<decimal>("CommissionPrecentage");
 
@@ -1889,6 +2028,8 @@ namespace NajmetAlraqee.Data.Migrations
                     b.Property<decimal>("TransferAmount");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AccountTreeId");
 
                     b.HasIndex("DelegateTypeId");
 
@@ -2000,6 +2141,10 @@ namespace NajmetAlraqee.Data.Migrations
                     b.HasOne("NajmetAlraqee.Data.Entities.Employee", "Employees")
                         .WithMany()
                         .HasForeignKey("EmployeeId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.FinancialPeriod", "FinancialPeriod")
+                        .WithMany()
+                        .HasForeignKey("FinancialPeriodId");
 
                     b.HasOne("NajmetAlraqee.Data.Entities.ForeignAgency", "ForeignAgency")
                         .WithMany()
@@ -2145,6 +2290,10 @@ namespace NajmetAlraqee.Data.Migrations
                         .WithMany()
                         .HasForeignKey("CurrencyId");
 
+                    b.HasOne("NajmetAlraqee.Data.Entities.FinancialPeriod", "FinancialPeriod")
+                        .WithMany()
+                        .HasForeignKey("FinancialPeriodId");
+
                     b.HasOne("NajmetAlraqee.Data.Entities.PaymentMethod", "PaymentMethod")
                         .WithMany()
                         .HasForeignKey("PaymentMethodId");
@@ -2193,6 +2342,13 @@ namespace NajmetAlraqee.Data.Migrations
                         .HasForeignKey("SocialStatusId");
                 });
 
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.Expense", b =>
+                {
+                    b.HasOne("NajmetAlraqee.Data.Entities.AccountTree", "AccountTree")
+                        .WithMany()
+                        .HasForeignKey("AccountTreeId");
+                });
+
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.FinancialPeriod", b =>
                 {
                     b.HasOne("NajmetAlraqee.Data.Entities.FinancialPeriodStatus", "FinancialPeriodStatus")
@@ -2202,6 +2358,10 @@ namespace NajmetAlraqee.Data.Migrations
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.ForeignAgency", b =>
                 {
+                    b.HasOne("NajmetAlraqee.Data.Entities.AccountTree", "AccountTree")
+                        .WithMany()
+                        .HasForeignKey("AccountTreeId");
+
                     b.HasOne("NajmetAlraqee.Data.Entities.BankDetail", "BankDetail")
                         .WithMany()
                         .HasForeignKey("BankDetailId");
@@ -2231,6 +2391,10 @@ namespace NajmetAlraqee.Data.Migrations
                     b.HasOne("NajmetAlraqee.Data.Entities.Currency", "Currency")
                         .WithMany()
                         .HasForeignKey("CurrencyId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.FinancialPeriod", "FinancialPeriod")
+                        .WithMany()
+                        .HasForeignKey("FinancialPeriodId");
 
                     b.HasOne("NajmetAlraqee.Data.Entities.ForeignAgency", "ForeignAgency")
                         .WithMany()
@@ -2273,6 +2437,10 @@ namespace NajmetAlraqee.Data.Migrations
                         .WithMany()
                         .HasForeignKey("CustomerId");
 
+                    b.HasOne("NajmetAlraqee.Data.Entities.FinancialPeriod", "FinancialPeriod")
+                        .WithMany()
+                        .HasForeignKey("FinancialPeriodId");
+
                     b.HasOne("NajmetAlraqee.Data.Entities.PaymentMethod", "PaymentMethod")
                         .WithMany()
                         .HasForeignKey("PaymentMethodId");
@@ -2284,13 +2452,32 @@ namespace NajmetAlraqee.Data.Migrations
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.RecruitmentQaid", b =>
                 {
-                    b.HasOne("NajmetAlraqee.Data.Entities.AccountTree", "FromAccount")
+                    b.HasOne("NajmetAlraqee.Data.Entities.FinancialPeriod", "FinancialPeriod")
                         .WithMany()
-                        .HasForeignKey("FromAccountId");
+                        .HasForeignKey("FinancialPeriodId");
 
-                    b.HasOne("NajmetAlraqee.Data.Entities.AccountTree", "ToAccount")
+                    b.HasOne("NajmetAlraqee.Data.Entities.RecruitmentQaidStatus", "Status")
                         .WithMany()
-                        .HasForeignKey("ToAccountId");
+                        .HasForeignKey("StatusId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.RecruitmentQaidType", "Type")
+                        .WithMany()
+                        .HasForeignKey("TypeId");
+                });
+
+            modelBuilder.Entity("NajmetAlraqee.Data.Entities.RecruitmentQaidDetail", b =>
+                {
+                    b.HasOne("NajmetAlraqee.Data.Entities.AccountTree", "AccountTree")
+                        .WithMany()
+                        .HasForeignKey("AccountTreeId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.RecruitmentQaid", "Qaid")
+                        .WithMany()
+                        .HasForeignKey("QaidId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.RecruitmentQaidDetailType", "Type")
+                        .WithMany()
+                        .HasForeignKey("TypeId");
                 });
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.SnadReceipt", b =>
@@ -2298,6 +2485,10 @@ namespace NajmetAlraqee.Data.Migrations
                     b.HasOne("NajmetAlraqee.Data.Entities.Expense", "Expense")
                         .WithMany()
                         .HasForeignKey("ExpenseId");
+
+                    b.HasOne("NajmetAlraqee.Data.Entities.FinancialPeriod", "FinancialPeriod")
+                        .WithMany()
+                        .HasForeignKey("FinancialPeriodId");
 
                     b.HasOne("NajmetAlraqee.Data.Entities.PaymentMethod", "PaymentMethod")
                         .WithMany()
@@ -2349,6 +2540,10 @@ namespace NajmetAlraqee.Data.Migrations
 
             modelBuilder.Entity("NajmetAlraqee.Data.Entities.UserDelegate", b =>
                 {
+                    b.HasOne("NajmetAlraqee.Data.Entities.AccountTree", "AccountTree")
+                        .WithMany()
+                        .HasForeignKey("AccountTreeId");
+
                     b.HasOne("NajmetAlraqee.Data.Entities.DelegateType", "DelegateType")
                         .WithMany()
                         .HasForeignKey("DelegateTypeId")

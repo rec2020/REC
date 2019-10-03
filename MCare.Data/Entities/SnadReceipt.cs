@@ -18,10 +18,13 @@ namespace NajmetAlraqee.Data.Entities
         public string SnadByUser { get; set; }
         public string SnadByUserName { get; set; }
         public string  Note { get; set; }
+        public int QaidNo { get; set; }
+        public int? FinancialPeriodId { get; set; }
 
         public virtual  PaymentMethod PaymentMethod  { get; set; }
         public virtual  SnadReceiptType SnadReceiptType  { get; set; }
         public virtual Expense Expense { get; set; }
+        public virtual FinancialPeriod FinancialPeriod { get; set; }
 
     }
 }

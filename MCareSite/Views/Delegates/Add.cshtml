@@ -91,7 +91,7 @@
                                 <div class="form-group">
                                     <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("TreeAccountNumber") </label>
                                     <div class="form-line">
-                                        <input asp-for="@Model.AccountNoTree" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("TreeAccountNumber")" />
+                                        <select asp-for="@Model.AccountTreeId" class="form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.AccountTreeId"><option>@SharedLocalizer.GetLocalizedHtmlString("TreeAccountNo")</option></select>
                                     </div>
                                 </div>
                             </div>

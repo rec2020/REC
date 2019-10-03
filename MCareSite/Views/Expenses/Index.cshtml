@@ -56,7 +56,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input asp-for="AccountNumber" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("AccountNumber")" />
+                                                <select asp-for="@Model.AccountTreeId" class="form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.AccountTreeId"><option>@SharedLocalizer.GetLocalizedHtmlString("TreeAccountNo")</option></select>
                                             </div>
                                         </div>
                                     </div>
@@ -88,7 +88,10 @@
                                         @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Expense"))
                                     </th>
                                     <th>
-                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("AccountNumber"))
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("TreeAccountNo"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("DescriptionAr"))
                                     </th>
                                     <th></th>
                                 </tr>
@@ -98,21 +101,24 @@
                                 {
                                     @foreach (var item in ViewBag.Expenses)
                                     {
-                                        <tr>
-                                            <td>
-                                                @item.Code
-                                            </td>
-                                            <td>
-                                                @item.Name
-                                            </td>
-                                            <td>
-                                                @item.AccountNumber
-                                            </td>
-                                            <td>
-                                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-raised btn-secondary btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Edit")</a> |
-                                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-raised btn-danger btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Delete")</a>
-                                            </td>
-                                        </tr>
+                                <tr>
+                                    <td>
+                                        @item.Code
+                                    </td>
+                                    <td>
+                                        @item.Name
+                                    </td>
+                                    <td>
+                                        <label class="label bg-teal">   @item.AccountTree.AccountNo </label>
+                                    </td>
+                                    <td>
+                                        <label class="label bg-teal">  @item.AccountTree.DescriptionAr </label>
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-raised btn-secondary btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Edit")</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-raised btn-danger btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Delete")</a>
+                                    </td>
+                                </tr>
                                     }
                                 }
                             </tbody>

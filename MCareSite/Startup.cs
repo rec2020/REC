@@ -121,6 +121,10 @@ namespace NajmetAlraqeeSite
             services.AddTransient<IAccountTreeRepository, AccountTreeRepository>();
             services.AddTransient<IInvoiceRepository, InvoiceRepository>();
             services.AddTransient<IRecruitmentQaidRepository, RecruitmentQaidRepository>();
+            services.AddTransient<IRecruitmentQaidTypeRepository, RecruitmentQaidTypeRepository>();
+            services.AddTransient<IRecruitmentQaidStatusRepository, RecruitmentQaidStatusRepository>();
+            services.AddTransient<IRecruitmentQaidDetailRepository, RecruitmentQaidDetailRepository>();
+            services.AddTransient<IRecruitmentQaidDetailTypeRepository, RecruitmentQaidDetailTypeRepository>();
 
             //// configure identity server with in-memory stores, keys, clients and scopes
             //services.AddIdentityServer()

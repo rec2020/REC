@@ -356,6 +356,48 @@ namespace NajmetAlraqee.Data
           }
         );
 
+            // 
+            modelbuilder.Entity<RecruitmentQaidType>()
+             .HasData(new RecruitmentQaidType
+             {
+                 Id = 1,
+                 Name = "صرف"
+             },
+             new RecruitmentQaidType
+             {
+                 Id = 2,
+                 Name = "قبض"
+             },
+             new RecruitmentQaidType
+             {
+                 Id = 3,
+                 Name = "حوالة"
+             }
+         );
+            modelbuilder.Entity<RecruitmentQaidStatus>()
+            .HasData(new RecruitmentQaidStatus
+            {
+                Id = 1,
+                Name = "مفتوح"
+            },
+            new RecruitmentQaidStatus
+            {
+                Id = 2,
+                Name = "مغلق"
+            }
+        );
+            modelbuilder.Entity<RecruitmentQaidDetailType>()
+            .HasData(new RecruitmentQaidDetailType
+            {
+                Id = 1,
+                Name = "Credit"
+            },
+            new RecruitmentQaidDetailType
+            {
+                Id = 2,
+                Name = "Debit"
+            }
+        );
         }
 
         // Lookups        
@@ -438,6 +480,11 @@ namespace NajmetAlraqee.Data
         public DbSet<AccountTree> AccountTrees { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<RecruitmentQaid> RecruitmentQaids { get; set; }
+        public DbSet<RecruitmentQaidType> RecruitmentQaidTypes { get; set; }
+        public DbSet<RecruitmentQaidStatus> RecruitmentQaidStatuses { get; set; }
+        public DbSet<RecruitmentQaidDetail> RecruitmentQaidDetails { get; set; }
+        public DbSet<RecruitmentQaidDetailType> RecruitmentQaidDetailTypes { get; set; }
+        
 
     }
 }

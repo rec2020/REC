@@ -28,16 +28,18 @@ namespace NajmetAlraqee.Site.Controllers
         private readonly IJobTypeReository _jobtype;
         private readonly ICurrencyRepository _currency;
         private readonly IForeignAgencyJobRepository _jobs;
+        private readonly IAccountTreeRepository _Acctree;
 
 
         #endregion
         public ForeginAgenciesController(IForeignAgencyRepository agency, IForeignAgencyJobRepository jobs,
-            IMapper mapper, 
+            IMapper mapper, IAccountTreeRepository Acctree, 
             IToastNotification toastNotification
             , INationalityRepository nationality, IBankDetailRepository bank, ICurrencyRepository currency, IJobTypeReository jobtype)
         {
             _agency = agency;
             _mapper = mapper;
+            _Acctree = Acctree;
             _toastNotification = toastNotification;
             _nationality = nationality;
             _bank = bank;
@@ -89,6 +91,7 @@ namespace NajmetAlraqee.Site.Controllers
         [HttpGet]
         public IActionResult Add()
         {
+            ViewBag.AccountTreeId = new SelectList(_Acctree.GetAccountTrees(), "Id", "DescriptionAr");
             ViewBag.NationalityId = new SelectList(_nationality.GetNationalities(), "Id", "Name");
             ViewBag.BankDetailId = new SelectList(_bank.GetBankDetails(), "Id", "Name");
             ViewBag.JobTypeId = new SelectList(_jobtype.GetJobTypes(), "Id", "Name");
@@ -104,6 +107,8 @@ namespace NajmetAlraqee.Site.Controllers
             ViewBag.BankDetailId = new SelectList(_bank.GetBankDetails(), "Id", "Name");
             ViewBag.JobTypeId = new SelectList(_jobtype.GetJobTypes(), "Id", "Name");
             ViewBag.CurrencyId = new SelectList(_currency.GetCurrencies(), "Id", "Name");
+            ViewBag.AccountTreeId = new SelectList(_Acctree.GetAccountTrees(), "Id", "DescriptionAr");
+            if (agencyViewModels.AccountTreeId == null) { ModelState.AddModelError("", "الرجاء تحدد رقم الحساب في الشجرة"); }
             //agencyViewModels.IsActive = true;
             //if (agencyViewModels.NationalityId == null) { ModelState.AddModelError("", "الرجاء ادخال جنسية المندوب"); }
             //if (agencyViewModels.BankDetailId == null) { ModelState.AddModelError("", "الرجاء ادخال نوع البنك"); }
@@ -115,6 +120,7 @@ namespace NajmetAlraqee.Site.Controllers
                 ModelState.Remove("JobTypeId");
                 ModelState.Remove("NationalityId");
                 ModelState.Remove("CurrencyId");
+                ModelState.Remove("AccountTreeId");
                 if (ModelState.IsValid)
                 {
 
@@ -130,6 +136,7 @@ namespace NajmetAlraqee.Site.Controllers
             {
                 ModelState.Remove("DelegateTypeId");
                 ModelState.Remove("NationalityId");
+                ModelState.Remove("AccountTreeId");
                 if (ModelState.IsValid)
                 {
                     var agency = _mapper.Map<ForeignAgency>(agencyViewModels);
@@ -158,7 +165,7 @@ namespace NajmetAlraqee.Site.Controllers
             {
                 return NotFound();
             }
-            //ViewBag.NationalityId = new SelectList(_nationality.GetNationalities(), "Id", "Name" , agencyViewModels.NationalityId);
+            ViewBag.AccountTreeId = new SelectList(_Acctree.GetAccountTrees(), "Id", "DescriptionAr",agencyViewModels.AccountTreeId);
             ViewBag.BankDetailId = new SelectList(_bank.GetBankDetails(), "Id", "Name", agencyViewModels.BankDetailId);
             //ViewBag.JobTypeId = new SelectList(_jobtype.GetJobTypes(), "Id", "Name", agencyViewModels.JobTypeId); 
             //    ViewBag.CurrencyId = new SelectList(_currency.GetCurrencies(), "Id", "Name", agencyViewModels.CurrencyId);

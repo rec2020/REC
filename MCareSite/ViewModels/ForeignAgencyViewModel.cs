@@ -17,8 +17,8 @@ namespace NajmetAlraqee.Site.ViewModels
         //public string NationalityName { get; set; }
         [Required(ErrorMessage = "الرجاء ادخال اسم المكتب ")]
         public string OfficeName { get; set; }
-        [Required(ErrorMessage = "الرجاء ادخال رقم حساب المكتب")]
-        public string AccountNumber { get; set; }
+        [Required(ErrorMessage = "الرجاء ادخال حساب الدليل")]
+        public string AccountTreeId { get; set; }
         [Required(ErrorMessage = "الرجاء ادخال المسؤول من المكتب ")]
         public string ResponsibleUser { get; set; }
         [Required(ErrorMessage = "الرجاء ادخال الايميل ")]

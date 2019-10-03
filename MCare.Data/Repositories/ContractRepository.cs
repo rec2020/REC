@@ -26,6 +26,11 @@ namespace NajmetAlraqee.Data.Repositories
             contract.Paid = 0;
             contract.TestDay = 0;
             contract.OldContractNo = 0;
+            var getCurrentFinancialPeriod = _context.FinancialPeriods.Where(x => x.FinancialPeriodStatusId == (int)EnumHelper.FinancPeriodStatus.CURRENT).SingleOrDefault();
+            if (getCurrentFinancialPeriod != null) {
+                contract.FinancialPeriodId = getCurrentFinancialPeriod.Id;
+            } 
+            
             _context.Contracts.Add(contract);
             _context.SaveChanges();
 
@@ -81,18 +86,26 @@ namespace NajmetAlraqee.Data.Repositories
         public Contract GetContractById(int Id)
         {
             return _context.Contracts.Include(x => x.ArrivalCity)
-                .Include(x => x.ContractStatus).Include(x => x.ContractType)
-                .Include(x => x.Customer).Include(x => x.Employees)
-                .Include(x => x.ForeignAgency).Include(x => x.JobType)
-               .SingleOrDefault(p => p.Id == Id);
+                .Include(x => x.ContractStatus)
+                .Include(x => x.ContractType)
+                .Include(x => x.Customer)
+                .Include(x => x.Employees)
+                .Include(x => x.ForeignAgency)
+                .Include(x => x.JobType)
+                .Include(x=>x.FinancialPeriod)
+                .SingleOrDefault(p => p.Id == Id);
         }
 
         public IQueryable<Contract> GetContracts()
         {
             return _context.Contracts.Include(x => x.ArrivalCity)
-                .Include(x => x.ContractStatus).Include(x => x.ContractType)
-                .Include(x => x.Customer).Include(x => x.Employees)
-                .Include(x => x.ForeignAgency).Include(x => x.JobType);
+                .Include(x => x.ContractStatus)
+                .Include(x => x.ContractType)
+                .Include(x => x.Customer)
+                .Include(x => x.Employees)
+                .Include(x => x.ForeignAgency)
+                .Include(x => x.JobType)
+                .Include(x => x.FinancialPeriod);
         }
 
         public bool RemoveContract(int Id)

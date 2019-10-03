@@ -30,13 +30,13 @@ namespace NajmetAlraqee.Data.Repositories
 
         public UserDelegate GetDelegateById(int Id)
         {
-            return _context.UserDelegates
+            return _context.UserDelegates.Include(x=>x.AccountTree)
                .SingleOrDefault(p => p.Id == Id);
         }
 
         public IQueryable<UserDelegate> GetDelegates()
         {
-            return _context.UserDelegates.Include("DelegateType").Include(x=>x.Nationality);
+            return _context.UserDelegates.Include("DelegateType").Include(x=>x.Nationality).Include(x => x.AccountTree);
         }
 
         public bool RemoveDelegate(int Id)
@@ -62,7 +62,7 @@ namespace NajmetAlraqee.Data.Repositories
             existdelegateuser.DelegateTypeId = del.DelegateTypeId;
             existdelegateuser.CommissionValue = del.CommissionValue;
             existdelegateuser.CommissionPrecentage = del.CommissionPrecentage;
-            existdelegateuser.AccountNoTree = del.AccountNoTree;
+            existdelegateuser.AccountTreeId = del.AccountTreeId;
             //existdelegateuser.DeservedAmount = del.DeservedAmount;
             //existdelegateuser.RemainderAmount = del.RemainderAmount;
             //existdelegateuser.TransferAmount = del.TransferAmount;

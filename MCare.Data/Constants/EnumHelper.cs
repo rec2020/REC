@@ -57,5 +57,24 @@ namespace NajmetAlraqee.Data.Constants
             OPEN,
             CLOSE
         }
+
+        public enum RecruitmentQaidStatus
+        {
+            Open=1,
+            Close
+        }
+
+        public enum RecruitmentQaidTypes
+        {
+             Exchange= 1,
+            Take,
+            Transfer
+        }
+
+        public enum RecruitmentQaidDetailType
+        {
+            Credit = 1,
+            Debit
+        }
     }
 }

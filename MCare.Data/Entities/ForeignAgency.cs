@@ -11,7 +11,7 @@ namespace NajmetAlraqee.Data.Entities
         public int Id { get; set; }
         public int? OfficeNumber { get; set; }
         public string  OfficeName { get; set; }
-        public string  AccountNumber { get; set; }
+        public int? AccountTreeId { get; set; }
         public string  ResponsibleUser { get; set; }
         public string Email { get; set; }
         public string  Phone { get; set; }
@@ -26,7 +26,7 @@ namespace NajmetAlraqee.Data.Entities
 
 
 
-
+        public virtual AccountTree AccountTree { get; set; }
         public virtual  BankDetail BankDetail { get; set; }
         //public virtual Nationality Nationality { get; set; }
         //public virtual Currency Currency  { get; set; }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using NajmetAlraqee.Data;
 using NajmetAlraqee.Data.Entities;
 using NajmetAlraqee.Data.Repositories;
@@ -20,12 +21,14 @@ namespace NajmetAlraqee.Site.Controllers
         private readonly IExpenseRepository _expense;
         private readonly IMapper _mapper;
         private readonly IToastNotification _toastNotification;
+        private readonly IAccountTreeRepository _Acctree;
 
-        public ExpensesController(NajmetAlraqeeContext context, IExpenseRepository expense, IMapper mapper, IToastNotification toastNotification)
+        public ExpensesController(NajmetAlraqeeContext context, IAccountTreeRepository Acctree,  IExpenseRepository expense, IMapper mapper, IToastNotification toastNotification)
         {
             _context = context;
             _expense = expense;
             _mapper = mapper;
+            _Acctree = Acctree;
             _toastNotification = toastNotification;
         }
 
@@ -34,6 +37,7 @@ namespace NajmetAlraqee.Site.Controllers
         {
             var expenses = _expense.GetExpenses();
             ViewBag.Expenses = expenses;
+            ViewBag.AccountTreeId = new SelectList(_Acctree.GetAccountTrees(), "Id", "DescriptionAr");
             //if (nationality.Count() <= 10) { page = 1; }
             //int pageSize = 10;
             return View();
@@ -48,9 +52,12 @@ namespace NajmetAlraqee.Site.Controllers
         {
             var expensesList = _expense.GetExpenses();
             ViewBag.expenses = expensesList;
+            ViewBag.AccountTreeId = new SelectList(_Acctree.GetAccountTrees(), "Id", "DescriptionAr");
+            if (expenseViewModel.AccountTreeId == null) { ModelState.AddModelError("", "الرجاء تحدد رقم الحساب في الشجرة"); }
             if (expenseViewModel.Id == 0)
             {
                 ModelState.Remove("Id");
+                ModelState.Remove("AccountTreeId");
                 if (ModelState.IsValid)
                 {
                     var expense = _mapper.Map<Expense>(expenseViewModel);
@@ -90,6 +97,7 @@ namespace NajmetAlraqee.Site.Controllers
             }
             var expensesList = _expense.GetExpenses();
             ViewBag.expenses = expensesList;
+            ViewBag.AccountTreeId = new SelectList(_Acctree.GetAccountTrees(), "Id", "DescriptionAr", expense.AccountTreeId);
             return View("Index", expenseViewModel);
         }
         #region Delete

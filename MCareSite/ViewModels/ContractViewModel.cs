@@ -64,7 +64,8 @@ namespace NajmetAlraqee.Site.ViewModels
         public int? ModifybyId { get; set; }
         public string CreationDate { get; set; }
 
-
+        public int? FinancialPeriodYear { get; set; }
+        public int? FinancialPeriodMonth { get; set; }
 
 
 

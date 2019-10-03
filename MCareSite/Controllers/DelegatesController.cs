@@ -26,9 +26,12 @@ namespace NajmetAlraqee.Site.Controllers
         private readonly IToastNotification _toastNotification;
         private readonly INationalityRepository _nationality;
         private readonly IDelegateTypeRepository _delegatetype;
+        private readonly IAccountTreeRepository _Acctree;
 
         #endregion
-        public DelegatesController(NajmetAlraqeeContext context, INationalityRepository nationality, IDelegateReository Delegate, IDelegateTypeRepository delegatetype, IMapper mapper, IToastNotification toastNotification)
+        public DelegatesController(NajmetAlraqeeContext context,
+            INationalityRepository nationality, IAccountTreeRepository Acctree,
+            IDelegateReository Delegate, IDelegateTypeRepository delegatetype, IMapper mapper, IToastNotification toastNotification)
         {
             _context = context;
             _Delegate = Delegate;
@@ -36,6 +39,7 @@ namespace NajmetAlraqee.Site.Controllers
             _toastNotification = toastNotification;
             _nationality = nationality;
             _delegatetype = delegatetype;
+            _Acctree = Acctree;
         }
 
         #region Index 
@@ -82,6 +86,7 @@ namespace NajmetAlraqee.Site.Controllers
         [HttpGet]
         public IActionResult Add()
         {
+            ViewBag.AccountTreeId = new SelectList(_Acctree.GetAccountTrees(), "Id", "DescriptionAr");
             ViewBag.NationalityId = new SelectList(_nationality.GetNationalities(), "Id", "Name");
             ViewBag.DelegateTypeId = new SelectList(_delegatetype.GetDelegateTypes(), "Id", "Name");
             return View();
@@ -93,11 +98,14 @@ namespace NajmetAlraqee.Site.Controllers
         {
             if (delegateViewModels.NationalityId == null) { ModelState.AddModelError("", "الرجاء ادخال جنسية المندوب"); }
             if (delegateViewModels.DelegateTypeId == null) { ModelState.AddModelError("", "الرجاء ادخال نوع المندوب"); }
+            ViewBag.AccountTreeId = new SelectList(_Acctree.GetAccountTrees(), "Id", "DescriptionAr");
+            if (delegateViewModels.AccountTreeId == null) { ModelState.AddModelError("", "الرجاء تحدد رقم الحساب في الشجرة"); }
             if (delegateViewModels.Id == 0)
             {
                 ModelState.Remove("Id");
                 ModelState.Remove("DelegateTypeId");
                 ModelState.Remove("NationalityId");
+                ModelState.Remove("AccountTreeId");
                 if (ModelState.IsValid)
                 {
 
@@ -112,6 +120,7 @@ namespace NajmetAlraqee.Site.Controllers
             else
             {
                 ModelState.Remove("DelegateTypeId");
+                ModelState.Remove("AccountTreeId");
                 ModelState.Remove("NationalityId");
                 if (ModelState.IsValid)
                 {
@@ -143,6 +152,7 @@ namespace NajmetAlraqee.Site.Controllers
             }
             ViewBag.NationalityId = new SelectList(_nationality.GetNationalities(), "Id", "Name", DelegateViewModel.NationalityId);
             ViewBag.DelegateTypeId = new SelectList(_delegatetype.GetDelegateTypes(), "Id", "Name", DelegateViewModel.DelegateTypeId);
+            ViewBag.AccountTreeId = new SelectList(_Acctree.GetAccountTrees(), "Id", "DescriptionAr", DelegateViewModel.AccountTreeId);
             return View("Add", DelegateViewModel);
         }
         #endregion

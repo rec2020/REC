@@ -1,0 +1,188 @@
+﻿@model NajmetAlraqee.Site.ViewModels.RecruitmentQaidDetailViewModel
+@using NajmetAlraqee.Site.Services;
+@using NajmetAlraqeeSite.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("RecruitmentQaids");
+}
+
+<div class="block-header">
+    <ol class="breadcrumb breadcrumb-col-cyan">
+        <li><a href=@Url.Action("index","Home")><i class="material-icons">home</i>@SharedLocalizer.GetLocalizedHtmlString("Home") </a></li>
+        <li><a href="javascript:void(0);"><i class="material-icons">library_books</i> @SharedLocalizer.GetLocalizedHtmlString("RecruitmentQaids")</a></li>
+    </ol>
+</div>
+
+<div class="container-fluid">
+    <div class="row clearfix" style="font-family:Droid Arabic Kufi">
+        <div class="col-md-12 col-xs-12">
+            <div class="card patients-list">
+                <div class="body">
+                    @*<h2 class="card-inside-title" style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("RecruitmentQaids")</h2>*@
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <form asp-action="Add" method="post" asp-controller="RecruitmentQaidDetail">
+                                @Html.HiddenFor(x => x.Id)
+                                <div class="row">
+                                    <div class="col-sm-2 col-xs-12"></div>
+                                    <div class="col-sm-8 col-xs-12">
+                                        <div asp-validation-summary="All" style="font-family:Droid Arabic Kufi" class="text-danger"></div>
+                                        @Html.HiddenFor(x => x.QaidId)
+                                    </div>
+                                    <div class="col-sm-2 col-xs-12"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("AccountNo") </label>
+                                            <div class="form-line">
+                                                <select asp-for="AccountTreeId" class="form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.AccountTreeId"><option>@SharedLocalizer.GetLocalizedHtmlString("AccountNo")</option></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("QaidType") </label>
+                                            <div class="form-line">
+                                                <select asp-for="TypeId" class="custom-select form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.TypeId"><option>@SharedLocalizer.GetLocalizedHtmlString("ReturnReason")</option></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3 col-xs-12" id="DebitX">
+                                        <div class="form-group">
+                                            <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Debit") </label>
+                                            <div class="form-line">
+                                                <input asp-for="Debit" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="Debit" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-xs-12" id="CreditX">
+                                        <div class="form-group">
+                                            <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Credit") </label>
+                                            <div class="form-line">
+                                                <input asp-for="Credit" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="Credit" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Note") </label>
+                                            <div class="form-line">
+                                                <input asp-for="@Model.Note" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Note")" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <center>
+                                    <input type="submit" style="font-family:Droid Arabic Kufi;" value="@SharedLocalizer.GetLocalizedHtmlString("Save")" class="btn btn-raised bg-teal btn-sm" />
+                                </center>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-md-12 col-xs-12">
+            <div class="card patients-list">
+                <div class="body">
+                    <h2 class="card-inside-title" style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("RecruitmentQaids")</h2>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("No"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("AccountNo"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("QaidType"))
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Debit")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Credit")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Note"))
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.QaidDetail != null)
+                                {
+                                    @foreach (var item in ViewBag.QaidDetail)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.Id
+                                            </td>
+                                            <td>
+                                                <label class="label bg-teal">  @item.AccountTree.DescriptionAr </label>
+                                            </td>
+                                            <td>
+                                                <label class="label bg-teal">  @item.Type.Name </label>
+                                            </td>
+                                            <td>
+                                                @item.Debit
+                                            </td>
+                                            <td>
+                                                @item.Credit
+                                            </td>
+                                            <td>
+                                                @item.Note
+                                            </td>
+                                            @*<td>
+                                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-raised bg-teal btn-sm"><i class="material-icons" title="@SharedLocalizer.GetLocalizedHtmlString("Edit")">create</i></a>
+                                            </td>*@
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <a asp-action="Details" asp-controller="RecruitmentQaid" asp-route-id="@Model.QaidId" class="btn btn-raised" style="font-family:Droid Arabic Kufi;right:500px">@SharedLocalizer.GetLocalizedHtmlString("Close")</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src='~/js/jquery-customselect.js'></script>
+    <script>
+      
+
+        if ($("#TypeId").val() == 1) {
+            $("#CreditX").fadeIn('slow');
+        } else { $("#CreditX").fadeOut('slow'); }
+
+        if ($("#TypeId").val() == 2) {
+            $("#DebitX").fadeIn('slow');
+        } else { $("#DebitX").fadeOut('slow'); }
+
+     
+        $("#TypeId").change(function () {
+            if ($("#TypeId").val() == 1) {
+                $("#CreditX").fadeIn('slow');
+            } else { $("#CreditX").fadeOut('slow'); }
+            if ($("#TypeId").val() == 2) {
+                $("#DebitX").fadeIn('slow');
+            } else { $("#DebitX").fadeOut('slow'); }
+            
+        });
+    </script>
+
+}

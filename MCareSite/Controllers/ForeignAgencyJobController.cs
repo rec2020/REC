@@ -72,22 +72,6 @@ namespace NajmetAlraqee.Site.Controllers
         }
         #endregion
 
-        //#region Details
-        //public IActionResult Details(long? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    var agency = _agency.GetAgencyById((int)id);
-        //    //var agencyViewModel = _mapper.Map<ForeignAgencyTransferViewModel>(agency);
-        //    if (agency == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(agency);
-        //}
-        //#endregion
 
         #region Add
 
@@ -125,7 +109,7 @@ namespace NajmetAlraqee.Site.Controllers
                     return RedirectToAction(nameof(Index), new { ForeignAgencyJobId = agencyjobViewModels.ForeignAgencyId });
                 }
 
-                return View(agencyjobViewModels);
+                return View(nameof(Index), agencyjobViewModels);
             }
             else
             {
@@ -139,7 +123,7 @@ namespace NajmetAlraqee.Site.Controllers
                     _toastNotification.AddSuccessToastMessage("تم تعديل الوظيفة الوكالة الخارجية بنجاح");
                     return RedirectToAction(nameof(Index), new { ForeignAgencyJobId = agencyjobViewModels.ForeignAgencyId });
                 }
-                return View("Add", agencyjobViewModels);
+                return View(nameof(Index), agencyjobViewModels);
             }
 
         }
@@ -195,8 +179,7 @@ namespace NajmetAlraqee.Site.Controllers
             _toastNotification.AddSuccessToastMessage("تم الايقاف بنجاح");
             return RedirectToAction(nameof(Index), new { ForeignAgencyJobId = item.ForeignAgencyId, Id = item.Id });
         }
-
-
+        
         //#endregion
     }
 }

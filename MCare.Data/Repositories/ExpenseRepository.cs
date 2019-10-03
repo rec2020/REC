@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 using NajmetAlraqee.Data.Entities;
 
 namespace NajmetAlraqee.Data.Repositories
@@ -25,12 +26,12 @@ namespace NajmetAlraqee.Data.Repositories
 
         public IQueryable<Expense> GetExpenses()
         {
-            return _context.Expenses;
+            return _context.Expenses.Include(x => x.AccountTree);
         }
 
         public Expense GetExpenseById(int id)
         {
-            return _context.Expenses.Find(id);
+            return _context.Expenses.Include(x => x.AccountTree).Where(x=>x.Id==id).SingleOrDefault();
         }
 
         public bool RemoveExpense(int id)
@@ -52,7 +53,7 @@ namespace NajmetAlraqee.Data.Repositories
 
             existexpense.Name = expense.Name;
             existexpense.Code = expense.Code;
-            existexpense.AccountNumber = expense.AccountNumber;
+            existexpense.AccountTreeId = expense.AccountTreeId;
 
             _context.Update(existexpense);
             _context.SaveChanges();

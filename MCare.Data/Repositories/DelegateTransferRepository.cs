@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using NajmetAlraqee.Data.Constants;
 using NajmetAlraqee.Data.Entities;
 
 namespace NajmetAlraqee.Data.Repositories
@@ -15,8 +17,62 @@ namespace NajmetAlraqee.Data.Repositories
         {
             _context = context;
         }
+
+        public int RecruitmentQaid(DelegateTransfer delegateTransfer)
+        {
+            // Add Qaid First 
+            RecruitmentQaid qaid = new RecruitmentQaid
+            {
+                QaidDate = DateTime.UtcNow.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
+                StatusId = (int)EnumHelper.RecruitmentQaidStatus.Open
+            };
+            var getCurrentFinancialPeriod = _context.FinancialPeriods.Where(x => x.FinancialPeriodStatusId == (int)EnumHelper.FinancPeriodStatus.CURRENT).SingleOrDefault();
+            if (getCurrentFinancialPeriod != null)
+            {
+                qaid.FinancialPeriodId = getCurrentFinancialPeriod.Id;
+            }
+            qaid.TypeId = (int)EnumHelper.RecruitmentQaidTypes.Transfer;
+            _context.RecruitmentQaids.Add(qaid);
+            _context.SaveChanges();
+
+            //// Add RecruitmentQaidDetails  DEBIT 
+            //RecruitmentQaidDetail detailDebit = new RecruitmentQaidDetail
+            //{
+            //    QaidId = qaid.Id,
+            //    Debit = delegateTransfer.Amount,
+            //    TypeId = (int)EnumHelper.RecruitmentQaidDetailType.Debit,
+            //    AccountTreeId = delegateTransfer.UserDelegate.AccountTreeId,
+            //    Note = ""
+            //};
+            //_context.RecruitmentQaidDetails.Add(detailDebit);
+            //_context.SaveChanges();
+
+            //// Add RecruitmentQaidDetails 
+            //RecruitmentQaidDetail detailCredit = new RecruitmentQaidDetail
+            //{
+            //    QaidId = qaid.Id,
+            //    Credit = receipt.Amount,
+            //    TypeId = (int)EnumHelper.RecruitmentQaidDetailType.Credit,
+            //    AccountTreeId = receipt.PaymentMethod.AccountTreeId,
+            //    Note = ""
+            //};
+            //_context.RecruitmentQaidDetails.Add(detailCredit);
+            //_context.SaveChanges();
+
+            return qaid.Id;
+        }
         public int AddDelegateTransfer(DelegateTransfer delegateTransfer)
         {
+            // Add RecruitmentQaid First 
+            var qaidId = RecruitmentQaid(delegateTransfer);
+            //snadReceipt.VAT = 0;
+            var getCurrentFinancialPeriodrec = _context.FinancialPeriods.Where(x => x.FinancialPeriodStatusId == (int)EnumHelper.FinancPeriodStatus.CURRENT).SingleOrDefault();
+            if (getCurrentFinancialPeriodrec != null)
+            {
+                delegateTransfer.FinancialPeriodId = getCurrentFinancialPeriodrec.Id;
+            }
+            delegateTransfer.QaidNo = qaidId;
+            
             _context.DelegateTransfers.Add(delegateTransfer);
             _context.SaveChanges();
 

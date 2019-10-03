@@ -13,9 +13,6 @@
         <li><a href=@Url.Action("index","Home")><i class="material-icons">home</i>@SharedLocalizer.GetLocalizedHtmlString("Home") </a></li>
         <li><a href="javascript:void(0);"><i class="material-icons">library_books</i> @SharedLocalizer.GetLocalizedHtmlString("RecruitmentQaids")</a></li>
     </ol>
-    @*<div>
-            <a class="btn btn-round pull-right bg-cyan waves-effect" asp-action="Add">@SharedLocalizer.GetLocalizedHtmlString("AddCountry")</a>
-        </div>*@
 </div>
 
 <div class="col-md-12">
@@ -58,13 +55,13 @@
                                         @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("QaidDate"))
                                     </th>
                                     <th>
-                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("FromAccount"))
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("QaidType"))
                                     </th>
                                     <th>
-                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("ToAccount"))
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Status"))
                                     </th>
                                     <th>
-                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Amount"))
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("FinancialPeriod"))
                                     </th>
                                     <th></th>
                                 </tr>
@@ -82,12 +79,12 @@
                                                 @item.QaidDate
                                             </td>
                                             <td>
-                                                <label class="label label bg-cyan">  @item.FromAccount.DescriptionAr </label>
+                                                <label class="label label bg-cyan">  @item.Type.Name </label>
                                             <td>
-                                                <label class="label label bg-cyan"> @item.ToAccount.DescriptionAr </label>
+                                                <label class="label label bg-cyan"> @item.Status.Name </label>
                                             </td>
                                             <td>
-                                                @item.Amount
+                                                @item.FinancialPeriod.Month / @item.FinancialPeriod.Year
                                             </td>
                                             <td>
                                                 @if (User.IsInRole("ADMIN"))

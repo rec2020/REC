@@ -28,12 +28,12 @@ namespace NajmetAlraqee.Data.Repositories
         }
         public ForeignAgency GetAgencyById(int Id)
         {
-            return _context.ForeignAgencies.Include(x => x.BankDetail)
+            return _context.ForeignAgencies.Include(x => x.BankDetail).Include(x => x.AccountTree)
                 .SingleOrDefault(p => p.Id == Id);
         }
         public IQueryable<ForeignAgency> GetAgencies()
         {
-            return _context.ForeignAgencies.Include(x=>x.BankDetail);
+            return _context.ForeignAgencies.Include(x=>x.BankDetail).Include(x => x.AccountTree);
         }
         public bool RemoveAggency(int Id)
         {
@@ -52,7 +52,7 @@ namespace NajmetAlraqee.Data.Repositories
             existagency.OfficeName = agency.OfficeName;
             //existagency.NationalityId = agency.NationalityId;
             existagency.BankDetailId = agency.BankDetailId;
-            existagency.AccountNumber = agency.AccountNumber;
+            existagency.AccountTreeId = agency.AccountTreeId;
             existagency.Email = agency.Email;
             //existagency.IsActive = agency.IsActive;
             //existagency.JobTypeId = agency.JobTypeId;

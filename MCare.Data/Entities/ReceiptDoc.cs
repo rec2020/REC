@@ -21,10 +21,12 @@ namespace NajmetAlraqee.Data.Entities
         public int? ContractTypeId { get; set; }
         public int? PaymentMethodId { get; set; }
         public int QaidNo { get; set; }
+        public int? FinancialPeriodId { get; set; }
         public virtual ReceiptDocType ReceiptdocType { get; set; }
         //public virtual ContractType ContractType { get; set; }
         public virtual  Contract Contract  { get; set; }
         public virtual PaymentMethod PaymentMethod  { get; set; }
         public virtual Customer Customer { get; set; }
+        public virtual FinancialPeriod FinancialPeriod { get; set; }
     }
 }

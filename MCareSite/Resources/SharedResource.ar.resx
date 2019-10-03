@@ -547,7 +547,7 @@
     <value>يبدأ في</value>
   </data>
   <data name="Status" xml:space="preserve">
-    <value>الحاله</value>
+    <value>الحالة</value>
   </data>
   <data name="Time" xml:space="preserve">
     <value>الوقت</value>
@@ -1472,5 +1472,11 @@
   </data>
   <data name="Reports" xml:space="preserve">
     <value>قائمة التقارير</value>
+  </data>
+  <data name="QaidStatus" xml:space="preserve">
+    <value>حالة القيد</value>
+  </data>
+  <data name="QaidType" xml:space="preserve">
+    <value>نوع القيد</value>
   </data>
 </root>

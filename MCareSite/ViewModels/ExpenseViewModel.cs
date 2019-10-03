@@ -16,7 +16,8 @@ namespace NajmetAlraqee.Site.ViewModels
         public int? Code { get; set; }
         [Required(ErrorMessage = "الرجاء أدخال المصروف ")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "الرجاء أدخال رقم الحساب ")]
-        public string AccountNumber { get; set; }
+
+        [Required(ErrorMessage = "الرجاء أدخال حساب الدليل")]
+        public int? AccountTreeId { get; set; }
     }
 }

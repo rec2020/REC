@@ -13,7 +13,7 @@
     <div class="block-header">
         @*<h2>Add Doctor</h2>*@
         <ol class="breadcrumb breadcrumb-col-cyan">
-            <li><a href=@Url.Action("index","RecruitmentQaid")><i class="material-icons">home</i>@SharedLocalizer.GetLocalizedHtmlString("RecruitmentQaids")</a></li>
+            <li><a href=@Url.Action("Index","RecruitmentQaid")><i class="material-icons">home</i>@SharedLocalizer.GetLocalizedHtmlString("RecruitmentQaids")</a></li>
             <li><a href="javascript:void(0);"><i class="material-icons">library_books</i>@SharedLocalizer.GetLocalizedHtmlString("RecruitmentQaid")</a></li>
         </ol>
     </div>
@@ -44,54 +44,143 @@
                             </div>
                             <div class="col-sm-2 col-xs-12"></div>
                         </div>
+
                         <div class="row">
-                            <div class="col-sm-6 col-xs-12">
+                            <div class="col-sm-3 col-xs-12">
                                 <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("QaidDate") </label>
-                                    <div class="form-line">
-                                        <input asp-for="QaidDate" value="@Model.QaidDate"  readonly="readonly" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("SnadDate")" />
-                                    </div>
+                                    <label style="color:black;font-size:medium">  @SharedLocalizer.GetLocalizedHtmlString("QaidDate")    </label>
+                                    <label style="color:black"></label>
+                                    <label class="label bg-teal" style="color:white;font-size:medium">   @Model.QaidDate   </label>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-xs-12">
+                            <div class="col-sm-3 col-xs-12">
                                 <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Amount") </label>
-                                    <div class="form-line">
-                                        <input asp-for="Amount" readonly="readonly" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Amount")" />
+                                    <label style="color:black;font-size:medium">@SharedLocalizer.GetLocalizedHtmlString("QaidType") </label>
+                                    <label style="color:black"></label>
+                                    <label class="label bg-teal" style="color:white;font-size:medium">   @Model.Type.Name </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black;font-size:medium">   @SharedLocalizer.GetLocalizedHtmlString("FinancialPeriod")    </label>
+                                    <label style="color:black">     </label>
+                                    <label class="label bg-teal" style="color:white;font-size:medium">   @Model.FinancialPeriod.Month/@Model.FinancialPeriod.Year   </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black;font-size:medium">   @SharedLocalizer.GetLocalizedHtmlString("Status")    </label>
+                                    <label style="color:black">     </label>
+                                    <label class="label bg-teal" style="color:white;font-size:medium">   @Model.Status.Name   </label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3 col-xs-12">
+                                @if (Model.StatusId == 1)
+                                {
+                                    <div class="form-group">
+                                        <label style="color:black"> </label>
+                                        <a class="btn btn-raised btn-danger btn-sm" asp-action="Close" asp-route-id="@Model.Id" title="@SharedLocalizer.GetLocalizedHtmlString("Close")"><i class="zmdi zmdi-power"></i>  @SharedLocalizer.GetLocalizedHtmlString("Close")</a>
+                                    </div>
+                                }
+                                </div>
+                        </div>
+
+                        <div class="raw">
+                        <div class="panel-group" id="accordion_1" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" role="tab" id="headingOne_1">
+                                    <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseOne_1" aria-expanded="false" aria-controls="collapseOne_1" class="collapsed" style="font-family:Droid Arabic Kufi"> بنود القيد </a> </h4>
+                                </div>
+                                <div id="collapseOne_1" class="panel-collapse in collapse" role="tabpanel" aria-labelledby="headingOne_1" aria-expanded="false" style="">
+                                    <div class="card-body">
+                                        <div class="body">
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                </div>
+                                                @if (Model.StatusId ==1) {
+                                                <div class="col-md-2">
+                                                    @*<a href="" class="btn btn-raised btn-warning btn-sm"><i class="zmdi zmdi-edit"></i> تعديل  </a>*@
+                                                    <a href="@Url.Action("Index", "RecruitmentQaidDetail", new { RecruitmentQaidId = Model.Id })" class="btn btn-raised bg-teal waves-effect btn-sm"><i class="zmdi zmdi-collection-add"></i> أضافة بند </a>
+                                                </div>
+                                                }
+                                            </div>
+                                            <div class="row clearfix">
+                                                <div class="col-md-12 col-xs-12">
+                                                    <div class="card patients-list">
+                                                        <div class="body">
+                                                            <h2 class="card-inside-title" style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("RecruitmentQaids")</h2>
+                                                            <div class="table-responsive">
+                                                                <table class="table table-hover">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("No"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("AccountNo"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("QaidType"))
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName("Debit")
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName("Credit")
+                                                                            </th>
+                                                                            <th>
+                                                                                @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Note"))
+                                                                            </th>
+                                                                            <th></th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @if (ViewBag.QaidDetail != null)
+                                                                        {
+                                                                            @foreach (var item in ViewBag.QaidDetail)
+                                                                            {
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        @item.Id
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <label class="label bg-teal">  @item.AccountTree.DescriptionAr </label>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <label class="label bg-teal">  @item.Type.Name </label>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.Debit
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.Credit
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.Note
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @*<a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-raised bg-teal btn-sm"><i class="material-icons" title="@SharedLocalizer.GetLocalizedHtmlString("Edit")">create</i></a>*@
+                                                                                    </td>
+                                                                                </tr>
+                                                                            }
+                                                                        }
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("FromAccount") </label>
-                                    <div class="form-line">
-                                        <input asp-for="FromAccount.DescriptionAr" readonly="readonly" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("FromAccount")" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ToAccount") </label>
-                                    <div class="form-line">
-                                        <input asp-for="ToAccount.DescriptionAr" readonly="readonly" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("ToAccount")" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Note") </label>
-                                    <div class="form-line">
-                                        <input asp-for="Note"  readonly="readonly" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Note")" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+                        <br />
                         <div class="col-sm-12">
-                            <a asp-action="Index" class="btn btn-raised" style="font-family:Droid Arabic Kufi;right:950Px">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</a>
+                            <a asp-action="Index" class="btn btn-raised" style="font-family:Droid Arabic Kufi">@SharedLocalizer.GetLocalizedHtmlString("Close")</a>
                         </div>
                     </div>
                 </div>

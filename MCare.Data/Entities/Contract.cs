@@ -38,6 +38,7 @@ namespace NajmetAlraqee.Data.Entities
         public string VisaDate { get; set; }
         public bool? IsDone { get; set; }
         public int?  LateDays { get; set; }
+        public int? FinancialPeriodId { get; set; }
 
         public virtual ContractStatus ContractStatus { get; set; }
         public virtual ContractType ContractType { get; set; }
@@ -47,6 +48,7 @@ namespace NajmetAlraqee.Data.Entities
         public virtual ForeignAgency ForeignAgency { get; set; }
         public virtual JobType JobType { get; set; }
         public virtual Nationality Nationality { get; set; }
+        public virtual FinancialPeriod FinancialPeriod { get; set; }
 
     }
 }

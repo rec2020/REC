@@ -15,6 +15,8 @@ namespace NajmetAlraqee.Data.Entities
         public int? TransferBankId { get; set; }
         public int? PurposeId { get; set; }
         public string Notes { get; set; }
+        public int? FinancialPeriodId { get; set; }
+        public int QaidNo { get; set; }
 
 
         public virtual TransferPurpose Purpose { get; set; }
@@ -22,5 +24,6 @@ namespace NajmetAlraqee.Data.Entities
         public virtual PaymentMethod PaymentMethod { get; set; }
         public virtual BankDetail TransferBank { get; set; }
         public virtual Currency Currency { get; set; }
+        public virtual FinancialPeriod FinancialPeriod { get; set; }
     }
 }

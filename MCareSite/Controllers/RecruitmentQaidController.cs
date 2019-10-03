@@ -19,21 +19,27 @@ namespace NajmetAlraqee.Site.Controllers
     [Authorize]
     public class RecruitmentQaidController : Controller
     {
-        private readonly IAccountTreeRepository _tree;
+        private readonly IRecruitmentQaidTypeRepository _type;
+        private readonly IRecruitmentQaidStatusRepository _status;
         private readonly IMapper _mapper;
         private readonly IToastNotification _toastNotification;
         private readonly IRecruitmentQaidRepository _recruitmentQaid;
+        private readonly IRecruitmentQaidDetailRepository _recruitmentQaidDetail;
 
         public RecruitmentQaidController(
             IRecruitmentQaidRepository recruitmentQaid,
-            IAccountTreeRepository tree,
+            IRecruitmentQaidDetailRepository recruitmentQaidDetail,
+            IRecruitmentQaidTypeRepository type,
+            IRecruitmentQaidStatusRepository status,
             IMapper mapper,
             IToastNotification toastNotification)
         {
             _recruitmentQaid = recruitmentQaid;
-            _tree = tree;
+            _type = type;
+            _status = status;
             _mapper = mapper;
             _toastNotification = toastNotification;
+            _recruitmentQaidDetail = recruitmentQaidDetail;
         }
 
         #region Index 
@@ -62,8 +68,7 @@ namespace NajmetAlraqee.Site.Controllers
         {
             RecruitmentQaidViewModel obj = new RecruitmentQaidViewModel();
             obj.QaidDate = DateTime.Now.ToString("d", CultureInfo.InvariantCulture);
-            ViewBag.FromAccountId = new SelectList(_tree.GetAccountTrees(), "Id", "DescriptionAr");
-            ViewBag.ToAccountId = new SelectList(_tree.GetAccountTrees(), "Id", "DescriptionAr");
+            ViewBag.TypeId = new SelectList(_type.GetRecruitmentQaidTypes(), "Id", "Name");
             return View(obj);
         }
 
@@ -71,22 +76,17 @@ namespace NajmetAlraqee.Site.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Add(RecruitmentQaidViewModel recruitmentQaidViewModels)
         {
-            ViewBag.FromAccountId = new SelectList(_tree.GetAccountTrees(), "Id", "DescriptionAr");
-            ViewBag.ToAccountId = new SelectList(_tree.GetAccountTrees(), "Id", "DescriptionAr");
-            if (recruitmentQaidViewModels.FromAccountId == null) { ModelState.AddModelError("", "الرجاء ادخال من حساب"); }
-            if (recruitmentQaidViewModels.ToAccountId == null) { ModelState.AddModelError("", "الرجاء ادخال الي حساب"); }
-            if (recruitmentQaidViewModels.Amount == 0) { ModelState.AddModelError("", "الرجاء ادخال المبلغ "); }
+            ViewBag.TypeId = new SelectList(_type.GetRecruitmentQaidTypes(), "Id", "Name");
+            if (recruitmentQaidViewModels.TypeId == null) { ModelState.AddModelError("", "الرجاء تحديد نوع القيد "); }
             if (recruitmentQaidViewModels.Id == 0)
             {
                 ModelState.Remove("Id");
-                ModelState.Remove("FromAccountId");
-                ModelState.Remove("ToAccountId");
-                ModelState.Remove("Amount");
+                ModelState.Remove("TypeId");
                 if (ModelState.IsValid)
                 {
                     var recruitmentQaid = _mapper.Map<RecruitmentQaid>(recruitmentQaidViewModels);
                     _recruitmentQaid.AddRecruitmentQaid(recruitmentQaid);
-                    _toastNotification.AddSuccessToastMessage("تم أضافة قيد الاستقدام بنجاح");
+                    _toastNotification.AddSuccessToastMessage("تم أضافة القيد  بنجاح");
                     return RedirectToAction(nameof(Index));
                 }
                 return View(recruitmentQaidViewModels);
@@ -97,7 +97,7 @@ namespace NajmetAlraqee.Site.Controllers
                 {
                     var recruitmentQaid =  _mapper.Map<RecruitmentQaid>(recruitmentQaidViewModels);
                      _recruitmentQaid.UpdateRecruitmentQaid(recruitmentQaidViewModels.Id, recruitmentQaid);
-                     _toastNotification.AddSuccessToastMessage("تم تعديل قيد الاستقدام بنجاح");
+                     _toastNotification.AddSuccessToastMessage("تم تعديل القيد  بنجاح");
                     return RedirectToAction(nameof(Index));
                 }
                 return View(recruitmentQaidViewModels);
@@ -119,8 +119,7 @@ namespace NajmetAlraqee.Site.Controllers
             {
                 return NotFound();
             }
-            ViewBag.FromAccountId = new SelectList(_tree.GetAccountTrees(), "Id", "DescriptionAr");
-            ViewBag.ToAccountId = new SelectList(_tree.GetAccountTrees(), "Id", "DescriptionAr");
+            ViewBag.TypeId = new SelectList(_type.GetRecruitmentQaidTypes(), "Id", "Name", recruitmentQaid.TypeId);
             return View("Add", recruitmentQaidViewModel);
         }
         #endregion
@@ -138,7 +137,22 @@ namespace NajmetAlraqee.Site.Controllers
             {
                 return NotFound();
             }
+            ViewBag.QaidDetail = _recruitmentQaidDetail.GetRecruitmentQaidDetails().Where(x=>x.QaidId== recruitmentQaid.Id); 
+            ViewBag.TypeId = new SelectList(_type.GetRecruitmentQaidTypes(), "Id", "Name", recruitmentQaid.TypeId);
             return View(recruitmentQaid);
+        }
+        #endregion
+
+        #region Close 
+        public IActionResult Close(int? id)
+        {
+            var qaid = _recruitmentQaid.GetRecruitmentQaidById((int)id);
+
+            if (qaid != null)
+            {
+                _recruitmentQaid.CloseRecruitmentQaid((int)id, qaid);
+            }
+            return RedirectToAction(nameof(Index), new { RecruitmentQaidId = qaid.Id });
         }
         #endregion
     }

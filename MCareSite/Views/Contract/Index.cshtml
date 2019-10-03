@@ -74,6 +74,9 @@
                                     <th>
                                         @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("JobType"))
                                     </th>
+                                    <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("FinancialPeriod"))
+                                    </th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -108,6 +111,9 @@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.JobType.Name)
+                                    </td>
+                                    <td>
+                                        <label class="label bg-success">  @item.FinancialPeriod.Month/@item.FinancialPeriod.Year </label>
                                     </td>
                                     <td>
                                         @if (User.IsInRole("ADMIN"))

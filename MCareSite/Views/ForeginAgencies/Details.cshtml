@@ -8,7 +8,6 @@
 
 
 
-
 <div class="container-fluid">
     <div class="block-header">
         @*<h2>Add Doctor</h2>*@
@@ -45,76 +44,63 @@
                             <div class="col-sm-2 col-xs-12"></div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-4 col-xs-12">
+                            <div class="col-sm-3 col-xs-12">
                                 <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("OfficeNumber") </label>
-                                    <div class="form-line">
-                                        <input asp-for="OfficeNumber" class="form-control" style="font-family:Droid Arabic Kufi" value="@Model.OfficeNumber" readonly="readonly" />
-                                    </div>
+                                    <label style="color:black;font-size:medium">  @SharedLocalizer.GetLocalizedHtmlString("OfficeNumber")    </label>
+                                    <label style="color:black"></label>
+                                    <label class="label bg-teal" style="color:white;font-size:medium">   @Model.OfficeNumber   </label>
                                 </div>
                             </div>
-                            <div class="col-sm-4 col-xs-12">
+                            <div class="col-sm-3 col-xs-12">
                                 <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("OfficeName") </label>
-                                    <div class="form-line">
-                                        <input asp-for="OfficeName" class="form-control" style="font-family:Droid Arabic Kufi" value="@Model.OfficeName" readonly="readonly" />
-                                    </div>
+                                    <label style="color:black;font-size:medium">@SharedLocalizer.GetLocalizedHtmlString("OfficeName") </label>
+                                    <label style="color:black"></label>
+                                    <label class="label bg-teal" style="color:white;font-size:medium">   @Model.OfficeName</label>
                                 </div>
                             </div>
-                            <div class="col-sm-4 col-xs-12">
+                            <div class="col-sm-3 col-xs-12">
                                 <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("AccountNumber") </label>
-                                    <div class="form-line">
-                                        <input asp-for="@Model.AccountNumber" class="form-control" style="font-family:Droid Arabic Kufi" value="@Model.AccountNumber" readonly="readonly" />
-                                    </div>
+                                    <label style="color:black;font-size:medium">   @SharedLocalizer.GetLocalizedHtmlString("AccountNo")    </label>
+                                    <label style="color:black">     </label>
+                                    <label class="label bg-teal" style="color:white;font-size:medium">   @Model.AccountTree.AccountNo </label>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4 col-xs-12">
+                            <div class="col-sm-3 col-xs-12">
                                 <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ResponsibleUser") </label>
-                                    <div class="form-line">
-                                        <input asp-for="@Model.ResponsibleUser" class="form-control" style="font-family:Droid Arabic Kufi" value="@Model.ResponsibleUser" readonly="readonly" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 col-xs-12">
-                                <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Email") </label>
-                                    <div class="form-line">
-                                        <input asp-for="@Model.Email" class="form-control" style="font-family:Droid Arabic Kufi" value="@Model.Email" readonly="readonly" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 col-xs-12">
-                                <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Phone") </label>
-                                    <div class="form-line">
-                                        <input asp-for="@Model.Phone" class="form-control" style="font-family:Droid Arabic Kufi" value="@Model.Phone" readonly="readonly" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-
-                            <div class="col-sm-4 col-xs-12">
-                                <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Bank") </label>
-                                    <div class="form-line">
-                                        <input asp-for="@Model.BankDetail.Name" class="form-control" style="font-family:Droid Arabic Kufi" value="@Model.BankDetail.Name" readonly="readonly" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 col-xs-12">
-                                <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("BankAccountNo") </label>
-                                    <div class="form-line">
-                                        <input asp-for="@Model.BankDetail.AccountNumber" class="form-control" style="font-family:Droid Arabic Kufi" value="@Model.BankDetail.AccountNumber" readonly="readonly" />
-                                    </div>
+                                    <label style="color:black;font-size:medium">   @SharedLocalizer.GetLocalizedHtmlString("ResponsibleUser")    </label>
+                                    <label style="color:black">     </label>
+                                    <label class="label bg-teal" style="color:white;font-size:medium">   @Model.ResponsibleUser   </label>
                                 </div>
                             </div>
 
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black;font-size:medium">  @SharedLocalizer.GetLocalizedHtmlString("Email")    </label>
+                                    <label style="color:black"></label>
+                                    <label class="label bg-teal" style="color:white;font-size:medium">   @Model.Email   </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black;font-size:medium">@SharedLocalizer.GetLocalizedHtmlString("Phone") </label>
+                                    <label style="color:black"></label>
+                                    <label class="label bg-teal" style="color:white;font-size:medium">   @Model.Phone</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black;font-size:medium">   @SharedLocalizer.GetLocalizedHtmlString("Bank")    </label>
+                                    <label style="color:black">     </label>
+                                    <label class="label bg-teal" style="color:white;font-size:medium">   @Model.BankDetail.Name </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label style="color:black;font-size:medium">   @SharedLocalizer.GetLocalizedHtmlString("BankAccountNo")    </label>
+                                    <label style="color:black">     </label>
+                                    <label class="label bg-teal" style="color:white;font-size:medium">   @Model.BankDetail.AccountNumber   </label>
+                                </div>
+                            </div>
                         </div>
                         <br />
                         @*<h2 class="card-inside-title">الوظائف </h2>*@
@@ -169,40 +155,40 @@
                                                                         {
                                                                             @foreach (var item in ViewBag.Jobs)
                                                                             {
-                                                                        <tr>
-                                                                            <td>
-                                                                                @item.Id
-                                                                            </td>
-                                                                            <td>
-                                                                                @item.Nationality.Name
-                                                                            </td>
-                                                                            <td>
-                                                                                @item.JobType.Name
-                                                                            </td>
-                                                                            <td>
-                                                                                @item.Price
-                                                                            </td>
-                                                                            <td>
-                                                                                @item.Currency.Name
-                                                                            </td>
-                                                                            <td>
-                                                                                @if (item.IsActive)
-                                                                                {<span class="label label-success">@SharedLocalizer.GetLocalizedHtmlString("Active")</span> }
-                                                                            else
-                                                                            {<span class="label label-warning">@SharedLocalizer.GetLocalizedHtmlString("InActive")</span>}
-                                                                            </td>
-                                                                            <td>
-                                                                                <a asp-action="Edit" asp-route-id="@item.Id" asp-controller="ForeignAgencyJob" class="btn btn-raised bg-teal btn-sm"><i class="material-icons" title="@SharedLocalizer.GetLocalizedHtmlString("Edit")">create</i></a>
-                                                                                @if (item.IsActive)
-                                                                                {
-                                                                                    <a asp-action="JobDisActivated" asp-route-id="@item.Id" title="@SharedLocalizer.GetLocalizedHtmlString("DisActivated")" class="btn btn-raised btn-danger btn-sm zmdi zmdi-power"></a>
-                                                                                }
-                                                                                else
-                                                                                {
-                                                                                    <a asp-action="JobActivated"   asp-route-id="@item.Id" title="@SharedLocalizer.GetLocalizedHtmlString("Activated")" class="btn btn-raised btn-success btn-sm zmdi zmdi-power"></a>
-                                                                                }
-                                                                            </td>
-                                                                        </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        @item.Id
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.Nationality.Name
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.JobType.Name
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.Price
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @item.Currency.Name
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @if (item.IsActive)
+                                                                                        {<span class="label label-success">@SharedLocalizer.GetLocalizedHtmlString("Active")</span> }
+                                                                                    else
+                                                                                    {<span class="label label-warning">@SharedLocalizer.GetLocalizedHtmlString("InActive")</span>}
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <a asp-action="Edit" asp-route-id="@item.Id" asp-controller="ForeignAgencyJob" class="btn btn-raised bg-teal btn-sm"><i class="material-icons" title="@SharedLocalizer.GetLocalizedHtmlString("Edit")">create</i></a>
+                                                                                        @if (item.IsActive)
+                                                                                        {
+                                                                                            <a asp-action="JobDisActivated" asp-route-id="@item.Id" title="@SharedLocalizer.GetLocalizedHtmlString("DisActivated")" class="btn btn-raised btn-danger btn-sm zmdi zmdi-power"></a>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <a asp-action="JobActivated" asp-route-id="@item.Id" title="@SharedLocalizer.GetLocalizedHtmlString("Activated")" class="btn btn-raised btn-success btn-sm zmdi zmdi-power"></a>
+                                                                                        }
+                                                                                    </td>
+                                                                                </tr>
                                                                             }
                                                                         }
                                                                     </tbody>
@@ -210,8 +196,8 @@
                                                             </div>
                                                         </div>
                                                         @*<div class="col-sm-12">
-                                                            <a asp-action="Details" asp-controller="ForeginAgencies" asp-route-id="@Model.Id" class="btn btn-raised" style="font-family:Droid Arabic Kufi;right:500px">@SharedLocalizer.GetLocalizedHtmlString("Close")</a>
-                                                        </div>*@
+                                            <a asp-action="Details" asp-controller="ForeginAgencies" asp-route-id="@Model.Id" class="btn btn-raised" style="font-family:Droid Arabic Kufi;right:500px">@SharedLocalizer.GetLocalizedHtmlString("Close")</a>
+                                        </div>*@
                                                     </div>
                                                 </div>
                                             </div>
@@ -222,10 +208,10 @@
                         </div>
 
                         <br />
-                            <div class="col-sm-12">
-                                <a asp-action="Index" class="btn btn-raised" style="font-family:Droid Arabic Kufi;right:450Px">@SharedLocalizer.GetLocalizedHtmlString("Back")</a>
-                            </div>
+                        <div class="col-sm-12">
+                            <a asp-action="Index" class="btn btn-raised" style="font-family:Droid Arabic Kufi;right:450Px">@SharedLocalizer.GetLocalizedHtmlString("Back")</a>
                         </div>
+                    </div>
                     </div>
             </form>
         </div>

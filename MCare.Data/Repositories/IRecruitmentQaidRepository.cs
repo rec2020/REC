@@ -13,5 +13,6 @@ namespace NajmetAlraqee.Data.Repositories
         int AddRecruitmentQaid(RecruitmentQaid recruitmentQaid);
         bool UpdateRecruitmentQaid(int Id, RecruitmentQaid recruitmentQaid);
         bool RemoveRecruitmentQaid(int Id);
+        bool CloseRecruitmentQaid(int Id, RecruitmentQaid recruitmentQaid);
     }
 }

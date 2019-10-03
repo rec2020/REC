@@ -78,18 +78,23 @@
                             <div class="raw">
                                 <div class="col-sm-12 col-xs-12">
                                     <div class="form-group">
-                                        @if (Model.OldContractNo != null) { 
-                                        <label style="color:black;font-size:medium"> @SharedLocalizer.GetLocalizedHtmlString("OldContractNo") </label>
-                                        <label style="color:black"></label>
-                                        <label class="label bg-teal" style="color:white;font-size:medium">@Model.OldContractNo </label>
+                                        @if (Model.OldContractNo != null)
+                                        {
+                                            <label style="color:black;font-size:medium"> @SharedLocalizer.GetLocalizedHtmlString("OldContractNo") </label>
+                                            <label style="color:black"></label>
+                                            <label class="label bg-teal" style="color:white;font-size:medium">@Model.OldContractNo </label>
                                         }
                                         <label style="color:black">   </label>
                                         <label style="color:black;font-size:medium"> @SharedLocalizer.GetLocalizedHtmlString("TestDay") </label>
                                         <label style="color:black"></label>
                                         <label class="label bg-teal" style="color:white;font-size:medium">@Model.TestDay </label>
                                         <label style="color:black">             </label>
-                                        @if (Model.ContractStatusId == 6) { 
-                                        <a class="btn btn-raised btn-sm bg-teal" href="@Url.Action("Add","Contract",new {contractType=2, contractId = Model.Id })" title="@SharedLocalizer.GetLocalizedHtmlString("ContractSubstitue")"><i class="zmdi zmdi-file-add"></i> @SharedLocalizer.GetLocalizedHtmlString("ContractSubstitue")</a>
+                                        <label style="color:black;font-size:medium"> @SharedLocalizer.GetLocalizedHtmlString("FinancialPeriod") </label>
+                                        <label style="color:black"></label>
+                                        <label class="label bg-teal" style="color:white;font-size:medium"> @Model.FinancialPeriodMonth/@Model.FinancialPeriodYear </label>
+                                        @if (Model.ContractStatusId == 6)
+                                        {
+                                            <a class="btn btn-raised btn-sm bg-teal" href="@Url.Action("Add","Contract",new {contractType=2, contractId = Model.Id })" title="@SharedLocalizer.GetLocalizedHtmlString("ContractSubstitue")"><i class="zmdi zmdi-file-add"></i> @SharedLocalizer.GetLocalizedHtmlString("ContractSubstitue")</a>
                                         }
                                         <label style="color:black"> </label>
                                         @if ((User.IsInRole("ADMIN") || User.IsInRole("SUPERUSER")))
@@ -99,6 +104,7 @@
                                         }
                                         <label style="color:black"> </label>
                                         <a class="btn btn-raised btn-danger btn-sm" asp-action="CloseContract" asp-route-id="@Model.Id" title="@SharedLocalizer.GetLocalizedHtmlString("Close")"><i class="zmdi zmdi-power"></i>  @SharedLocalizer.GetLocalizedHtmlString("Close")</a>
+
                                     </div>
                                     <div class="col-sm-4 col-xs-12">
 

@@ -24,7 +24,14 @@
                         <div class="col-sm-12">
                             <form asp-action="Add" method="post" asp-controller="ForeignAgencyJob">
                                 @Html.HiddenFor(x => x.Id)
-                                @Html.HiddenFor(x => x.ForeignAgencyId)
+                                <div class="row">
+                                    <div class="col-sm-2 col-xs-12"></div>
+                                    <div class="col-sm-8 col-xs-12">
+                                        <div asp-validation-summary="All" style="font-family:Droid Arabic Kufi" class="text-danger"></div>
+                                        @Html.HiddenFor(x => x.ForeignAgencyId)
+                                    </div>
+                                    <div class="col-sm-2 col-xs-12"></div>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-4 col-xs-12">
                                         <div class="form-group">

@@ -9,14 +9,15 @@ namespace NajmetAlraqee.Site.ViewModels
     public class RecruitmentQaidViewModel
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "الرجاء ادخال تاريخ القيد ")]
         public string QaidDate { get; set; }
-        [Required(ErrorMessage ="الرجاء ادخال من حساب ")]
-        public int? FromAccountId { get; set; }
-        [Required(ErrorMessage = "الرجاء ادخال الي حساب ")]
-        public int? ToAccountId { get; set; }
-        [Required(ErrorMessage = "الرجاء ادخال المبلغ ")]
-        public decimal Amount { get; set; }
-        [Required(ErrorMessage = "الرجاء الملاحظة  ")]
-        public string Note { get; set; }
+
+        [Required(ErrorMessage = "الرجاء ادخال نوع القيد ")]
+        public int? TypeId { get; set; }
+
+        public int? FinancialPeriodId { get; set; }
+
+        public int? StatusId { get; set; }
     }
 }

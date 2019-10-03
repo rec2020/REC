@@ -54,37 +54,9 @@
                             </div>
                             <div class="col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Amount") </label>
+                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("QaidType") </label>
                                     <div class="form-line">
-                                        <input asp-for="Amount" class="form-control"  style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Amount")" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("FromAccount") </label>
-                                    <div class="form-line">
-                                        <select asp-for="@Model.FromAccountId" class="form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.FromAccountId"><option>@SharedLocalizer.GetLocalizedHtmlString("FromAccount")</option></select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("ToAccount") </label>
-                                    <div class="form-line">
-                                        <select asp-for="@Model.ToAccountId" class="form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.ToAccountId"><option>@SharedLocalizer.GetLocalizedHtmlString("ToAccount")</option></select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Note") </label>
-                                    <div class="form-line">
-                                        <input asp-for="Note" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Note")" />
+                                        <select asp-for="TypeId" class="form-control" style="font-family:Droid Arabic Kufi" asp-items="ViewBag.TypeId"><option>@SharedLocalizer.GetLocalizedHtmlString("QaidType")</option></select>
                                     </div>
                                 </div>
                             </div>

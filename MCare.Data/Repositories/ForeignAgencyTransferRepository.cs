@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using NajmetAlraqee.Data.Constants;
 using NajmetAlraqee.Data.Entities;
 
 namespace NajmetAlraqee.Data.Repositories
@@ -18,6 +20,30 @@ namespace NajmetAlraqee.Data.Repositories
         }
         public int AddForeignAgencyTransfer(ForeignAgencyTransfer agencyTransfer)
         {
+            // Add Qaid First 
+            RecruitmentQaid qaid = new RecruitmentQaid
+            {
+                QaidDate = DateTime.UtcNow.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
+                StatusId = (int)EnumHelper.RecruitmentQaidStatus.Open
+            };
+            var getCurrentFinancialPeriod = _context.FinancialPeriods.Where(x => x.FinancialPeriodStatusId == (int)EnumHelper.FinancPeriodStatus.CURRENT).SingleOrDefault();
+            if (getCurrentFinancialPeriod != null)
+            {
+                qaid.FinancialPeriodId = getCurrentFinancialPeriod.Id;
+            }
+            qaid.TypeId = (int)EnumHelper.RecruitmentQaidTypes.Transfer;
+            _context.RecruitmentQaids.Add(qaid);
+            _context.SaveChanges();
+
+
+            //snadReceipt.VAT = 0;
+            var getCurrentFinancialPeriodrec = _context.FinancialPeriods.Where(x => x.FinancialPeriodStatusId == (int)EnumHelper.FinancPeriodStatus.CURRENT).SingleOrDefault();
+            if (getCurrentFinancialPeriodrec != null)
+            {
+                agencyTransfer.FinancialPeriodId = getCurrentFinancialPeriodrec.Id;
+            }
+            agencyTransfer.QaidNo = qaid.Id;
+            
             _context.ForeignAgencyTransfers.Add(agencyTransfer);
             _context.SaveChanges();
 

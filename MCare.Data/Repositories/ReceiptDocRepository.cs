@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
@@ -18,20 +19,71 @@ namespace NajmetAlraqee.Data.Repositories
             _context = context;
         }
 
-        public int AddReceiptDoc(ReceiptDoc receipt)
+        public int RecruitmentQaid(ReceiptDoc receipt)
         {
-            var totalRecord = _context.ReceiptDocs.Count();
-            if (totalRecord == 0)
+            // Add RecruitmentQaid First 
+            RecruitmentQaid qaid = new RecruitmentQaid
             {
-                receipt.QaidNo = 00001;
+                QaidDate = DateTime.UtcNow.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
+                StatusId = (int)EnumHelper.RecruitmentQaidStatus.Open
+            };
+            var getCurrentFinancialPeriod = _context.FinancialPeriods.Where(x => x.FinancialPeriodStatusId == (int)EnumHelper.FinancPeriodStatus.CURRENT).SingleOrDefault();
+            if (getCurrentFinancialPeriod != null)
+            {
+                qaid.FinancialPeriodId = getCurrentFinancialPeriod.Id;
+            }
+            if (receipt.ReceiptdocTypeId == (int)EnumHelper.ReceiptdocType.SnadReceive)
+            {
+                qaid.TypeId = (int)EnumHelper.RecruitmentQaidTypes.Exchange;
             }
             else
             {
-                var getLastQauidNo = _context.ReceiptDocs.LastOrDefault();
-                receipt.QaidNo = getLastQauidNo.QaidNo + 1;
+                qaid.TypeId = (int)EnumHelper.RecruitmentQaidTypes.Take;
             }
+            _context.RecruitmentQaids.Add(qaid);
+            _context.SaveChanges();
+
+            // Add RecruitmentQaidDetails 
+            RecruitmentQaidDetail detailDebit = new RecruitmentQaidDetail {
+                QaidId = qaid.Id,
+                Debit = receipt.Amount,
+                TypeId = (int)EnumHelper.RecruitmentQaidDetailType.Debit,
+                AccountTreeId = receipt.Customer.AccountTreeId ,
+                Note=""
+            };
+            _context.RecruitmentQaidDetails.Add(detailDebit);
+            _context.SaveChanges();
+
+            // Add RecruitmentQaidDetails 
+            RecruitmentQaidDetail detailCredit = new RecruitmentQaidDetail
+            {
+                QaidId = qaid.Id,
+                Credit = receipt.Amount,
+                TypeId = (int)EnumHelper.RecruitmentQaidDetailType.Credit,
+                AccountTreeId = receipt.PaymentMethod.AccountTreeId,
+                Note = ""
+            };
+            _context.RecruitmentQaidDetails.Add(detailCredit);
+            _context.SaveChanges();
+            
+            return qaid.Id;
+        }
+
+        public int AddReceiptDoc(ReceiptDoc receipt)
+        {
+            // Add RecruitmentQaid First 
+           var qaidId = RecruitmentQaid(receipt);
+            //  Add ReceiptDoc 
+            var getCurrentFinancialPeriodrec = _context.FinancialPeriods.Where(x => x.FinancialPeriodStatusId == (int)EnumHelper.FinancPeriodStatus.CURRENT).SingleOrDefault();
+            if (getCurrentFinancialPeriodrec != null)
+            {
+                receipt.FinancialPeriodId = getCurrentFinancialPeriodrec.Id;
+            }
+            receipt.QaidNo = qaidId;
             _context.ReceiptDocs.Add(receipt);
             _context.SaveChanges();
+
+            // update Contract
             if (receipt.ContractTypeId == (int)EnumHelper.ContractType.New || receipt.ContractTypeId == (int)EnumHelper.ContractType.Substitute)
             {
                 if (receipt.ReceiptdocTypeId == (int)EnumHelper.ReceiptdocType.SnadReceive)
