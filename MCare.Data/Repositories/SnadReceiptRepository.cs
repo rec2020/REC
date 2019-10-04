@@ -18,6 +18,7 @@ namespace NajmetAlraqee.Data.Repositories
         }
         public int RecruitmentQaid(SnadReceipt snadReceipt)
         {
+            #region AddQaid
             // Add RecruitmentQaid First 
             RecruitmentQaid qaid = new RecruitmentQaid
             {
@@ -37,36 +38,59 @@ namespace NajmetAlraqee.Data.Repositories
             _context.RecruitmentQaids.Add(qaid);
             _context.SaveChanges();
 
-            // Add RecruitmentQaidDetails 
-            //RecruitmentQaidDetail detailDebit = new RecruitmentQaidDetail
-            //{
-            //    QaidId = qaid.Id,
-            //    Debit = snadReceipt.Amount,
-            //    TypeId = (int)EnumHelper.RecruitmentQaidDetailType.Debit,
-            //    AccountTreeId = snadReceipt.Expense.AccountTreeId,
-            //    Note = ""
-            //};
-            //_context.RecruitmentQaidDetails.Add(detailDebit);
-            //_context.SaveChanges();
+            #endregion
 
+            #region DEBIT 
+            //Add RecruitmentQaidDetails DEBIT ACCOUNT 
+            RecruitmentQaidDetail detailDebit = new RecruitmentQaidDetail
+            {
+                QaidId = qaid.Id,
+                Debit = snadReceipt.Amount,
+                TypeId = (int)EnumHelper.RecruitmentQaidDetailType.Debit,
+                AccountTreeId = snadReceipt.Expense.AccountTreeId,
+                Note = "سند صرف "
+            };
+            _context.RecruitmentQaidDetails.Add(detailDebit);
+            _context.SaveChanges();
+
+            // change In AccountTree For Debit Account ----------------------------------------
+            AccountTree existAcc = _context.AccountTrees.Where(x => x.Id == detailDebit.AccountTreeId).SingleOrDefault();
+            if (existAcc != null)
+            {
+                existAcc.Debit = existAcc.Debit + detailDebit.Debit;
+                _context.Update(existAcc);
+                _context.SaveChanges();
+            }
+            #endregion
+
+            #region CREDIT 
             //Add RecruitmentQaidDetails
-            //RecruitmentQaidDetail detailCredit = new RecruitmentQaidDetail
-            //{
-            //    QaidId = qaid.Id,
-            //    Credit = receipt.Amount,
-            //    TypeId = (int)EnumHelper.RecruitmentQaidDetailType.Credit,
-            //    AccountTreeId = receipt.PaymentMethod.AccountTreeId,
-            //    Note = ""
-            //};
-            //_context.RecruitmentQaidDetails.Add(detailCredit);
-            //_context.SaveChanges();
+            RecruitmentQaidDetail detailCredit = new RecruitmentQaidDetail
+            {
+                QaidId = qaid.Id,
+                Credit = snadReceipt.Amount,
+                TypeId = (int)EnumHelper.RecruitmentQaidDetailType.Credit,
+                AccountTreeId = snadReceipt.PaymentMethod.AccountTreeId,
+                Note = "سند صرف"
+            };
+            _context.RecruitmentQaidDetails.Add(detailCredit);
+            _context.SaveChanges();
+
+            // change In AccountTree For Credit Account ---------------------------------------------
+            AccountTree existAccCredit = _context.AccountTrees.Where(x => x.Id == detailCredit.AccountTreeId).SingleOrDefault();
+            if (existAccCredit != null)
+            {
+                existAccCredit.Credit = existAccCredit.Credit + detailCredit.Credit;
+                _context.Update(existAccCredit);
+                _context.SaveChanges();
+            }
+            #endregion 
 
             return qaid.Id;
         }
 
         public int AddSnadReceipt(SnadReceipt snadReceipt)
         {
-
             // Add RecruitmentQaid First 
             var qaidId = RecruitmentQaid(snadReceipt);
 
