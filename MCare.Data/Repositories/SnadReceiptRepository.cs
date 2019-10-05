@@ -41,13 +41,16 @@ namespace NajmetAlraqee.Data.Repositories
             #endregion
 
             #region DEBIT 
+
+            var expences = _context.Expenses.Where(x => x.Id == snadReceipt.ExpenseId).SingleOrDefault();
+            if (expences != null ) { 
             //Add RecruitmentQaidDetails DEBIT ACCOUNT 
             RecruitmentQaidDetail detailDebit = new RecruitmentQaidDetail
             {
                 QaidId = qaid.Id,
                 Debit = snadReceipt.Amount,
                 TypeId = (int)EnumHelper.RecruitmentQaidDetailType.Debit,
-                AccountTreeId = snadReceipt.Expense.AccountTreeId,
+                AccountTreeId = expences.AccountTreeId,
                 Note = "سند صرف "
             };
             _context.RecruitmentQaidDetails.Add(detailDebit);
@@ -61,16 +64,20 @@ namespace NajmetAlraqee.Data.Repositories
                 _context.Update(existAcc);
                 _context.SaveChanges();
             }
+            }
+
             #endregion
 
             #region CREDIT 
+            var paymentMethod = _context.PaymentMethods.Where(x => x.Id == snadReceipt.PaymentMethodId).SingleOrDefault();
+            if (paymentMethod != null ) { 
             //Add RecruitmentQaidDetails
             RecruitmentQaidDetail detailCredit = new RecruitmentQaidDetail
             {
                 QaidId = qaid.Id,
                 Credit = snadReceipt.Amount,
                 TypeId = (int)EnumHelper.RecruitmentQaidDetailType.Credit,
-                AccountTreeId = snadReceipt.PaymentMethod.AccountTreeId,
+                AccountTreeId = paymentMethod.AccountTreeId,
                 Note = "سند صرف"
             };
             _context.RecruitmentQaidDetails.Add(detailCredit);
@@ -83,6 +90,7 @@ namespace NajmetAlraqee.Data.Repositories
                 existAccCredit.Credit = existAccCredit.Credit + detailCredit.Credit;
                 _context.Update(existAccCredit);
                 _context.SaveChanges();
+            }
             }
             #endregion 
 
@@ -111,13 +119,16 @@ namespace NajmetAlraqee.Data.Repositories
         {
             return _context.SnadReceipts.Include(x => x.Expense)
                 .Include(x => x.SnadReceiptType).Include(x => x.PaymentMethod)
+                .Include(x => x.FinancialPeriod)
                .SingleOrDefault(p => p.Id == Id);
         }
 
         public IQueryable<SnadReceipt> GetSnadReceipts()
         {
             return _context.SnadReceipts.Include(x=>x.Expense)
-               .Include(x => x.SnadReceiptType).Include(x => x.PaymentMethod);
+               .Include(x => x.SnadReceiptType)
+               .Include(x => x.FinancialPeriod)
+               .Include(x => x.PaymentMethod);
         }
 
         public bool UpdateSnadReceipt(int Id, SnadReceipt snadReceipt)

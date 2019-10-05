@@ -89,30 +89,14 @@
                             </div>
                             <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("QuidNumber") </label>
-                                    <div class="form-line">
-                                        <input asp-for="QuidNumber" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="6" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("QuidNumber")" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3 col-xs-12">
-                                <div class="form-group">
                                     <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("SnadDate") </label>
                                     <div class="form-line">
                                         <input asp-for="SnadDate" value="@Model.SnadDate" readonly="readonly" class="form-control" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("SnadDate")" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3 col-xs-12">
-                                <div class="form-group">
-                                    <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("FinancialYear") </label>
-                                    <div class="form-line">
-                                        <input asp-for="FinancialYear" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57" length="4" style="font-family:Droid Arabic Kufi" placeholder="@SharedLocalizer.GetLocalizedHtmlString("FinancialYear")" />
-                                    </div>
-                                </div>
-                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label style="color:black">@SharedLocalizer.GetLocalizedHtmlString("Note") </label>

@@ -69,8 +69,11 @@
                                         @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Amount"))
                                     </th>
                                     <th>
-                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("SnadByUserName"))
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("FinancialPeriod"))
                                     </th>
+                                    @*<th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("SnadByUserName"))
+                                    </th>*@
                                     <th></th>
                                 </tr>
                             </thead>
@@ -79,39 +82,42 @@
                                 {
                                     @foreach (var item in ViewBag.snadList)
                                     {
-                                        <tr>
-                                            <td>
-                                                @item.Id
-                                            </td>
-                                            <td>
-                                                @item.SnadReceiptType.Name
-                                            </td>
-                                            <td>
-                                                @item.Expense.Name
-                                            </td>
-                                            <td>
-                                                @item.PaymentMethod.Name
-                                            </td>
-                                            <td>
-                                                @item.SnadDate
-                                            </td>
-                                            <td>
-                                                @item.QuidNumber
-                                            </td>
-                                            <td>
-                                                @item.Amount
-                                            </td>
-                                            <td>
-                                               @item.SnadByUserName
-                                            </td>
-                                            <td>
-                                                @if (User.IsInRole("ADMIN"))
-                                                {
-                                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-raised btn-warning btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Edit")</a>
-                                                }
-                                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-raised btn-info btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Details")</a> 
-                                            </td>
-                                        </tr>
+                                <tr>
+                                    <td>
+                                        @item.Id
+                                    </td>
+                                    <td>
+                                        <label class="label bg-teal">    @item.SnadReceiptType.Name </label>
+                                    </td>
+                                    <td>
+                                        <label class="label bg-teal">  @item.Expense.Name </label>
+                                    </td>
+                                    <td>
+                                        @item.PaymentMethod.Name
+                                    </td>
+                                    <td>
+                                        @item.SnadDate
+                                    </td>
+                                    <td>
+                                        @item.QaidNo
+                                    </td>
+                                    <td>
+                                        @item.Amount
+                                    </td>
+                                    <td>
+                                        <label class="label bg-teal"> @item.FinancialPeriod.Month/@item.FinancialPeriod.Year </label>
+                                     </td>
+                                    @*<td>
+                                        @item.SnadByUserName
+                                    </td>*@
+                                    <td>
+                                        @if (User.IsInRole("ADMIN"))
+                                        {
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-raised btn-warning btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Edit")</a>
+                                        }
+                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-raised btn-info btn-sm">@SharedLocalizer.GetLocalizedHtmlString("Details")</a>
+                                    </td>
+                                </tr>
                                     }
                                 }
                             </tbody>

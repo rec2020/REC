@@ -38,38 +38,45 @@ namespace NajmetAlraqee.Data.Repositories
             #endregion
 
             #region DEBIT
-            // Add RecruitmentQaidDetails  DEBIT 
-            RecruitmentQaidDetail detailDebit = new RecruitmentQaidDetail
+            var foreignAgency = _context.ForeignAgencies.Where(x => x.Id == foreignAgencyTransfer.ForeignAgencyId).SingleOrDefault();
+            if (foreignAgency != null)
             {
-                QaidId = qaid.Id,
-                Debit = foreignAgencyTransfer.Amount,
-                TypeId = (int)EnumHelper.RecruitmentQaidDetailType.Debit,
-                AccountTreeId = foreignAgencyTransfer.ForeignAgency.AccountTreeId,
-                Note = ""
-            };
-            _context.RecruitmentQaidDetails.Add(detailDebit);
-            _context.SaveChanges();
-
-            // change In AccountTree For Debit Account ----------------------------------------
-            AccountTree existAcc = _context.AccountTrees.Where(x => x.Id == detailDebit.AccountTreeId).SingleOrDefault();
-            if (existAcc != null)
-            {
-                existAcc.Debit = existAcc.Debit + detailDebit.Debit;
-                _context.Update(existAcc);
+                // Add RecruitmentQaidDetails  DEBIT 
+                RecruitmentQaidDetail detailDebit = new RecruitmentQaidDetail
+                {
+                    QaidId = qaid.Id,
+                    Debit = foreignAgencyTransfer.Amount,
+                    TypeId = (int)EnumHelper.RecruitmentQaidDetailType.Debit,
+                    AccountTreeId = foreignAgency.AccountTreeId,
+                    Note = "حوالة"
+                };
+                _context.RecruitmentQaidDetails.Add(detailDebit);
                 _context.SaveChanges();
-            }
 
+                // change In AccountTree For Debit Account ----------------------------------------
+                AccountTree existAcc = _context.AccountTrees.Where(x => x.Id == detailDebit.AccountTreeId).SingleOrDefault();
+                if (existAcc != null)
+                {
+                    existAcc.Debit = existAcc.Debit + detailDebit.Debit;
+                    _context.Update(existAcc);
+                    _context.SaveChanges();
+                }
+
+            }
             #endregion
 
             #region CREDIT
-            // Add RecruitmentQaidDetails 
-            RecruitmentQaidDetail detailCredit = new RecruitmentQaidDetail
+            var paymentMethod = _context.PaymentMethods.Where(x => x.Id == foreignAgencyTransfer.PaymentMethodId).SingleOrDefault();
+            if (paymentMethod != null)
+            {
+               // Add RecruitmentQaidDetails 
+             RecruitmentQaidDetail detailCredit = new RecruitmentQaidDetail
             {
                 QaidId = qaid.Id,
                 Credit = foreignAgencyTransfer.Amount,
                 TypeId = (int)EnumHelper.RecruitmentQaidDetailType.Credit,
-                AccountTreeId = foreignAgencyTransfer.PaymentMethod.AccountTreeId,
-                Note = ""
+                AccountTreeId = paymentMethod.AccountTreeId,
+                Note = "حوالة "
             };
             _context.RecruitmentQaidDetails.Add(detailCredit);
             _context.SaveChanges();
@@ -81,7 +88,7 @@ namespace NajmetAlraqee.Data.Repositories
                 _context.Update(existAccCredit);
                 _context.SaveChanges();
             }
-
+            }
             #endregion
 
             return qaid.Id;

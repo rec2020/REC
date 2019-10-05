@@ -150,7 +150,6 @@ namespace NajmetAlraqee.Data.Repositories
             _context.SaveChanges();
 
             //Adding TestDays
-
             var cont = _context.Contracts.Find(existticket.ContractId);
             if (cont != null)
             {
@@ -158,6 +157,13 @@ namespace NajmetAlraqee.Data.Repositories
                 cont.ContractStatusId = (int)EnumHelper.ContractStatus.UnderTest;
                     //cont.EmployeeName = contractVisa.EmployeeName;
                 _context.Update(cont);
+                _context.SaveChanges();
+            }
+            // Update Employee Status 
+            var emp = _context.Employees.Where(x => x.Id == ticket.EmployeeId).SingleOrDefault();
+            if (emp != null) {
+                emp.EmployeeStatusId = (int)EnumHelper.EmployeeStatus.UnderTest;
+                _context.Update(emp);
                 _context.SaveChanges();
             }
 

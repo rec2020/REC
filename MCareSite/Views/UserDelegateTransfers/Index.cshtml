@@ -70,6 +70,9 @@
                                         @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Amount"))
                                     </th>
                                     <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("QaidNo"))
+                                    </th>
+                                    <th>
                                         @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Currency"))
                                     </th>
                                     <th></th>
@@ -82,24 +85,27 @@
                                     {
                                 <tr>
                                     <td>
-                                        @item.UserDelegate.Name
+                                        <label class="label bg-teal">@item.UserDelegate.Name</label>
                                     </td>
                                     <td>
                                         @item.TransferDate
                                     </td>
                                     <td>
-                                        @item.PaymentMethod.Name
+                                        <label class="label bg-teal">@item.PaymentMethod.Name</label>
                                     </td>
 
                                     <td>
                                         @item.TransferBank.Name
                                     </td>
                                     <td>
-                                        @item.Purpose.Name
+                                        <label class="label bg-teal">@item.Purpose.Name</label>
                                     </td>
                                     <td>
                                         @item.Amount
                                     </td>
+                                    <td>
+                                        <label class="label bg-teal"> @item.QaidNo </label>
+</td>
                                     <td>
                                         @item.Currency.Name
                                     </td>

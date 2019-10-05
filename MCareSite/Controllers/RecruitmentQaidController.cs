@@ -151,6 +151,7 @@ namespace NajmetAlraqee.Site.Controllers
             if (qaid != null)
             {
                 _recruitmentQaid.CloseRecruitmentQaid((int)id, qaid);
+                _toastNotification.AddSuccessToastMessage("تم أغلاق القيد  بنجاح");
             }
             return RedirectToAction(nameof(Index), new { RecruitmentQaidId = qaid.Id });
         }

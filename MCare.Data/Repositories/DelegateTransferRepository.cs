@@ -38,14 +38,16 @@ namespace NajmetAlraqee.Data.Repositories
             #endregion
 
             #region DEBIT
+            var delegate_user = _context.UserDelegates.Where(x => x.Id == delegateTransfer.UserDelegateId).SingleOrDefault();
+            if (delegate_user != null) { 
             // Add RecruitmentQaidDetails  DEBIT 
             RecruitmentQaidDetail detailDebit = new RecruitmentQaidDetail
             {
                 QaidId = qaid.Id,
                 Debit = delegateTransfer.Amount,
                 TypeId = (int)EnumHelper.RecruitmentQaidDetailType.Debit,
-                AccountTreeId = delegateTransfer.UserDelegate.AccountTreeId,
-                Note = ""
+                AccountTreeId = delegate_user.AccountTreeId,
+                Note = "حوالة"
             };
             _context.RecruitmentQaidDetails.Add(detailDebit);
             _context.SaveChanges();
@@ -58,30 +60,33 @@ namespace NajmetAlraqee.Data.Repositories
                 _context.Update(existAcc);
                 _context.SaveChanges();
             }
-
+            }
             #endregion
 
             #region CREDIT
-            // Add RecruitmentQaidDetails 
-            RecruitmentQaidDetail detailCredit = new RecruitmentQaidDetail
+            var paymentMethod = _context.PaymentMethods.Where(x => x.Id == delegateTransfer.PaymentMethodId).SingleOrDefault();
+            if (paymentMethod != null)
             {
-                QaidId = qaid.Id,
-                Credit = delegateTransfer.Amount,
-                TypeId = (int)EnumHelper.RecruitmentQaidDetailType.Credit,
-                AccountTreeId = delegateTransfer.PaymentMethod.AccountTreeId,
-                Note = ""
-            };
-            _context.RecruitmentQaidDetails.Add(detailCredit);
-            _context.SaveChanges();
-            // change In AccountTree For Credit Account ---------------------------------------------
-            AccountTree existAccCredit = _context.AccountTrees.Where(x => x.Id == detailCredit.AccountTreeId).SingleOrDefault();
-            if (existAccCredit != null)
-            {
-                existAccCredit.Credit = existAccCredit.Credit + detailCredit.Credit;
-                _context.Update(existAccCredit);
+                // Add RecruitmentQaidDetails 
+                RecruitmentQaidDetail detailCredit = new RecruitmentQaidDetail
+                {
+                    QaidId = qaid.Id,
+                    Credit = delegateTransfer.Amount,
+                    TypeId = (int)EnumHelper.RecruitmentQaidDetailType.Credit,
+                    AccountTreeId = paymentMethod.AccountTreeId,
+                    Note = "حوالة"
+                };
+                _context.RecruitmentQaidDetails.Add(detailCredit);
                 _context.SaveChanges();
+                // change In AccountTree For Credit Account ---------------------------------------------
+                AccountTree existAccCredit = _context.AccountTrees.Where(x => x.Id == detailCredit.AccountTreeId).SingleOrDefault();
+                if (existAccCredit != null)
+                {
+                    existAccCredit.Credit = existAccCredit.Credit + detailCredit.Credit;
+                    _context.Update(existAccCredit);
+                    _context.SaveChanges();
+                }
             }
-
             #endregion
 
             return qaid.Id;

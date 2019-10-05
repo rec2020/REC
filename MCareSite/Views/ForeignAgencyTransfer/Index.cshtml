@@ -67,6 +67,9 @@
                                         @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("TransferPurpose"))
                                     </th>
                                     <th>
+                                        @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("QaidNo"))
+                                    </th>
+                                    <th>
                                         @Html.DisplayName(SharedLocalizer.GetLocalizedHtmlString("Amount"))
                                     </th>
                                     <th>
@@ -82,26 +85,28 @@
                                     {
                                 <tr>
                                     <td>
-                                        @item.ForeignAgency.OfficeName
+                                        <label class="label bg-teal"> @item.ForeignAgency.OfficeName</label>
                                     </td>
                                     <td>
                                         @item.TransferDate
                                     </td>
                                     <td>
-                                        @item.PaymentMethod.Name
+                                        <label class="label bg-teal">@item.PaymentMethod.Name </label>
                                     </td>
-
                                     <td>
                                         @item.TransferBank.Name
                                     </td>
                                     <td>
-                                        @item.Purpose.Name
+                                        <label class="label bg-teal"> @item.Purpose.Name</label>
+                                    </td>
+                                    <td>
+                                        <label class="label bg-teal">@item.QaidNo </label>
                                     </td>
                                     <td>
                                         @item.Amount
                                     </td>
                                     <td>
-                                        @item.Currency.Name
+                                        <label class="label bg-teal"> @item.Currency.Name </label>
                                     </td>
                                     <td>
                                         @if (User.IsInRole("ADMIN"))

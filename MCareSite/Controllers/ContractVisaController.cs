@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using NajmetAlraqee.Data.Constants;
 using NajmetAlraqee.Data.Entities;
 using NajmetAlraqee.Data.Repositories;
 using NajmetAlraqee.Site.ViewModels;
@@ -52,7 +53,7 @@ namespace NajmetAlraqee.Site.Controllers
         {
             var contractVisaList = _visa.GetContractVisas();
             ViewBag.ContractVisa = contractVisaList;
-            ViewBag.EmployeeId = new SelectList(_employee.GetEmployees(), "Id", "FirstName");
+            ViewBag.EmployeeId = new SelectList(_employee.GetEmployees().Where(x=>x.EmployeeStatusId==(int)EnumHelper.EmployeeStatus.New), "Id", "FirstName");
             return View();
         }
 
@@ -66,7 +67,7 @@ namespace NajmetAlraqee.Site.Controllers
             visaViewModel.VisaById = visitbyid.Id;
             var contractVisaList = _visa.GetContractVisas().Where(x => x.ContractId == visaViewModel.ContractId);
             ViewBag.ContractVisa = contractVisaList;
-            ViewBag.EmployeeId = new SelectList(_employee.GetEmployees(), "Id", "FirstName",visaViewModel.EmployeeId);
+            ViewBag.EmployeeId = new SelectList(_employee.GetEmployees().Where(x => x.EmployeeStatusId == (int)EnumHelper.EmployeeStatus.New), "Id", "FirstName",visaViewModel.EmployeeId);
             if (visaViewModel.EmployeeId == null) { ModelState.AddModelError("", "الرجاء تحدد الموظف"); }
             if (visaViewModel.Id == 0)
             {
@@ -116,7 +117,7 @@ namespace NajmetAlraqee.Site.Controllers
             }
             var contractVisaList = _visa.GetContractVisas().Where(x => x.ContractId == contractVisa.ContractId); ;
             ViewBag.ContractVisa = contractVisaList;
-            ViewBag.EmployeeId = new SelectList(_employee.GetEmployees(), "Id", "FirstName", contractVisaViewModel.EmployeeId);
+            ViewBag.EmployeeId = new SelectList(_employee.GetEmployees().Where(x => x.EmployeeStatusId == (int)EnumHelper.EmployeeStatus.New), "Id", "FirstName", contractVisa.EmployeeId);
             return View("Index", contractVisaViewModel);
         }
 

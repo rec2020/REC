@@ -39,6 +39,7 @@ namespace NajmetAlraqee.Site.ViewModels
         public string ArrivalCityName { get; set; }
         public decimal? Remainder { get; set; }
         public decimal? Paid { get; set; }
+        public decimal? Recieved { get; set; }
         public string ContractNote { get; set; }
         public int? ForeignAgencyId { get; set; }
         public int? TestDay { get; set; }

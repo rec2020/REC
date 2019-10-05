@@ -21,6 +21,7 @@ namespace NajmetAlraqee.Data.Entities
         public decimal  ContractCost { get; set; }
         public decimal? Remainder { get; set; }
         public decimal? Paid { get; set; }
+        public decimal? Recieved { get; set; }
         public int? NationalityId { get; set; }
         public int? ArrivalCityId { get; set; }
         public string ContractNote  { get; set; }
